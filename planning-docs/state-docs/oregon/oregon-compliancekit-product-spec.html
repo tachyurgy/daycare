@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit - Oregon Product Specification</title>
+<style>
+  /* ── Reset & Base ────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1a1a2e;
+    --navy-light:  #222244;
+    --navy-mid:    #2d2d50;
+    --slate:       #3a3a5c;
+    --accent:      #4fc3f7;
+    --accent-dim:  #2a8abf;
+    --white:       #ffffff;
+    --off-white:   #f4f6f9;
+    --text:        #2c2c3a;
+    --text-light:  #6b7280;
+    --border:      #e2e5ea;
+    --high:        #e53935;
+    --high-bg:     #fdecea;
+    --med-high:    #f57c00;
+    --med-high-bg: #fff3e0;
+    --medium:      #fbc02d;
+    --medium-bg:   #fffde7;
+    --med-low:     #c0ca33;
+    --med-low-bg:  #f9fbe7;
+    --low:         #43a047;
+    --low-bg:      #e8f5e9;
+    --sidebar-w:   270px;
+    --header-h:    64px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    color: var(--text);
+    background: var(--off-white);
+    line-height: 1.65;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--navy);
+    color: var(--white);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--slate) var(--navy);
+  }
+
+  .sidebar::-webkit-scrollbar { width: 5px; }
+  .sidebar::-webkit-scrollbar-track { background: var(--navy); }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 3px; }
+
+  .sidebar-brand {
+    padding: 24px 24px 8px;
+    border-bottom: 1px solid var(--navy-mid);
+  }
+
+  .sidebar-brand h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-brand h1 .logo-icon {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand .subtitle {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .sidebar-meta {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--navy-mid);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .sidebar-meta strong { color: rgba(255,255,255,0.7); }
+
+  .sidebar-nav { padding: 16px 0; flex: 1; }
+
+  .sidebar-nav .nav-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+    padding: 12px 24px 6px;
+    display: block;
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 24px;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: all 0.15s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-nav a:hover {
+    background: var(--navy-light);
+    color: var(--white);
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-nav a .nav-num {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 18px;
+  }
+
+  /* ── Main Content ────────────────────────────────────── */
+  .main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(244,246,249,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+  }
+
+  .top-bar .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  .top-bar .breadcrumb span { color: var(--text); font-weight: 600; }
+
+  .top-bar .badge-live {
+    margin-left: auto;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 48px 120px;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 16px;
+    padding: 56px 48px;
+    color: var(--white);
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(79,195,247,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero .tag {
+    display: inline-block;
+    background: rgba(79,195,247,0.18);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .hero .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .hero-stats .stat {
+    text-align: left;
+  }
+
+  .hero .hero-stats .stat .num {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .hero .hero-stats .stat .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  /* ── Sections ────────────────────────────────────────── */
+  .section {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-num {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-header h3 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--navy);
+  }
+
+  .section p, .section li {
+    color: var(--text);
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+
+  .section p { margin-bottom: 14px; }
+
+  .section ul, .section ol {
+    margin: 0 0 18px 20px;
+  }
+
+  .section li { margin-bottom: 6px; }
+
+  .section h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 32px 0 12px;
+  }
+
+  .section h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin: 20px 0 8px;
+  }
+
+  /* ── Cards ───────────────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .card-sm {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card-sm .card-sm-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .card-sm .card-sm-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy);
+  }
+
+  .card-sm .card-sm-detail {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ── Tables ──────────────────────────────────────────── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  thead {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  thead th {
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  thead th:first-child { border-radius: 9px 0 0 0; }
+  thead th:last-child { border-radius: 0 9px 0 0; }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:nth-child(even) { background: rgba(244,246,249,0.5); }
+
+  tbody tr:hover { background: rgba(79,195,247,0.04); }
+
+  /* ── Badges ──────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .badge-high       { background: var(--high-bg);     color: var(--high); }
+  .badge-med-high   { background: var(--med-high-bg); color: var(--med-high); }
+  .badge-medium     { background: var(--medium-bg);   color: #e6a800; }
+  .badge-med-low    { background: var(--med-low-bg);  color: #8c9900; }
+  .badge-low        { background: var(--low-bg);      color: var(--low); }
+
+  .badge-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 12px;
+    min-width: 48px;
+  }
+
+  /* ── Process Steps ───────────────────────────────────── */
+  .process-steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  .process-steps li {
+    counter-increment: step;
+    padding: 14px 20px 14px 56px;
+    position: relative;
+    border-left: 2px solid var(--border);
+    margin-left: 16px;
+    margin-bottom: 0;
+  }
+
+  .process-steps li:last-child { border-left-color: transparent; }
+
+  .process-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: -15px; top: 12px;
+    width: 28px; height: 28px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Checklist Columns ───────────────────────────────── */
+  .checklist-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin: 12px 0 20px;
+  }
+
+  .checklist-cols li {
+    font-size: 0.84rem;
+    padding-left: 20px;
+    position: relative;
+    list-style: none;
+    margin-bottom: 4px;
+  }
+
+  .checklist-cols li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 10px; height: 10px;
+    border: 2px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ── Posting Items ───────────────────────────────────── */
+  .posted-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  .posted-item {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .posted-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Domain Object Cards ─────────────────────────────── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .domain-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .domain-card .domain-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .domain-card .domain-name .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .domain-card .domain-fields {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+
+  /* ── Penalty callout ─────────────────────────────────── */
+  .penalty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .penalty-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .penalty-card .penalty-amount {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--high);
+  }
+
+  .penalty-card .penalty-label {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── Enforcement steps ───────────────────────────────── */
+  .enforcement-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .enforcement-step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    white-space: nowrap;
+  }
+
+  .enforcement-arrow {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── Severity legend (inline) ────────────────────────── */
+  .severity-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0 24px;
+  }
+
+  .severity-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+  }
+
+  .severity-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Callout box ─────────────────────────────────────── */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: rgba(79,195,247,0.06);
+    padding: 18px 22px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+    font-size: 0.88rem;
+  }
+
+  .callout strong { color: var(--navy); }
+
+  .callout-warning {
+    border-left: 4px solid var(--high);
+    background: rgba(229,57,53,0.04);
+    padding: 18px 22px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+    font-size: 0.88rem;
+  }
+
+  .callout-warning strong { color: var(--high); }
+
+  /* ── Architecture ────────────────────────────────────── */
+  .arch-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .arch-layer {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease;
+  }
+
+  .arch-layer:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+  .arch-layer .arch-icon {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 800;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .arch-layer .arch-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .arch-layer .arch-desc {
+    font-size: 0.74rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ── Inspection Section Cards ────────────────────────── */
+  .insp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .insp-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease;
+  }
+
+  .insp-card:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+
+  .insp-card .insp-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 800;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .insp-card .insp-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .insp-card .insp-rule {
+    font-size: 0.68rem;
+    color: var(--accent-dim);
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  .insp-card .insp-desc {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    line-height: 1.55;
+  }
+
+  /* ── Training Timeline ──────────────────────────────── */
+  .training-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .training-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .training-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--accent);
+  }
+
+  .training-card .training-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .training-card .training-hours {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent-dim);
+    margin-bottom: 4px;
+  }
+
+  .training-card .training-detail {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ── Strategic Advantage Cards ──────────────────────── */
+  .advantage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .advantage-card {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 10px;
+    padding: 22px;
+    color: var(--white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: transform 0.15s ease;
+  }
+
+  .advantage-card:hover { transform: translateY(-2px); }
+
+  .advantage-card .adv-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .advantage-card .adv-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  .doc-footer {
+    text-align: center;
+    padding: 32px 0;
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    font-size: 0.74rem;
+    color: var(--text-light);
+  }
+
+  /* ── Print / Responsive ──────────────────────────────── */
+  @media (max-width: 1000px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .content { padding: 32px 20px 80px; }
+    .card-grid, .domain-grid, .insp-grid, .advantage-grid { grid-template-columns: 1fr; }
+    .arch-stack, .training-grid { grid-template-columns: 1fr; }
+    .penalty-grid { grid-template-columns: 1fr; }
+    .checklist-cols { grid-template-columns: 1fr; }
+    .hero .hero-stats { flex-wrap: wrap; gap: 24px; }
+  }
+
+  @media print {
+    .sidebar, .top-bar { display: none; }
+    .main { margin-left: 0; }
+    .hero { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <h1><span class="logo-icon">CK</span> ComplianceKit</h1>
+    <span class="subtitle">Product Specification</span>
+  </div>
+  <div class="sidebar-meta">
+    <strong>State:</strong> Oregon<br>
+    <strong>Version:</strong> 1.0<br>
+    <strong>Date:</strong> April 6, 2026<br>
+    <strong>Status:</strong> Internal Draft
+  </div>
+  <div class="sidebar-nav">
+    <span class="nav-label">Regulatory Context</span>
+    <a href="#s1"><span class="nav-num">01</span> Regulatory Landscape</a>
+    <a href="#s2"><span class="nav-num">02</span> Inspector &amp; Process</a>
+    <a href="#s3"><span class="nav-num">03</span> Violation System</a>
+    <a href="#s4"><span class="nav-num">04</span> Inspection Checklist</a>
+    <span class="nav-label">Compliance Surface</span>
+    <a href="#s5"><span class="nav-num">05</span> Staff-Child Ratios</a>
+    <a href="#s6"><span class="nav-num">06</span> Training Requirements</a>
+    <a href="#s7"><span class="nav-num">07</span> Central Background Registry</a>
+    <a href="#s8"><span class="nav-num">08</span> Documentation Requirements</a>
+    <span class="nav-label">Product</span>
+    <a href="#s9"><span class="nav-num">09</span> Feature Mapping</a>
+    <a href="#s10"><span class="nav-num">10</span> Domain Objects</a>
+    <a href="#s11"><span class="nav-num">11</span> West Coast Expansion</a>
+  </div>
+</nav>
+
+<!-- ════════════════════ MAIN ═══════════════════════ -->
+<div class="main">
+  <div class="top-bar">
+    <div class="breadcrumb">ComplianceKit / States / <span>Oregon</span></div>
+    <div class="badge-live">Internal Product Spec</div>
+  </div>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="tag">Oregon West Coast Expansion</div>
+      <h2>Commoditizing Daycare Compliance for the State of Oregon</h2>
+      <p>A complete product specification mapping every DELC Child Care Licensing Division requirement to a digital-first ComplianceKit feature. Oregon's brand-new regulatory agency and freshly enacted OAR 414-305 rules create a once-in-a-decade market entry window.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="num">3,700+</div>
+          <div class="label">Licensed Facilities</div>
+        </div>
+        <div class="stat">
+          <div class="num">72</div>
+          <div class="label">OAR 414-305 Sections</div>
+        </div>
+        <div class="stat">
+          <div class="num">$2,500</div>
+          <div class="label">Max Per-Violation Fine</div>
+        </div>
+        <div class="stat">
+          <div class="num">2024</div>
+          <div class="label">New Rules Effective</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────── SECTION 1: Regulatory Landscape ────────── -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h3>Oregon Regulatory Landscape</h3>
+      </div>
+
+      <p>Oregon child care operations are governed by the <strong>Department of Early Learning and Care (DELC)</strong>, specifically the <strong>Child Care Licensing Division (CCLD)</strong>. DELC was created in <strong>July 2023</strong> via <strong>HB 3073</strong>, which consolidated the Early Learning Division (ELD), Employment Related Day Care (ERDC), and the Office of Child Care (OCC) into a single, standalone agency. All child care rules fall under <strong>OAR Chapter 414</strong>.</p>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Regulatory Body</div>
+          <div class="card-sm-value">DELC CCLD</div>
+          <div class="card-sm-detail">Department of Early Learning and Care, Child Care Licensing Division</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Licensed Facilities</div>
+          <div class="card-sm-value">3,700+</div>
+          <div class="card-sm-detail">1,379 centers + 1,231 registered homes + 1,113 certified homes</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Governing Rules</div>
+          <div class="card-sm-value">OAR 414-305</div>
+          <div class="card-sm-detail">Effective 1/1/2024, replacing legacy OAR 414-300</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Public Database</div>
+          <div class="card-sm-value">Find Child Care OR</div>
+          <div class="card-sm-detail">findchildcareoregon.org -- shows 5 years of inspection findings</div>
+        </div>
+      </div>
+
+      <h4>Agency Structure</h4>
+      <p>DELC operates through <strong>6 regional offices</strong> plus <strong>Salem headquarters</strong>. The contact number is <strong>1-800-556-6616</strong>. HB 3073 was a landmark reorganization, pulling early learning and child care functions out of multiple agencies into one purpose-built department. This makes Oregon's regulatory structure cleaner but also means providers are still adapting to the new organizational reality.</p>
+
+      <div class="card">
+        <h5>Facility Breakdown</h5>
+        <div class="table-wrap" style="margin-top: 12px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Facility Type</th>
+                <th>Count</th>
+                <th>Licensing Cycle</th>
+                <th>Monitoring</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Certified Centers</strong></td>
+                <td>1,379</td>
+                <td>Annual licensing visit (announced)</td>
+                <td>1+ unannounced monitoring visit/year</td>
+              </tr>
+              <tr>
+                <td><strong>Registered Family Homes</strong></td>
+                <td>1,231</td>
+                <td>Biennial licensing visit</td>
+                <td>Annual monitoring visit</td>
+              </tr>
+              <tr>
+                <td><strong>Certified Family Homes</strong></td>
+                <td>1,113</td>
+                <td>Annual licensing visit (announced)</td>
+                <td>1+ unannounced monitoring visit/year</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Market Timing:</strong> DELC is a brand-new agency (July 2023) and OAR 414-305 just took effect January 1, 2024. Providers are scrambling to understand 72 sections of new rules while simultaneously navigating a reorganized regulatory body. This confusion-to-compliance gap is ComplianceKit's entry point.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 2: Inspector & Process ────────── -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h3>The Inspector &amp; Inspection Process</h3>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Who Inspects</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">Licensing Specialists</div>
+          <div class="card-sm-detail">Compliance Specialist 2 classification; Investigative Specialists handle complaints</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Inspection Frequency</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">2+ Per Year</div>
+          <div class="card-sm-detail">1 announced annual + 1+ unannounced monitoring (centers/certified homes)</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Complaint Handling</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">Always Unannounced</div>
+          <div class="card-sm-detail">Handled by dedicated Investigative Specialists</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">New FTE (2025-27)</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">+13 Positions</div>
+          <div class="card-sm-detail">Added in 2025-27 budget to align with national best practices</div>
+        </div>
+      </div>
+
+      <h4>Two Types of Inspection Visits</h4>
+
+      <div class="card-grid">
+        <div class="card">
+          <h5>Health &amp; Safety Review</h5>
+          <p style="margin-bottom:8px;"><strong>Form:</strong> CCLD-0090 (16-page checklist)</p>
+          <p style="margin-bottom:8px;"><strong>Type:</strong> Announced annual licensing visit</p>
+          <p style="margin-bottom:0;">Comprehensive walkthrough of all operations, records, physical spaces, and compliance elements. The inspector uses the full 16-page checklist to evaluate every aspect of the facility.</p>
+        </div>
+        <div class="card">
+          <h5>Monitoring Visit</h5>
+          <p style="margin-bottom:8px;"><strong>Form:</strong> CCLD-0515 (30-item checklist)</p>
+          <p style="margin-bottom:8px;"><strong>Type:</strong> Unannounced monitoring visit</p>
+          <p style="margin-bottom:0;">Focused spot-check on critical health and safety items. Shorter and more targeted than the full H&amp;S review, but still covers ratios, supervision, training compliance, and physical safety.</p>
+        </div>
+      </div>
+
+      <h4>What Inspectors Check</h4>
+      <ol class="process-steps">
+        <li><strong>Ratios and supervision</strong> -- counting heads in each classroom against age-group requirements, verifying staff positioning</li>
+        <li><strong>Central Background Registry (CBR) enrollment</strong> -- confirming all adults with child access are CBR-approved</li>
+        <li><strong>Attendance records</strong> -- verifying daily sign-in/out logs with timestamps match actual children present</li>
+        <li><strong>Training compliance</strong> -- checking pre-service certifications (ICCHS, RRCAN, FFL) and annual training hours</li>
+        <li><strong>Hazardous items</strong> -- inspecting for accessible medications, cleaning products, sharp objects, choking hazards</li>
+        <li><strong>Required postings</strong> -- verifying all 7 classroom items and 14 public items are posted and current</li>
+        <li><strong>Health and safety conditions</strong> -- fire extinguishers, CO detectors, safe sleep practices, sanitation, outdoor play safety</li>
+        <li>Documents any findings as <strong>Valid</strong>, <strong>Invalid</strong>, or <strong>Unable to Substantiate</strong></li>
+      </ol>
+
+      <div class="callout">
+        <strong>Registered Family Homes:</strong> Operate on a different schedule -- biennial licensing visits plus annual monitoring. This means they receive fewer inspections but face the same substantive compliance requirements.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 3: Violation System ────────── -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h3>Violation System &amp; Enforcement</h3>
+      </div>
+
+      <p>Oregon uses a <strong>two-tier severity system</strong> -- Serious and Non-Serious violations -- with corresponding civil penalty ranges. Each day of noncompliance constitutes a separate violation. Serious findings must be <strong>posted publicly for 12 months</strong>.</p>
+
+      <div class="severity-legend">
+        <div class="severity-item">
+          <div class="severity-dot" style="background: var(--high);"></div>
+          <span><strong>Serious Violations</strong> -- imminent danger, life-safety</span>
+        </div>
+        <div class="severity-item">
+          <div class="severity-dot" style="background: var(--medium);"></div>
+          <span><strong>Non-Serious Violations</strong> -- all other noncompliance</span>
+        </div>
+      </div>
+
+      <h4>Civil Penalty Ranges</h4>
+      <div class="penalty-grid">
+        <div class="penalty-card">
+          <div class="penalty-amount">$2,500</div>
+          <div class="penalty-label">Per serious violation<br><strong>Centers</strong></div>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-amount">$1,200</div>
+          <div class="penalty-label">Per serious violation<br><strong>Homes</strong></div>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-amount">$1,500/day</div>
+          <div class="penalty-label">Unlicensed care<br><strong>Per day of operation</strong></div>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Non-Serious (Centers)</div>
+          <div class="card-sm-value" style="color: #e6a800;">$800</div>
+          <div class="card-sm-detail">Per violation for any other noncompliance</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Non-Serious (Homes)</div>
+          <div class="card-sm-value" style="color: #e6a800;">$400</div>
+          <div class="card-sm-detail">Per violation for any other noncompliance</div>
+        </div>
+      </div>
+
+      <h4>Serious Violations <span class="badge badge-high">Red</span></h4>
+      <ul>
+        <li>Children in <strong>imminent danger</strong></li>
+        <li>Operating <strong>over capacity</strong></li>
+        <li><strong>Prohibited discipline or punishment</strong> of children</li>
+        <li>Children <strong>not supervised</strong></li>
+        <li>Multiple or serious <strong>fire, health, or safety hazards</strong></li>
+        <li><strong>Extreme unsanitary</strong> conditions</li>
+        <li>Adults <strong>not enrolled in CBR</strong> (Central Background Registry)</li>
+        <li>Operating <strong>without certification</strong></li>
+      </ul>
+
+      <h4>Non-Serious Violations <span class="badge badge-medium">Yellow</span></h4>
+      <p>Any other noncompliance with OAR 414-305 or other applicable rules that does not rise to the level of a serious violation.</p>
+
+      <div class="callout-warning">
+        <strong>Cumulative Risk:</strong> Each day of noncompliance counts as a separate violation. A center operating over capacity for 5 days faces up to $12,500 in penalties ($2,500 x 5 days). Serious findings must be publicly posted for 12 full months, creating lasting reputational damage visible on Find Child Care Oregon.
+      </div>
+
+      <h4>Progressive Enforcement Ladder</h4>
+      <div class="enforcement-flow">
+        <div class="enforcement-step">Technical Assistance</div>
+        <span class="enforcement-arrow">&rarr;</span>
+        <div class="enforcement-step">Civil Penalty</div>
+        <span class="enforcement-arrow">&rarr;</span>
+        <div class="enforcement-step">Conditions on License</div>
+        <span class="enforcement-arrow">&rarr;</span>
+        <div class="enforcement-step">Denial</div>
+        <span class="enforcement-arrow">&rarr;</span>
+        <div class="enforcement-step">Revocation</div>
+        <span class="enforcement-arrow">&rarr;</span>
+        <div class="enforcement-step" style="border-color: var(--high); color: var(--high);">Emergency Suspension</div>
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 4: 16-Page Inspection Checklist ────────── -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h3>The 16-Page Inspection Checklist (CCLD-0090)</h3>
+      </div>
+
+      <p>The Health &amp; Safety Review uses <strong>Form CCLD-0090</strong>, a 16-page checklist that covers every operational domain. Below are the 24 major sections from the actual form, organized by regulatory area. Each maps directly to OAR 414-305 rule sections.</p>
+
+      <div class="insp-grid">
+        <div class="insp-card">
+          <div class="insp-num">1</div>
+          <div class="insp-title">Ratios and Supervision</div>
+          <div class="insp-rule">OAR 0400-0500</div>
+          <div class="insp-desc">Ratios per Table 3A/3B, full attention requirement, proper staff positioning, naptime lighting levels</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">2</div>
+          <div class="insp-title">Program and Care</div>
+          <div class="insp-rule">OAR 0520</div>
+          <div class="insp-desc">Daily schedule, outdoor play time: 20min/3hrs infants, 30min/3hrs preschool, 90min/6hrs active play</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">3</div>
+          <div class="insp-title">Activity Plans</div>
+          <div class="insp-rule">OAR 0525</div>
+          <div class="insp-desc">Weekly written plans, developmentally appropriate, 11 activity types required, max 2.5hrs screen time</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">4</div>
+          <div class="insp-title">Meals and Snacks</div>
+          <div class="insp-rule">OAR 1100-1140</div>
+          <div class="insp-desc">USDA CACFP compliance, drinking water availability, parent-provided food handling rules</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">5</div>
+          <div class="insp-title">School-Age Care</div>
+          <div class="insp-rule">OAR 0500, 0530</div>
+          <div class="insp-desc">Sight and sound supervision, homework time, rest periods, structured and unstructured activities</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">6</div>
+          <div class="insp-title">Infant and Toddler Care</div>
+          <div class="insp-rule">OAR 0600-0610</div>
+          <div class="insp-desc">Daily parent reports, individualized care plans, feeding schedules, developmental needs documentation</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">7</div>
+          <div class="insp-title">Equipment / Cribs</div>
+          <div class="insp-rule">OAR 0620</div>
+          <div class="insp-desc">CPSC compliance, 2ft spacing between cribs, individual assignment, sanitization protocols</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">8</div>
+          <div class="insp-title">Infant Safe Sleep</div>
+          <div class="insp-rule">OAR 0630</div>
+          <div class="insp-desc">Back to sleep, firm surface, no loose items, no swaddling, active monitoring required</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">9</div>
+          <div class="insp-title">Diaper Changing</div>
+          <div class="insp-rule">OAR 0650</div>
+          <div class="insp-desc">Every 2 hours minimum, proper area setup, sanitizing between changes, glove requirements</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">10</div>
+          <div class="insp-title">Center Capacity</div>
+          <div class="insp-rule">OAR 0800</div>
+          <div class="insp-desc">35 sq ft per child minimum, 1 toilet per 15 children, adequate ventilation and egress</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">11</div>
+          <div class="insp-title">Facility Structure</div>
+          <div class="insp-rule">OAR 0810</div>
+          <div class="insp-desc">Adequate lighting, cleanable flooring, child barriers, window locks, CO detectors in all areas</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">12</div>
+          <div class="insp-title">Play Materials</div>
+          <div class="insp-rule">OAR 0910</div>
+          <div class="insp-desc">Developmentally appropriate equipment, shock-absorbing surfaces under climbing equipment</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">13</div>
+          <div class="insp-title">Outdoor Play Areas</div>
+          <div class="insp-rule">OAR 0920</div>
+          <div class="insp-desc">Fencing min 4ft, use zones 6ft clearance, protective surfacing, shade availability, helmet policy</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">14</div>
+          <div class="insp-title">Injuries</div>
+          <div class="insp-rule">OAR 1020</div>
+          <div class="insp-desc">Written injury procedures, incident reports filed within 48 hours, parent notification</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">15</div>
+          <div class="insp-title">Medications</div>
+          <div class="insp-rule">OAR 1030</div>
+          <div class="insp-desc">Written authorization required, proper labeling, administration documentation, sunscreen protocols</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">16</div>
+          <div class="insp-title">Swimming &amp; Animals</div>
+          <div class="insp-rule">OAR 1300-1400</div>
+          <div class="insp-desc">Water safety protocols, animal interaction policies, supervision requirements near water</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">17</div>
+          <div class="insp-title">Written Policies</div>
+          <div class="insp-rule">OAR 0200</div>
+          <div class="insp-desc">20 required written policy items (a through t) covering all operational areas</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">18</div>
+          <div class="insp-title">Emergency Preparedness</div>
+          <div class="insp-rule">OAR 0210</div>
+          <div class="insp-desc">Monthly evacuation drills + other emergency drill every 2 months, 15-item emergency plan (a-o)</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">19</div>
+          <div class="insp-title">Required Postings</div>
+          <div class="insp-rule">OAR 0260</div>
+          <div class="insp-desc">7 classroom items + 14 public items (a through n) must be visibly posted and current</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">20</div>
+          <div class="insp-title">Children's Records</div>
+          <div class="insp-rule">OAR 0220</div>
+          <div class="insp-desc">12 items per child file, annual review and update required, immunization records</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">21</div>
+          <div class="insp-title">Parental Permissions</div>
+          <div class="insp-rule">OAR 0230</div>
+          <div class="insp-desc">Authorized pickup persons, field trip consent, photo/media release, high-risk activity waivers</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">22</div>
+          <div class="insp-title">Staff Records</div>
+          <div class="insp-rule">OAR 0240</div>
+          <div class="insp-desc">12 items per staff member file, CBR verification, training documentation, performance records</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">23</div>
+          <div class="insp-title">Training Compliance</div>
+          <div class="insp-rule">OAR 0370-0380</div>
+          <div class="insp-desc">Orientation within 30 days, 15 hours annual continuing education, category requirements</div>
+        </div>
+        <div class="insp-card">
+          <div class="insp-num">24</div>
+          <div class="insp-title">Program Records</div>
+          <div class="insp-rule">OAR 0250</div>
+          <div class="insp-desc">Daily attendance logs, visitor sign-in/out, parent declarations, emergency contact lists</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Product Implication:</strong> The 24 sections of CCLD-0090 directly map to ComplianceKit's digital walkthrough feature. Each section becomes an interactive checklist with photo documentation, date-stamped completion, and pre-inspection prep mode that mirrors what the Licensing Specialist will actually evaluate.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 5: Staff-Child Ratios ────────── -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <h3>Staff-Child Ratios</h3>
+      </div>
+
+      <p>Oregon's ratio requirements are defined in <strong>Table 3A/3B of OAR 414-305</strong>. These ratios must be maintained at all times when children are in care, including during transitions, outdoor play, and mealtimes.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Age Group</th>
+              <th>Staff : Child Ratio</th>
+              <th>Max Group Size</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>6 weeks - 23 months</strong></td>
+              <td><span class="badge badge-high">1 : 4</span></td>
+              <td>8 children</td>
+              <td>Infants and young toddlers</td>
+            </tr>
+            <tr>
+              <td><strong>24 - 35 months</strong></td>
+              <td><span class="badge badge-med-high">1 : 5</span></td>
+              <td>10 children</td>
+              <td>Older toddlers</td>
+            </tr>
+            <tr>
+              <td><strong>36 months - school age</strong></td>
+              <td><span class="badge badge-medium">1 : 10</span></td>
+              <td>20 children</td>
+              <td>Preschool-age children</td>
+            </tr>
+            <tr>
+              <td><strong>School-age</strong></td>
+              <td><span class="badge badge-low">1 : 15</span></td>
+              <td>30 children</td>
+              <td>Before/after school programs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Group Size Exceptions:</strong> Maximum group size limits <strong>do not apply</strong> during field trips, outdoor play, large-group activities, napping, or eating. However, <strong>staff-child ratios must still be maintained</strong> during all of these activities. This distinction is a common source of confusion and citations.
+      </div>
+
+      <h4>Outdoor Play Time Requirements</h4>
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Infants</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">20 min / 3 hrs</div>
+          <div class="card-sm-detail">Outdoor or large motor activity per every 3 hours of care</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Preschool</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">30 min / 3 hrs</div>
+          <div class="card-sm-detail">Outdoor play per every 3 hours of care</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Active Play</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">90 min / 6 hrs</div>
+          <div class="card-sm-detail">Total active play requirement for full-day programs</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Screen Time</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">2.5 hrs max</div>
+          <div class="card-sm-detail">Maximum daily screen time per OAR 0525</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 6: Training Requirements ────────── -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <h3>Training Requirements</h3>
+      </div>
+
+      <p>Oregon has both <strong>pre-service</strong> requirements (completed before unsupervised access to children) and <strong>annual continuing education</strong> requirements. All training is tracked through the <strong>Oregon Registry Online (ORO)</strong>, which uses a 12-step professional development ladder.</p>
+
+      <h4>Pre-Service Requirements (Before Unsupervised Access)</h4>
+      <div class="training-grid">
+        <div class="training-card">
+          <div class="training-name">ICCHS</div>
+          <div class="training-hours">2 hrs</div>
+          <div class="training-detail">Intro to Child Care Health &amp; Safety -- online course</div>
+        </div>
+        <div class="training-card">
+          <div class="training-name">RRCAN</div>
+          <div class="training-hours">2 hrs</div>
+          <div class="training-detail">Recognizing &amp; Reporting Child Abuse &amp; Neglect -- online</div>
+        </div>
+        <div class="training-card">
+          <div class="training-name">FFL</div>
+          <div class="training-hours">2 hrs</div>
+          <div class="training-detail">Foundations for Learning -- online course</div>
+        </div>
+        <div class="training-card">
+          <div class="training-name">Safe Sleep</div>
+          <div class="training-hours">1 hr</div>
+          <div class="training-detail">Safe Sleep for Oregon Infants -- required if serving infants</div>
+        </div>
+        <div class="training-card">
+          <div class="training-name">Food Handlers</div>
+          <div class="training-hours">2 hrs</div>
+          <div class="training-detail">Food Handlers Certificate -- valid 3 years</div>
+        </div>
+        <div class="training-card">
+          <div class="training-name">First Aid / CPR</div>
+          <div class="training-hours">In-Person</div>
+          <div class="training-detail">Pediatric First Aid &amp; CPR -- in-person required, valid 2 years</div>
+        </div>
+      </div>
+
+      <h4>Annual Continuing Education</h4>
+      <div class="card">
+        <div class="card-grid" style="margin-bottom: 0;">
+          <div class="card-sm" style="border: none; box-shadow: none; padding: 12px;">
+            <div class="card-sm-label">Total Annual Hours</div>
+            <div class="card-sm-value">15 hrs</div>
+            <div class="card-sm-detail">Required clock hours per year for all staff</div>
+          </div>
+          <div class="card-sm" style="border: none; box-shadow: none; padding: 12px;">
+            <div class="card-sm-label">Child Development</div>
+            <div class="card-sm-value">8 hrs</div>
+            <div class="card-sm-detail">Minimum in child development topics</div>
+          </div>
+          <div class="card-sm" style="border: none; box-shadow: none; padding: 12px;">
+            <div class="card-sm-label">Health/Safety/Nutrition</div>
+            <div class="card-sm-value">1 hr</div>
+            <div class="card-sm-detail">Minimum in health, safety, or nutrition</div>
+          </div>
+          <div class="card-sm" style="border: none; box-shadow: none; padding: 12px;">
+            <div class="card-sm-label">Director Requirement</div>
+            <div class="card-sm-value">10 hrs</div>
+            <div class="card-sm-detail">Program Management within first year as director</div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Oregon Registry Online (ORO)</h4>
+      <p>The ORO is Oregon's statewide professional development tracking system. It uses a <strong>12-step professional development ladder</strong> that maps career progression from entry-level aides to program directors. All training hours, certifications, and professional development activities are logged in the ORO. Staff orientation must be completed <strong>within 30 days</strong> of hire.</p>
+
+      <div class="callout">
+        <strong>Integration Opportunity:</strong> ORO is a centralized, state-maintained system. A ComplianceKit integration with ORO would auto-sync training records, eliminate manual entry, and create a powerful competitive moat -- no other compliance tool in Oregon connects to the registry.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 7: Central Background Registry ────────── -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <h3>Central Background Registry (CBR)</h3>
+      </div>
+
+      <p>The CBR is Oregon's <strong>unique, statewide background check system</strong> for child care. Unlike most states that require individual facility-level background checks, Oregon centralizes all checks through the CBR, administered by CCLD.</p>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Who Must Enroll</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">All Adults</div>
+          <div class="card-sm-detail">Any person with unsupervised access to children in care</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Valid Period</div>
+          <div class="card-sm-value">5 Years</div>
+          <div class="card-sm-detail">Must be renewed before expiration to maintain compliance</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Processing Time</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">Up to 8 Weeks</div>
+          <div class="card-sm-detail">Out-of-state checks can take significantly longer</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Cost to Provider</div>
+          <div class="card-sm-value" style="font-size: 1.1rem; color: var(--low);">Free</div>
+          <div class="card-sm-detail">CCLD covers fingerprinting costs for providers</div>
+        </div>
+      </div>
+
+      <h4>What the CBR Checks</h4>
+      <ul>
+        <li><strong>Oregon State Police (OSP)</strong> -- statewide criminal history</li>
+        <li><strong>DHS Child Protective Services (CPS)</strong> -- child abuse/neglect history</li>
+        <li><strong>FBI fingerprint check</strong> -- national criminal database</li>
+        <li><strong>National sex offender registries</strong> -- all 50 states</li>
+        <li><strong>Out-of-state checks</strong> -- required if the individual has lived in another state within the past 5 years</li>
+      </ul>
+
+      <div class="callout-warning">
+        <strong>Critical Compliance Point:</strong> Staff must be CBR-approved <strong>BEFORE starting work</strong>. An adult with unsupervised access who is not CBR-enrolled is a <strong>serious violation</strong> carrying up to $2,500 per day in penalties. With processing times up to 8 weeks for out-of-state checks, this requires careful hiring workflow management.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 8: Documentation Requirements ────────── -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <h3>Documentation &amp; Posting Requirements</h3>
+      </div>
+
+      <h4>Public Postings (14 Items) <span class="badge-count">OAR 0260</span></h4>
+      <p>The following items must be posted in a publicly visible location accessible to all parents and visitors:</p>
+      <div class="posted-items">
+        <span class="posted-item">a. Current certificate</span>
+        <span class="posted-item">b. Rules/inspections notice</span>
+        <span class="posted-item">c. DELC website/phone/Safety Portal</span>
+        <span class="posted-item">d. Water test results</span>
+        <span class="posted-item">e. Complaint information</span>
+        <span class="posted-item">f. Abuse hotline number</span>
+        <span class="posted-item">g. Director + substitute name</span>
+        <span class="posted-item">h. Parent access notice</span>
+        <span class="posted-item">i. Closure dates</span>
+        <span class="posted-item">j. Current week's menu</span>
+        <span class="posted-item">k. Field trip notices (48hrs)</span>
+        <span class="posted-item">l. Neighborhood walk notices</span>
+        <span class="posted-item">m. Restrictable disease notices</span>
+        <span class="posted-item">n. Behavior/guidance policy</span>
+      </div>
+
+      <h4>Per Classroom Postings (7 Items) <span class="badge-count">OAR 0260</span></h4>
+      <p>Each classroom or care area must have the following items posted:</p>
+      <div class="posted-items">
+        <span class="posted-item">a. Emergency numbers</span>
+        <span class="posted-item">b. Evacuation diagram</span>
+        <span class="posted-item">c. Daily schedule + weekly plan</span>
+        <span class="posted-item">d. Menu + dietary restrictions</span>
+        <span class="posted-item">e. Handwashing procedures (at sinks)</span>
+        <span class="posted-item">f. Diaper changing procedures (at stations)</span>
+        <span class="posted-item">g. Ratios and group sizes</span>
+      </div>
+
+      <h4>Children's Records (12 Items per Child) <span class="badge-count">OAR 0220</span></h4>
+      <p>Each child enrolled must have a file containing 12 required items, reviewed and updated annually:</p>
+      <ul class="checklist-cols">
+        <li>Emergency contact information</li>
+        <li>Authorized pickup persons</li>
+        <li>Immunization records</li>
+        <li>Health/medical information</li>
+        <li>Enrollment/registration form</li>
+        <li>Allergy and dietary needs</li>
+        <li>Parental permissions/consents</li>
+        <li>Special care plans (if applicable)</li>
+        <li>Photo/media release</li>
+        <li>Transportation authorization</li>
+        <li>Field trip permissions</li>
+        <li>Annual review documentation</li>
+      </ul>
+
+      <h4>Staff Records (12 Items per Staff Member) <span class="badge-count">OAR 0240</span></h4>
+      <p>Each staff member must have a personnel file containing 12 required items with CBR verification:</p>
+      <ul class="checklist-cols">
+        <li>CBR enrollment verification</li>
+        <li>Pre-service training certificates</li>
+        <li>Current CPR/First Aid certification</li>
+        <li>Food Handlers Certificate</li>
+        <li>Annual training hour log</li>
+        <li>ORO registry enrollment</li>
+        <li>Job description/qualifications</li>
+        <li>Emergency contact information</li>
+        <li>Health screening documentation</li>
+        <li>Performance evaluations</li>
+        <li>Orientation completion record</li>
+        <li>Signed policies acknowledgment</li>
+      </ul>
+
+      <h4>Written Policies (20 Items) <span class="badge-count">OAR 0200</span></h4>
+      <p>Facilities must maintain 20 written policy items (a through t) covering all operational areas. These must be provided to parents in writing and updated as regulations change. Key policies include enrollment, discipline/guidance, health/illness, emergency procedures, transportation, field trips, media use, and grievance processes.</p>
+
+      <h4>Emergency Preparedness <span class="badge-count">OAR 0210</span></h4>
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Evacuation Drills</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">Monthly</div>
+          <div class="card-sm-detail">Fire/evacuation drill required every month</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Other Emergency Drills</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">Every 2 Months</div>
+          <div class="card-sm-detail">Earthquake, lockdown, shelter-in-place, etc.</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Emergency Plan Items</div>
+          <div class="card-sm-value">15</div>
+          <div class="card-sm-detail">Items a through o required in written emergency plan</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Drill Documentation</div>
+          <div class="card-sm-value" style="font-size: 1.1rem;">Required</div>
+          <div class="card-sm-detail">Date, time, supervisor, head count, completion time</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 9: How ComplianceKit Productizes Oregon ────────── -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-num">09</div>
+        <h3>How ComplianceKit Productizes Oregon</h3>
+      </div>
+
+      <p>Every major Oregon compliance requirement maps to a specific ComplianceKit feature. The table below shows the <strong>rule-to-product mapping</strong>, highlighting the current pain point that makes each feature valuable.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OR Requirement</th>
+              <th>Form / Rule</th>
+              <th>Current Pain</th>
+              <th>ComplianceKit Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>30-item monitoring visit</strong></td>
+              <td>CCLD-0515</td>
+              <td>Paper checklist, unclear compliance status</td>
+              <td>Digital self-assessment mirroring exact 30 items, real-time compliance score</td>
+            </tr>
+            <tr>
+              <td><strong>16-page H&amp;S review</strong></td>
+              <td>CCLD-0090</td>
+              <td>Massive paper form, hard to prepare for</td>
+              <td>Digital walkthrough matching all sections, photo documentation, pre-inspection prep mode</td>
+            </tr>
+            <tr>
+              <td><strong>CBR enrollment tracking</strong></td>
+              <td>OAR 414-061</td>
+              <td>Manual tracking, 8-week processing delays</td>
+              <td>CBR status dashboard per staff member, 5-year renewal alerts, new hire workflow</td>
+            </tr>
+            <tr>
+              <td><strong>Monthly evacuation drills</strong></td>
+              <td>OAR 0210(6)</td>
+              <td>Paper log, incomplete records</td>
+              <td>Digital drill logger with timer, attendance capture, bi-monthly other-drill reminders</td>
+            </tr>
+            <tr>
+              <td><strong>12-item children's records</strong></td>
+              <td>OAR 0220</td>
+              <td>Paper files, annual review forgotten</td>
+              <td>Digital child profile with 12-item checklist, annual review reminders, parent portal for updates</td>
+            </tr>
+            <tr>
+              <td><strong>12-item staff records</strong></td>
+              <td>OAR 0240</td>
+              <td>Paper files, cert expirations missed</td>
+              <td>Staff compliance dashboard, ORO integration concept, CPR/FA 2-year alerts</td>
+            </tr>
+            <tr>
+              <td><strong>Daily attendance</strong></td>
+              <td>OAR 0250</td>
+              <td>Paper sign-in, hard to access during emergency</td>
+              <td>Digital check-in with timestamps, accessible from any device, emergency evacuation list</td>
+            </tr>
+            <tr>
+              <td><strong>20-item written policies</strong></td>
+              <td>OAR 0200</td>
+              <td>Paper handbook, hard to prove distribution</td>
+              <td>Digital policy acknowledgment with parent e-signatures, version tracking</td>
+            </tr>
+            <tr>
+              <td><strong>15hrs annual training</strong></td>
+              <td>OAR 0380</td>
+              <td>Manual tracking, prorated calculations complex</td>
+              <td>Training hour tracker with auto-proration, category breakdown (8hr CD, 1hr HSN)</td>
+            </tr>
+            <tr>
+              <td><strong>Serious findings posting</strong></td>
+              <td>12 months</td>
+              <td>Easy to forget to remove or post</td>
+              <td>Automated posting timeline, 12-month countdown, reminder to remove</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Compliance Score Engine:</strong> ComplianceKit generates a real-time compliance percentage for each Oregon facility by mapping their current documentation, training status, and operational practices against every applicable OAR 414-305 requirement. Providers see exactly where they stand before the Licensing Specialist arrives.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 10: Domain Objects ────────── -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <h3>Domain Objects (Oregon-Specific)</h3>
+      </div>
+
+      <p>The following data models capture Oregon-specific regulatory concepts that do not exist in other states. These domain objects form the foundation of ComplianceKit's Oregon module.</p>
+
+      <div class="domain-grid">
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>CBREnrollment</div>
+          <div class="domain-fields">
+            staff_id: uuid<br>
+            enrollment_date: date<br>
+            expiry_date: date<br>
+            status: enum<br>
+            approval_date: date<br>
+            out_of_state_check_status: enum
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>OROProfile</div>
+          <div class="domain-fields">
+            staff_id: uuid<br>
+            registry_step: int (1-12)<br>
+            training_hours_current_year: float<br>
+            cd_hours: float<br>
+            hsn_hours: float<br>
+            last_updated: datetime
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>MonitoringVisit</div>
+          <div class="domain-fields">
+            facility_id: uuid<br>
+            visit_type: health_safety | monitoring | complaint<br>
+            date: date<br>
+            announced: bool<br>
+            licensing_specialist: string<br>
+            findings: FindingRecord[]
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>FindingRecord</div>
+          <div class="domain-fields">
+            visit_id: uuid<br>
+            rule_reference: string<br>
+            status: valid | invalid | unable_to_substantiate<br>
+            severity: serious | non_serious<br>
+            public_response_url: url<br>
+            posted_until_date: date
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>EmergencyDrill</div>
+          <div class="domain-fields">
+            facility_id: uuid<br>
+            drill_type: evacuation | other_emergency<br>
+            date: date<br>
+            time_of_day: time<br>
+            supervisor: string<br>
+            children_count: int<br>
+            staff_count: int<br>
+            completion_time: interval<br>
+            documented: bool
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span>PolicyDistribution</div>
+          <div class="domain-fields">
+            facility_id: uuid<br>
+            policy_version: string<br>
+            parent_id: uuid<br>
+            acknowledged_date: date<br>
+            signature_url: url
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Oregon-Unique Models:</strong> The <code>CBREnrollment</code> and <code>OROProfile</code> objects are entirely unique to Oregon. No other state has a centralized background registry or a 12-step professional development ladder. These domain objects create natural switching costs -- once a provider's data lives in ComplianceKit's Oregon module, migrating to a competitor means losing CBR workflow automation and ORO sync.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 11: Why Oregon for West Coast Expansion ────────── -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <div class="section-num">11</div>
+        <h3>Why Oregon for West Coast Expansion</h3>
+      </div>
+
+      <p>Oregon is the ideal beachhead for ComplianceKit's Pacific Northwest expansion. The combination of a new agency, new rules, manageable market size, and unique regulatory features creates a textbook entry opportunity.</p>
+
+      <div class="advantage-grid">
+        <div class="advantage-card">
+          <div class="adv-title">Pacific Northwest Corridor</div>
+          <div class="adv-desc">Natural expansion path: Oregon leads to Washington leads to California. Regulatory patterns and provider networks overlap across the I-5 corridor. Win Oregon, and the playbook scales north and south.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">Focused, Dominatable Market</div>
+          <div class="adv-desc">~3,700 facilities is a manageable TAM to achieve dominant market share. Unlike Texas (14,000+) or California, Oregon can be saturated with a focused sales effort, creating a reference market for larger states.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">Brand-New Agency (July 2023)</div>
+          <div class="adv-desc">DELC is barely two years old. Providers are confused about who to contact, what forms to use, and how the new structure works. ComplianceKit becomes the provider's guide to the new regulatory reality.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">New Rules = New Urgency</div>
+          <div class="adv-desc">OAR 414-305 took effect January 1, 2024. Everyone is scrambling to comply with 72 sections of new standards. The transition from 414-300 to 414-305 changes dozens of requirements. Perfect timing for a digital compliance tool.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">ORO Integration = Competitive Moat</div>
+          <div class="adv-desc">Oregon Registry Online is a unique state system with no equivalent in other states. Building ORO integration creates a feature that competitors cannot replicate without significant Oregon-specific investment.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">Reputation Risk Drives Purchases</div>
+          <div class="adv-desc">Serious violations posted publicly for 12 months on findchildcareoregon.org. Parents actively check these records. The reputational cost of a violation makes compliance software an easy ROI calculation for directors.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">CBR = Unique Switching Cost</div>
+          <div class="adv-desc">Central Background Registry enrollment tracking is Oregon-specific functionality. Once a provider builds their CBR workflow in ComplianceKit -- tracking 5-year renewals, out-of-state checks, and new hire approvals -- switching costs are high.</div>
+        </div>
+        <div class="advantage-card">
+          <div class="adv-title">72 Sections of Complexity</div>
+          <div class="adv-desc">OAR 414-305 contains 72 sections of detailed requirements across every operational area. This level of regulatory complexity demands software -- spreadsheets and paper binders cannot keep pace with the scope of what providers must track.</div>
+        </div>
+      </div>
+
+      <h4>Market Entry Timeline</h4>
+      <ol class="process-steps">
+        <li><strong>Oregon Module Build</strong> -- Implement all 10 feature mappings from Section 9, focusing on CCLD-0090 digital walkthrough and CBR enrollment tracking as launch features</li>
+        <li><strong>Pilot Program</strong> -- Partner with 10-20 Portland-metro certified centers for beta testing against the new OAR 414-305 requirements</li>
+        <li><strong>ORO Integration Proof of Concept</strong> -- Demonstrate training hour sync with Oregon Registry Online to validate the competitive moat thesis</li>
+        <li><strong>Statewide Launch</strong> -- Target all 1,379 centers first (highest complexity, highest willingness to pay), then expand to certified and registered homes</li>
+        <li><strong>Washington Expansion</strong> -- Use Oregon customer base and regulatory pattern recognition to enter Washington market (WAC 110-300)</li>
+      </ol>
+
+      <div class="callout">
+        <strong>Revenue Opportunity:</strong> At 3,700+ facilities with an estimated $50-100/month SaaS price point, the Oregon TAM is $2.2M - $4.4M ARR. More importantly, Oregon serves as the proof point for the entire West Coast strategy. A dominant position in Oregon de-risks the far larger Washington and California market entries.
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      ComplianceKit Product Specification -- Oregon -- Version 1.0 -- April 2026 -- Internal Use Only
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

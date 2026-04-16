@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComplianceKit - Florida Product Specification</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --navy: #1a1a2e;
+            --navy-deep: #12121f;
+            --navy-light: #22223a;
+            --navy-lighter: #2a2a48;
+            --sidebar-bg: #0e0e1a;
+            --sidebar-hover: #1e1e34;
+            --sidebar-active: #2c2c50;
+            --border: #2e2e52;
+            --border-light: #3a3a60;
+            --text: #e8e8f0;
+            --text-muted: #9090b0;
+            --text-dim: #6a6a8a;
+            --accent: #6c5ce7;
+            --accent-light: #a29bfe;
+            --accent-glow: rgba(108, 92, 231, 0.15);
+            --red: #ff6b6b;
+            --red-bg: rgba(255, 107, 107, 0.10);
+            --red-border: rgba(255, 107, 107, 0.30);
+            --orange: #ffa502;
+            --orange-bg: rgba(255, 165, 2, 0.10);
+            --orange-border: rgba(255, 165, 2, 0.30);
+            --yellow: #feca57;
+            --yellow-bg: rgba(254, 202, 87, 0.10);
+            --yellow-border: rgba(254, 202, 87, 0.30);
+            --green: #00b894;
+            --green-bg: rgba(0, 184, 148, 0.10);
+            --green-border: rgba(0, 184, 148, 0.30);
+            --blue: #74b9ff;
+            --blue-bg: rgba(116, 185, 255, 0.10);
+            --blue-border: rgba(116, 185, 255, 0.30);
+            --gray-badge: #4a4a6a;
+            --gray-badge-bg: rgba(74, 74, 106, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ───── Sidebar ───── */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            padding: 28px 24px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-brand-sub {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            padding: 20px 24px 8px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 12px 24px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            margin-bottom: 1px;
+            line-height: 1.4;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--sidebar-hover);
+            color: var(--text);
+        }
+
+        .sidebar-nav a .nav-num {
+            color: var(--text-dim);
+            font-size: 11px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            min-width: 20px;
+            margin-top: 1px;
+        }
+
+        .sidebar-nav a.active {
+            background: var(--sidebar-active);
+            color: var(--accent-light);
+        }
+
+        .sidebar-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .sidebar-footer .state-flag {
+            font-size: 14px;
+            margin-right: 4px;
+        }
+
+        /* ───── Main Content ───── */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 48px 80px;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 48px 48px;
+            max-width: 960px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 56px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 100px;
+        }
+
+        .hero-badge-purple {
+            background: var(--accent-glow);
+            color: var(--accent-light);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+        }
+
+        .hero-badge-orange {
+            background: var(--orange-bg);
+            color: var(--orange);
+            border: 1px solid var(--orange-border);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-light), #74b9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 680px;
+            line-height: 1.7;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        .hero-meta-item strong {
+            color: var(--text-muted);
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 64px;
+            scroll-margin-top: 24px;
+        }
+
+        .section-header {
+            margin-bottom: 28px;
+        }
+
+        .section-num {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 14px;
+            color: var(--text);
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 24px 0 10px;
+            color: var(--accent-light);
+        }
+
+        p { margin-bottom: 14px; }
+
+        /* ───── Cards ───── */
+        .card {
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .info-value a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+
+        /* Stat Cards */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-number.purple { color: var(--accent-light); }
+        .stat-number.red { color: var(--red); }
+        .stat-number.orange { color: var(--orange); }
+        .stat-number.green { color: var(--green); }
+        .stat-number.blue { color: var(--blue); }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ───── Tables ───── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+
+        thead th {
+            background: var(--navy-lighter);
+            color: var(--text-muted);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 13px 16px;
+            text-align: left;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(46, 46, 82, 0.5);
+            vertical-align: top;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(108, 92, 231, 0.04); }
+
+        /* ───── Severity Badges ───── */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .badge-critical {
+            background: var(--red-bg);
+            color: var(--red);
+            border: 1px solid var(--red-border);
+        }
+
+        .badge-serious {
+            background: var(--orange-bg);
+            color: var(--orange);
+            border: 1px solid var(--orange-border);
+        }
+
+        .badge-moderate {
+            background: var(--yellow-bg);
+            color: var(--yellow);
+            border: 1px solid var(--yellow-border);
+        }
+
+        .badge-low {
+            background: var(--gray-badge-bg);
+            color: var(--text-muted);
+            border: 1px solid rgba(74, 74, 106, 0.4);
+        }
+
+        .badge-green {
+            background: var(--green-bg);
+            color: var(--green);
+            border: 1px solid var(--green-border);
+        }
+
+        .badge-blue {
+            background: var(--blue-bg);
+            color: var(--blue);
+            border: 1px solid var(--blue-border);
+        }
+
+        /* ───── Callouts ───── */
+        .callout {
+            border-radius: 10px;
+            padding: 22px 26px;
+            margin: 22px 0;
+            border-left: 4px solid;
+        }
+
+        .callout-red { background: var(--red-bg); border-color: var(--red); }
+        .callout-orange { background: var(--orange-bg); border-color: var(--orange); }
+        .callout-yellow { background: var(--yellow-bg); border-color: var(--yellow); }
+        .callout-green { background: var(--green-bg); border-color: var(--green); }
+        .callout-blue { background: var(--blue-bg); border-color: var(--blue); }
+        .callout-purple { background: var(--accent-glow); border-color: var(--accent); }
+
+        .callout-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .callout p {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .callout p:last-child { margin-bottom: 0; }
+
+        /* ───── Lists ───── */
+        ul, ol {
+            margin: 10px 0 16px 22px;
+        }
+
+        li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        li strong { color: var(--text); }
+
+        /* ───── Steps / Process ───── */
+        .process-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 4px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(46, 46, 82, 0.4);
+        }
+
+        .step:last-child { border-bottom: none; }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            color: var(--accent-light);
+            font-size: 13px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .step-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        /* ───── Violation Section Cards ───── */
+        .violation-class {
+            background: var(--navy-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border-left: 4px solid;
+        }
+
+        .violation-class.class-1 { border-left-color: var(--red); }
+        .violation-class.class-2 { border-left-color: var(--orange); }
+        .violation-class.class-3 { border-left-color: var(--yellow); }
+        .violation-class.class-4 { border-left-color: var(--gray-badge); }
+
+        .violation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .violation-title {
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .violation-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .violation-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .violation-example {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+        }
+
+        .violation-example code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+            white-space: nowrap;
+            min-width: 30px;
+        }
+
+        /* ───── Category List ───── */
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .category-num {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--accent);
+            min-width: 24px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .category-sub {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* ───── Posting / Files Sections ───── */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .doc-card {
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .doc-card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .doc-card li {
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        /* ───── Ratio Table Special ───── */
+        .ratio-highlight {
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        /* ───── Training Timeline ───── */
+        .training-item {
+            display: flex;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(46, 46, 82, 0.4);
+        }
+
+        .training-item:last-child { border-bottom: none; }
+
+        .training-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .training-content {
+            flex: 1;
+        }
+
+        .training-name {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .training-details {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ───── Penalty Ladder ───── */
+        .penalty-ladder {
+            display: flex;
+            gap: 0;
+            margin: 24px 0;
+            align-items: stretch;
+        }
+
+        .penalty-step {
+            flex: 1;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .penalty-step:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .penalty-step:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .penalty-step .penalty-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+
+        /* ───── Domain Objects ───── */
+        .domain-obj {
+            background: var(--navy-lighter);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .domain-obj-header {
+            padding: 14px 20px;
+            background: rgba(108, 92, 231, 0.06);
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 14px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            color: var(--accent-light);
+        }
+
+        .domain-obj-fields {
+            padding: 12px 20px;
+        }
+
+        .domain-field {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(46, 46, 82, 0.3);
+        }
+
+        .domain-field:last-child { border-bottom: none; }
+
+        .field-name {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            color: var(--green);
+            min-width: 180px;
+        }
+
+        .field-type {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* ───── Responsive ───── */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+                min-width: 240px;
+            }
+            .main { margin-left: 240px; }
+            .content { padding: 0 32px 60px; }
+            .hero { padding: 48px 32px 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main { margin-left: 0; }
+            .violation-examples { grid-template-columns: 1fr; }
+            .category-grid { grid-template-columns: 1fr; }
+            .doc-grid { grid-template-columns: 1fr; }
+            .penalty-ladder { flex-direction: column; }
+            .penalty-step:first-child { border-radius: 8px 8px 0 0; }
+            .penalty-step:last-child { border-radius: 0 0 8px 8px; }
+        }
+
+        /* ───── Scrollbar ───── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+        /* ───── Code ───── */
+        code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-light);
+        }
+
+        /* ───── Links ───── */
+        a { color: var(--accent-light); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ───── Divider ───── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 40px 0;
+        }
+
+        /* Product mapping special table */
+        .product-table td:nth-child(1) {
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .product-table td:nth-child(3) {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .product-table td:nth-child(4) {
+            color: var(--green);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ SIDEBAR ═══════════════════════ -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-name">ComplianceKit</div>
+        <div class="sidebar-brand-sub">Florida Product Spec</div>
+    </div>
+
+    <div class="sidebar-label">Sections</div>
+    <nav class="sidebar-nav">
+        <a href="#regulatory-landscape">
+            <span class="nav-num">01</span> Regulatory Landscape
+        </a>
+        <a href="#inspection-process">
+            <span class="nav-num">02</span> Inspector &amp; Inspection Process
+        </a>
+        <a href="#violation-classes">
+            <span class="nav-num">03</span> Violation Classification System
+        </a>
+        <a href="#inspection-categories">
+            <span class="nav-num">04</span> 32 Inspection Categories
+        </a>
+        <a href="#documentation">
+            <span class="nav-num">05</span> Documentation Requirements
+        </a>
+        <a href="#ratios">
+            <span class="nav-num">06</span> Staff-Child Ratios
+        </a>
+        <a href="#training">
+            <span class="nav-num">07</span> Training Requirements
+        </a>
+        <a href="#fines-penalties">
+            <span class="nav-num">08</span> Fines &amp; Penalties
+        </a>
+        <a href="#product-mapping">
+            <span class="nav-num">09</span> Product Mapping
+        </a>
+        <a href="#domain-objects">
+            <span class="nav-num">10</span> Domain Objects
+        </a>
+        <a href="#why-florida">
+            <span class="nav-num">11</span> Why Florida First
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <span class="state-flag">FL</span> Florida Market<br>
+        Document version 1.0<br>
+        April 2026
+    </div>
+</aside>
+
+<!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+<main class="main">
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-badges">
+            <span class="hero-badge hero-badge-purple">Product Specification</span>
+            <span class="hero-badge hero-badge-orange">Florida Launch Market</span>
+        </div>
+        <h1>How ComplianceKit <span>Productizes Florida Daycare Compliance</span></h1>
+        <p class="hero-desc">
+            A complete mapping of every Florida DCF inspection requirement to product features.
+            This document covers the regulatory framework, violation classification system, all 32
+            inspection categories, and how ComplianceKit commoditizes each one into a software solution.
+        </p>
+        <div class="hero-meta">
+            <span class="hero-meta-item"><strong>State:</strong> Florida</span>
+            <span class="hero-meta-item"><strong>Regulator:</strong> DCF</span>
+            <span class="hero-meta-item"><strong>Licensed Facilities:</strong> 11,000+</span>
+            <span class="hero-meta-item"><strong>Inspections/Year:</strong> 2 minimum (unannounced)</span>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <!-- ═══════ SECTION 1: REGULATORY LANDSCAPE ═══════ -->
+        <section id="regulatory-landscape">
+            <div class="section-header">
+                <div class="section-num">Section 01</div>
+                <h2>Florida Regulatory Landscape</h2>
+                <div class="section-subtitle">The governing bodies, laws, and infrastructure that define daycare compliance in Florida</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Regulatory Body</div>
+                    <div class="info-value">Florida Department of Children and Families (DCF)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Governing Statute</div>
+                    <div class="info-value">Florida Statute Chapter 402</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Administrative Code</div>
+                    <div class="info-value">Florida Administrative Code Chapter 65C-22</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Reference Manual</div>
+                    <div class="info-value">Child Care Facility Handbook (Oct 2021, incorporated by reference)</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Public Database</div>
+                    <div class="info-value"><a href="https://caressearch.myflfamilies.com/PublicSearch" target="_blank">CARES Search Portal</a></div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Licensed Facilities</div>
+                    <div class="info-value">~11,000+ child care facilities statewide</div>
+                </div>
+            </div>
+
+            <div class="callout callout-purple">
+                <div class="callout-title">Key Regulatory Detail</div>
+                <p>The Child Care Facility Handbook is <strong>incorporated by reference</strong> into Florida Administrative Code 65C-22, making its requirements legally binding. This handbook is the single source of truth for inspectors and is the basis for the CF-FSP 5316 Standards Classification Summary form used during inspections.</p>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="stat-number purple">11,000+</div>
+                    <div class="stat-label">Licensed Facilities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number red">2/yr</div>
+                    <div class="stat-label">Minimum Inspections</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number orange">32</div>
+                    <div class="stat-label">Inspection Categories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number green">4</div>
+                    <div class="stat-label">Violation Classes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 2: INSPECTION PROCESS ═══════ -->
+        <section id="inspection-process">
+            <div class="section-header">
+                <div class="section-num">Section 02</div>
+                <h2>The Inspector &amp; Inspection Process</h2>
+                <div class="section-subtitle">Who inspects, when they show up, and exactly what they do during a visit</div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Inspector Title</div>
+                    <div class="info-value">DCF Licensing Counselors</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Frequency</div>
+                    <div class="info-value">Minimum 2 unannounced per year</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Pre-Licensing</div>
+                    <div class="info-value">County health dept + local fire marshal inspections required</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Space Requirements</div>
+                    <div class="info-value">35 sq ft indoor / 45 sq ft outdoor per child (fenced)</div>
+                </div>
+            </div>
+
+            <div class="callout callout-red">
+                <div class="callout-title">Most Aggressive Inspection Schedule</div>
+                <p>Florida mandates a <strong>minimum of 2 unannounced inspections per year</strong> -- the most aggressive schedule of any state we are launching in. This creates 2x the compliance pressure and 2x the urgency for operators to adopt software like ComplianceKit.</p>
+            </div>
+
+            <h3>What Happens During an Inspection</h3>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Unannounced Arrival</div>
+                        <div class="step-desc">Licensing counselor arrives without prior notice during operating hours. No advance warning is given.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Full Facility Walkthrough</div>
+                        <div class="step-desc">Inspector walks through all indoor areas, outdoor play areas, kitchen, storage rooms, and restrooms looking for hazards and compliance issues.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Real-Time Ratio &amp; Supervision Observation</div>
+                        <div class="step-desc">Staff-child ratios are observed and counted in real-time. Supervision practices are evaluated as-is -- no time to adjust.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Records Review On-Site</div>
+                        <div class="step-desc">ALL facility and personnel records are reviewed on-site: children's files, staff credentials, training records, fire drill logs, transportation logs, and more.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Posted Items Check</div>
+                        <div class="step-desc">Inspector verifies that license, evacuation plans, current menus, ratio charts, and disciplinary policy notices are posted and visible in required locations.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <div class="step-title">Violation Documentation (CF-FSP 5316)</div>
+                        <div class="step-desc">Every violation found is documented using the Standards Classification Summary form (CF-FSP 5316). Each violation is assigned a Class level (1-4) based on severity.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">7</div>
+                    <div class="step-content">
+                        <div class="step-title">Class Level Assignment</div>
+                        <div class="step-desc">Violations are classified into 4 severity levels. Class 1 requires immediate correction; Class 4 is lowest severity. The class level determines enforcement actions and fines.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">8</div>
+                    <div class="step-content">
+                        <div class="step-title">CARES Database Entry</div>
+                        <div class="step-desc">Results are entered into the CARES database, which is <strong>publicly searchable</strong>. Parents, competitors, and media can see every violation -- creating significant reputation risk.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 3: VIOLATION CLASSIFICATION ═══════ -->
+        <section id="violation-classes">
+            <div class="section-header">
+                <div class="section-num">Section 03</div>
+                <h2>Violation Classification System</h2>
+                <div class="section-subtitle">From the actual CF-FSP 5316 Standards Classification Summary -- the form inspectors use in the field</div>
+            </div>
+
+            <p>Florida uses a 4-class violation system. This is <strong>critical for the product</strong> because ComplianceKit must flag the class level of risk for every checklist item, giving operators immediate visual awareness of what matters most.</p>
+
+            <!-- Class 1 -->
+            <div class="violation-class class-1">
+                <div class="violation-header">
+                    <span class="badge badge-critical">Class 1 -- Critical</span>
+                    <span class="violation-title">Immediate Danger to Children</span>
+                </div>
+                <div class="violation-desc">Must be corrected <strong>immediately</strong>. These represent situations where children are in or have been in direct, immediate danger. A pattern of Class 1 violations can result in license revocation.</div>
+                <div class="violation-examples">
+                    <div class="violation-example"><code>4.2</code> Child not adequately supervised, left facility premises</div>
+                    <div class="violation-example"><code>4.3</code> Child left without supervision and left facility</div>
+                    <div class="violation-example"><code>4.10</code> Child left unsupervised in vehicle or on field trip</div>
+                    <div class="violation-example"><code>4.11</code> Operator supervising under influence of narcotics/alcohol</div>
+                    <div class="violation-example"><code>4.13</code> Water activity without certified lifeguard</div>
+                    <div class="violation-example"><code>4.18</code> Unscreened individual left alone with children</div>
+                    <div class="violation-example"><code>4.30</code> Child released to unknown/unauthorized individual</div>
+                    <div class="violation-example"><code>11.4</code> Severe/humiliating/frightening discipline</div>
+                    <div class="violation-example"><code>11.6</code> Physical punishment including spanking</div>
+                    <div class="violation-example"><code>12.5</code> Serious health hazard observed</div>
+                    <div class="violation-example"><code>12.8</code> Serious safety hazard observed</div>
+                    <div class="violation-example"><code>13.5</code> Firearm on premises</div>
+                    <div class="violation-example"><code>13.6</code> Narcotics/drugs on premises</div>
+                    <div class="violation-example"><code>17.4</code> Outdoor area not fenced to prevent water hazard access</div>
+                </div>
+            </div>
+
+            <!-- Class 2 -->
+            <div class="violation-class class-2">
+                <div class="violation-header">
+                    <span class="badge badge-serious">Class 2 -- Serious</span>
+                    <span class="violation-title">Direct or Potential Threat to Health/Safety</span>
+                </div>
+                <div class="violation-desc">Represents a direct or potential threat to the health, safety, or well-being of children. Subject to fines and corrective action requirements.</div>
+                <div class="violation-examples">
+                    <div class="violation-example"><code>3.1</code> Ratio violation -- insufficient staff for enrolled children</div>
+                    <div class="violation-example"><code>4.1</code> Inadequate supervision of group</div>
+                    <div class="violation-example"><code>4.4</code> Outdoor play area not adequately supervised</div>
+                    <div class="violation-example"><code>4.5</code> Staff not within sight and hearing during nap</div>
+                    <div class="violation-example"><code>11.3</code> Staff didn't comply with discipline policies</div>
+                    <div class="violation-example"><code>12.4</code> Health deficiency with moderate potential for harm</div>
+                    <div class="violation-example"><code>12.7</code> Safety deficiency with moderate potential for harm</div>
+                    <div class="violation-example"><code>12.18</code> Outlet covers not in place</div>
+                    <div class="violation-example"><code>12.20</code> Missing guardrails/baby gates</div>
+                    <div class="violation-example"><code>13.1</code> Potentially harmful item not labeled</div>
+                    <div class="violation-example"><code>13.3</code> Harmful items accessible to children</div>
+                    <div class="violation-example"><code>15.1</code> Over licensed capacity</div>
+                    <div class="violation-example"><code>23.2</code> No current fire safety inspection on file</div>
+                    <div class="violation-example"><code>23.6</code> Fire drills not conducted monthly</div>
+                </div>
+            </div>
+
+            <!-- Class 3 -->
+            <div class="violation-class class-3">
+                <div class="violation-header">
+                    <span class="badge badge-moderate">Class 3 -- Moderate</span>
+                    <span class="violation-title">Low Potential for Harm</span>
+                </div>
+                <div class="violation-desc">Low potential for harm to children. Fines are only imposed after the <strong>3rd occurrence</strong> of the same violation -- but the violations are still publicly visible in CARES.</div>
+                <div class="violation-examples">
+                    <div class="violation-example"><code>1.1</code> License not posted conspicuously</div>
+                    <div class="violation-example"><code>9.1</code> No written plan of scheduled activities</div>
+                    <div class="violation-example"><code>9.3</code> Activity plan not posted</div>
+                    <div class="violation-example"><code>12.1</code> Areas need cleaning</div>
+                    <div class="violation-example"><code>12.2</code> Areas not in good repair</div>
+                    <div class="violation-example"><code>12.19</code> Indoor/outdoor areas not inspected daily</div>
+                    <div class="violation-example"><code>14.4</code> Temperature not 65-82 degrees F</div>
+                    <div class="violation-example"><code>18.1</code> No cot/mat for all children at naptime</div>
+                    <div class="violation-example"><code>23.1</code> No proof of annual fire inspection</div>
+                    <div class="violation-example"><code>23.8</code> Incomplete fire drill records</div>
+                    <div class="violation-example"><code>23.9</code> Fire drill records not retained 12 months</div>
+                    <div class="violation-example"><code>24.1</code> Food prep area used for other purposes</div>
+                </div>
+            </div>
+
+            <!-- Class 4 -->
+            <div class="violation-class class-4">
+                <div class="violation-header">
+                    <span class="badge badge-low">Class 4 -- Low</span>
+                    <span class="violation-title">Indirect Potential Threat</span>
+                </div>
+                <div class="violation-desc">Lowest severity classification. Represents an indirect or minimal potential threat. Still documented and entered into CARES, but carries the lightest enforcement consequences.</div>
+            </div>
+
+            <div class="callout callout-blue">
+                <div class="callout-title">Product Implication</div>
+                <p>Every checklist item in ComplianceKit must display its associated Class level with color-coded badges. When a user opens a daily walkthrough checklist, they should immediately see red (Class 1) items at the top, creating urgency around the most dangerous gaps. The violation codes (4.2, 12.18, etc.) must map directly to CF-FSP 5316 line items.</p>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 4: 32 INSPECTION CATEGORIES ═══════ -->
+        <section id="inspection-categories">
+            <div class="section-header">
+                <div class="section-num">Section 04</div>
+                <h2>The 32 Inspection Categories</h2>
+                <div class="section-subtitle">Every major category the DCF Licensing Counselor evaluates, from the CF-FSP 5316</div>
+            </div>
+
+            <p>The Standards Classification Summary (CF-FSP 5316) organizes inspection items into 32 major categories. Some categories contain over 20 sub-items. The app must have a checklist module for each one.</p>
+
+            <div class="category-grid">
+                <div class="category-item">
+                    <div class="category-num">1</div>
+                    <div>
+                        <div class="category-name">License Display / Citation Posted / Advertising</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">2</div>
+                    <div>
+                        <div class="category-name">Minimum Age Requirements</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">3</div>
+                    <div>
+                        <div class="category-name">Ratio Sufficient</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">4</div>
+                    <div>
+                        <div class="category-name">Supervision</div>
+                        <div class="category-sub">20+ sub-items, many Class 1</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">5</div>
+                    <div>
+                        <div class="category-name">Transportation</div>
+                        <div class="category-sub">11 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">6</div>
+                    <div>
+                        <div class="category-name">Driver's License / CPR Training</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">7</div>
+                    <div>
+                        <div class="category-name">Vehicle Requirements</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">8</div>
+                    <div>
+                        <div class="category-name">Seat Belts / Child Restraints</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">9</div>
+                    <div>
+                        <div class="category-name">Planned Activities</div>
+                        <div class="category-sub">13 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">10</div>
+                    <div>
+                        <div class="category-name">Field Trip Permission</div>
+                        <div class="category-sub">6 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">11</div>
+                    <div>
+                        <div class="category-name">Child Discipline</div>
+                        <div class="category-sub">8 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">12</div>
+                    <div>
+                        <div class="category-name">Facility Environment</div>
+                        <div class="category-sub">24 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">13</div>
+                    <div>
+                        <div class="category-name">Toxic Substances / Hazardous Materials / Weapons</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">14</div>
+                    <div>
+                        <div class="category-name">Lighting, Temperature, Ventilation</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">15</div>
+                    <div>
+                        <div class="category-name">Licensed Capacity</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">16</div>
+                    <div>
+                        <div class="category-name">Indoor Floor Space</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">17</div>
+                    <div>
+                        <div class="category-name">Outdoor Play Area / Fencing</div>
+                        <div class="category-sub">10 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">18</div>
+                    <div>
+                        <div class="category-name">Bedding and Linens</div>
+                        <div class="category-sub">12 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">19</div>
+                    <div>
+                        <div class="category-name">Nap / Sleep Space Requirements</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">20</div>
+                    <div>
+                        <div class="category-name">Crib Requirements</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">21</div>
+                    <div>
+                        <div class="category-name">Restrooms and Bath Facilities</div>
+                        <div class="category-sub">14 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">22</div>
+                    <div>
+                        <div class="category-name">Operable Phone</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">23</div>
+                    <div>
+                        <div class="category-name">Fire Drills &amp; Emergency Preparedness</div>
+                        <div class="category-sub">26 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">24</div>
+                    <div>
+                        <div class="category-name">Food Preparation Area</div>
+                        <div class="category-sub">20 sub-items</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">25</div>
+                    <div>
+                        <div class="category-name">Staff Personnel Records</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">26</div>
+                    <div>
+                        <div class="category-name">Background Screening Compliance</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">27</div>
+                    <div>
+                        <div class="category-name">Staff Health Requirements</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">28</div>
+                    <div>
+                        <div class="category-name">Training &amp; Professional Development</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">29</div>
+                    <div>
+                        <div class="category-name">Children's Health Records</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">30</div>
+                    <div>
+                        <div class="category-name">Immunization Records</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">31</div>
+                    <div>
+                        <div class="category-name">Nutrition &amp; Meal Service</div>
+                    </div>
+                </div>
+                <div class="category-item">
+                    <div class="category-num">32</div>
+                    <div>
+                        <div class="category-name">Facility Records &amp; Documentation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-orange">
+                <div class="callout-title">High Sub-Item Categories</div>
+                <p>Categories <strong>4 (Supervision)</strong>, <strong>12 (Facility Environment)</strong>, <strong>23 (Fire/Emergency)</strong>, and <strong>24 (Food Prep)</strong> each contain 13-26 sub-items. These are the most complex inspection areas and represent the greatest opportunity for ComplianceKit to add value through structured digital checklists.</p>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 5: DOCUMENTATION REQUIREMENTS ═══════ -->
+        <section id="documentation">
+            <div class="section-header">
+                <div class="section-num">Section 05</div>
+                <h2>Documentation Requirements</h2>
+                <div class="section-subtitle">Everything that must be posted on walls and everything that must be in files for inspector review</div>
+            </div>
+
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <div class="doc-card-title">
+                        <span style="font-size: 18px;">&#128204;</span> Must Be Posted on Walls
+                    </div>
+                    <ul>
+                        <li><strong>Current license</strong> -- posted conspicuously</li>
+                        <li><strong>Evacuation plan</strong> with safe routes posted in <em>each room</em></li>
+                        <li><strong>Room capacity</strong> posted in each room</li>
+                        <li><strong>Current menu</strong> -- weekly or daily</li>
+                        <li><strong>Activity schedule</strong> -- plan of daily activities</li>
+                        <li><strong>Disciplinary policy notification</strong></li>
+                        <li><strong>Smoking prohibition notice</strong></li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-card-title">
+                        <span style="font-size: 18px;">&#128193;</span> Child Records (per child)
+                    </div>
+                    <ul>
+                        <li>Enrollment form</li>
+                        <li>Emergency contacts</li>
+                        <li>Immunization records (Florida 680 form)</li>
+                        <li>Authorized pickup list</li>
+                        <li>Medical conditions &amp; allergies</li>
+                        <li>Field trip permission forms</li>
+                        <li>Daily attendance log (sign-in/sign-out)</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-card-title">
+                        <span style="font-size: 18px;">&#128100;</span> Staff Records (per employee)
+                    </div>
+                    <ul>
+                        <li>Background screening clearance (DCF Clearinghouse)</li>
+                        <li>CPR / First Aid certification</li>
+                        <li>40-hour introductory training certificate</li>
+                        <li>Annual in-service training records (10 hrs/yr)</li>
+                        <li>Driver's license (if transporting children)</li>
+                        <li>Physical exam results (if driving)</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-card-title">
+                        <span style="font-size: 18px;">&#127970;</span> Facility Records
+                    </div>
+                    <ul>
+                        <li>Fire inspection certificate (annual)</li>
+                        <li>Liability insurance documentation</li>
+                        <li>Plan of operation</li>
+                        <li>Written discipline policy</li>
+                        <li>Transportation logs</li>
+                        <li>Fire drill records (retained 12 months)</li>
+                        <li>Emergency preparedness drill records (12 months)</li>
+                        <li>Vehicle inspection records</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout callout-green">
+                <div class="callout-title">Product Opportunity</div>
+                <p>This is where ComplianceKit replaces filing cabinets. Every document listed above becomes a digital record with OCR scanning for immunization forms, expiration tracking for certifications, and a single "inspection-ready" view that an operator can hand to the licensing counselor on an iPad.</p>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 6: STAFF-CHILD RATIOS ═══════ -->
+        <section id="ratios">
+            <div class="section-header">
+                <div class="section-num">Section 06</div>
+                <h2>Staff-Child Ratios</h2>
+                <div class="section-subtitle">Florida Statute 402.305(4) -- the ratios inspectors verify in real-time</div>
+            </div>
+
+            <p>Ratio violations are <span class="badge badge-serious">Class 2</span> -- a serious finding. Inspectors count heads on-the-spot. If a single staff member steps out for a break and the ratio drops below threshold, that is an immediate violation.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Age Group</th>
+                            <th>Staff : Children Ratio</th>
+                            <th>Max Children Per Staff</th>
+                            <th>Class if Violated</th>
+                            <th>ComplianceKit Feature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Birth - 1 year</strong></td>
+                            <td class="ratio-highlight">1 : 4</td>
+                            <td>4 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 - under 2 years</strong></td>
+                            <td class="ratio-highlight">1 : 6</td>
+                            <td>6 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 - under 3 years</strong></td>
+                            <td class="ratio-highlight">1 : 11</td>
+                            <td>11 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3 - under 4 years</strong></td>
+                            <td class="ratio-highlight">1 : 15</td>
+                            <td>15 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4 - under 5 years</strong></td>
+                            <td class="ratio-highlight">1 : 20</td>
+                            <td>20 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5 years and older</strong></td>
+                            <td class="ratio-highlight">1 : 25</td>
+                            <td>25 children per staff</td>
+                            <td><span class="badge badge-serious">Class 2</span></td>
+                            <td style="color: var(--green);">Real-time ratio monitor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-blue">
+                <div class="callout-title">Ratio Monitor Implementation</div>
+                <p>ComplianceKit's ratio calculator uses digital check-in data (children present) crossed with staff clock-in data to compute real-time ratios per room by age group. When a room hits <strong>90% of its ratio threshold</strong>, an amber alert fires. At 100%, a red alert fires to the director's dashboard and phone. This prevents violations before the inspector even arrives.</p>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 7: TRAINING REQUIREMENTS ═══════ -->
+        <section id="training">
+            <div class="section-header">
+                <div class="section-num">Section 07</div>
+                <h2>Training Requirements</h2>
+                <div class="section-subtitle">What every child care worker in Florida must complete -- and the deadlines that operators constantly miss</div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--accent-glow); border: 1px solid rgba(108,92,231,0.3);">
+                    <span style="font-size: 20px;">&#128218;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">40-Hour Introductory Course</div>
+                    <div class="training-details">
+                        Must be completed <strong>within 90 days of employment</strong>. Covers: state and local rules/regulations, health and safety procedures, child development stages, behavioral observation techniques, and community health and social service resources. This is the most commonly missed deadline in Florida daycare compliance.
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--green-bg); border: 1px solid var(--green-border);">
+                    <span style="font-size: 20px;">&#128260;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">10 Hours Annual In-Service Training</div>
+                    <div class="training-details">
+                        Required for <strong>all child care personnel</strong> every year. Must be documented with certificates, dates, and hours. Inspectors verify completion during record reviews. ComplianceKit tracks hours automatically and alerts at 7 hours, 9 hours, and when the annual deadline approaches.
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--blue-bg); border: 1px solid var(--blue-border);">
+                    <span style="font-size: 20px;">&#128214;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">5-Hour Literacy Training (VPK)</div>
+                    <div class="training-details">
+                        Required for instructors in the <strong>Voluntary Prekindergarten (VPK) program</strong>. Covers emergent literacy and language development. This is a separate requirement on top of the standard 10-hour annual in-service.
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--red-bg); border: 1px solid var(--red-border);">
+                    <span style="font-size: 20px;">&#129657;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">CPR and First Aid Certification</div>
+                    <div class="training-details">
+                        At least <strong>one staff member on-site at all times</strong> must hold current CPR and First Aid certification. Certifications typically expire every 2 years. ComplianceKit tracks expiration dates and ensures coverage across all shifts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--orange-bg); border: 1px solid var(--orange-border);">
+                    <span style="font-size: 20px;">&#128272;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">Background Screening (DCF Clearinghouse)</div>
+                    <div class="training-details">
+                        All personnel must pass background screening through the <strong>DCF Clearinghouse</strong> before working with children. Clearances must be maintained and renewed on schedule. An unscreened individual left alone with children is a <span class="badge badge-critical">Class 1</span> violation.
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-item">
+                <div class="training-icon" style="background: var(--yellow-bg); border: 1px solid var(--yellow-border);">
+                    <span style="font-size: 20px;">&#127942;</span>
+                </div>
+                <div class="training-content">
+                    <div class="training-name">Florida Child Care Professional Credential (FCCPC)</div>
+                    <div class="training-details">
+                        An advanced <strong>optional credential</strong> that demonstrates higher-level competency. While not required, facilities with FCCPC-credentialed staff may qualify for higher reimbursement rates and demonstrate commitment to quality. ComplianceKit tracks credential status and renewal dates.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 8: FINES & PENALTIES ═══════ -->
+        <section id="fines-penalties">
+            <div class="section-header">
+                <div class="section-num">Section 08</div>
+                <h2>Fines &amp; Penalties</h2>
+                <div class="section-subtitle">The financial and operational consequences of noncompliance -- what operators are paying to avoid</div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="stat-number red">$100</div>
+                    <div class="stat-label">Fine per violation/day (standard)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number red">$500</div>
+                    <div class="stat-label">Fine per violation/day (serious harm)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number orange">3rd</div>
+                    <div class="stat-label">Occurrence before Class 3 fines</div>
+                </div>
+            </div>
+
+            <h3>Progressive Enforcement Ladder</h3>
+            <p>Florida follows a progressive enforcement model. Each step escalates the consequences. ComplianceKit's value proposition is keeping operators at step zero -- never entering this ladder at all.</p>
+
+            <div class="penalty-ladder">
+                <div class="penalty-step" style="background: var(--green-bg); color: var(--green);">
+                    TA
+                    <div class="penalty-label">Technical Assistance</div>
+                </div>
+                <div class="penalty-step" style="background: var(--blue-bg); color: var(--blue);">
+                    NOV
+                    <div class="penalty-label">Notice of Violation</div>
+                </div>
+                <div class="penalty-step" style="background: var(--yellow-bg); color: var(--yellow);">
+                    Fine
+                    <div class="penalty-label">Administrative Fine</div>
+                </div>
+                <div class="penalty-step" style="background: var(--orange-bg); color: var(--orange);">
+                    Prob.
+                    <div class="penalty-label">Probation</div>
+                </div>
+                <div class="penalty-step" style="background: rgba(255,107,107,0.15); color: var(--red);">
+                    Susp.
+                    <div class="penalty-label">Suspension</div>
+                </div>
+                <div class="penalty-step" style="background: var(--red-bg); color: var(--red);">
+                    Rev.
+                    <div class="penalty-label">Revocation</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Fine Structure Details</div>
+                <ul>
+                    <li><strong>Standard administrative fine:</strong> Up to $100 per violation per day the violation persists</li>
+                    <li><strong>Serious harm violations:</strong> Up to $500 per violation per day -- applies when the violation could cause death or serious harm to a child</li>
+                    <li><strong>Class 3 violations:</strong> Fines are only imposed after the 3rd occurrence of the <em>same specific violation</em>. However, each occurrence is still documented in CARES.</li>
+                    <li><strong>Pattern of Class 1 violations:</strong> Can result in immediate license denial or revocation -- the nuclear option</li>
+                    <li><strong>Probation:</strong> Facility remains open but under heightened scrutiny with additional inspections and reporting requirements</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-red">
+                <div class="callout-title">The Real Cost is Reputation</div>
+                <p>Fines are painful, but the real cost is the CARES database. Every violation is <strong>publicly searchable</strong> by parents. In the age of Google, a bad inspection report can crater enrollment. ComplianceKit's pitch: the cost of the subscription is a rounding error compared to the cost of losing 5 enrolled families because of a public violation record.</p>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 9: PRODUCT MAPPING ═══════ -->
+        <section id="product-mapping">
+            <div class="section-header">
+                <div class="section-num">Section 09</div>
+                <h2>How ComplianceKit Productizes Every Florida Requirement</h2>
+                <div class="section-subtitle">A comprehensive mapping of inspection categories to product features -- the core of the product spec</div>
+            </div>
+
+            <p>This table is the blueprint for the Florida module. Every row represents an inspection area, the pain it causes operators today, and exactly how ComplianceKit eliminates that pain with software.</p>
+
+            <div class="table-wrap">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>FL Inspection Category</th>
+                            <th>Class Risk</th>
+                            <th>Current Pain</th>
+                            <th>ComplianceKit Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Supervision (4.x)</td>
+                            <td>
+                                <span class="badge badge-critical">1</span>
+                                <span class="badge badge-serious">2</span>
+                            </td>
+                            <td>No documentation of supervision practices; violations are observed in real-time with no paper trail of proactive measures</td>
+                            <td>Ratio monitoring + supervision logging + incident prevention alerts. Digital proof that supervision protocols are followed daily.</td>
+                        </tr>
+                        <tr>
+                            <td>Fire Drills (23.x)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>Paper logs, incomplete records, frequently not retained the required 12 months. Monthly drills forgotten.</td>
+                            <td>Digital drill logger with timer, attendance capture, 12-month auto-retention, monthly reminder push notifications. Inspector-ready drill history.</td>
+                        </tr>
+                        <tr>
+                            <td>Daily Environment Check (12.x)</td>
+                            <td>
+                                <span class="badge badge-critical">1</span>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>No consistent daily safety/health checks of indoor and outdoor areas. Issues caught only during inspections.</td>
+                            <td>Daily digital walkthrough checklist (FL-specific, mapped to 12.x sub-items), photo proof upload, GPS-timestamped completion, issue escalation workflow.</td>
+                        </tr>
+                        <tr>
+                            <td>Staff Records (Personnel)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>Paper files in binders, expired CPR certs missed, 40-hour training deadline lapses, background screening renewals forgotten.</td>
+                            <td>Digital personnel profiles with cert scanner (OCR), 30/60/90 day expiration alerts, training hour tracker with progress bar, DCF Clearinghouse status tracker.</td>
+                        </tr>
+                        <tr>
+                            <td>Children's Records</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>Paper files scattered across folders and cabinets. Immunization records incomplete. Authorized pickup lists outdated.</td>
+                            <td>Digital enrollment with immunization OCR (Florida 680 form), emergency contact management, authorized pickup with photos, allergy/medical condition flagging.</td>
+                        </tr>
+                        <tr>
+                            <td>Food Safety (24.x)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>No temperature logs, messy kitchen documentation, food prep area compliance is ad hoc.</td>
+                            <td>Food temperature logger (fridge/freezer), prep area daily checklist, food storage checklist, menu posting reminder, allergen cross-reference with enrolled children's records.</td>
+                        </tr>
+                        <tr>
+                            <td>Ratios (3.x)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                            </td>
+                            <td>Manual headcounts, ratios only checked when staff remembers. Break coverage gaps create momentary violations.</td>
+                            <td>Real-time ratio calculator based on digital check-in. Age-based auto-calculation per Florida statute. Amber alert at 90% threshold, red alert at 100%. Break planning tool.</td>
+                        </tr>
+                        <tr>
+                            <td>Transportation (5.x)</td>
+                            <td>
+                                <span class="badge badge-critical">1</span>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>Paper transport logs, no verification that vehicle sweeps happened, child counts unreliable.</td>
+                            <td>Digital transport log with child check-on/check-off (parent-visible), mandatory vehicle sweep confirmation with timestamp, GPS route tracking, driver credential verification.</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity (15.x)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                            </td>
+                            <td>Easy to lose track of enrollment vs. licensed capacity, especially across multiple rooms.</td>
+                            <td>Real-time enrollment vs. capacity dashboard. Per-room tracking with square footage calculations (35 sq ft indoor / 45 sq ft outdoor). Waitlist management when at capacity.</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Preparedness (23.x)</td>
+                            <td>
+                                <span class="badge badge-serious">2</span>
+                                <span class="badge badge-moderate">3</span>
+                            </td>
+                            <td>Emergency plans outdated, drills undocumented, staff don't know evacuation routes, records not retained.</td>
+                            <td>Living emergency plan document (versioned, auditable), drill scheduler with auto-reminders, attendance capture during drills, evacuation route photo mapping per room.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="divider">
+
+            <h3>Feature Priority Matrix</h3>
+            <p>Based on violation severity and inspection frequency, here is the build priority for Florida-specific features:</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Priority</th>
+                            <th>Feature</th>
+                            <th>Addresses Categories</th>
+                            <th>Risk Eliminated</th>
+                            <th>Build Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-critical">P0</span></td>
+                            <td><strong>Real-Time Ratio Monitor</strong></td>
+                            <td>3.x, 4.x, 15.x</td>
+                            <td><span class="badge badge-serious">Class 2</span> ratio violations</td>
+                            <td><span class="badge badge-green">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-critical">P0</span></td>
+                            <td><strong>Daily Environment Checklist</strong></td>
+                            <td>12.x, 13.x, 14.x, 17.x</td>
+                            <td><span class="badge badge-critical">Class 1</span> hazards</td>
+                            <td><span class="badge badge-green">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-critical">P0</span></td>
+                            <td><strong>Staff Credential Tracker</strong></td>
+                            <td>25-28</td>
+                            <td><span class="badge badge-critical">Class 1</span> unscreened staff</td>
+                            <td><span class="badge badge-green">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-serious">P1</span></td>
+                            <td><strong>Fire Drill Logger</strong></td>
+                            <td>23.x</td>
+                            <td><span class="badge badge-serious">Class 2</span> drill gaps</td>
+                            <td><span class="badge badge-green">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-serious">P1</span></td>
+                            <td><strong>Digital Child Records</strong></td>
+                            <td>29, 30</td>
+                            <td><span class="badge badge-serious">Class 2</span> missing records</td>
+                            <td><span class="badge badge-blue">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-serious">P1</span></td>
+                            <td><strong>Transportation Module</strong></td>
+                            <td>5.x, 6, 7, 8</td>
+                            <td><span class="badge badge-critical">Class 1</span> transport risks</td>
+                            <td><span class="badge badge-blue">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-moderate">P2</span></td>
+                            <td><strong>Food Safety Logger</strong></td>
+                            <td>24.x, 31</td>
+                            <td><span class="badge badge-serious">Class 2</span> food violations</td>
+                            <td><span class="badge badge-green">Low</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-moderate">P2</span></td>
+                            <td><strong>Posted Items Reminder</strong></td>
+                            <td>1.x, 9.x</td>
+                            <td><span class="badge badge-moderate">Class 3</span> posting gaps</td>
+                            <td><span class="badge badge-green">Low</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 10: DOMAIN OBJECTS ═══════ -->
+        <section id="domain-objects">
+            <div class="section-header">
+                <div class="section-num">Section 10</div>
+                <h2>Domain Objects (Florida-Specific Extensions)</h2>
+                <div class="section-subtitle">Data models that extend the core ComplianceKit schema for Florida's unique requirements</div>
+            </div>
+
+            <p>These domain objects are Florida-specific extensions added on top of the shared multi-state data model. Each maps directly to a Florida regulation or inspection requirement.</p>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">ViolationClassification</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">class_level</span>
+                        <span class="field-type">enum: 1 | 2 | 3 | 4</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">category</span>
+                        <span class="field-type">string -- e.g. "Supervision", "Fire Drills"</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">description</span>
+                        <span class="field-type">string -- human-readable violation description</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">handbook_section</span>
+                        <span class="field-type">string -- reference to Handbook section</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">statute_reference</span>
+                        <span class="field-type">string -- e.g. "402.305(4)"</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">TransportationLog</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">vehicle_id</span>
+                        <span class="field-type">uuid -- FK to VehicleRecord</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">date</span>
+                        <span class="field-type">date</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">route</span>
+                        <span class="field-type">string -- route description or GPS path</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">children_manifest</span>
+                        <span class="field-type">uuid[] -- list of child IDs on transport</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">driver_id</span>
+                        <span class="field-type">uuid -- FK to Staff</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">departure_time</span>
+                        <span class="field-type">timestamp</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">arrival_time</span>
+                        <span class="field-type">timestamp</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">vehicle_sweep_confirmed</span>
+                        <span class="field-type">boolean -- must be true to close log</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">sweep_confirmed_by</span>
+                        <span class="field-type">uuid -- FK to Staff who confirmed sweep</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">VehicleRecord</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">vehicle_id</span>
+                        <span class="field-type">uuid -- primary key</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">make_model</span>
+                        <span class="field-type">string</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">year</span>
+                        <span class="field-type">integer</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">insurance_expiry</span>
+                        <span class="field-type">date -- triggers alert at 30 days</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">annual_inspection_date</span>
+                        <span class="field-type">date</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">alarm_system_installed</span>
+                        <span class="field-type">boolean</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">BackgroundScreening</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">staff_id</span>
+                        <span class="field-type">uuid -- FK to Staff</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">dcf_clearinghouse_id</span>
+                        <span class="field-type">string -- DCF-issued identifier</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">submission_date</span>
+                        <span class="field-type">date</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">clearance_date</span>
+                        <span class="field-type">date -- null if pending</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">status</span>
+                        <span class="field-type">enum: pending | cleared | denied | expired</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">expiry_date</span>
+                        <span class="field-type">date -- triggers renewal alert</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">TrainingRecord</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">staff_id</span>
+                        <span class="field-type">uuid -- FK to Staff</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">type</span>
+                        <span class="field-type">enum: introductory_40hr | annual_inservice | cpr | first_aid | literacy_vpk</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">completed_date</span>
+                        <span class="field-type">date</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">hours</span>
+                        <span class="field-type">decimal -- hours completed</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">provider</span>
+                        <span class="field-type">string -- training provider name</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">cert_expiry</span>
+                        <span class="field-type">date -- triggers 30/60/90 day alerts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-obj">
+                <div class="domain-obj-header">FoodSafetyLog</div>
+                <div class="domain-obj-fields">
+                    <div class="domain-field">
+                        <span class="field-name">date</span>
+                        <span class="field-type">date</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">temp_readings</span>
+                        <span class="field-type">json[] -- array of {location, temp_f, time}</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">prep_area_clean</span>
+                        <span class="field-type">boolean</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">storage_proper</span>
+                        <span class="field-type">boolean</span>
+                    </div>
+                    <div class="domain-field">
+                        <span class="field-name">checked_by</span>
+                        <span class="field-type">uuid -- FK to Staff</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ SECTION 11: WHY FLORIDA FIRST ═══════ -->
+        <section id="why-florida">
+            <div class="section-header">
+                <div class="section-num">Section 11</div>
+                <h2>Why Florida First Could Win</h2>
+                <div class="section-subtitle">The structural advantages of launching ComplianceKit in the Florida market before any other state</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--accent);">
+                <div class="card-title">
+                    <div class="card-icon" style="background: var(--red-bg); border: 1px solid var(--red-border);">
+                        <span style="font-size: 18px;">&#128200;</span>
+                    </div>
+                    2x Inspection Frequency = 2x Pain = 2x Urgency to Buy
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">Florida mandates a minimum of 2 unannounced inspections per year -- the most aggressive schedule of any state in our launch pipeline. More inspections means more opportunities for violations, more stress for operators, and more urgency to adopt compliance software. A state with 1 inspection per year creates half the buying pressure.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--orange);">
+                <div class="card-title">
+                    <div class="card-icon" style="background: var(--orange-bg); border: 1px solid var(--orange-border);">
+                        <span style="font-size: 18px;">&#128270;</span>
+                    </div>
+                    CARES Database is Public = Reputation Risk Drives Purchases
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">Every violation is entered into the CARES database and is <strong>publicly searchable</strong> by parents, competitors, and media. This transparency creates a powerful market dynamic: operators are not just avoiding fines, they are protecting their public reputation. The fear of a bad CARES report is often a stronger buying motivation than the fine itself.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--green);">
+                <div class="card-title">
+                    <div class="card-icon" style="background: var(--green-bg); border: 1px solid var(--green-border);">
+                        <span style="font-size: 18px;">&#127793;</span>
+                    </div>
+                    Growing State Population = New Daycares Opening Constantly
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">Florida is one of the fastest-growing states in the US. Population growth drives demand for child care, which drives new facility openings. New facilities are the ideal acquisition channel for ComplianceKit -- they are starting from scratch, have no existing systems, and are overwhelmed by the pre-licensing inspection requirements (county health + fire marshal).</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--blue);">
+                <div class="card-title">
+                    <div class="card-icon" style="background: var(--blue-bg); border: 1px solid var(--blue-border);">
+                        <span style="font-size: 18px;">&#128220;</span>
+                    </div>
+                    32-Page Violation Form = Complexity Demands Software
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">The CF-FSP 5316 Standards Classification Summary is a 32-page form covering hundreds of individual inspection items across 32 categories. This is not something an operator can manage with a binder and a checklist on the back of a napkin. The sheer complexity of Florida's inspection regime makes software a <strong>necessity, not a luxury</strong>.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--accent-light);">
+                <div class="card-title">
+                    <div class="card-icon" style="background: var(--accent-glow); border: 1px solid rgba(108,92,231,0.3);">
+                        <span style="font-size: 18px;">&#128640;</span>
+                    </div>
+                    No Dominant Incumbent in This Vertical
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px;">The daycare compliance software market in Florida has no dominant player. Existing child care management platforms (Brightwheel, HiMama, Procare) focus on parent communication and billing, not inspection readiness. The compliance gap is wide open. ComplianceKit can own this category if we move fast and build specifically for the CF-FSP 5316.</p>
+            </div>
+
+            <div class="callout callout-purple">
+                <div class="callout-title">Bottom Line</div>
+                <p>Florida's combination of aggressive inspection frequency, public violation transparency, population growth, regulatory complexity, and an open competitive landscape makes it the highest-conviction launch market for ComplianceKit. The product practically sells itself once an operator understands that every violation they get is publicly visible and that software can prevent nearly all of them.</p>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="stat-number purple">11K+</div>
+                    <div class="stat-label">TAM (Licensed Facilities)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number green">2x</div>
+                    <div class="stat-label">Inspection Pain vs Other States</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number orange">32</div>
+                    <div class="stat-label">Categories to Productize</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number blue">0</div>
+                    <div class="stat-label">Dominant Incumbents</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 48px 0 24px; border-top: 1px solid var(--border); margin-top: 40px;">
+            <div style="font-size: 18px; font-weight: 800; background: linear-gradient(135deg, var(--accent-light), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px;">ComplianceKit</div>
+            <div style="font-size: 13px; color: var(--text-dim);">Florida Product Specification &middot; Version 1.0 &middot; April 2026</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Confidential &middot; Internal Use Only</div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daycare Inspector Requirements — CA / FL / TX</title>
+<style>
+  :root {
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --paper: #ffffff;
+    --bg: #f8fafc;
+    --accent: #2563eb;
+    --accent-soft: #eff6ff;
+    --red: #b91c1c;
+    --red-soft: #fef2f2;
+    --amber: #b45309;
+    --amber-soft: #fffbeb;
+    --green: #15803d;
+    --green-soft: #f0fdf4;
+    --ca: #0369a1;
+    --ca-soft: #e0f2fe;
+    --fl: #0d9488;
+    --fl-soft: #ccfbf1;
+    --tx: #9a3412;
+    --tx-soft: #ffedd5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 48px 28px 120px;
+  }
+  header.top {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+  }
+  header.top .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  header.top h1 {
+    font-size: 36px;
+    line-height: 1.15;
+    margin: 8px 0 10px;
+    letter-spacing: -0.015em;
+  }
+  header.top .sub {
+    color: var(--ink-2);
+    font-size: 16px;
+    max-width: 720px;
+  }
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  .toc strong { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .toc a { color: var(--ink); text-decoration: none; display: inline-block; margin-right: 20px; border-bottom: 1px dashed var(--line); padding-bottom: 1px; }
+  .toc a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  h2.section {
+    font-size: 26px;
+    margin: 56px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  h2.section .num {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 13px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+
+  h3 { font-size: 19px; margin: 32px 0 10px; }
+  h4 { font-size: 15px; margin: 22px 0 8px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.05em; }
+  p { margin: 0 0 12px; }
+
+  .state-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 24px;
+  }
+  .state-card.ca { border-top: 5px solid var(--ca); }
+  .state-card.fl { border-top: 5px solid var(--fl); }
+  .state-card.tx { border-top: 5px solid var(--tx); }
+  .state-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .state-tag.ca { background: var(--ca-soft); color: var(--ca); }
+  .state-tag.fl { background: var(--fl-soft); color: var(--fl); }
+  .state-tag.tx { background: var(--tx-soft); color: var(--tx); }
+
+  .kv {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 6px 20px;
+    font-size: 14px;
+    margin: 10px 0 18px;
+  }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; color: var(--ink); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 10px 0 20px;
+    background: var(--paper);
+  }
+  table th, table td {
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  table tr:nth-child(even) td { background: #fafafa; }
+  table code {
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .callout {
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 18px 0;
+    border-left: 4px solid;
+  }
+  .callout.warn { background: var(--red-soft); border-color: var(--red); color: #7f1d1d; }
+  .callout.info { background: var(--accent-soft); border-color: var(--accent); color: #1e3a8a; }
+  .callout.ok { background: var(--green-soft); border-color: var(--green); color: #14532d; }
+  .callout.note { background: var(--amber-soft); border-color: var(--amber); color: #78350f; }
+  .callout strong { display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  ul.clean, ol.clean { padding-left: 22px; margin: 8px 0 16px; }
+  ul.clean li, ol.clean li { margin-bottom: 6px; }
+
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-right: 4px;
+    letter-spacing: 0.02em;
+  }
+  .pill.critical { background: #fee2e2; color: #991b1b; }
+  .pill.serious  { background: #ffedd5; color: #9a3412; }
+  .pill.moderate { background: #fef3c7; color: #92400e; }
+  .pill.low      { background: #dcfce7; color: #166534; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 820px) {
+    .two-col { grid-template-columns: 1fr; }
+    .kv { grid-template-columns: 1fr; gap: 2px; }
+    .kv dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  }
+
+  .form-block {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink-2);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--paper);
+  }
+  .form-block .form-id {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    background: #0f172a;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-right: 8px;
+  }
+  .form-block .form-name { font-weight: 600; font-size: 14px; }
+  .form-block .form-who { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .form-block .form-what { font-size: 13px; margin-top: 6px; color: var(--ink-2); }
+
+  footer.foot {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Daycare Compliance — Launch Research</div>
+  <h1>What the inspector actually wants.</h1>
+  <p class="sub">A straight layout of the forms, files, and checklists licensing inspectors use in <strong>California, Florida, and Texas</strong> — and what that tells us about the product we need to build for staff and child document tracking.</p>
+</header>
+
+<nav class="toc">
+  <strong>Contents</strong>
+  <a href="#summary">1. The short version</a>
+  <a href="#ca">2. California</a>
+  <a href="#fl">3. Florida</a>
+  <a href="#tx">4. Texas</a>
+  <a href="#docs">5. Staff &amp; child file spec</a>
+  <a href="#product">6. What to build</a>
+  <a href="#walkthrough">7. What actually happens</a>
+  <a href="#adjacent">8. Adjacent industries</a>
+</nav>
+
+<!-- ========== SUMMARY ========== -->
+<h2 class="section" id="summary"><span class="num">1</span>The short version</h2>
+<p class="section-sub">If you remember nothing else, remember this grid.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>California (CDSS / CCLD)</th>
+      <th>Florida (DCF)</th>
+      <th>Texas (HHSC CCR)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Who inspects</strong></td>
+      <td>Licensing Program Analyst (LPA)</td>
+      <td>DCF Licensing Counselor</td>
+      <td>CCR Licensing Representative</td>
+    </tr>
+    <tr>
+      <td><strong>Inspection cadence</strong></td>
+      <td>Annual unannounced visits; risk-based. Complaint visits any time.</td>
+      <td><strong>Minimum 2 unannounced visits/year</strong> (most aggressive).</td>
+      <td>Unannounced visits at least annually; more for new permit holders.</td>
+    </tr>
+    <tr>
+      <td><strong>Primary inspection instrument</strong></td>
+      <td><strong>CARE Tools</strong> (Excel spreadsheets, one per facility type) + LIC 311A records list</td>
+      <td><strong>CF-FSP 5316</strong> Standards Classification Summary (32 categories)</td>
+      <td><strong>Form 7259</strong> (staff), <strong>7260</strong> (children), <strong>7261</strong> (center) evaluation forms</td>
+    </tr>
+    <tr>
+      <td><strong>Violation system</strong></td>
+      <td>Type A (health/safety) vs Type B. Civil penalties via LIC 421.</td>
+      <td>4-class (1 = immediate danger, 4 = minimal). Class 1 can revoke license.</td>
+      <td>Standards cited against Chapter 746; weighted by risk.</td>
+    </tr>
+    <tr>
+      <td><strong>Public transparency</strong></td>
+      <td>CCLD Facility Search — inspection history, citations</td>
+      <td><strong>CARES</strong> — every violation publicly searchable</td>
+      <td>HHSC Public Search — compliance history</td>
+    </tr>
+    <tr>
+      <td><strong>Record retention</strong></td>
+      <td>Licensing reports 3 years; sign-in sheets 30 days posted</td>
+      <td>Fire drill records 12 months; attendance 12 months</td>
+      <td>Attendance, drills, incidents — minimum 12 months on-site</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout info">
+  <strong>The pattern</strong>
+  Every state inspection boils down to three file stacks: <strong>(1) one file per child</strong>, <strong>(2) one file per staff member</strong>, <strong>(3) one file for the center itself</strong>. The inspector sits at a table, asks for each stack, opens a checklist form, and ticks boxes. The only thing that changes state-to-state is the form number, the field names, and the penalty ladder.
+</div>
+
+<!-- ========== CALIFORNIA ========== -->
+<h2 class="section" id="ca"><span class="num">2</span>California</h2>
+<p class="section-sub">Regulated by CDSS Community Care Licensing Division (CCLD), under Title 22 regulations.</p>
+
+<div class="state-card ca">
+  <span class="state-tag ca">CA · CDSS · CCLD</span>
+
+  <dl class="kv">
+    <dt>Who shows up</dt><dd>Licensing Program Analyst (LPA), from the regional CCLD office.</dd>
+    <dt>Legal backbone</dt><dd>Title 22, Division 12, Chapters 1 (Centers) and 3 (Family Child Care Homes).</dd>
+    <dt>Pre-visit review</dt><dd>LPA reviews file using <code>LIC 9122A</code> (pre-visit file review checklist) before arriving.</dd>
+    <dt>On-site tool</dt><dd>One of the <strong>CARE Tools</strong> — Excel workbooks, facility-type specific.</dd>
+    <dt>Records checklist</dt><dd><strong>LIC 311A</strong> (centers) or <strong>LIC 311D</strong> (family homes) — the authoritative list of what must be on-site.</dd>
+  </dl>
+
+  <h3>The CARE Tools (what the inspector opens on their laptop)</h3>
+  <table>
+    <thead>
+      <tr><th>Tool</th><th>When used</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CCC Single License Pre-Licensing Tool</td><td>Before license issuance</td></tr>
+      <tr><td>CCC Single License Standard Tool</td><td>Routine annual inspection</td></tr>
+      <tr><td>CCC Infant Standard Tool</td><td>Infant program specific</td></tr>
+      <tr><td>CCC Pre-school Standard Tool</td><td>Preschool program</td></tr>
+      <tr><td>CCC School-Age Standard Tool</td><td>School-age program</td></tr>
+      <tr><td>FCCH Standard Tool</td><td>Family Child Care Home routine inspection</td></tr>
+    </tbody>
+  </table>
+
+  <h4>CARE Tool inspection domains (centers)</h4>
+  <ol class="clean">
+    <li><strong>Care &amp; Supervision</strong> — protection, food intake, diapering, toileting, medication</li>
+    <li><strong>Children's Records</strong> — diet, medical needs, individual development plans</li>
+    <li><strong>Food Service</strong></li>
+    <li><strong>Personal Rights</strong> (children's rights)</li>
+    <li><strong>Physical Plant</strong> — furniture, toys, flooring, cleanliness</li>
+    <li><strong>Reporting Requirements</strong> — incident reporting</li>
+    <li><strong>Staff Records</strong> — experience, qualifications, training</li>
+    <li><strong>Staffing Ratio &amp; Capacity</strong></li>
+    <li><strong>Toddler Component</strong> (18 months – 3 years)</li>
+  </ol>
+
+  <h3>Every form the inspector will ask to see</h3>
+
+  <h4>Child file (per enrolled child) — from LIC 311A §I</h4>
+  <div class="form-block"><span class="form-id">LIC 700</span><span class="form-name">Identification and Emergency Information</span><div class="form-who">Signed by parent.</div><div class="form-what">Emergency contacts, authorized pickup, physician, allergies.</div></div>
+  <div class="form-block"><span class="form-id">LIC 701</span><span class="form-name">Pre-admission Health Evaluation (Physician's Report)</span></div>
+  <div class="form-block"><span class="form-id">LIC 702</span><span class="form-name">Pre-admission Health History (Parents' Report)</span></div>
+  <div class="form-block"><span class="form-id">LIC 627</span><span class="form-name">Consent for Medical Treatment</span></div>
+  <div class="form-block"><span class="form-id">LIC 613A</span><span class="form-name">Personal Rights — Child Care</span><div class="form-who">Parent signs receipt.</div></div>
+  <div class="form-block"><span class="form-id">LIC 622</span><span class="form-name">Centrally Stored Medication and Destruction Record</span></div>
+  <div class="form-block"><span class="form-id">LIC 624</span><span class="form-name">Unusual Incident / Injury Report</span></div>
+  <div class="form-block"><span class="form-id">LIC 9221</span><span class="form-name">Parent Consent for Administering Medication</span></div>
+  <div class="form-block"><span class="form-id">LIC 9224</span><span class="form-name">Acknowledgement of Receipt of Licensing Reports</span></div>
+  <div class="form-block"><span class="form-id">LIC 9227</span><span class="form-name">Individual Infant Sleeping Plan</span><div class="form-who">Infants only — plus daily sleep logs under 24 months.</div></div>
+  <div class="form-block"><span class="form-id">LIC 995A / 995E</span><span class="form-name">Notification of Parents' Rights / Background Check Process</span></div>
+  <div class="form-block"><span class="form-id">CDPH 286</span><span class="form-name">California School Immunization Record</span><div class="form-who">Plus religious/physician exemption if applicable.</div></div>
+  <div class="form-block"><span class="form-id">PUB 515</span><span class="form-name">Risks and Effects of Lead Poisoning</span><div class="form-who">Acknowledged by parent.</div></div>
+  <p>Plus: current signed <strong>Admission Agreement</strong>, infant feeding plan, quarterly infant needs &amp; services plan (infant centers), toilet-training plan (infant centers).</p>
+
+  <h4>Staff file (per employee) — from LIC 311A §II</h4>
+  <div class="form-block"><span class="form-id">LIC 501</span><span class="form-name">Personnel Record</span><div class="form-who">Plus application or resume.</div></div>
+  <div class="form-block"><span class="form-id">LIC 503</span><span class="form-name">Health Screening Report + TB Clearance</span></div>
+  <div class="form-block"><span class="form-id">LIC 508</span><span class="form-name">Criminal Record Statement</span></div>
+  <div class="form-block"><span class="form-id">LIC 9052</span><span class="form-name">Notice of Employee Rights</span></div>
+  <div class="form-block"><span class="form-id">LIC 9095 / 9096</span><span class="form-name">Evaluation of Teacher / Director Qualifications</span></div>
+  <div class="form-block"><span class="form-id">LIC 9108</span><span class="form-name">Mandated Reporter — Suspected Child Abuse Acknowledgement</span></div>
+  <p>Plus: <strong>fingerprint clearances</strong> (State, FBI, CACI), immunizations (Measles, Pertussis, Influenza), <strong>pediatric CPR &amp; First Aid</strong> cards, <strong>16-hour health &amp; safety</strong> training, official transcripts, <strong>mandated reporter training</strong> (renew every 2 years), water safety certificate (if pool).</p>
+
+  <h4>Facility / administrative file — from LIC 311A §III</h4>
+  <div class="form-block"><span class="form-id">LIC 500</span><span class="form-name">Personnel Report (current staff roster)</span></div>
+  <div class="form-block"><span class="form-id">LIC 308 / 309</span><span class="form-name">Designation of Facility Responsibility / Administrative Organization</span></div>
+  <div class="form-block"><span class="form-id">LIC 610 (or 610A for homes)</span><span class="form-name">Emergency Disaster Plan</span><div class="form-what">Staff assignments, emergency numbers, utility shut-offs, exits, extinguisher &amp; smoke detector locations, relocation site.</div></div>
+  <div class="form-block"><span class="form-id">LIC 9148</span><span class="form-name">Earthquake Preparedness Checklist</span><div class="form-who">Attached to LIC 610/610A.</div></div>
+  <div class="form-block"><span class="form-id">LIC 9040</span><span class="form-name">Child Care Facility Roster</span></div>
+  <div class="form-block"><span class="form-id">LIC 999</span><span class="form-name">Facility Sketch (floor plan with exits)</span></div>
+  <p>Plus: <strong>sign-in / sign-out sheets (last 30 days on-site)</strong>, admission policies, substitute teacher list, waivers/exceptions, <strong>last 3 years of licensing reports</strong>, fire/disaster drill records (every 6 months).</p>
+
+  <h4>Must be posted on walls</h4>
+  <ul class="clean">
+    <li>Facility license</li>
+    <li>LIC 613A Personal Rights</li>
+    <li>Menus</li>
+    <li>PUB 269 child passenger restraint poster</li>
+    <li>Daily activity schedule</li>
+    <li>LIC 999 facility sketch</li>
+    <li>PUB 393 Parent's Rights poster</li>
+    <li>LIC 9213 Notice of Site Visit (posted 30 days after visit)</li>
+    <li>Type "A" citation reports (30 days)</li>
+  </ul>
+
+  <div class="callout note">
+    <strong>California gotcha</strong>
+    CA has no true statewide self-service portal for providers to submit compliance docs. Most of this is still paper in binders at the facility. That's the wedge — a digital binder with one-tap "show inspector" mode.
+  </div>
+</div>
+
+<!-- ========== FLORIDA ========== -->
+<h2 class="section" id="fl"><span class="num">3</span>Florida</h2>
+<p class="section-sub">Regulated by Florida DCF under Statute Ch. 402 and Administrative Code 65C-22. The Child Care Facility Handbook is incorporated by reference — it's legally binding.</p>
+
+<div class="state-card fl">
+  <span class="state-tag fl">FL · DCF · Licensing</span>
+
+  <dl class="kv">
+    <dt>Who shows up</dt><dd>DCF Licensing Counselor.</dd>
+    <dt>Cadence</dt><dd><strong>Minimum 2 unannounced inspections per year</strong> plus pre-licensing (county health + fire marshal) and complaint-driven visits.</dd>
+    <dt>Primary form</dt><dd><strong>CF-FSP 5316</strong> — Standards Classification Summary. 32-page form, 32 categories, hundreds of line items, each pre-assigned a Class (1–4).</dd>
+    <dt>Home-based variant</dt><dd><strong>CF-FSP 5274</strong> — Registered Family Child Care Home Health &amp; Safety Checklist.</dd>
+    <dt>Public visibility</dt><dd>Every finding enters <strong>CARES</strong>, parents can search.</dd>
+  </dl>
+
+  <h3>Florida's 4-class violation system</h3>
+  <table>
+    <thead>
+      <tr><th>Class</th><th>Meaning</th><th>Fine ladder</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill critical">Class 1</span></td>
+        <td>Immediate danger — unsupervised child, firearm on premises, unscreened adult alone with children, unauthorized pickup, serious health/safety hazard</td>
+        <td>$100–$500/day per violation. 3rd strike same standard → revoke license.</td>
+      </tr>
+      <tr>
+        <td><span class="pill serious">Class 2</span></td>
+        <td>Direct/potential threat — ratio violation, outlet covers missing, missing fire inspection, no monthly fire drill</td>
+        <td>2nd: $50 · 3rd: $60/day · 4th: probation + $75/day · 5th+: revoke + $100/day</td>
+      </tr>
+      <tr>
+        <td><span class="pill moderate">Class 3</span></td>
+        <td>Low potential harm — license not posted, activity plan not posted, incomplete drill records</td>
+        <td>3rd: $25 · 4th: $30/day · 5th: probation + $40/day</td>
+      </tr>
+      <tr>
+        <td><span class="pill low">Class 4</span></td>
+        <td>Indirect/minimal — still entered into CARES.</td>
+        <td>Progressive corrective action.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The 32 inspection categories (CF-FSP 5316)</h3>
+  <p class="section-sub">Categories with 10+ sub-items marked with <span style="color:var(--red)">★</span>.</p>
+  <table>
+    <thead><tr><th>#</th><th>Category</th><th>#</th><th>Category</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>License display / citation posted</td><td>17</td><td>Outdoor play area / fencing <span style="color:var(--red)">★</span></td></tr>
+      <tr><td>2</td><td>Minimum age requirements</td><td>18</td><td>Bedding and linens <span style="color:var(--red)">★</span></td></tr>
+      <tr><td>3</td><td>Ratio sufficient</td><td>19</td><td>Nap / sleep space</td></tr>
+      <tr><td>4</td><td>Supervision <span style="color:var(--red)">★★</span> (20+ sub-items, many Class 1)</td><td>20</td><td>Crib requirements</td></tr>
+      <tr><td>5</td><td>Transportation <span style="color:var(--red)">★</span></td><td>21</td><td>Restrooms and bath facilities <span style="color:var(--red)">★</span></td></tr>
+      <tr><td>6</td><td>Driver's license / CPR training</td><td>22</td><td>Operable phone</td></tr>
+      <tr><td>7</td><td>Vehicle requirements</td><td>23</td><td>Fire drills &amp; emergency prep <span style="color:var(--red)">★★</span> (26 sub-items)</td></tr>
+      <tr><td>8</td><td>Seat belts / child restraints</td><td>24</td><td>Food prep area <span style="color:var(--red)">★★</span> (20 sub-items)</td></tr>
+      <tr><td>9</td><td>Planned activities <span style="color:var(--red)">★</span></td><td>25</td><td>Staff personnel records</td></tr>
+      <tr><td>10</td><td>Field trip permission</td><td>26</td><td>Background screening compliance</td></tr>
+      <tr><td>11</td><td>Child discipline</td><td>27</td><td>Staff health requirements</td></tr>
+      <tr><td>12</td><td>Facility environment <span style="color:var(--red)">★★</span> (24 sub-items)</td><td>28</td><td>Training &amp; professional development</td></tr>
+      <tr><td>13</td><td>Toxic substances / hazardous materials / weapons</td><td>29</td><td>Children's health records</td></tr>
+      <tr><td>14</td><td>Lighting, temperature, ventilation</td><td>30</td><td>Immunization records</td></tr>
+      <tr><td>15</td><td>Licensed capacity</td><td>31</td><td>Nutrition &amp; meal service</td></tr>
+      <tr><td>16</td><td>Indoor floor space (35 sq ft/child)</td><td>32</td><td>Facility records &amp; documentation</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Staff–child ratios (Statute 402.305(4)) — Class 2 if violated</h3>
+  <table>
+    <thead><tr><th>Age</th><th>Ratio</th><th>Age</th><th>Ratio</th></tr></thead>
+    <tbody>
+      <tr><td>Birth – 1 yr</td><td>1 : 4</td><td>3 – under 4 yr</td><td>1 : 15</td></tr>
+      <tr><td>1 – under 2 yr</td><td>1 : 6</td><td>4 – under 5 yr</td><td>1 : 20</td></tr>
+      <tr><td>2 – under 3 yr</td><td>1 : 11</td><td>5 yr +</td><td>1 : 25</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Every doc the inspector will demand</h3>
+
+  <h4>Posted on walls</h4>
+  <ul class="clean">
+    <li>Current license (conspicuously)</li>
+    <li>Evacuation plan with safe routes — <strong>in each room</strong></li>
+    <li>Room capacity — in each room</li>
+    <li>Current weekly/daily menu</li>
+    <li>Daily activity schedule</li>
+    <li>Disciplinary policy notification</li>
+    <li>Smoking prohibition notice</li>
+  </ul>
+
+  <h4>Child file (per child)</h4>
+  <ul class="clean">
+    <li>Enrollment form</li>
+    <li>Emergency contact list</li>
+    <li><strong>Florida Form 680</strong> — Immunization record</li>
+    <li><strong>DH 3040</strong> — School-entry health exam (where applicable)</li>
+    <li>Authorized pickup list</li>
+    <li>Medical conditions &amp; allergies documentation</li>
+    <li>Field trip permission forms</li>
+    <li>Daily sign-in/sign-out log (retained 12 months)</li>
+  </ul>
+
+  <h4>Staff file (per employee)</h4>
+  <ul class="clean">
+    <li><strong>DCF Clearinghouse</strong> Level 2 background screening clearance (Statute 435.04)</li>
+    <li>Pediatric CPR / First Aid certification</li>
+    <li><strong>40-hour introductory training certificate</strong> (DCF-approved)</li>
+    <li>Annual in-service training records (10 hrs/yr)</li>
+    <li>Driver's license (if transporting)</li>
+    <li>Physical exam (if driving)</li>
+    <li>CF-FSP 5270 Florida Child Care Professional Credential (if claimed)</li>
+  </ul>
+
+  <h4>Facility file</h4>
+  <ul class="clean">
+    <li>Annual fire inspection certificate</li>
+    <li>Liability insurance documentation</li>
+    <li>Plan of operation</li>
+    <li>Written discipline policy</li>
+    <li>Transportation logs</li>
+    <li>Fire drill records — <strong>retained 12 months</strong></li>
+    <li>Emergency preparedness drill records — 12 months</li>
+    <li>Vehicle inspection records</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>Florida is the hardest state to pass clean</strong>
+    2× unannounced visits every year + every violation public in CARES + a 32-category form with hundreds of line items. A single Class 1 finding shows up on a parent's phone search. That's why FL is the best market to launch into — the pain is highest.
+  </div>
+</div>
+
+<!-- ========== TEXAS ========== -->
+<h2 class="section" id="tx"><span class="num">4</span>Texas</h2>
+<p class="section-sub">Regulated by HHSC Child Care Regulation (CCR) under Chapter 746 Minimum Standards for Centers (Ch. 747 for Homes).</p>
+
+<div class="state-card tx">
+  <span class="state-tag tx">TX · HHSC · CCR</span>
+
+  <dl class="kv">
+    <dt>Who shows up</dt><dd>CCR Licensing Representative (a.k.a. inspector).</dd>
+    <dt>Cadence</dt><dd>Unannounced inspections at least annually; more frequent in the first year of a permit; complaint-driven any time.</dd>
+    <dt>Legal backbone</dt><dd>Chapter 746 Minimum Standards (Centers) / Chapter 747 (Homes).</dd>
+    <dt>Primary tools</dt><dd>Three interactive PDF evaluation forms: <strong>7259</strong> (staff files), <strong>7260</strong> (child files), <strong>7261</strong> (center records).</dd>
+  </dl>
+
+  <h3>The three forms the inspector opens on arrival</h3>
+
+  <div class="form-block">
+    <span class="form-id">Form 7259</span>
+    <span class="form-name">Personnel Records Evaluation — Child Care Centers</span>
+    <div class="form-who">Filled out by the <strong>inspector</strong>. Systematic per-staff checklist.</div>
+    <div class="form-what">For every staff member, they verify:
+      <ul class="clean" style="margin-top:6px">
+        <li>Background check clearance (current)</li>
+        <li>Pre-employment affidavit (Form 2912) &amp; employment affidavit (2985)</li>
+        <li>Training documentation (orientation, 24 clock hours/year of training, pre-service hours)</li>
+        <li>Health statement</li>
+        <li>Pediatric CPR / First Aid certification (current)</li>
+        <li>Professional development records</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <span class="form-id">Form 7260</span>
+    <span class="form-name">Children's Records Evaluation — Child Care Centers</span>
+    <div class="form-who">Filled out by the <strong>inspector</strong>. Per-child checklist.</div>
+    <div class="form-what">They pull individual files and verify:
+      <ul class="clean" style="margin-top:6px">
+        <li><strong>Form 2935</strong> Admission Information complete</li>
+        <li>Emergency contact info</li>
+        <li>Immunization records (Texas minimum state requirements)</li>
+        <li>Allergy &amp; medical condition documentation</li>
+        <li>Parent authorizations (medication, authorized pickup, field trips)</li>
+        <li>Sign-in/sign-out logs present and complete</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <span class="form-id">Form 7261</span>
+    <span class="form-name">Center Records Evaluation</span>
+    <div class="form-who">Filled out by the <strong>inspector</strong>. Center-level admin review.</div>
+    <div class="form-what">They verify the presence of:
+      <ul class="clean" style="margin-top:6px">
+        <li>License / permit documentation</li>
+        <li>Form 2948 Plan of Operation</li>
+        <li>Form 2962 Verification of Liability Insurance</li>
+        <li>Fire / health / gas inspection records</li>
+        <li>Form 7263 Emergency Practices log</li>
+        <li>Posted menu &amp; activity plans</li>
+        <li>Controlling persons documentation (Form 2760)</li>
+        <li>Any waivers / variances on file (Form 2937)</li>
+      </ul>
+    </div>
+  </div>
+  <p><strong>Home-based variants:</strong> Form 7270 (children) and Form 7271 (personnel) for LCCH/RCCH.</p>
+
+  <h3>Provider-maintained operational forms the inspector reviews</h3>
+
+  <div class="form-block">
+    <span class="form-id">Form 1100</span>
+    <span class="form-name">Daily Building and Grounds Checklist</span>
+    <div class="form-who">Completed by designated staff <strong>every day</strong> (Mon–Fri columns).</div>
+    <div class="form-what">22 items: choking hazards, linen laundering, sleep equipment sanitizing, garbage, floors/walls, heating/lighting/ventilation, sanitized furniture, hazardous materials, childproof outlets, marked glass doors, toy safety, inaccessible water, pre-play hazard check, broken equipment removed, current menu posted, activity plans posted, cleaning supplies out of reach, soap/towels available, naptime lighting, crib spacing, anchored TVs.</div>
+  </div>
+
+  <div class="form-block">
+    <span class="form-id">Form 7263</span>
+    <span class="form-name">Emergency Practices</span>
+    <div class="form-who">Provider logs drills &amp; device tests monthly.</div>
+    <div class="form-what">
+      Fire drill log (monthly, must exit in &lt; 3 min) ·
+      Sheltering / severe weather drills (4×/yr) ·
+      Lock-down drills (4×/yr) ·
+      CO alarm tests (monthly) ·
+      Smoke detector tests (monthly) ·
+      Fire extinguisher checks (monthly) + locations ·
+      Relocation site listed ·
+      First aid kit location ·
+      Fire / Health / Gas inspection dates.
+    </div>
+  </div>
+
+  <div class="form-block"><span class="form-id">Form 2935</span><span class="form-name">Admission Information</span><div class="form-who">Per child — demographics, emergency contacts, authorized pickup, medical.</div></div>
+  <div class="form-block"><span class="form-id">Form 2941</span><span class="form-name">Sign-in / Sign-out Log</span><div class="form-who">Parents complete at drop-off / pickup.</div></div>
+  <div class="form-block"><span class="form-id">Form 7240</span><span class="form-name">Monthly Attendance Record</span></div>
+  <div class="form-block"><span class="form-id">Form 7239</span><span class="form-name">Incident / Illness Report</span></div>
+  <div class="form-block"><span class="form-id">Form 7243</span><span class="form-name">Emergency Telephone Numbers (posted)</span></div>
+  <div class="form-block"><span class="form-id">Form 7255</span><span class="form-name">Medication Authorization + Administration Log</span></div>
+  <div class="form-block"><span class="form-id">Form 2550</span><span class="form-name">Operational Policy on Infant Safe Sleep</span></div>
+  <div class="form-block"><span class="form-id">Form 1099</span><span class="form-name">Discipline and Guidance Policy</span></div>
+  <div class="form-block"><span class="form-id">Form 2947</span><span class="form-name">Personnel Information Record</span></div>
+  <div class="form-block"><span class="form-id">Form 2948</span><span class="form-name">Plan of Operation</span></div>
+
+  <h3>If the inspection finds issues</h3>
+  <div class="form-block">
+    <span class="form-id">Form 7277</span>
+    <span class="form-name">Plan of Action</span>
+    <div class="form-who">Written by the provider.</div>
+    <div class="form-what">Spells out how each deficiency will be corrected and by when. This is the remediation instrument.</div>
+  </div>
+
+  <h3>Application / licensing forms (onboarding, not routine)</h3>
+  <table>
+    <thead><tr><th>Form</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>2910</code></td><td>CCR Application for License/Certification</td></tr>
+      <tr><td><code>2919</code></td><td>Request for Registration Permit (Registered Home)</td></tr>
+      <tr><td><code>2911</code></td><td>Governing Body / Director Designation</td></tr>
+      <tr><td><code>2760</code></td><td>Controlling Person Disclosure</td></tr>
+      <tr><td><code>2962</code></td><td>Verification of Liability Insurance</td></tr>
+      <tr><td><code>2971</code></td><td>Request for Background Check</td></tr>
+      <tr><td><code>2982</code></td><td>Personal History Statement</td></tr>
+      <tr><td><code>2985</code></td><td>Affidavit for Employment</td></tr>
+      <tr><td><code>2912</code></td><td>Pre-Employment Affidavit</td></tr>
+      <tr><td><code>2937</code></td><td>Waiver / Variance Request</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== DOCS SPEC ========== -->
+<h2 class="section" id="docs"><span class="num">5</span>Staff &amp; child file spec (the product primitives)</h2>
+<p class="section-sub">Normalize across all three states. Every document we track has the same metadata envelope.</p>
+
+<h3>The document envelope</h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Why it matters</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>subject_type</code> + <code>subject_id</code></td><td>Child, staff, or facility — owns the doc.</td></tr>
+    <tr><td><code>state_form_map</code></td><td>e.g. <code>{CA: "LIC 700", FL: "Enrollment Form", TX: "Form 2935"}</code>. Same logical doc, different state paperwork.</td></tr>
+    <tr><td><code>category</code></td><td>Enrollment · Health · Immunization · Consent · Emergency · Background · Training · Incident · Drill · Policy · Posting.</td></tr>
+    <tr><td><code>effective_date</code> / <code>expires_at</code></td><td>Most of compliance is expiry-driven. CPR cards, TB tests, background checks, physicals, liability insurance — all time-bombed.</td></tr>
+    <tr><td><code>retention_days</code></td><td>30 (CA sign-ins posted) · 365 (FL/TX drills, attendance) · 1095 (CA licensing reports, 3 yrs).</td></tr>
+    <tr><td><code>state_violation_codes</code></td><td>If missing/expired, which cite fires. Drives the "inspection-ready" dashboard severity.</td></tr>
+    <tr><td><code>parent_signed</code> / <code>staff_signed</code> / <code>signed_at</code></td><td>Many forms require wet/e-signature; CARE Tools and 7260 specifically check for signatures.</td></tr>
+    <tr><td><code>source_file</code> (scan / PDF)</td><td>OCR on upload — pull name, DOB, expiration, immunization dates automatically.</td></tr>
+  </tbody>
+</table>
+
+<h3>Child file — canonical fields</h3>
+<div class="two-col">
+  <div>
+    <h4>Always required</h4>
+    <ul class="clean">
+      <li>Demographics + DOB (drives ratio bucket)</li>
+      <li>Emergency contacts (≥ 2)</li>
+      <li>Authorized pickup list + IDs</li>
+      <li>Consent for medical treatment</li>
+      <li>Immunization record (CDPH 286 / FL Form 680 / TX state minimum)</li>
+      <li>Pre-admission health exam (physician)</li>
+      <li>Parent health history</li>
+      <li>Allergy &amp; medical conditions</li>
+      <li>Medication authorizations + admin log</li>
+      <li>Field trip permissions</li>
+      <li>Signed parent rights / notifications</li>
+      <li>Admission / enrollment agreement</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Infant-specific</h4>
+    <ul class="clean">
+      <li>Individual infant sleep plan (CA LIC 9227; FL/TX safe-sleep policy acknowledgement)</li>
+      <li>Feeding plan</li>
+      <li>Toilet-training plan (CA infant centers)</li>
+      <li>Daily sleep logs (CA under 24 months)</li>
+      <li>Quarterly needs &amp; services plan (CA)</li>
+    </ul>
+    <h4>Daily operational</h4>
+    <ul class="clean">
+      <li>Sign-in / sign-out timestamp per session</li>
+      <li>Incident / injury reports (linked to child)</li>
+      <li>Attendance roll-up (monthly, TX Form 7240)</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Staff file — canonical fields</h3>
+<div class="two-col">
+  <div>
+    <h4>Identity &amp; eligibility</h4>
+    <ul class="clean">
+      <li>Application / resume / personnel record</li>
+      <li>Government ID + age verification</li>
+      <li>Driver's license (if transporting)</li>
+      <li><strong>Background check clearance</strong>
+        <ul>
+          <li>CA: fingerprint State + FBI + CACI</li>
+          <li>FL: DCF Clearinghouse Level 2</li>
+          <li>TX: HHSC Form 2971 background check</li>
+        </ul>
+      </li>
+      <li>Pre-employment affidavit (TX 2912)</li>
+      <li>Mandated reporter acknowledgement</li>
+      <li>Notice of employee rights</li>
+    </ul>
+  </div>
+  <div>
+    <h4>Health &amp; training (expiry-driven)</h4>
+    <ul class="clean">
+      <li>TB clearance / physical / immunizations</li>
+      <li>Pediatric CPR + First Aid card</li>
+      <li>State-required initial hours
+        <ul>
+          <li>CA: 16 hrs health &amp; safety</li>
+          <li>FL: 40 hr introductory training</li>
+          <li>TX: pre-service + 8 hr orientation</li>
+        </ul>
+      </li>
+      <li>Annual in-service hours (FL 10 hr/yr · TX 24 hr/yr)</li>
+      <li>Qualifications evaluation (CA LIC 9095/9096)</li>
+      <li>Transcripts / credentials (CDA, FL Credential, etc.)</li>
+      <li>Water safety cert (if pool)</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Facility file — canonical fields</h3>
+<ul class="clean">
+  <li>Current license + any citation reports (posted 30 days)</li>
+  <li>Plan of operation</li>
+  <li>Liability insurance</li>
+  <li>Fire / health / gas inspection certificates (annual)</li>
+  <li>Emergency disaster plan + earthquake addendum (CA) / emergency practices log (TX) / evacuation plan (FL)</li>
+  <li>Daily walkthrough checklist log (TX 1100-equivalent daily)</li>
+  <li>Drill logs: fire (monthly), severe weather (quarterly), lockdown (quarterly), CO/smoke detector tests (monthly)</li>
+  <li>Sign-in/sign-out archive</li>
+  <li>Floor plan / facility sketch</li>
+  <li>Staff roster + current ratios by room</li>
+  <li>Menus, activity schedules, discipline policy</li>
+  <li>Written policies: safe sleep, medication, discipline, transportation, emergency</li>
+  <li>Waivers / variances</li>
+  <li>Last 3 years of inspection reports (CA)</li>
+</ul>
+
+<!-- ========== PRODUCT ========== -->
+<h2 class="section" id="product"><span class="num">6</span>What the product needs to do</h2>
+<p class="section-sub">This is the whole game. Every feature traces back to a line on a state form.</p>
+
+<h3>Core surfaces</h3>
+<ol class="clean">
+  <li><strong>Three file-stack views</strong>: Children · Staff · Facility. That's how inspectors think, that's how the app should organize.</li>
+  <li><strong>"Inspection Ready" dashboard</strong>: a single screen showing green/yellow/red by state-specific form. For CA, it's the LIC 311A list. For FL, it's the 32 CF-FSP 5316 categories. For TX, it's Forms 7259/7260/7261 line items. <em>The inspector should be able to flip through this and say "done."</em></li>
+  <li><strong>Expiry engine</strong>: CPR cards, TB tests, background checks, insurance, fire inspections, training hours. 30/60/90 day warnings pushed to director's phone.</li>
+  <li><strong>Daily walkthrough</strong>: TX Form 1100-style checklist that runs every morning on a tablet, auto-logs, produces a retained record. Same module serves FL Category 12 and CA's physical plant domain.</li>
+  <li><strong>Drill tracker</strong>: monthly fire, quarterly lockdown, quarterly severe weather, monthly detector tests. One log auto-generates TX Form 7263 / FL evacuation records / CA LIC 610 addenda.</li>
+  <li><strong>Real-time ratio monitor</strong>: sign-in/sign-out by child age bucket → current required staff count by room. Alert if a staff break would drop below threshold.</li>
+  <li><strong>Incident reporter</strong>: tablet form → auto-generates LIC 624 / CF-FSP incident / TX 7239. Parent signature capture. Attached to child record.</li>
+  <li><strong>Document capture &amp; OCR</strong>: snap a photo of an immunization card, extract dates, auto-fill expiry. This single feature eliminates the binder.</li>
+  <li><strong>State form mapper</strong>: same logical document (e.g., "Parent consent for medical treatment") maps to LIC 627 / FL consent / TX authorization. User enters once; app prints the state-correct form.</li>
+  <li><strong>Parent portal</strong>: parents sign digitally, upload immunizations, update emergency contacts. Removes 80% of the admin's data-entry load.</li>
+</ol>
+
+<h3>State-specific modules on top of the core</h3>
+<table>
+  <thead><tr><th>State</th><th>What the module does</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="state-tag ca">CA</span></td>
+      <td>Import the <strong>CARE Tool</strong> Excel workbooks as checklist templates. Map our data model to LIC 311A items. Produce the LIC 500 roster, LIC 9040 child roster, LIC 610 emergency plan, LIC 9148 earthquake checklist, and LIC 999 sketch (upload + annotate). Track LIC 9213 posting dates.</td>
+    </tr>
+    <tr>
+      <td><span class="state-tag fl">FL</span></td>
+      <td>Ship the <strong>32 CF-FSP 5316 categories</strong> as 32 daily/weekly/monthly checklist modules. Each line item carries its Class (1/2/3/4) — <span class="pill critical">Class 1</span> items float to top of director's morning view. Track <strong>CARES</strong>-style violation history internally so operators see their own record the way parents do. Ratio monitor specifically calibrated to FL's 6 age bands.</td>
+    </tr>
+    <tr>
+      <td><span class="state-tag tx">TX</span></td>
+      <td>Generate inspector-ready outputs that mirror <strong>Form 7259 / 7260 / 7261</strong> one-to-one — so the inspector can tick through our screen instead of their PDF. Daily Form 1100 walkthrough lives on the kitchen-room tablet. Emergency Practices module maps directly to Form 7263. If a violation happens, auto-draft a Form 7277 Plan of Action from our finding log.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>The wedge — why this works</h3>
+<div class="callout ok">
+  <strong>Thesis</strong>
+  Existing daycare software (Brightwheel, HiMama, Procare) optimizes for <em>parent communication and billing</em>. None of them organize around the inspector. Every operator we've talked to runs inspection readiness out of a filing cabinet + a wall calendar + panic. A product that says "we have every line on CF-FSP 5316 / LIC 311A / Form 7261 covered, green, and retained" sells itself — especially in <strong>Florida, where 2× unannounced visits per year + public CARES listings make this existential</strong>.
+</div>
+
+<div class="callout info">
+  <strong>Launch order</strong>
+  <strong>FL first</strong> (highest pain, most structured form), <strong>TX second</strong> (cleanest form set — 7259/7260/7261 map 1:1 to our three file stacks), <strong>CA third</strong> (most complex — CARE Tool variants per facility type; but highest enterprise ACV once dialed).
+</div>
+
+<!-- ========== WALKTHROUGH ========== -->
+<h2 class="section" id="walkthrough"><span class="num">7</span>What actually happens during an inspection</h2>
+<p class="section-sub">The minute-by-minute playbook. Same structure in all three states — different forms on the clipboard.</p>
+
+<h3>Minute 0 — The inspector walks in unannounced</h3>
+<p>They do not call ahead. They do not email. They show up at the door, usually mid-morning when the facility is fully operating. They carry a laptop or iPad (CA: CARE Tool workbook open; FL: CF-FSP 5316 PDF; TX: Forms 7259/7260/7261 open).</p>
+<div class="callout note">
+  <strong>First words — almost verbatim</strong>
+  <em>"Hi, I'm [name] with [DCF / CCLD / HHSC CCR]. I'm here to do a routine monitoring inspection. Can I speak with the director or person in charge?"</em> They show a state-issued ID badge. The clock is now running.
+</div>
+
+<h3>Minute 1–5 — The entrance conference</h3>
+<ul class="clean">
+  <li>Director escorts them to a quiet spot — usually the office.</li>
+  <li>Inspector states the scope: routine, complaint-driven, or re-inspection.</li>
+  <li>Asks: <em>"Has anything changed since last visit? New staff? Capacity changes? Any incidents?"</em></li>
+  <li>Asks for the <strong>current staff roster and current child roster</strong>. This is the first document request.</li>
+  <li>CA: "Pull up your LIC 500 and LIC 9040." · FL: "Give me your current enrollment and staff list." · TX: "I need your 2947 list and your current roll."</li>
+</ul>
+
+<h3>Minute 5–30 — Physical walkthrough of the facility</h3>
+<p>The inspector walks every room with the director. They are looking, touching, smelling, and counting — not just reviewing paper. Expect them to:</p>
+<ul class="clean">
+  <li><strong>Count heads and count staff in every room.</strong> Ratios are verified on the spot. If an aide just stepped to the restroom, that's a violation.</li>
+  <li>Open cabinets. Look for unlocked cleaning supplies, medications, sharp objects.</li>
+  <li>Check outlet covers, cord management, anchored furniture, choking hazards under age 3.</li>
+  <li>Confirm the license, evacuation plan, menu, activity schedule, and capacity signs are posted — in every room (FL).</li>
+  <li>Open the refrigerator. Check labeled bottles, dates on food, parent labels.</li>
+  <li>Check handwashing sinks, diapering stations, bleach solution concentration (they sometimes bring test strips).</li>
+  <li>Walk outdoor play area. Look at fencing height, fall zones under equipment, water hazards, locked gates.</li>
+  <li>Ask a random staff member: <em>"What would you do if there was a fire right now?"</em> They want to hear the plan, not read it.</li>
+  <li>Watch a diaper change, a meal, or a nap transition if timing lines up.</li>
+</ul>
+
+<div class="callout warn">
+  <strong>What they say when they see something wrong</strong>
+  They don't scold. They take a photo. They write a code on their device. Then they say something like: <em>"I'm noting this as a [Class 2 / Type A]. We'll go over it at the end."</em> Don't argue on the spot — that's for the exit conference.
+</div>
+
+<h3>Minute 30–90 — The document deep-dive</h3>
+<p>This is where most time is spent, and this is where our product wins or loses the deal. The inspector sits at a table and says some version of:</p>
+
+<div class="two-col">
+  <div>
+    <h4>Staff file request</h4>
+    <ul class="clean">
+      <li><em>"Pull files for these three staff."</em> (random sample)</li>
+      <li>They open Form 7259 / CARE Staff Records / CF-FSP 5316 §25–28 on their screen.</li>
+      <li>For each staff:
+        <ul>
+          <li>"Show me the background check clearance."</li>
+          <li>"When was their last TB / physical?"</li>
+          <li>"Where's the CPR card — it expires when?"</li>
+          <li>"Show me proof of training hours this year."</li>
+          <li>"Signed mandated reporter statement?"</li>
+          <li>"Has this person's fingerprints cleared before they started?"</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h4>Child file request</h4>
+    <ul class="clean">
+      <li><em>"Pull files for these five children."</em> (random sample, usually 10–20% of roster)</li>
+      <li>They open Form 7260 / LIC 311A §I / CF-FSP 5316 §29–30.</li>
+      <li>For each child:
+        <ul>
+          <li>"Show me the immunization record."</li>
+          <li>"Emergency contacts — is there more than one?"</li>
+          <li>"Who's authorized for pickup?"</li>
+          <li>"Medication authorization + administration log?"</li>
+          <li>"Allergies documented + posted in the classroom?"</li>
+          <li>"Signed consent for medical treatment?"</li>
+          <li>"Infant — where's the sleep plan, feeding plan?"</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h4>Facility file request</h4>
+<ul class="clean">
+  <li>"Show me your most recent fire inspection certificate."</li>
+  <li>"Where are your drill logs for the last 12 months?" — they count drills, verify each month has fire, quarterly lockdown.</li>
+  <li>"Current liability insurance certificate?"</li>
+  <li>"Daily sign-in sheets — I want to see the last 30 days."</li>
+  <li>"Plan of operation. Who is the designated director in the director's absence?"</li>
+  <li>"Any incidents since last visit? Show me the incident reports."</li>
+  <li>CA: "Pull up your LIC 610 emergency plan and your LIC 9148."</li>
+  <li>FL: "Show me your written discipline policy." / "Your safe-sleep policy, signed by staff."</li>
+  <li>TX: "Show me Form 7263 with this month's extinguisher and CO tests initialed."</li>
+</ul>
+
+<div class="callout note">
+  <strong>The phrases operators dread</strong>
+  <em>"I don't see a…"</em> · <em>"When was this last updated?"</em> · <em>"This is expired."</em> · <em>"Is there another copy?"</em> · <em>"Can you pull up [form] while I wait?"</em> — Each of these is 30–90 seconds of fumbling in a filing cabinet, which an inspector interprets as disorganization. That frame biases every subsequent finding.
+</div>
+
+<h3>Minute 90–120 — Observation of practice</h3>
+<p>The inspector often lingers to watch actual practice that paper can't capture:</p>
+<ul class="clean">
+  <li>Sign-in/sign-out at pickup (is the parent signing? Is ID being checked for unfamiliar pickups?)</li>
+  <li>Meal service (are allergies visible? Is food being served at right temp?)</li>
+  <li>Nap transition (cribs spaced? sleep sacks only? infants on backs?)</li>
+  <li>Diapering (gloves, sanitizing, handwashing sequence)</li>
+  <li>Staff–child interactions (any yelling? appropriate redirection? any child left unattended even briefly?)</li>
+</ul>
+
+<h3>Minute 120 — The exit conference</h3>
+<p>This is the moment of truth. The inspector sits with the director and goes through findings one by one.</p>
+<ul class="clean">
+  <li><em>"I found [X] deficiencies today. Let me walk you through each."</em></li>
+  <li>Each violation is read aloud with its code: FL — <em>"12.18, outlet covers not in place in the 3-year-old room, Class 2."</em> TX — <em>"Standard §746.3405, no documentation of monthly fire drill for February."</em> CA — <em>"Type A violation, staff file missing current TB clearance."</em></li>
+  <li>The director signs receipt (CA: <strong>LIC 9224</strong>; TX: LOC — Licensing Observation &amp; Conclusion).</li>
+  <li>Inspector hands over (or emails) the written report. TX attaches <strong>Form 7277 Plan of Action</strong> for the director to fill out and return.</li>
+  <li>CA: inspector posts <strong>LIC 9213 Notice of Site Visit</strong> — it stays posted 30 days.</li>
+  <li>FL: findings go into <strong>CARES</strong> within 48 hours — publicly searchable.</li>
+</ul>
+
+<div class="callout info">
+  <strong>The questions they always ask that people blow</strong>
+  <ol class="clean">
+    <li><em>"Walk me through what happens if a child has an allergic reaction right now."</em> — wants to see a plan, trained staff, medication on-site, signed authorization.</li>
+    <li><em>"Who's in charge when the director is not here?"</em> — must match LIC 308 / Plan of Operation / Form 2911.</li>
+    <li><em>"When was your last lockdown drill? Show me."</em> — date, time, staff initials, duration.</li>
+    <li><em>"What's your ratio in this room right now?"</em> — head count + age mix + required staff, on the spot.</li>
+    <li><em>"How do you document medication administration?"</em> — wants to see authorization + dose-by-dose log.</li>
+  </ol>
+</div>
+
+<h3>Follow-up — what comes after</h3>
+<ul class="clean">
+  <li><strong>Re-inspection window</strong>: 30–45 days depending on state and severity. Inspector returns specifically to check cited items.</li>
+  <li><strong>Plan of Action</strong> (TX) or <strong>Corrective Action Plan</strong> (CA/FL) due within specified timeframe.</li>
+  <li><strong>Public posting</strong>: Type A citations (CA), Class 1 violations (FL), any cited standards (TX) go public. Parents see them.</li>
+  <li><strong>Civil penalty assessment</strong>: CA uses <strong>LIC 421</strong>; FL ladders per Class; TX depends on weighted severity.</li>
+</ul>
+
+<div class="callout ok">
+  <strong>Where the product makes the entire visit different</strong>
+  When the inspector asks "show me X," the director opens our app on an iPad, filters by child/staff/form type, and turns the screen around. 30 seconds instead of 3 minutes. Every doc pre-verified green. Drill log auto-generated from monthly prompts. Ratio monitor showed 0 breaches in the last 90 days. <strong>The inspector leaves faster, with fewer findings, because the paper was never the problem — the organization of the paper was.</strong>
+</div>
+
+<!-- ========== ADJACENT INDUSTRIES ========== -->
+<h2 class="section" id="adjacent"><span class="num">8</span>Adjacent industries for document compliance management</h2>
+<p class="section-sub">Same product primitives — file-per-entity, expiry engine, state-form mapper, inspection-ready view, incident log. Different regulator, different forms.</p>
+
+<h3>Tier 1 — nearest adjacencies (same buyer profile, same playbook)</h3>
+
+<table>
+  <thead>
+    <tr><th>Industry</th><th>Who inspects</th><th>What they check</th><th>Why it fits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Preschools &amp; Pre-K</strong></td>
+      <td>State education dept + licensing</td>
+      <td>Teacher credentials, curriculum records, child records</td>
+      <td>Literally the same file stacks + an education layer. Natural upsell from daycare.</td>
+    </tr>
+    <tr>
+      <td><strong>After-school / youth programs (YMCA, Boys &amp; Girls Clubs)</strong></td>
+      <td>State licensing + local</td>
+      <td>Staff background checks, child records, drills, ratios</td>
+      <td>Same regulatory DNA (e.g., TX Ch. 744 school-age).</td>
+    </tr>
+    <tr>
+      <td><strong>Foster care / group homes</strong></td>
+      <td>CA: CDSS/CCLD · FL: DCF · TX: HHSC</td>
+      <td>Child files (case plans, medical, court), staff files, fire safety (TX Form 3004)</td>
+      <td>Same regulator as daycare in CA/TX — literally sister divisions.</td>
+    </tr>
+    <tr>
+      <td><strong>Assisted living &amp; memory care</strong></td>
+      <td>CA: CCLD (RCFE) · FL: AHCA · TX: HHSC</td>
+      <td>Resident records, medication logs, staff files, physical plant, incident reports</td>
+      <td>Same regulatory agencies (CA, TX). Identical file-stack model: resident/staff/facility.</td>
+    </tr>
+    <tr>
+      <td><strong>Skilled nursing facilities (SNFs)</strong></td>
+      <td>CMS + state DOH (F-Tags)</td>
+      <td>Resident MDS, staff credentialing, infection control, drills</td>
+      <td>Bigger ACV, more complex — but same document-expiry/inspection-ready pattern.</td>
+    </tr>
+    <tr>
+      <td><strong>Adult day care</strong></td>
+      <td>State social services</td>
+      <td>Participant records, staff, meals, transportation</td>
+      <td>Same checklist-driven inspection model. Often shares forms with child day care (e.g., NC DCD-0303).</td>
+    </tr>
+    <tr>
+      <td><strong>Behavioral health &amp; residential treatment (SUD, mental health, IDD homes)</strong></td>
+      <td>State DMH / SAMHSA / CARF / Joint Commission</td>
+      <td>Client records, treatment plans, med logs, staff licensure, incident reports</td>
+      <td>Heavy document compliance, high-ACV facilities.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Tier 2 — high-document-burden verticals</h3>
+
+<table>
+  <thead>
+    <tr><th>Industry</th><th>Regulator / standard</th><th>Document pain</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Dental offices</strong></td>
+      <td>State dental board + OSHA + HIPAA</td>
+      <td>OSHA BBP training, sterilization logs, autoclave spore tests, radiation safety, DEA, staff credentials</td>
+    </tr>
+    <tr>
+      <td><strong>Medical clinics / urgent care / specialty practices</strong></td>
+      <td>CMS + state DOH + Joint Commission</td>
+      <td>Credentialing (primary source verification), CLIA waiver, controlled-substance logs, incident reports</td>
+    </tr>
+    <tr>
+      <td><strong>Home health &amp; hospice</strong></td>
+      <td>CMS Conditions of Participation + state</td>
+      <td>Caregiver credentials, background checks, competency, TB, supervision visits, patient records</td>
+    </tr>
+    <tr>
+      <td><strong>Veterinary hospitals</strong></td>
+      <td>State vet board + DEA + OSHA</td>
+      <td>DEA logs, controlled substances, radiation, anesthesia, staff credentialing</td>
+    </tr>
+    <tr>
+      <td><strong>Dialysis / infusion centers</strong></td>
+      <td>CMS + state DOH</td>
+      <td>Water testing logs, patient charts, staff competency, infection control</td>
+    </tr>
+    <tr>
+      <td><strong>Pharmacies (community + compounding)</strong></td>
+      <td>State pharmacy board + DEA + USP 795/797/800</td>
+      <td>Controlled substance inventory, pharmacist licensure, compounding environmental monitoring</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Tier 3 — non-medical but document-heavy</h3>
+
+<table>
+  <thead>
+    <tr><th>Industry</th><th>Regulator</th><th>Document pain</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Restaurants &amp; commercial kitchens</strong></td>
+      <td>Local health dept + FDA Food Code</td>
+      <td>Food handler cards, temp logs, HACCP records, pest control, cleaning logs</td>
+    </tr>
+    <tr>
+      <td><strong>Food manufacturing / co-packers</strong></td>
+      <td>FDA FSMA · SQF · BRC</td>
+      <td>Supplier docs, batch records, recall readiness, allergen control, training</td>
+    </tr>
+    <tr>
+      <td><strong>Cannabis dispensaries &amp; cultivators</strong></td>
+      <td>State cannabis control boards</td>
+      <td>Seed-to-sale tracking, employee badges, security logs, lab COAs, waste logs</td>
+    </tr>
+    <tr>
+      <td><strong>Auto repair / smog check stations</strong></td>
+      <td>State (e.g., CA BAR) + EPA</td>
+      <td>Technician certifications, equipment calibration, hazmat disposal manifests</td>
+    </tr>
+    <tr>
+      <td><strong>Construction &amp; trades (general, electrical, plumbing)</strong></td>
+      <td>OSHA + state contractor board</td>
+      <td>OSHA 10/30 cards, safety training, MSDS/SDS, tool inspections, drug tests, subcontractor COIs</td>
+    </tr>
+    <tr>
+      <td><strong>Trucking &amp; logistics fleets</strong></td>
+      <td>FMCSA (DOT)</td>
+      <td>Driver qualification files (DQF), HOS logs, medical cards, drug &amp; alcohol program, vehicle inspections</td>
+    </tr>
+    <tr>
+      <td><strong>Aviation: Part 135 charter &amp; Part 141 flight schools</strong></td>
+      <td>FAA</td>
+      <td>Pilot records, maintenance logs, training records, medicals, drug testing</td>
+    </tr>
+    <tr>
+      <td><strong>Staffing &amp; PEOs (healthcare, light industrial)</strong></td>
+      <td>OSHA + industry-specific</td>
+      <td>Per-worker credentials, I-9s, background checks, training tracking across placements</td>
+    </tr>
+    <tr>
+      <td><strong>Gyms, yoga studios, climbing gyms, camps</strong></td>
+      <td>State youth camp licensing + waivers</td>
+      <td>Instructor certs (CPR, lifeguard), participant waivers, incident reports, inspections</td>
+    </tr>
+    <tr>
+      <td><strong>Salons, barbershops, tattoo/piercing, med spas</strong></td>
+      <td>State cosmetology / health board</td>
+      <td>Practitioner licenses, bloodborne pathogen training, autoclave logs, client intake</td>
+    </tr>
+    <tr>
+      <td><strong>Schools (K-12 private &amp; charter)</strong></td>
+      <td>State education dept</td>
+      <td>Teacher licensure, fingerprint clearance, student records, IEPs, drills, immunizations</td>
+    </tr>
+    <tr>
+      <td><strong>Property management / affordable housing (LIHTC, HUD)</strong></td>
+      <td>HUD + state housing finance agency</td>
+      <td>Tenant income certs, recertifications, inspection-ready files (REAC / NSPIRE)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>How to think about ordering</h3>
+<div class="callout info">
+  <strong>The pattern that travels</strong>
+  Any industry where the shape is <em>"facility gets inspected unannounced + file-per-employee + file-per-client/patient + expiry-driven credentials + paper-based violation findings"</em> is in our lane. The product doesn't fundamentally change — only the form names, the checklist catalogs, and the state/federal violation codes differ. Build the core primitives state-configurable, and each new vertical is 90% content, 10% code.
+</div>
+<ul class="clean">
+  <li><strong>Stay close to daycare first</strong>: preschool → after-school → adult day care → assisted living. Same regulatory agencies (CCLD/HHSC/DCF each regulate several of these).</li>
+  <li><strong>Then pivot to healthcare credentialing</strong>: dental, home health, behavioral health. Higher ACVs, same primitives.</li>
+  <li><strong>Long-tail opportunistic</strong>: restaurants, cannabis, trucking — lots of competition in each, but our "inspection-ready dashboard" framing is underrepresented vs. pure credential trackers.</li>
+</ul>
+
+<footer class="foot">
+  Source material in <code>planning-docs/state-docs/</code>. Actual PDFs of every state form cited above are stored there for reference. Last pulled April 2026.
+</footer>
+
+</div>
+</body>
+</html>

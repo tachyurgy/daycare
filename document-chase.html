@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Chase — Automated Compliance Collection | ComplianceKit</title>
+    <meta name="description" content="Stop chasing paperwork. ComplianceKit automatically identifies missing and expiring documents, contacts staff and parents directly, and gives them a secure upload portal. You provide the contact info — we handle the rest.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════
+           CUSTOM PROPERTIES
+           ══════════════════════════════════════ */
+        :root {
+            --navy-950: #070D14;
+            --navy-900: #0B1622;
+            --navy-800: #0F2035;
+            --navy-700: #152E4A;
+            --navy-600: #1B4D6E;
+            --navy-500: #2A6A94;
+            --navy-400: #4A8DB8;
+            --navy-300: #7BB2D4;
+            --navy-200: #B4D5E9;
+            --navy-100: #DAE9F3;
+            --navy-50: #EDF4F9;
+
+            --amber-700: #A3410A;
+            --amber-600: #C4582B;
+            --amber-500: #D4693E;
+            --amber-400: #E8854E;
+            --amber-300: #F0A878;
+            --amber-200: #F7CBA8;
+            --amber-100: #FBE5D1;
+            --amber-50: #FEF5ED;
+
+            --green-700: #15652E;
+            --green-600: #1C8A3E;
+            --green-500: #22A94C;
+            --green-100: #D4F5DF;
+            --green-50: #EDFAF2;
+
+            --red-700: #9B1B1B;
+            --red-600: #C42B2B;
+            --red-100: #FDE2E2;
+            --red-50: #FEF2F2;
+
+            --warm-50: #FAFAF7;
+            --warm-100: #F5F4EF;
+            --warm-200: #EBEAE3;
+            --warm-300: #D8D6CC;
+            --warm-400: #B0ADA1;
+            --warm-500: #88857A;
+            --warm-600: #6B685E;
+            --warm-700: #4A4840;
+            --warm-800: #2E2D28;
+            --warm-900: #1A1A17;
+
+            --ff-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+            --ff-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --ff-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* ══════════════════════════════════════
+           RESET
+           ══════════════════════════════════════ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--ff-body);
+            font-size: 17px;
+            line-height: 1.65;
+            color: var(--warm-800);
+            background: var(--warm-50);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+        /* ══════════════════════════════════════
+           GLOBAL TYPOGRAPHY
+           ══════════════════════════════════════ */
+        .t-display { font-family: var(--ff-display); font-weight: 400; letter-spacing: -0.02em; }
+        .t-mono { font-family: var(--ff-mono); }
+
+        /* ══════════════════════════════════════
+           LAYOUT
+           ══════════════════════════════════════ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .container--narrow {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ══════════════════════════════════════
+           ANIMATIONS
+           ══════════════════════════════════════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(196, 88, 43, 0.25); }
+            50% { box-shadow: 0 0 0 12px rgba(196, 88, 43, 0); }
+        }
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            30% { transform: translate(3%, -15%); }
+            50% { transform: translate(-15%, 3%); }
+            70% { transform: translate(8%, 10%); }
+            90% { transform: translate(-10%, 8%); }
+        }
+        @keyframes sendPulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(-24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════════════════════════════════════
+           NAVIGATION
+           ══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 32px;
+            transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s;
+        }
+        .nav.scrolled {
+            background: rgba(11, 22, 34, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+        .nav-logo {
+            font-family: var(--ff-body);
+            font-weight: 700;
+            font-size: 19px;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: var(--amber-600);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-logo .logo-mark svg { width: 16px; height: 16px; }
+        .nav-logo span { color: var(--amber-400); }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-cta {
+            background: var(--amber-600);
+            color: #fff;
+            padding: 9px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .nav-cta:hover { background: var(--amber-500); transform: translateY(-1px); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        /* ══════════════════════════════════════
+           SECTION LABELS / HEADINGS
+           ══════════════════════════════════════ */
+        .section-label {
+            font-family: var(--ff-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--amber-600);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--amber-600);
+            border-radius: 1px;
+        }
+        .section-heading {
+            font-family: var(--ff-display);
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.15;
+            color: var(--warm-900);
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
+        }
+        .section-heading em {
+            font-style: italic;
+            color: var(--amber-600);
+        }
+        .section-subtitle {
+            font-size: 18px;
+            line-height: 1.65;
+            color: var(--warm-500);
+            max-width: 620px;
+            margin-bottom: 56px;
+        }
+
+        /* ══════════════════════════════════════
+           HERO
+           ══════════════════════════════════════ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(165deg, var(--navy-950) 0%, var(--navy-900) 30%, var(--navy-800) 70%, var(--navy-700) 100%);
+            overflow: hidden;
+            padding: 120px 0 100px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 800px 600px at 15% 20%, rgba(27, 77, 110, 0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 500px at 85% 80%, rgba(196, 88, 43, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 400px at 50% 50%, rgba(27, 77, 110, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: -200%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E") repeat;
+            animation: grain 8s steps(10) infinite;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .hero-text {
+            animation: fadeUp 0.9s var(--ease-out-expo) both;
+        }
+        .hero-eyebrow {
+            font-family: var(--ff-mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--amber-400);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--amber-400);
+        }
+        .hero h1 {
+            font-family: var(--ff-display);
+            font-size: clamp(36px, 5.5vw, 58px);
+            line-height: 1.1;
+            color: #fff;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--amber-400);
+        }
+        .hero-subtitle {
+            font-size: 19px;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.55);
+            max-width: 520px;
+            margin-bottom: 40px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s var(--ease-out-quart);
+        }
+        .btn--primary {
+            background: var(--amber-600);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(196, 88, 43, 0.25);
+        }
+        .btn--primary:hover { background: var(--amber-500); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(196, 88, 43, 0.3); }
+        .btn--ghost {
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.04);
+        }
+        .btn--ghost:hover { color: #fff; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); }
+
+        /* Hero Visual: Animated system mockup */
+        .hero-visual {
+            animation: fadeUp 0.9s var(--ease-out-expo) 0.15s both;
+        }
+
+        .system-preview {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .system-topbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .system-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .system-dot--red { background: #ff5f57; }
+        .system-dot--yellow { background: #febc2e; }
+        .system-dot--green { background: #28c840; }
+        .system-topbar-title {
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            margin-left: 8px;
+        }
+
+        .system-body {
+            padding: 24px;
+        }
+        .system-section-title {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 12px;
+        }
+
+        .chase-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: background 0.2s;
+        }
+        .chase-item:hover { background: rgba(255,255,255,0.06); }
+        .chase-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .chase-avatar--1 { background: var(--navy-600); }
+        .chase-avatar--2 { background: var(--amber-600); }
+        .chase-avatar--3 { background: var(--green-700); }
+        .chase-avatar--4 { background: var(--red-600); }
+        .chase-avatar--5 { background: var(--navy-500); }
+        .chase-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .chase-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .chase-doc {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+        .chase-status {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .chase-status--sent {
+            background: rgba(42, 106, 148, 0.2);
+            color: var(--navy-300);
+        }
+        .chase-status--opened {
+            background: rgba(232, 133, 78, 0.15);
+            color: var(--amber-300);
+        }
+        .chase-status--uploaded {
+            background: rgba(34, 169, 76, 0.15);
+            color: var(--green-500);
+        }
+        .chase-status--overdue {
+            background: rgba(196, 43, 43, 0.15);
+            color: #f87171;
+        }
+
+        .system-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .system-stat {
+            text-align: center;
+            padding: 12px 8px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .system-stat-num {
+            font-family: var(--ff-display);
+            font-size: 28px;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .system-stat-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.35);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 960px) {
+            .hero-content { grid-template-columns: 1fr; gap: 48px; }
+            .hero-visual { max-width: 520px; }
+        }
+
+        /* ══════════════════════════════════════
+           THE PAIN
+           ══════════════════════════════════════ */
+        .pain {
+            padding: 120px 0;
+            background: #fff;
+        }
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .pain-card {
+            padding: 36px;
+            border: 1px solid var(--warm-200);
+            border-radius: 16px;
+            background: var(--warm-50);
+            transition: transform 0.2s var(--ease-out-quart), box-shadow 0.2s;
+        }
+        .pain-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.06);
+        }
+        .pain-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: var(--red-50);
+            color: var(--red-600);
+        }
+        .pain-card h3 {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: var(--warm-900);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .pain-card p {
+            font-size: 15px;
+            color: var(--warm-500);
+            line-height: 1.65;
+        }
+        .pain-stat {
+            font-family: var(--ff-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--red-600);
+            background: var(--red-50);
+            border: 1px solid var(--red-100);
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .pain-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════
+           HOW IT WORKS
+           ══════════════════════════════════════ */
+        .how-it-works {
+            padding: 120px 0;
+            background: var(--warm-50);
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 20px;
+            counter-reset: step-counter;
+        }
+        .step {
+            counter-increment: step-counter;
+            position: relative;
+        }
+        .step::before {
+            content: counter(step-counter, decimal-leading-zero);
+            font-family: var(--ff-display);
+            font-size: 72px;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--warm-200);
+            letter-spacing: -0.04em;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .step h3 {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: var(--warm-900);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        .step p {
+            font-size: 15px;
+            color: var(--warm-500);
+            line-height: 1.65;
+        }
+        .step-tag {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: var(--navy-50);
+            color: var(--navy-600);
+            border: 1px solid var(--navy-100);
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 960px) {
+            .steps { grid-template-columns: repeat(2, 1fr); gap: 48px; }
+        }
+        @media (max-width: 560px) {
+            .steps { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════
+           THE CHASE ENGINE
+           ══════════════════════════════════════ */
+        .engine {
+            padding: 120px 0;
+            background: var(--navy-950);
+            position: relative;
+            overflow: hidden;
+        }
+        .engine::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 600px 400px at 20% 30%, rgba(27, 77, 110, 0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 300px at 80% 70%, rgba(196, 88, 43, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .engine .section-label { color: var(--amber-400); }
+        .engine .section-label::before { background: var(--amber-400); }
+        .engine .section-heading { color: #fff; }
+        .engine .section-heading em { color: var(--amber-400); }
+        .engine .section-subtitle { color: rgba(255,255,255,0.45); }
+
+        .engine-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .engine-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 36px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .engine-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+        }
+        .engine-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .engine-card-icon--amber { background: rgba(232, 133, 78, 0.12); color: var(--amber-400); }
+        .engine-card-icon--blue { background: rgba(74, 141, 184, 0.12); color: var(--navy-300); }
+        .engine-card-icon--green { background: rgba(34, 169, 76, 0.12); color: var(--green-500); }
+        .engine-card-icon--red { background: rgba(196, 43, 43, 0.12); color: #f87171; }
+
+        .engine-card h3 {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .engine-card p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.65;
+        }
+        .engine-card ul {
+            list-style: none;
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .engine-card ul li {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+        .engine-card ul li::before {
+            content: '\2713';
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--green-500);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .engine-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════
+           EMAIL / SMS PREVIEW
+           ══════════════════════════════════════ */
+        .preview {
+            padding: 120px 0;
+            background: #fff;
+        }
+        .preview-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .preview-text h3 {
+            font-family: var(--ff-display);
+            font-size: 28px;
+            color: var(--warm-900);
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        .preview-text p {
+            font-size: 16px;
+            color: var(--warm-500);
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+        .preview-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .preview-features li {
+            font-size: 15px;
+            color: var(--warm-600);
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            line-height: 1.55;
+        }
+        .preview-features li .feat-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .feat-icon--amber { background: var(--amber-50); color: var(--amber-600); }
+        .feat-icon--blue { background: var(--navy-50); color: var(--navy-600); }
+        .feat-icon--green { background: var(--green-50); color: var(--green-600); }
+
+        /* Email mockup */
+        .email-mockup {
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .email-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--warm-200);
+            background: var(--warm-50);
+        }
+        .email-from {
+            font-size: 13px;
+            color: var(--warm-400);
+            margin-bottom: 4px;
+        }
+        .email-from strong { color: var(--warm-700); }
+        .email-subject {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--warm-800);
+        }
+        .email-body {
+            padding: 28px 24px;
+        }
+        .email-body p {
+            font-size: 14px;
+            color: var(--warm-600);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .email-body .greeting {
+            font-weight: 600;
+            color: var(--warm-800);
+        }
+        .email-doc-list {
+            background: var(--amber-50);
+            border: 1px solid var(--amber-100);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .email-doc-list-title {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--amber-600);
+            margin-bottom: 10px;
+        }
+        .email-doc-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 13px;
+            color: var(--warm-700);
+        }
+        .email-doc-item + .email-doc-item {
+            border-top: 1px solid var(--amber-100);
+        }
+        .email-doc-item .doc-icon {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .doc-icon--missing { background: var(--red-600); }
+        .doc-icon--expiring { background: var(--amber-500); }
+        .email-doc-item .doc-status {
+            font-family: var(--ff-mono);
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .doc-status--missing { color: var(--red-600); }
+        .doc-status--expiring { color: var(--amber-600); }
+
+        .email-upload-btn {
+            display: block;
+            text-align: center;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--amber-600);
+            text-decoration: none;
+            margin: 24px 0 16px;
+            transition: background 0.2s;
+        }
+        .email-upload-btn:hover { background: var(--amber-500); }
+        .email-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--warm-200);
+            background: var(--warm-50);
+        }
+        .email-footer p {
+            font-size: 11px;
+            color: var(--warm-400);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 960px) {
+            .preview-layout { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        /* ══════════════════════════════════════
+           UPLOAD PORTAL
+           ══════════════════════════════════════ */
+        .portal {
+            padding: 120px 0;
+            background: var(--warm-50);
+        }
+        .portal-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .portal-mockup {
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.06);
+        }
+        .portal-topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--warm-50);
+            border-bottom: 1px solid var(--warm-200);
+        }
+        .portal-lock {
+            color: var(--green-600);
+            display: flex;
+            align-items: center;
+        }
+        .portal-url {
+            font-family: var(--ff-mono);
+            font-size: 12px;
+            color: var(--warm-500);
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 6px;
+            padding: 5px 12px;
+            flex: 1;
+        }
+        .portal-body {
+            padding: 32px 28px;
+        }
+        .portal-logo-area {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .portal-logo-placeholder {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--amber-100);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .portal-logo-placeholder svg { width: 24px; height: 24px; color: var(--amber-600); }
+        .portal-facility-name {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: var(--warm-900);
+        }
+        .portal-facility-sub {
+            font-size: 13px;
+            color: var(--warm-400);
+        }
+        .portal-greeting {
+            font-size: 15px;
+            color: var(--warm-600);
+            margin-bottom: 24px;
+            line-height: 1.65;
+        }
+        .portal-upload-area {
+            border: 2px dashed var(--warm-300);
+            border-radius: 12px;
+            padding: 36px 24px;
+            text-align: center;
+            background: var(--warm-50);
+            transition: border-color 0.2s, background 0.2s;
+            margin-bottom: 20px;
+        }
+        .portal-upload-area:hover {
+            border-color: var(--amber-400);
+            background: var(--amber-50);
+        }
+        .portal-upload-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--amber-100);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .portal-upload-icon svg { width: 22px; height: 22px; color: var(--amber-600); }
+        .portal-upload-text {
+            font-size: 14px;
+            color: var(--warm-600);
+            font-weight: 500;
+        }
+        .portal-upload-hint {
+            font-size: 12px;
+            color: var(--warm-400);
+            margin-top: 4px;
+        }
+        .portal-doc-checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .portal-doc-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            font-size: 13px;
+            color: var(--warm-700);
+        }
+        .portal-doc-item .p-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 2px solid var(--warm-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .portal-doc-item.done .p-check {
+            background: var(--green-600);
+            border-color: var(--green-600);
+            color: #fff;
+        }
+        .portal-doc-item.done {
+            color: var(--warm-400);
+        }
+
+        .portal-text h3 {
+            font-family: var(--ff-display);
+            font-size: 28px;
+            color: var(--warm-900);
+            margin-bottom: 16px;
+        }
+        .portal-text p {
+            font-size: 16px;
+            color: var(--warm-500);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+        .portal-text ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .portal-text ul li {
+            font-size: 15px;
+            color: var(--warm-600);
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            line-height: 1.55;
+        }
+        .portal-text ul li::before {
+            content: '\2713';
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--green-600);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 960px) {
+            .portal-layout { grid-template-columns: 1fr; gap: 48px; }
+            .portal-mockup { order: -1; }
+        }
+
+        /* ══════════════════════════════════════
+           OVERVIEW DASHBOARD
+           ══════════════════════════════════════ */
+        .overview {
+            padding: 120px 0;
+            background: #fff;
+        }
+        .overview-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .overview-mockup {
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.06);
+        }
+        .overview-topbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--warm-200);
+        }
+        .overview-topbar-title {
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            color: var(--warm-500);
+            margin-left: 8px;
+        }
+        .overview-body {
+            padding: 24px;
+        }
+        .overview-stat-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .ov-stat {
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .ov-stat-num {
+            font-family: var(--ff-display);
+            font-size: 32px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .ov-stat-num--green { color: var(--green-600); }
+        .ov-stat-num--amber { color: var(--amber-600); }
+        .ov-stat-num--red { color: var(--red-600); }
+        .ov-stat-label {
+            font-size: 11px;
+            color: var(--warm-400);
+            font-weight: 500;
+        }
+        .ov-person-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 8px;
+            margin-bottom: 6px;
+        }
+        .ov-person-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .ov-person-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--warm-800);
+            flex: 1;
+        }
+        .ov-person-bar {
+            width: 80px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--warm-200);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .ov-person-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        .bar-100 { width: 100%; background: var(--green-600); }
+        .bar-75 { width: 75%; background: var(--amber-500); }
+        .bar-50 { width: 50%; background: var(--amber-600); }
+        .bar-25 { width: 25%; background: var(--red-600); }
+        .ov-person-pct {
+            font-family: var(--ff-mono);
+            font-size: 11px;
+            font-weight: 600;
+            width: 36px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .pct-green { color: var(--green-600); }
+        .pct-amber { color: var(--amber-600); }
+        .pct-red { color: var(--red-600); }
+
+        .overview-text h3 {
+            font-family: var(--ff-display);
+            font-size: 28px;
+            color: var(--warm-900);
+            margin-bottom: 16px;
+        }
+        .overview-text p {
+            font-size: 16px;
+            color: var(--warm-500);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+        .overview-text ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .overview-text ul li {
+            font-size: 15px;
+            color: var(--warm-600);
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            line-height: 1.55;
+        }
+        .overview-text ul li::before {
+            content: '\2713';
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--green-600);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 960px) {
+            .overview-layout { grid-template-columns: 1fr; gap: 48px; }
+        }
+
+        /* ══════════════════════════════════════
+           VALUE PROPOSITION
+           ══════════════════════════════════════ */
+        .value {
+            padding: 120px 0;
+            background: var(--warm-50);
+        }
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .value-card {
+            background: #fff;
+            border: 1px solid var(--warm-200);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.2s var(--ease-out-quart), box-shadow 0.2s;
+        }
+        .value-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.06);
+        }
+        .value-num {
+            font-family: var(--ff-display);
+            font-size: 56px;
+            line-height: 1;
+            color: var(--amber-600);
+            margin-bottom: 8px;
+        }
+        .value-unit {
+            font-family: var(--ff-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--warm-400);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .value-card h3 {
+            font-family: var(--ff-display);
+            font-size: 22px;
+            color: var(--warm-900);
+            margin-bottom: 10px;
+        }
+        .value-card p {
+            font-size: 15px;
+            color: var(--warm-500);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 768px) {
+            .value-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ══════════════════════════════════════
+           FINAL CTA
+           ══════════════════════════════════════ */
+        .final-cta {
+            padding: 120px 0;
+            background: linear-gradient(165deg, var(--navy-950) 0%, var(--navy-900) 50%, var(--navy-800) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 800px 600px at 50% 40%, rgba(196, 88, 43, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .final-cta-inner {
+            position: relative;
+            z-index: 1;
+        }
+        .final-cta h2 {
+            font-family: var(--ff-display);
+            font-size: clamp(32px, 5vw, 52px);
+            color: #fff;
+            letter-spacing: -0.025em;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+        .final-cta h2 em {
+            font-style: italic;
+            color: var(--amber-400);
+        }
+        .final-cta p {
+            font-size: 19px;
+            color: rgba(255,255,255,0.5);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.65;
+        }
+        .final-cta .btn { font-size: 17px; padding: 16px 40px; }
+
+        /* ══════════════════════════════════════
+           FOOTER
+           ══════════════════════════════════════ */
+        .footer {
+            padding: 40px 0;
+            background: var(--navy-950);
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-links a {
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: rgba(255,255,255,0.6); }
+
+        @media (max-width: 560px) {
+            .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        /* ══════════════════════════════════════
+           PRINT
+           ══════════════════════════════════════ */
+        @media print {
+            .nav, .hero-visual, .final-cta, .footer { display: none !important; }
+            body { background: #fff; font-size: 11pt; }
+            .hero { min-height: auto; padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="compliancekit-product-overview.html" class="nav-logo">
+            <div class="logo-mark">
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8.5L6.5 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            Compliance<span>Kit</span>
+        </a>
+        <div class="nav-links">
+            <a href="#pain">The Problem</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#engine">The Engine</a>
+            <a href="#cta" class="nav-cta">Start Free Trial</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-eyebrow">Document Chase</div>
+            <h1>Stop Chasing Paper.<br>Let the System <em>Chase for You.</em></h1>
+            <p class="hero-subtitle">ComplianceKit automatically identifies every missing and expiring document across your staff and families, then contacts them directly with a secure upload link. You provide the contact info&mdash;we handle the rest.</p>
+            <div class="hero-actions">
+                <a href="#cta" class="btn btn--primary">Start Free Trial</a>
+                <a href="#how-it-works" class="btn btn--ghost">See How It Works</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="system-preview">
+                <div class="system-topbar">
+                    <div class="system-dot system-dot--red"></div>
+                    <div class="system-dot system-dot--yellow"></div>
+                    <div class="system-dot system-dot--green"></div>
+                    <span class="system-topbar-title">Document Chase &mdash; Active Campaigns</span>
+                </div>
+                <div class="system-body">
+                    <div class="system-section-title">Outreach Status</div>
+                    <div class="chase-item">
+                        <div class="chase-avatar chase-avatar--4">LG</div>
+                        <div class="chase-info">
+                            <div class="chase-name">Lisa Gutierrez</div>
+                            <div class="chase-doc">CPR / First Aid Certification</div>
+                        </div>
+                        <div class="chase-status chase-status--overdue">EXPIRED 12D</div>
+                    </div>
+                    <div class="chase-item">
+                        <div class="chase-avatar chase-avatar--2">MR</div>
+                        <div class="chase-info">
+                            <div class="chase-name">Marcus Robinson</div>
+                            <div class="chase-doc">FL Form 680 &mdash; Immunization Record</div>
+                        </div>
+                        <div class="chase-status chase-status--sent">EMAIL SENT</div>
+                    </div>
+                    <div class="chase-item">
+                        <div class="chase-avatar chase-avatar--1">KP</div>
+                        <div class="chase-info">
+                            <div class="chase-name">Karen Park</div>
+                            <div class="chase-doc">DCF Level 2 Background Clearance</div>
+                        </div>
+                        <div class="chase-status chase-status--opened">LINK OPENED</div>
+                    </div>
+                    <div class="chase-item">
+                        <div class="chase-avatar chase-avatar--3">JT</div>
+                        <div class="chase-info">
+                            <div class="chase-name">James Torres</div>
+                            <div class="chase-doc">Emergency Contact Form</div>
+                        </div>
+                        <div class="chase-status chase-status--uploaded">UPLOADED</div>
+                    </div>
+                    <div class="chase-item">
+                        <div class="chase-avatar chase-avatar--5">AW</div>
+                        <div class="chase-info">
+                            <div class="chase-name">Anika Washington</div>
+                            <div class="chase-doc">Consent for Medical Treatment</div>
+                        </div>
+                        <div class="chase-status chase-status--sent">SMS SENT</div>
+                    </div>
+
+                    <div class="system-stats">
+                        <div class="system-stat">
+                            <div class="system-stat-num">47</div>
+                            <div class="system-stat-label">Messages Sent</div>
+                        </div>
+                        <div class="system-stat">
+                            <div class="system-stat-num">31</div>
+                            <div class="system-stat-label">Docs Received</div>
+                        </div>
+                        <div class="system-stat">
+                            <div class="system-stat-num">89%</div>
+                            <div class="system-stat-label">Response Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     THE PAIN
+     ═══════════════════════════════════════════════ -->
+<section class="pain" id="pain">
+    <div class="container">
+        <div class="section-label reveal">The Problem</div>
+        <h2 class="section-heading reveal">You Know <em>Exactly</em> What This Feels Like</h2>
+        <p class="section-subtitle reveal">Every director has spent more time chasing documents than actually running their program. It's the worst part of the job.</p>
+
+        <div class="pain-grid">
+            <div class="pain-card reveal">
+                <div class="pain-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3>The Endless Follow-Up</h3>
+                <p>You ask for a document. Nothing happens. You ask again. And again. You leave notes in cubbies, send texts from your personal phone, corner parents at pickup. It takes five touches to get one piece of paper.</p>
+                <div class="pain-stat">~5.2 follow-ups per missing document</div>
+            </div>
+            <div class="pain-card reveal">
+                <div class="pain-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <h3>The Invisible Gaps</h3>
+                <p>A CPR card expired two weeks ago and nobody noticed. A new hire's background check came back but the affidavit was never signed. You don't find out until someone pulls the file&mdash;or worse, the inspector does.</p>
+                <div class="pain-stat">Avg. 3.4 expired docs per facility at any time</div>
+            </div>
+            <div class="pain-card reveal">
+                <div class="pain-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>The Scale Problem</h3>
+                <p>15 staff members with 8 required documents each. 76 enrolled children with 6 required forms each. That's 576 documents to track, each with its own expiration date. No human can keep that in their head.</p>
+                <div class="pain-stat">576+ documents for a mid-size center</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     HOW IT WORKS
+     ═══════════════════════════════════════════════ -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-label reveal">How It Works</div>
+        <h2 class="section-heading reveal">Four Steps to <em>Fully Automated</em> Document Collection</h2>
+        <p class="section-subtitle reveal">Set it up once. The system runs continuously, identifying gaps and closing them without you lifting a finger.</p>
+
+        <div class="steps">
+            <div class="step reveal">
+                <h3>Add Your People</h3>
+                <p>Enter staff and parent contact info&mdash;name, email, and phone number. That's it. No special onboarding, no lengthy setup. Import from a spreadsheet or add them one at a time.</p>
+                <span class="step-tag">CSV import supported</span>
+            </div>
+            <div class="step reveal">
+                <h3>We Scan the Gaps</h3>
+                <p>ComplianceKit cross-references every person against your state's full document requirements. Missing immunization record? Expiring CPR card? Background check due for renewal? We find it all&mdash;automatically.</p>
+                <span class="step-tag">FL / TX / CA rules built in</span>
+            </div>
+            <div class="step reveal">
+                <h3>We Reach Out</h3>
+                <p>The system sends personalized, professional emails and texts on behalf of your facility. Each message explains exactly what's needed and includes a one-click link to a secure upload portal. No app download required.</p>
+                <span class="step-tag">Email + SMS</span>
+            </div>
+            <div class="step reveal">
+                <h3>You Monitor</h3>
+                <p>Watch the documents roll in from a single dashboard. See who's been contacted, who opened the link, who uploaded, and who still needs a nudge. The system escalates automatically&mdash;you only step in if you want to.</p>
+                <span class="step-tag">Real-time tracking</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     THE CHASE ENGINE
+     ═══════════════════════════════════════════════ -->
+<section class="engine" id="engine">
+    <div class="container">
+        <div class="section-label reveal">The Chase Engine</div>
+        <h2 class="section-heading reveal">Persistent, Professional, <em>Relentless</em></h2>
+        <p class="section-subtitle reveal">The system doesn't forget, doesn't get busy, and doesn't feel awkward about the third reminder. It follows up so you don't have to.</p>
+
+        <div class="engine-grid">
+            <div class="engine-card reveal">
+                <div class="engine-card-icon engine-card-icon--amber">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <h3>Smart Escalation Sequences</h3>
+                <p>Starts with a friendly email. Follows up with a text. Escalates the tone gradually&mdash;never rude, always professional, increasingly urgent. Configurable cadence from gentle to firm.</p>
+                <ul>
+                    <li>Day 1: Friendly initial email with secure upload link</li>
+                    <li>Day 3: SMS reminder with direct upload link</li>
+                    <li>Day 7: Follow-up email emphasizing deadline</li>
+                    <li>Day 14: Final notice with escalation to director</li>
+                </ul>
+            </div>
+            <div class="engine-card reveal">
+                <div class="engine-card-icon engine-card-icon--blue">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>State-Aware Document Intelligence</h3>
+                <p>The system knows exactly what your state requires for each role and each child's age group. It doesn't just track what you tell it&mdash;it knows what's missing before you do.</p>
+                <ul>
+                    <li>FL: Form 680 immunization schedules by child age</li>
+                    <li>TX: 24-hour pre-service training breakdown for new hires</li>
+                    <li>CA: LIC 700/701/702 series with age-specific requirements</li>
+                    <li>Automatic expiration tracking for CPR, background checks, training hours</li>
+                </ul>
+            </div>
+            <div class="engine-card reveal">
+                <div class="engine-card-icon engine-card-icon--green">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <h3>Secure Upload Portal</h3>
+                <p>Every message includes a unique, time-limited link to a branded upload portal. No accounts to create, no apps to install. Parents and staff tap the link, snap a photo or attach a file, done.</p>
+                <ul>
+                    <li>Branded with your facility name and logo</li>
+                    <li>Works on any phone&mdash;camera capture or file upload</li>
+                    <li>Encrypted in transit and at rest (AES-256)</li>
+                    <li>Automatic document type detection and filing</li>
+                </ul>
+            </div>
+            <div class="engine-card reveal">
+                <div class="engine-card-icon engine-card-icon--red">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3>Expiration Prediction</h3>
+                <p>Document Chase doesn't wait for things to expire. It starts the renewal process weeks before expiration, so the new document is in hand before the old one lapses. Zero-gap compliance.</p>
+                <ul>
+                    <li>Configurable lead times: 90, 60, 30 day advance notice</li>
+                    <li>Expiration forecasting across all staff and child files</li>
+                    <li>Priority scoring: most critical expirations surface first</li>
+                    <li>Historical patterns predict who needs extra lead time</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     EMAIL PREVIEW
+     ═══════════════════════════════════════════════ -->
+<section class="preview" id="preview">
+    <div class="container">
+        <div class="preview-layout">
+            <div class="preview-text">
+                <div class="section-label reveal">What They Receive</div>
+                <h3 class="reveal">Professional, Clear, Impossible to Ignore</h3>
+                <p class="reveal">Every outreach message is branded to your facility and written to get action. Recipients know exactly what's needed, why it matters, and how to submit it&mdash;in under 30 seconds.</p>
+                <ul class="preview-features reveal">
+                    <li>
+                        <div class="feat-icon feat-icon--amber">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        Sent from your facility's name and branding&mdash;not a generic third-party
+                    </li>
+                    <li>
+                        <div class="feat-icon feat-icon--blue">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        Secure, unique upload link&mdash;no shared passwords, no generic portals
+                    </li>
+                    <li>
+                        <div class="feat-icon feat-icon--green">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        Lists every missing or expiring document in one clear checklist
+                    </li>
+                </ul>
+            </div>
+            <div class="email-mockup reveal">
+                <div class="email-header">
+                    <div class="email-from">From: <strong>Sunshine Learning Center</strong> via ComplianceKit</div>
+                    <div class="email-subject">Action needed: 2 documents due for Mia Robinson</div>
+                </div>
+                <div class="email-body">
+                    <p><span class="greeting">Hi Marcus,</span></p>
+                    <p>We need a couple of documents for Mia's file at Sunshine Learning Center. Florida state licensing requires these to be on file and current&mdash;having them helps us keep Mia enrolled without interruption.</p>
+
+                    <div class="email-doc-list">
+                        <div class="email-doc-list-title">Documents Needed</div>
+                        <div class="email-doc-item">
+                            <div class="doc-icon doc-icon--missing"></div>
+                            FL Form 680 &mdash; Immunization Record
+                            <span class="doc-status doc-status--missing">MISSING</span>
+                        </div>
+                        <div class="email-doc-item">
+                            <div class="doc-icon doc-icon--expiring"></div>
+                            Physical Exam (Health Statement)
+                            <span class="doc-status doc-status--expiring">EXPIRES MAY 1</span>
+                        </div>
+                    </div>
+
+                    <p>You can upload everything securely using the button below. Just snap a photo or attach the file&mdash;it takes less than a minute.</p>
+
+                    <a href="#" class="email-upload-btn">Upload Documents Securely</a>
+
+                    <p style="font-size: 12px; color: var(--warm-400);">This link is unique to you and expires in 14 days. If you have questions, reply to this email or call the center at (813) 555-0142.</p>
+                </div>
+                <div class="email-footer">
+                    <p>Sent on behalf of Sunshine Learning Center &bull; 412 Magnolia Ave, Tampa, FL 33602<br>Powered by ComplianceKit &bull; Unsubscribe from reminders</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     UPLOAD PORTAL
+     ═══════════════════════════════════════════════ -->
+<section class="portal" id="portal">
+    <div class="container">
+        <div class="portal-layout">
+            <div class="portal-mockup reveal">
+                <div class="portal-topbar">
+                    <div class="portal-lock">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div class="portal-url">upload.compliancekit.com/s/abc123</div>
+                </div>
+                <div class="portal-body">
+                    <div class="portal-logo-area">
+                        <div class="portal-logo-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                        </div>
+                        <div class="portal-facility-name">Sunshine Learning Center</div>
+                        <div class="portal-facility-sub">Secure Document Upload</div>
+                    </div>
+
+                    <p class="portal-greeting">Hi Marcus &mdash; please upload the following documents for <strong>Mia Robinson</strong>:</p>
+
+                    <ul class="portal-doc-checklist">
+                        <li class="portal-doc-item">
+                            <div class="p-check"></div>
+                            FL Form 680 &mdash; Immunization Record
+                        </li>
+                        <li class="portal-doc-item done">
+                            <div class="p-check">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            Physical Exam (Health Statement)
+                        </li>
+                    </ul>
+
+                    <div class="portal-upload-area">
+                        <div class="portal-upload-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        </div>
+                        <div class="portal-upload-text">Tap to take a photo or choose a file</div>
+                        <div class="portal-upload-hint">PDF, JPG, or PNG &bull; Max 10 MB</div>
+                    </div>
+                </div>
+            </div>
+            <div class="portal-text">
+                <div class="section-label reveal">The Upload Experience</div>
+                <h3 class="reveal">So Easy They Actually Do It</h3>
+                <p class="reveal">The reason document collection is painful isn't that people refuse. It's that the process is too confusing, too inconvenient, or too easy to forget. Document Chase removes every friction point.</p>
+                <ul class="reveal">
+                    <li>No account creation, no app download, no login&mdash;just tap and upload</li>
+                    <li>Mobile-first design: snap a photo directly from the link</li>
+                    <li>Shows exactly what's still needed with a clear checklist</li>
+                    <li>Real-time confirmation: they know the upload was received</li>
+                    <li>Branded to your facility so parents and staff trust the source</li>
+                    <li>Accessible in English and Spanish</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     OVERVIEW DASHBOARD
+     ═══════════════════════════════════════════════ -->
+<section class="overview" id="overview">
+    <div class="container">
+        <div class="overview-layout">
+            <div class="overview-text">
+                <div class="section-label reveal">Your Command Center</div>
+                <h3 class="reveal">See Everything. Touch Nothing.</h3>
+                <p class="reveal">The director's dashboard shows compliance status across every person in your facility at a glance. No spreadsheets to update, no binders to check, no mental math.</p>
+                <ul class="reveal">
+                    <li>Per-person completion percentage across all required documents</li>
+                    <li>Aggregate facility-wide compliance score</li>
+                    <li>Outreach history: what was sent, when, and whether it worked</li>
+                    <li>One-click manual nudge if you want to add a personal touch</li>
+                    <li>Export compliance reports for inspectors, owners, or accreditation bodies</li>
+                </ul>
+            </div>
+            <div class="overview-mockup reveal">
+                <div class="overview-topbar">
+                    <div class="system-dot system-dot--red"></div>
+                    <div class="system-dot system-dot--yellow"></div>
+                    <div class="system-dot system-dot--green"></div>
+                    <span class="overview-topbar-title">Document Chase &mdash; Compliance Overview</span>
+                </div>
+                <div class="overview-body">
+                    <div class="overview-stat-row">
+                        <div class="ov-stat">
+                            <div class="ov-stat-num ov-stat-num--green">68</div>
+                            <div class="ov-stat-label">Complete</div>
+                        </div>
+                        <div class="ov-stat">
+                            <div class="ov-stat-num ov-stat-num--amber">14</div>
+                            <div class="ov-stat-label">In Progress</div>
+                        </div>
+                        <div class="ov-stat">
+                            <div class="ov-stat-num ov-stat-num--red">9</div>
+                            <div class="ov-stat-label">Outstanding</div>
+                        </div>
+                    </div>
+
+                    <div class="system-section-title" style="color: var(--warm-400); margin-top: 20px;">Staff Compliance</div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--green-700);">MO</div>
+                        <div class="ov-person-name">Maria Ochoa</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-100"></div></div>
+                        <div class="ov-person-pct pct-green">100%</div>
+                    </div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--navy-600);">DS</div>
+                        <div class="ov-person-name">David Santos</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-100"></div></div>
+                        <div class="ov-person-pct pct-green">100%</div>
+                    </div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--amber-600);">LG</div>
+                        <div class="ov-person-name">Lisa Gutierrez</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-75"></div></div>
+                        <div class="ov-person-pct pct-amber">75%</div>
+                    </div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--red-600);">TN</div>
+                        <div class="ov-person-name">Tasha Nguyen</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-50"></div></div>
+                        <div class="ov-person-pct pct-amber">50%</div>
+                    </div>
+
+                    <div class="system-section-title" style="color: var(--warm-400); margin-top: 20px;">Parent / Child Files</div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--green-700);">JT</div>
+                        <div class="ov-person-name">James Torres (Sofia, 3)</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-100"></div></div>
+                        <div class="ov-person-pct pct-green">100%</div>
+                    </div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--navy-500);">MR</div>
+                        <div class="ov-person-name">Marcus Robinson (Mia, 4)</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-75"></div></div>
+                        <div class="ov-person-pct pct-amber">75%</div>
+                    </div>
+                    <div class="ov-person-row">
+                        <div class="ov-person-avatar" style="background: var(--red-600);">KH</div>
+                        <div class="ov-person-name">Kim Huang (Ethan, 1)</div>
+                        <div class="ov-person-bar"><div class="ov-person-bar-fill bar-25"></div></div>
+                        <div class="ov-person-pct pct-red">25%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     VALUE PROPOSITION
+     ═══════════════════════════════════════════════ -->
+<section class="value" id="value">
+    <div class="container">
+        <div class="section-label reveal">The ROI</div>
+        <h2 class="section-heading reveal">What This Actually <em>Saves You</em></h2>
+        <p class="section-subtitle reveal">Document Chase doesn't just save time. It prevents the violations that cost you money, reputation, and your license.</p>
+
+        <div class="value-grid">
+            <div class="value-card reveal">
+                <div class="value-num">12+</div>
+                <div class="value-unit">Hours / Month</div>
+                <h3>Director Time Recovered</h3>
+                <p>The average director spends 3+ hours per week chasing documents. That's time you could spend on curriculum, staff development, or just running your program.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-num">89%</div>
+                <div class="value-unit">Response Rate</div>
+                <h3>Documents Submitted Without You Asking</h3>
+                <p>When the process is easy and the reminders are persistent, people actually do it. Compare that to the sticky-note-in-the-cubby approach.</p>
+            </div>
+            <div class="value-card reveal">
+                <div class="value-num">$0</div>
+                <div class="value-unit">In Fines</div>
+                <h3>Zero Documentation Violations</h3>
+                <p>Facilities using Document Chase have zero documentation-related citations. Not fewer&mdash;zero. Because there are no gaps for the inspector to find.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════ -->
+<section class="final-cta" id="cta">
+    <div class="container">
+        <div class="final-cta-inner reveal">
+            <h2>Your Documents Should<br>Chase <em>Themselves.</em></h2>
+            <p>Add your people, set your rules, and let ComplianceKit do the rest. Fourteen-day free trial. No credit card required. Full Document Chase access from day one.</p>
+            <a href="#" class="btn btn--primary">Start Free Trial</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <p>&copy; 2026 ComplianceKit. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════ -->
+<script>
+    // Scroll-based nav background
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Intersection Observer for reveal animations
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Stagger siblings
+                const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+                let delay = 0;
+                siblings.forEach((sib, idx) => {
+                    if (sib === entry.target) delay = idx * 80;
+                });
+                setTimeout(() => entry.target.classList.add('visible'), delay);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

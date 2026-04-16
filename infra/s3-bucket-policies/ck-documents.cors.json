@@ -1,0 +1,28 @@
+{
+    "CORSRules": [
+        {
+            "AllowedOrigins": [
+                "https://compliancekit.com",
+                "https://www.compliancekit.com",
+                "https://app.compliancekit.com",
+                "http://localhost:5173"
+            ],
+            "AllowedMethods": [
+                "GET",
+                "PUT",
+                "POST",
+                "HEAD"
+            ],
+            "AllowedHeaders": [
+                "*"
+            ],
+            "ExposeHeaders": [
+                "ETag",
+                "x-amz-server-side-encryption",
+                "x-amz-request-id",
+                "x-amz-id-2"
+            ],
+            "MaxAgeSeconds": 3000
+        }
+    ]
+}

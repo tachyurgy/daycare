@@ -1,0 +1,2938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit - Master Architecture &amp; Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --navy-light: #242445;
+    --navy-lighter: #2d2d5e;
+    --surface: #ffffff;
+    --bg: #f8f9fa;
+    --bg-alt: #f0f1f3;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --text-light: #9ca3af;
+    --border: #e5e7eb;
+    --border-light: #f3f4f6;
+    --success: #22c55e;
+    --success-bg: #f0fdf4;
+    --warning: #f59e0b;
+    --warning-bg: #fffbeb;
+    --critical: #ef4444;
+    --critical-bg: #fef2f2;
+    --info: #3b82f6;
+    --info-bg: #eff6ff;
+    --orange: #f97316;
+    --yellow: #fbbf24;
+    --sidebar-width: 280px;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 24px;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--navy);
+    color: #fff;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--success), #16a34a);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .logo-icon::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 7px;
+    border-left: 2.5px solid #fff;
+    border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg) translateY(-1px);
+    top: 12px;
+    left: 10px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-tagline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.3);
+    padding: 20px 24px 8px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding-bottom: 24px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-item:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .nav-item.active {
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border-left-color: var(--success);
+  }
+
+  .nav-number {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.25);
+    width: 18px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+
+  .sidebar-meta {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.6;
+  }
+
+  .sidebar-meta span {
+    display: block;
+  }
+
+  /* ── Main Content ── */
+  .main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(248,249,250,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .breadcrumb-sep { color: var(--text-light); }
+
+  .doc-badges {
+    display: flex;
+    gap: 8px;
+  }
+
+  .doc-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .doc-badge.version {
+    background: var(--info-bg);
+    color: var(--info);
+  }
+
+  .doc-badge.status {
+    background: var(--success-bg);
+    color: #16a34a;
+  }
+
+  .doc-badge.confidential {
+    background: var(--critical-bg);
+    color: var(--critical);
+  }
+
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 48px 120px;
+  }
+
+  /* ── Hero Header ── */
+  .hero {
+    margin-bottom: 64px;
+  }
+
+  .hero-overline {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--info);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-lighter));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 640px;
+    font-weight: 400;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero-meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+  }
+
+  .hero-meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .section-anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--navy);
+  }
+
+  .section-number {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--navy);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--navy);
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 32px 0 14px;
+    letter-spacing: -0.3px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 24px 0 10px;
+  }
+
+  p {
+    margin-bottom: 14px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  p.muted { color: var(--text-muted); }
+
+  strong { font-weight: 700; }
+
+  /* ── Callout / Insight Boxes ── */
+  .callout {
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin: 24px 0;
+    border-left: 4px solid;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout.insight {
+    background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+    border-color: var(--info);
+  }
+
+  .callout.insight .callout-title { color: var(--info); }
+
+  .callout.success {
+    background: var(--success-bg);
+    border-color: var(--success);
+  }
+
+  .callout.success .callout-title { color: #16a34a; }
+
+  .callout.warning {
+    background: var(--warning-bg);
+    border-color: var(--warning);
+  }
+
+  .callout.warning .callout-title { color: #d97706; }
+
+  .callout.critical {
+    background: var(--critical-bg);
+    border-color: var(--critical);
+  }
+
+  .callout.critical .callout-title { color: var(--critical); }
+
+  .callout-title {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ── Stats Grid ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -1px;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  .stat-card.highlight {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+
+  .stat-card.highlight .stat-value { color: var(--success); }
+  .stat-card.highlight .stat-label { color: rgba(255,255,255,0.6); }
+
+  /* ── Tables ── */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+  }
+
+  thead th:first-child { border-radius: 11px 0 0 0; }
+  thead th:last-child { border-radius: 0 11px 0 0; }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover {
+    background: rgba(59,130,246,0.02);
+  }
+
+  .state-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  .state-badge.tx { background: #fef3c7; color: #92400e; }
+  .state-badge.fl { background: #dbeafe; color: #1e40af; }
+  .state-badge.ca { background: #fce7f3; color: #9d174d; }
+
+  td.mono {
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  td.highlight-cell {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── Architecture Diagrams ── */
+  .diagram-container {
+    margin: 24px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    overflow-x: auto;
+  }
+
+  .diagram-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .diagram-ascii {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--navy);
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* ── Visual Architecture Boxes ── */
+  .arch-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .arch-layer {
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 20px 24px;
+    position: relative;
+  }
+
+  .arch-layer.client {
+    border-color: var(--info);
+    background: var(--info-bg);
+  }
+
+  .arch-layer.api {
+    border-color: var(--warning);
+    background: var(--warning-bg);
+  }
+
+  .arch-layer.data {
+    border-color: var(--success);
+    background: var(--success-bg);
+  }
+
+  .arch-layer-label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    padding: 2px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    color: #fff;
+  }
+
+  .arch-layer.client .arch-layer-label { background: var(--info); }
+  .arch-layer.api .arch-layer-label { background: var(--warning); }
+  .arch-layer.data .arch-layer-label { background: var(--success); }
+
+  .arch-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .arch-module {
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .arch-module .module-sub {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .arch-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0;
+    color: var(--text-light);
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .arch-connector-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 12px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+
+  /* ── Color Palette Display ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .palette-swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: transform 0.15s ease;
+  }
+
+  .palette-swatch:hover { transform: scale(1.02); }
+
+  .palette-color {
+    height: 64px;
+    display: flex;
+    align-items: flex-end;
+    padding: 8px 12px;
+  }
+
+  .palette-info {
+    padding: 10px 12px;
+  }
+
+  .palette-name {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .palette-hex {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .palette-use {
+    font-size: 10px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  /* ── Severity Scale ── */
+  .severity-scale {
+    display: flex;
+    gap: 0;
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .severity-level {
+    flex: 1;
+    padding: 14px 12px;
+    text-align: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .severity-level .sev-title {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .severity-level .sev-states {
+    font-size: 9px;
+    font-weight: 500;
+    opacity: 0.85;
+    line-height: 1.3;
+  }
+
+  /* ── Component Cards ── */
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .component-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .component-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .component-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--info);
+    margin-bottom: 6px;
+  }
+
+  .component-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .component-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  /* ── Entity Model ── */
+  .entity-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .entity-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .entity-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .entity-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .entity-body {
+    padding: 16px 20px;
+  }
+
+  .entity-fields {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .entity-fields .field-name {
+    color: var(--info);
+    font-weight: 600;
+  }
+
+  .entity-fields .field-type {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .entity-state-mappings {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .entity-state-map {
+    font-size: 11px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--bg);
+    line-height: 1.4;
+  }
+
+  .entity-state-map .map-state {
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  .entity-state-map.tx .map-state { color: #92400e; }
+  .entity-state-map.fl .map-state { color: #1e40af; }
+  .entity-state-map.ca .map-state { color: #9d174d; }
+
+  /* ── Data Flow ── */
+  .flow-container {
+    margin: 20px 0;
+  }
+
+  .flow-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .flow-step {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .flow-content {
+    flex: 1;
+    padding-bottom: 24px;
+    border-left: 2px solid var(--border);
+    margin-left: -19px;
+    padding-left: 34px;
+  }
+
+  .flow-item:last-child .flow-content {
+    border-left-color: transparent;
+  }
+
+  .flow-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .flow-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Comparison (With / Without) ── */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .comparison-col {
+    border-radius: 12px;
+    border: 2px solid;
+    overflow: hidden;
+  }
+
+  .comparison-col.bad {
+    border-color: var(--critical);
+  }
+
+  .comparison-col.good {
+    border-color: var(--success);
+  }
+
+  .comparison-header {
+    padding: 14px 20px;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .comparison-col.bad .comparison-header {
+    background: var(--critical);
+  }
+
+  .comparison-col.good .comparison-header {
+    background: var(--success);
+  }
+
+  .comparison-body {
+    padding: 16px 20px;
+  }
+
+  .comparison-body ol {
+    padding-left: 18px;
+    margin: 0;
+  }
+
+  .comparison-body li {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .comparison-result {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .comparison-col.bad .comparison-result { color: var(--critical); }
+  .comparison-col.good .comparison-result { color: #16a34a; }
+
+  /* ── Pricing Table ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .pricing-card.featured {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .pricing-card.featured .pricing-name { color: var(--success); }
+  .pricing-card.featured .pricing-price { color: #fff; }
+  .pricing-card.featured .pricing-feature { color: rgba(255,255,255,0.7); }
+
+  .pricing-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .pricing-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .pricing-price {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-period {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pricing-feature {
+    font-size: 12px;
+    padding: 5px 0;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .pricing-feature:last-child { border-bottom: none; }
+
+  .pricing-check {
+    color: var(--success);
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  .pricing-card.featured .pricing-feature {
+    border-bottom-color: rgba(255,255,255,0.1);
+  }
+
+  /* ── UI Pattern Blocks ── */
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .pattern-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pattern-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--info);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .pattern-text {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ── Navigation Mockup ── */
+  .nav-mockup {
+    background: var(--navy);
+    border-radius: 0 0 12px 12px;
+    padding: 10px 0 12px;
+    display: flex;
+    justify-content: space-around;
+    max-width: 360px;
+    margin: 20px auto;
+    border-radius: 12px;
+  }
+
+  .nav-mock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    color: rgba(255,255,255,0.4);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-mock-item.active { color: var(--success); }
+
+  .nav-mock-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1.5px solid currentColor;
+  }
+
+  .nav-mock-item.active .nav-mock-icon {
+    background: var(--success);
+    border-color: var(--success);
+  }
+
+  /* ── GTM State Cards ── */
+  .gtm-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .gtm-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .gtm-card-header {
+    padding: 16px 20px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gtm-card.tx .gtm-card-header { background: linear-gradient(135deg, #92400e, #b45309); }
+  .gtm-card.fl .gtm-card-header { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+  .gtm-card.ca .gtm-card-header { background: linear-gradient(135deg, #9d174d, #db2777); }
+
+  .gtm-card-body {
+    padding: 16px 20px;
+  }
+
+  .gtm-strategy {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gtm-strategy li {
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .gtm-strategy li:last-child { border-bottom: none; }
+
+  .gtm-arrow {
+    color: var(--text-light);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Economics bar ── */
+  .economics-bar {
+    display: flex;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 48px;
+    border: 1px solid var(--border);
+  }
+
+  .econ-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .econ-segment .econ-label {
+    font-size: 9px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  /* ── Typography showcase ── */
+  .type-showcase {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-meta {
+    flex-shrink: 0;
+    width: 140px;
+    text-align: right;
+  }
+
+  .type-meta-name {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  .type-meta-spec {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-light);
+  }
+
+  .type-sample { flex: 1; }
+
+  /* ── Tech stack list ── */
+  .tech-stack {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0;
+    margin: 20px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .tech-row {
+    display: contents;
+  }
+
+  .tech-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 12px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+  }
+
+  .tech-value {
+    font-size: 13px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tech-value code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--info);
+    font-weight: 500;
+  }
+
+  .tech-row:last-child .tech-label,
+  .tech-row:last-child .tech-value {
+    border-bottom: none;
+  }
+
+  /* ── Inline code ── */
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--navy);
+  }
+
+  /* ── Lists ── */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+  }
+
+  li {
+    margin-bottom: 4px;
+    line-height: 1.6;
+  }
+
+  /* ── HR ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── Bottom nav items ── */
+  .bottom-nav-demo {
+    display: flex;
+    justify-content: space-around;
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 14px 0;
+    margin: 20px auto;
+    max-width: 400px;
+  }
+
+  .bn-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255,255,255,0.35);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .bn-item.active { color: var(--success); }
+
+  .bn-icon {
+    width: 22px;
+    height: 22px;
+    border: 2px solid currentColor;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .bn-item.active .bn-icon { background: rgba(34,197,94,0.2); }
+
+  /* ── Donut chart (CSS only) ── */
+  .donut-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 20px 0;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .donut {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--success) 0deg 266deg,
+      var(--warning) 266deg 302deg,
+      var(--critical) 302deg 360deg
+    );
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .donut::after {
+    content: '87%';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -1px;
+  }
+
+  .donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .donut-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .gtm-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .content { padding: 24px 20px 80px; }
+    .top-bar { padding: 14px 20px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 28px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .entity-state-mappings { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <div class="logo-text">ComplianceKit</div>
+    </div>
+    <div class="logo-tagline">Always inspection-ready.</div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-label">Architecture</div>
+    <a href="#vision" class="nav-item active">
+      <span class="nav-number">01</span> Product Vision
+    </a>
+    <a href="#launch" class="nav-item">
+      <span class="nav-number">02</span> Three-State Launch
+    </a>
+    <a href="#design" class="nav-item">
+      <span class="nav-number">03</span> Visual Design System
+    </a>
+    <a href="#domain" class="nav-item">
+      <span class="nav-number">04</span> Unified Domain Model
+    </a>
+
+    <div class="sidebar-label">Engineering</div>
+    <a href="#tech" class="nav-item">
+      <span class="nav-number">05</span> Technical Architecture
+    </a>
+    <a href="#revenue" class="nav-item">
+      <span class="nav-number">06</span> Revenue Model
+    </a>
+
+    <div class="sidebar-label">Go-to-Market</div>
+    <a href="#inspection" class="nav-item">
+      <span class="nav-number">07</span> Inspection Day
+    </a>
+    <a href="#gtm" class="nav-item">
+      <span class="nav-number">08</span> GTM per State
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-meta">
+      <span>ComplianceKit Architecture v2.0</span>
+      <span>Last updated: April 2026</span>
+      <span>TX / FL / CA Launch</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ===================== MAIN ===================== -->
+<main class="main">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="breadcrumb">
+      <span>ComplianceKit</span>
+      <span class="breadcrumb-sep">/</span>
+      <span style="font-weight:600; color:var(--text);">Master Architecture &amp; Design System</span>
+    </div>
+    <div class="doc-badges">
+      <span class="doc-badge version">v2.0</span>
+      <span class="doc-badge status">Active</span>
+      <span class="doc-badge confidential">Confidential</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ===================== HERO ===================== -->
+    <div class="hero">
+      <div class="hero-overline">Master Architecture Document</div>
+      <h1>ComplianceKit</h1>
+      <p class="hero-subtitle">
+        The unified product architecture and design system for America's first daycare compliance platform.
+        Three states. One codebase. Zero failed inspections.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Launch States</span>
+          <span class="hero-meta-value">Texas, Florida, California</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Target Market</span>
+          <span class="hero-meta-value">65,000+ Facilities</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Architecture</span>
+          <span class="hero-meta-value">Next.js + Supabase</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Status</span>
+          <span class="hero-meta-value" style="color: var(--success);">In Development</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 1: VISION ===================== -->
+    <div class="section" id="vision">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Product Vision</h2>
+      </div>
+
+      <p>ComplianceKit replaces the paper binder, the clipboard on the wall, and the filing cabinet full of forms. Every daycare in America is running their compliance on paper &mdash; and they're failing inspections because of it.</p>
+
+      <div class="callout insight">
+        <div class="callout-title">Core Insight</div>
+        <p><strong>Inspectors use checklists. We give daycare owners the same checklists, pre-filled with their data, so they can self-audit before the inspector ever shows up.</strong></p>
+      </div>
+
+      <h3>The Market Opportunity</h3>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">60,000+</div>
+          <div class="stat-label">Licensed Centers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$12K+</div>
+          <div class="stat-label">Avg Non-Compliance Fine</div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-value">$0</div>
+          <div class="stat-label">Incumbent Under $100/mo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">#1</div>
+          <div class="stat-label">Violation Cause: Paperwork</div>
+        </div>
+      </div>
+
+      <p>The most common violations are <em>all</em> documentation failures &mdash; expired background checks, missing immunization records, incomplete fire drill logs, undocumented daily inspections. These are things software trivially solves. Every daycare director knows the pain of scrambling through file folders when the inspector walks in.</p>
+
+      <p>There is zero incumbent software under $100/month that serves micro-business daycare operators. Enterprise solutions exist for large chains, but the ~60,000 independent and small-chain facilities in the US have nothing purpose-built for their compliance needs. ComplianceKit fills that gap.</p>
+    </div>
+
+    <!-- ===================== SECTION 2: THREE-STATE LAUNCH ===================== -->
+    <div class="section" id="launch">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">Three-State Launch Strategy</h2>
+      </div>
+
+      <p>We launch in Texas, Florida, and California because they represent the three largest childcare markets, three distinct regulatory models, and enough diversity to validate our state-abstraction layer before expanding nationwide.</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th><span class="state-badge tx">TX</span> Texas</th>
+              <th><span class="state-badge fl">FL</span> Florida</th>
+              <th><span class="state-badge ca">CA</span> California</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="highlight-cell">Facilities</td>
+              <td>~14,000</td>
+              <td>~11,000</td>
+              <td>~40,000</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Inspections / yr</td>
+              <td>1 annual + complaint</td>
+              <td>2 annual + complaint</td>
+              <td>1 annual + complaint</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Violation System</td>
+              <td>5-weight deficiency</td>
+              <td>4-class violation</td>
+              <td>Type A / B citation</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Inspector Title</td>
+              <td class="mono">CCR Licensing Rep</td>
+              <td class="mono">DCF Licensing Counselor</td>
+              <td class="mono">Licensing Program Analyst</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Online Portal</td>
+              <td class="mono">CLASS / Search TX</td>
+              <td class="mono">CARES</td>
+              <td class="mono">CCLD Facility Search</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Key Statute</td>
+              <td class="mono">Chapter 746 TAC</td>
+              <td class="mono">Chapter 402 F.S.</td>
+              <td class="mono">Title 22 CCR</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Forms Count</td>
+              <td>~20 forms</td>
+              <td>~15 forms + 32-pg checklist</td>
+              <td>35+ LIC forms</td>
+            </tr>
+            <tr>
+              <td class="highlight-cell">Unique Feature</td>
+              <td style="color: var(--orange); font-weight:600;">5-level deficiency weights</td>
+              <td style="color: var(--info); font-weight:600;">Strictest (2x/yr inspections)</td>
+              <td style="color: #9d174d; font-weight:600;">Most forms (35+ per facility)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">Architectural Implication</div>
+        <p>Every entity in our domain model must carry a <code>state_code</code> context. Ratios, required documents, credential types, violation levels, checklist templates, and drill schedules are all state-specific. The <strong>StateConfig</strong> system acts as a rule engine that parameterizes the entire application per state.</p>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 3: VISUAL DESIGN SYSTEM ===================== -->
+    <div class="section" id="design">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">Visual Design System</h2>
+      </div>
+
+      <h3>Brand Identity</h3>
+      <div style="display: flex; align-items: center; gap: 20px; margin: 20px 0; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;">
+        <div style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--success), #16a34a); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;">
+          <div style="width: 24px; height: 12px; border-left: 4px solid #fff; border-bottom: 4px solid #fff; transform: rotate(-45deg) translateY(-2px);"></div>
+        </div>
+        <div>
+          <div style="font-size: 28px; font-weight: 900; letter-spacing: -1px; color: var(--navy);">ComplianceKit</div>
+          <div style="font-size: 14px; color: var(--text-muted); font-weight: 500; font-style: italic;">Always inspection-ready.</div>
+          <div style="font-size: 11px; color: var(--text-light); margin-top: 4px;">Shield + checkmark hybrid &mdash; safety meets completion</div>
+        </div>
+      </div>
+
+      <h3>Color Palette</h3>
+      <div class="palette-grid">
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #1a1a2e;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Deep Navy</div>
+            <div class="palette-hex">#1a1a2e</div>
+            <div class="palette-use">Primary &middot; Trust &amp; Authority</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #ffffff; border-bottom: 1px solid var(--border);"></div>
+          <div class="palette-info">
+            <div class="palette-name">White</div>
+            <div class="palette-hex">#ffffff</div>
+            <div class="palette-use">Surface</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #f8f9fa;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Light Gray</div>
+            <div class="palette-hex">#f8f9fa</div>
+            <div class="palette-use">Background</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #22c55e;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Success Green</div>
+            <div class="palette-hex">#22c55e</div>
+            <div class="palette-use">Compliant</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #f59e0b;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Warning Amber</div>
+            <div class="palette-hex">#f59e0b</div>
+            <div class="palette-use">Expiring</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #ef4444;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Critical Red</div>
+            <div class="palette-hex">#ef4444</div>
+            <div class="palette-use">Overdue</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #3b82f6;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Info Blue</div>
+            <div class="palette-hex">#3b82f6</div>
+            <div class="palette-use">Informational</div>
+          </div>
+        </div>
+        <div class="palette-swatch">
+          <div class="palette-color" style="background: #f97316;"></div>
+          <div class="palette-info">
+            <div class="palette-name">Orange</div>
+            <div class="palette-hex">#f97316</div>
+            <div class="palette-use">Medium-High Severity</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Severity Scale &mdash; Cross-State Mapping</h3>
+      <p class="muted">Colors map directly to state violation levels, providing a universal visual language across all three regulatory systems.</p>
+      <div class="severity-scale">
+        <div class="severity-level" style="background: var(--critical);">
+          <div class="sev-title">Critical</div>
+          <div class="sev-states">TX High / FL Class 1 / CA Type A</div>
+        </div>
+        <div class="severity-level" style="background: var(--orange);">
+          <div class="sev-title">High</div>
+          <div class="sev-states">TX Med-High / FL Class 2 / CA Type B repeat</div>
+        </div>
+        <div class="severity-level" style="background: var(--warning);">
+          <div class="sev-title">Medium</div>
+          <div class="sev-states">TX Medium / FL Class 3</div>
+        </div>
+        <div class="severity-level" style="background: var(--yellow); color: #78350f;">
+          <div class="sev-title">Low</div>
+          <div class="sev-states">TX Med-Low / FL Class 4</div>
+        </div>
+        <div class="severity-level" style="background: var(--success);">
+          <div class="sev-title">Compliant</div>
+          <div class="sev-states">TX Low / All Clear</div>
+        </div>
+      </div>
+
+      <h3>Typography</h3>
+      <div class="type-showcase">
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Heading 1</div>
+            <div class="type-meta-spec">Inter 32px Bold</div>
+          </div>
+          <div class="type-sample" style="font-size: 32px; font-weight: 800; letter-spacing: -1px; color: var(--navy);">Inspection Readiness</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Heading 2</div>
+            <div class="type-meta-spec">Inter 22px Bold</div>
+          </div>
+          <div class="type-sample" style="font-size: 22px; font-weight: 700; color: var(--navy);">Daily Compliance Checklist</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Heading 3</div>
+            <div class="type-meta-spec">Inter 16px Semi</div>
+          </div>
+          <div class="type-sample" style="font-size: 16px; font-weight: 600; color: var(--text);">Staff Credential Status</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Body</div>
+            <div class="type-meta-spec">Inter 14px Regular</div>
+          </div>
+          <div class="type-sample" style="font-size: 14px; font-weight: 400; color: var(--text);">Background check expires in 14 days. Renewal required by April 20, 2026.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Code / Forms</div>
+            <div class="type-meta-spec">JetBrains Mono 12px</div>
+          </div>
+          <div class="type-sample" style="font-family: var(--mono); font-size: 12px; color: var(--info);">Form 2935 &middot; LIC 311A &middot; CCF-001 &middot; 746.501(a)(2)</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-name">Caption</div>
+            <div class="type-meta-spec">Inter 11px Medium</div>
+          </div>
+          <div class="type-sample" style="font-size: 11px; font-weight: 500; color: var(--text-muted);">Last updated 2 hours ago by Maria G. &middot; Verified</div>
+        </div>
+      </div>
+      <p class="muted" style="font-size: 12px;">Base font size: 14px. Line height: 1.5. Scale: 11 / 12 / 14 / 16 / 22 / 32px.</p>
+
+      <h3>Component Library</h3>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--info), #6366f1);">C</div>
+          <div class="component-name">&lt;ComplianceCard /&gt;</div>
+          <p class="component-desc">Shows a requirement with status badge (compliant / warning / overdue), due date, and linked documents. Core building block of every list view.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--success), #059669);">L</div>
+          <div class="component-name">&lt;ChecklistWidget /&gt;</div>
+          <p class="component-desc">Daily interactive checklist with swipe-to-complete, per-item timestamps, photo attachment support, and note fields.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--warning), var(--orange));">S</div>
+          <div class="component-name">&lt;StatusBadge /&gt;</div>
+          <p class="component-desc">Pill-shaped badge with color-coded status. Variants: compliant, expiring, expired, missing, pending. Maps to severity scale.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);">T</div>
+          <div class="component-name">&lt;ExpirationTimeline /&gt;</div>
+          <p class="component-desc">Visual timeline showing upcoming cert and document expirations. Horizontal scrolling, color-coded urgency bands.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--critical), #dc2626);">R</div>
+          <div class="component-name">&lt;RatioMeter /&gt;</div>
+          <p class="component-desc">Real-time visual gauge showing current staff-to-child ratio vs. required. Green when safe, yellow at 90%, red when violated.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, #f97316, #ea580c);">D</div>
+          <div class="component-name">&lt;DrillTimer /&gt;</div>
+          <p class="component-desc">Stopwatch for fire and emergency drills with evacuation time capture, headcount verification, and auto-log to records.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--navy), var(--navy-lighter));">I</div>
+          <div class="component-name">&lt;InspectionReadiness /&gt;</div>
+          <p class="component-desc">Donut chart showing percentage of standards met, with drill-down to deficient items by category. The "are we ready?" view.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">X</div>
+          <div class="component-name">&lt;DocumentScanner /&gt;</div>
+          <p class="component-desc">Camera integration for scanning immunization cards, certificates, and forms. OCR via Google Cloud Vision for auto-extraction.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon" style="background: linear-gradient(135deg, var(--critical), #b91c1c);">!</div>
+          <div class="component-name">&lt;AlertBanner /&gt;</div>
+          <p class="component-desc">Top-of-screen alert for critical items: expired background check, overdue drill, ratio violation. Dismissible but persistent until resolved.</p>
+        </div>
+      </div>
+
+      <h3>UI Patterns</h3>
+      <div class="pattern-grid">
+        <div class="pattern-block">
+          <div class="pattern-dot"></div>
+          <p class="pattern-text">Mobile-first responsive design (most daycare staff use phones)</p>
+        </div>
+        <div class="pattern-block">
+          <div class="pattern-dot"></div>
+          <p class="pattern-text">Dashboard-first: landing shows compliance score + critical alerts</p>
+        </div>
+        <div class="pattern-block">
+          <div class="pattern-dot"></div>
+          <p class="pattern-text">One-tap daily checklist start</p>
+        </div>
+        <div class="pattern-block">
+          <div class="pattern-dot"></div>
+          <p class="pattern-text">Pull-to-refresh for real-time data</p>
+        </div>
+        <div class="pattern-block">
+          <div class="pattern-dot"></div>
+          <p class="pattern-text">Offline mode with sync indicator</p>
+        </div>
+        <div class="pattern-block">
+          <div class="pattern-dot" style="background: var(--success);"></div>
+          <p class="pattern-text">Swipe gestures for common actions</p>
+        </div>
+      </div>
+
+      <h4>Bottom Navigation</h4>
+      <div class="bottom-nav-demo">
+        <div class="bn-item active">
+          <div class="bn-icon"></div>
+          Home
+        </div>
+        <div class="bn-item">
+          <div class="bn-icon"></div>
+          Checklists
+        </div>
+        <div class="bn-item">
+          <div class="bn-icon"></div>
+          Children
+        </div>
+        <div class="bn-item">
+          <div class="bn-icon"></div>
+          Staff
+        </div>
+        <div class="bn-item">
+          <div class="bn-icon"></div>
+          Reports
+        </div>
+      </div>
+
+      <h4>Inspection Readiness Widget Preview</h4>
+      <div class="donut-wrapper">
+        <div class="donut"></div>
+        <div class="donut-legend">
+          <div style="font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 4px;">87% Ready</div>
+          <div class="donut-legend-item">
+            <div class="donut-legend-dot" style="background: var(--success);"></div>
+            <span>192 of 221 standards met</span>
+          </div>
+          <div class="donut-legend-item">
+            <div class="donut-legend-dot" style="background: var(--warning);"></div>
+            <span>16 items expiring within 30 days</span>
+          </div>
+          <div class="donut-legend-item">
+            <div class="donut-legend-dot" style="background: var(--critical);"></div>
+            <span>13 items require immediate action</span>
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; color: var(--text-light);">Tap to drill down by category</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 4: DOMAIN MODEL ===================== -->
+    <div class="section" id="domain">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <h2 class="section-title">Unified Domain Model</h2>
+      </div>
+
+      <p>The domain model is designed to be state-agnostic at the structural level while carrying state-specific configuration through the <code>StateConfig</code> rule engine. Every entity that has compliance requirements references back to a state-specific schema for its validation rules.</p>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Entity Relationship Overview</div>
+        <div class="diagram-ascii">
+  +-----------------------------------------------------------------+
+  |                        ORGANIZATION                              |
+  |   id, name, owner, plan, state_configs[]                        |
+  |                                                                  |
+  |   +---------------+   +---------------+   +-----------------+   |
+  |   |   FACILITY    |   |   FACILITY    |   |   FACILITY      |   |
+  |   |   TX License  |   |   FL License  |   |   CA License    |   |
+  |   +-------+-------+   +-------+-------+   +--------+--------+   |
+  +-----------|-----------------------|--------------------|---------+
+              |                       |                    |
+        +-----+------+         +-----+------+       +-----+------+
+        | CLASSROOMS |         | CLASSROOMS |       | CLASSROOMS |
+        | age_group  |         | age_group  |       | age_group  |
+        | capacity   |         | capacity   |       | capacity   |
+        | ratio_req  |         | ratio_req  |       | ratio_req  |
+        +-----+------+         +-----+------+       +-----+------+
+              |                       |                    |
+        +-----+------+         +-----+------+       +-----+------+
+        | CHILDREN   |         | CHILDREN   |       | CHILDREN   |
+        | STAFF      |         | STAFF      |       | STAFF      |
+        | DOCUMENTS  |         | DOCUMENTS  |       | DOCUMENTS  |
+        | CHECKLISTS |         | CHECKLISTS |       | CHECKLISTS |
+        +------------+         +------------+       +------------+</div>
+      </div>
+
+      <h3>Core Entities</h3>
+
+      <!-- Organization -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">Organization</span>
+          <span class="entity-desc">Top-level account</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">name</span>, <span class="field-name">owner_id</span>, <span class="field-name">plan</span> <span class="field-type">(solo | team | multi-site)</span>, <span class="field-name">created_at</span><br>
+            Has many <strong>Facilities</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facility -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">Facility</span>
+          <span class="entity-desc">A single licensed location</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">org_id</span>, <span class="field-name">name</span>, <span class="field-name">address</span>, <span class="field-name">state</span> <span class="field-type">(TX | FL | CA)</span>, <span class="field-name">license_number</span>, <span class="field-name">license_type</span>, <span class="field-name">license_expiry</span><br>
+            <span class="field-name">capacity</span>, <span class="field-name">square_footage_indoor</span>, <span class="field-name">square_footage_outdoor</span><br>
+            Has many <strong>Classrooms</strong>, <strong>Staff</strong>, <strong>Children</strong>, <strong>Checklists</strong>, <strong>DrillLogs</strong>, <strong>IncidentReports</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classroom -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">Classroom</span>
+          <span class="entity-desc">A room or group within a facility</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">name</span>, <span class="field-name">age_group_min</span>, <span class="field-name">age_group_max</span>, <span class="field-name">max_capacity</span><br>
+            <span class="field-name">current_enrollment</span>, <span class="field-name">required_ratio</span> <span class="field-type">(auto-calculated from state + age group)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Child -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">Child</span>
+          <span class="entity-desc">An enrolled child</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">classroom_id</span>, <span class="field-name">first_name</span>, <span class="field-name">last_name</span>, <span class="field-name">dob</span>, <span class="field-name">enrollment_date</span><br>
+            <span class="field-name">emergency_contacts</span>: <span class="field-type">[{name, phone, relationship, authorized_pickup}]</span><br>
+            <span class="field-name">medical</span>: <span class="field-type">{allergies[], conditions[], medications[], physician_name, physician_phone}</span><br>
+            Has many <strong>ChildDocuments</strong>, <strong>AttendanceRecords</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- ChildDocument -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">ChildDocument</span>
+          <span class="entity-desc">A required document for a child</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">child_id</span>, <span class="field-name">document_type</span> <span class="field-type">(state-specific enum)</span>, <span class="field-name">title</span>, <span class="field-name">file_url</span><br>
+            <span class="field-name">required_by_state</span>, <span class="field-name">uploaded_at</span>, <span class="field-name">verified_at</span>, <span class="field-name">expires_at</span>, <span class="field-name">status</span> <span class="field-type">(complete | missing | expired)</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              Maps to Form 2935 requirements
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              Maps to CCF Handbook enrollment reqs
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              Maps to LIC 311A Section I (21 items)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">Staff</span>
+          <span class="entity-desc">An employee</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">first_name</span>, <span class="field-name">last_name</span>, <span class="field-name">role</span> <span class="field-type">(director | teacher | aide | support)</span>, <span class="field-name">hire_date</span><br>
+            Has many <strong>StaffCredentials</strong>, <strong>TrainingRecords</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- StaffCredential -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">StaffCredential</span>
+          <span class="entity-desc">A required credential or certification</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">staff_id</span>, <span class="field-name">credential_type</span> <span class="field-type">(state-specific enum)</span>, <span class="field-name">title</span><br>
+            <span class="field-name">issue_date</span>, <span class="field-name">expiry_date</span>, <span class="field-name">status</span> <span class="field-type">(active | expiring_soon | expired | missing)</span><br>
+            <span class="field-name">file_url</span>, <span class="field-name">issuing_authority</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              background_check, cpr, first_aid, pre_service_training
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              dcf_screening, cpr, first_aid, 40hr_intro, annual_inservice
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              live_scan_doj, live_scan_fbi, caci, cpr, first_aid, mandated_reporter, health_screening, tb_clearance
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DailyChecklist -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">DailyChecklist</span>
+          <span class="entity-desc">The daily walkthrough</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">checklist_template_id</span>, <span class="field-name">date</span>, <span class="field-name">started_at</span>, <span class="field-name">completed_at</span>, <span class="field-name">completed_by</span><br>
+            <span class="field-name">items</span>: <span class="field-type">[{item_id, description, checked, photo_url, note, checked_at}]</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              Maps exactly to Form 1100 (24 items)
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              Maps to CCF Handbook Section 3.1 daily inspection
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              Custom based on Title 22 physical plant requirements
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DrillLog -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">DrillLog</span>
+          <span class="entity-desc">Fire / emergency drill records</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">drill_type</span> <span class="field-type">(fire | severe_weather | lockdown | earthquake)</span><br>
+            <span class="field-name">date</span>, <span class="field-name">time_started</span>, <span class="field-name">evacuation_completed_at</span>, <span class="field-name">duration_seconds</span><br>
+            <span class="field-name">children_count</span>, <span class="field-name">staff_count</span>, <span class="field-name">conducted_by</span>, <span class="field-name">notes</span>, <span class="field-name">photos[]</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              Form 7263 &mdash; monthly fire, 4x/yr weather, 4x/yr lockdown
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              CCF 3.8.4 &mdash; monthly fire, monthly emergency, retain 12 mo
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              LIC 610 &mdash; every 6 months, retain 1 year
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IncidentReport -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">IncidentReport</span>
+          <span class="entity-desc">Injuries / illnesses</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">child_id</span>, <span class="field-name">reported_by</span>, <span class="field-name">date</span>, <span class="field-name">time</span>, <span class="field-name">description</span><br>
+            <span class="field-name">injury_type</span>, <span class="field-name">body_part</span>, <span class="field-name">severity</span>, <span class="field-name">action_taken</span>, <span class="field-name">medical_attention_sought</span><br>
+            <span class="field-name">parent_notified_at</span>, <span class="field-name">parent_notified_by</span>, <span class="field-name">parent_signature_url</span><br>
+            <span class="field-name">photos[]</span>, <span class="field-name">follow_up_required</span>, <span class="field-name">follow_up_notes</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              Maps to Form 7239
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              CCF Handbook incident reporting
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              Maps to LIC 624
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AttendanceRecord -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">AttendanceRecord</span>
+          <span class="entity-desc">Daily sign-in / sign-out</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">child_id</span>, <span class="field-name">date</span>, <span class="field-name">check_in_time</span>, <span class="field-name">check_in_signature</span>, <span class="field-name">check_in_by</span><br>
+            <span class="field-name">check_out_time</span>, <span class="field-name">check_out_signature</span>, <span class="field-name">check_out_by</span>
+          </div>
+          <div class="entity-state-mappings">
+            <div class="entity-state-map tx">
+              <div class="map-state">Texas</div>
+              Maps to Form 2941
+            </div>
+            <div class="entity-state-map fl">
+              <div class="map-state">Florida</div>
+              Daily attendance log requirement
+            </div>
+            <div class="entity-state-map ca">
+              <div class="map-state">California</div>
+              Admin record A (30-day retention)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ComplianceAlert -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">ComplianceAlert</span>
+          <span class="entity-desc">System-generated alerts</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">entity_type</span> <span class="field-type">(child | staff | facility)</span>, <span class="field-name">entity_id</span><br>
+            <span class="field-name">alert_type</span> <span class="field-type">(document_expiring | document_missing | drill_overdue | checklist_incomplete | ratio_warning)</span><br>
+            <span class="field-name">severity</span> <span class="field-type">(critical | warning | info)</span>, <span class="field-name">message</span>, <span class="field-name">due_date</span><br>
+            <span class="field-name">acknowledged_at</span>, <span class="field-name">acknowledged_by</span>, <span class="field-name">resolved_at</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- InspectionReport -->
+      <div class="entity-card">
+        <div class="entity-header">
+          <span class="entity-name">InspectionReport</span>
+          <span class="entity-desc">Record of actual inspections</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">id</span>, <span class="field-name">facility_id</span>, <span class="field-name">inspection_date</span>, <span class="field-name">inspector_name</span>, <span class="field-name">inspection_type</span> <span class="field-type">(annual | complaint | follow_up)</span><br>
+            <span class="field-name">findings[]</span>, <span class="field-name">overall_result</span>, <span class="field-name">corrective_action_required</span>, <span class="field-name">corrective_action_due</span><br>
+            <span class="field-name">photos[]</span>, <span class="field-name">notes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- StateConfig -->
+      <div class="entity-card">
+        <div class="entity-header" style="background: linear-gradient(135deg, var(--navy), var(--navy-lighter));">
+          <span class="entity-name">StateConfig</span>
+          <span class="entity-desc">State-specific rule engine (the key abstraction)</span>
+        </div>
+        <div class="entity-body">
+          <div class="entity-fields">
+            <span class="field-name">state_code</span> <span class="field-type">(TX | FL | CA)</span><br>
+            <span class="field-name">ratios</span>: <span class="field-type">[{age_min, age_max, ratio, max_group_size}]</span><br>
+            <span class="field-name">required_child_documents</span>: <span class="field-type">[{doc_type, form_number, title, required: bool}]</span><br>
+            <span class="field-name">required_staff_credentials</span>: <span class="field-type">[{cred_type, title, renewal_period_months}]</span><br>
+            <span class="field-name">checklist_templates</span>: <span class="field-type">[{name, items[], frequency}]</span><br>
+            <span class="field-name">drill_requirements</span>: <span class="field-type">[{drill_type, frequency, retention_months}]</span><br>
+            <span class="field-name">violation_levels</span>: <span class="field-type">[{level, name, color, description, fine_range}]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">Design Principle</div>
+        <p><strong>StateConfig is the single source of truth</strong> for all state-specific rules. Adding a new state means adding a new StateConfig entry &mdash; no code changes required for the core application logic. The UI, validation, alerting, and reporting layers all read from StateConfig to parameterize their behavior.</p>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 5: TECHNICAL ARCHITECTURE ===================== -->
+    <div class="section" id="tech">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <h2 class="section-title">Technical Architecture</h2>
+      </div>
+
+      <h3>Technology Stack</h3>
+      <div class="tech-stack">
+        <div class="tech-row">
+          <div class="tech-label">Frontend</div>
+          <div class="tech-value"><code>Next.js 15</code> App Router + <code>Tailwind CSS</code> + <code>shadcn/ui</code></div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Backend</div>
+          <div class="tech-value"><code>Next.js API Routes</code> + <code>Supabase</code></div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Database</div>
+          <div class="tech-value"><code>Supabase PostgreSQL</code> with Row-Level Security</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Auth</div>
+          <div class="tech-value"><code>Supabase Auth</code> &mdash; email/password + Google + magic link</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">File Storage</div>
+          <div class="tech-value"><code>Supabase Storage</code> with CDN for images</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Real-time</div>
+          <div class="tech-value"><code>Supabase Realtime</code> &mdash; ratio monitoring, multi-user checklists</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">PDF Generation</div>
+          <div class="tech-value"><code>@react-pdf/renderer</code> for inspection-ready reports</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">OCR</div>
+          <div class="tech-value"><code>Google Cloud Vision API</code> for scanning certs &amp; cards</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Push</div>
+          <div class="tech-value"><code>Web Push API</code> + <code>Supabase Edge Functions</code></div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Offline</div>
+          <div class="tech-value"><code>Service Workers</code> + <code>IndexedDB</code> via <code>Workbox</code></div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Hosting</div>
+          <div class="tech-value"><code>Vercel</code> with Edge Functions</div>
+        </div>
+        <div class="tech-row">
+          <div class="tech-label">Payments</div>
+          <div class="tech-value"><code>Stripe</code> monthly subscriptions</div>
+        </div>
+      </div>
+
+      <h3>System Architecture</h3>
+
+      <div style="margin: 24px 0;">
+        <div class="arch-stack">
+          <!-- Client Layer -->
+          <div class="arch-layer client">
+            <div class="arch-layer-label">Client (PWA)</div>
+            <div style="font-size: 12px; color: var(--info); font-weight: 600; margin-bottom: 8px;">Next.js 15 + Tailwind + Service Worker + IndexedDB</div>
+            <div class="arch-modules">
+              <div class="arch-module">
+                Dashboard &amp; Alerts
+                <div class="module-sub">Compliance score, critical items</div>
+              </div>
+              <div class="arch-module">
+                Checklists &amp; Drills
+                <div class="module-sub">Daily walkthrough, timer</div>
+              </div>
+              <div class="arch-module">
+                Children &amp; Records
+                <div class="module-sub">Enrollment, attendance, docs</div>
+              </div>
+              <div class="arch-module">
+                Staff &amp; Credentials
+                <div class="module-sub">Profiles, certs, training</div>
+              </div>
+            </div>
+            <div style="margin-top: 12px;">
+              <div class="arch-module" style="max-width: 260px; margin: 0 auto; background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.15);">
+                Offline Sync Queue (IndexedDB)
+                <div class="module-sub">Queues mutations for replay when online</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector -->
+          <div class="arch-connector">
+            <span style="font-family: var(--mono);">|</span>
+            <span class="arch-connector-label">HTTPS / WSS</span>
+            <span style="font-family: var(--mono);">|</span>
+          </div>
+
+          <!-- API Layer -->
+          <div class="arch-layer api">
+            <div class="arch-layer-label">Vercel Edge / API Routes</div>
+            <div class="arch-modules">
+              <div class="arch-module">
+                Auth Middleware
+                <div class="module-sub">JWT validation, RLS context</div>
+              </div>
+              <div class="arch-module">
+                State Rule Engine
+                <div class="module-sub">StateConfig-driven logic</div>
+              </div>
+              <div class="arch-module">
+                Notification Scheduler
+                <div class="module-sub">Cert expiry, drill due, alerts</div>
+              </div>
+              <div class="arch-module">
+                PDF Generator
+                <div class="module-sub">Inspection-ready reports</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector -->
+          <div class="arch-connector">
+            <span style="font-family: var(--mono);">|</span>
+            <span class="arch-connector-label">Supabase Client</span>
+            <span style="font-family: var(--mono);">|</span>
+          </div>
+
+          <!-- Data Layer -->
+          <div class="arch-layer data">
+            <div class="arch-layer-label">Supabase</div>
+            <div class="arch-modules">
+              <div class="arch-module">
+                PostgreSQL + RLS
+                <div class="module-sub">All domain entities</div>
+              </div>
+              <div class="arch-module">
+                Auth (JWT)
+                <div class="module-sub">Email, Google, magic link</div>
+              </div>
+              <div class="arch-module">
+                Storage (CDN)
+                <div class="module-sub">Files, photos, scans</div>
+              </div>
+              <div class="arch-module">
+                Realtime
+                <div class="module-sub">Ratios, check-ins, checklists</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Key Data Flows</h3>
+
+      <!-- Flow 1: Morning Routine -->
+      <h4>1. Morning Routine</h4>
+      <div class="flow-container">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div class="flow-content">
+            <div class="flow-title">Staff opens app</div>
+            <p class="flow-desc">PWA loads, service worker checks for cached checklist template. Dashboard shows compliance score and any overnight alerts.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div class="flow-content">
+            <div class="flow-title">Daily checklist auto-loaded</div>
+            <p class="flow-desc">Checklist template selected based on facility's state config (TX Form 1100, FL Section 3.1, or CA Title 22 custom). Items pre-populated with facility-specific details.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div class="flow-content">
+            <div class="flow-title">Tap through items</div>
+            <p class="flow-desc">Staff swipes/taps each item. Photo attachment for hazard-free areas. Notes for any issues found. Each item timestamped individually.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">4</div>
+          <div class="flow-content">
+            <div class="flow-title">Checklist stored</div>
+            <p class="flow-desc">Completed checklist timestamped and synced to Supabase. If offline, queued in IndexedDB for background sync. Compliance score updates in real-time.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow 2: Child Check-In -->
+      <h4>2. Child Check-In</h4>
+      <div class="flow-container">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div class="flow-content">
+            <div class="flow-title">Parent arrives</div>
+            <p class="flow-desc">Staff opens attendance module, scans child's QR code or selects name from roster.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div class="flow-content">
+            <div class="flow-title">Signature capture</div>
+            <p class="flow-desc">Parent signs on screen (touch signature). Check-in timestamped with authorized pickup verification.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div class="flow-content">
+            <div class="flow-title">Ratio auto-updates</div>
+            <p class="flow-desc">Supabase Realtime broadcasts attendance change. RatioMeter updates across all classrooms. Alert triggered if ratio approaches or exceeds limit.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow 3: Cert Expiration -->
+      <h4>3. Credential Expiration Alert</h4>
+      <div class="flow-container">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div class="flow-content">
+            <div class="flow-title">Nightly cron job runs</div>
+            <p class="flow-desc">Supabase Edge Function checks all StaffCredentials for expiry within 30/60/90-day windows.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div class="flow-content">
+            <div class="flow-title">ComplianceAlerts generated</div>
+            <p class="flow-desc">Alert records created with severity level. Push notification sent to facility director via Web Push API.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div class="flow-content">
+            <div class="flow-title">Director takes action</div>
+            <p class="flow-desc">Alert appears in dashboard AlertBanner. Director can tap through to the specific staff member's credential and initiate renewal workflow.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow 4: Inspection Prep -->
+      <h4>4. Inspection Preparation</h4>
+      <div class="flow-container">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div class="flow-content">
+            <div class="flow-title">Director taps "Inspection Readiness"</div>
+            <p class="flow-desc">App generates comprehensive report across ALL compliance domains using StateConfig to determine which standards apply.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div class="flow-content">
+            <div class="flow-title">Green / Yellow / Red per area</div>
+            <p class="flow-desc">InspectionReadiness widget shows donut chart with drill-down capability. Each category expandable to individual deficient items.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div class="flow-content">
+            <div class="flow-title">PDF export</div>
+            <p class="flow-desc">React-PDF generates a report that mirrors what the inspector will check. Can be printed or shared on iPad during inspection.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow 5: Fire Drill -->
+      <h4>5. Fire Drill</h4>
+      <div class="flow-container">
+        <div class="flow-item">
+          <div class="flow-step">1</div>
+          <div class="flow-content">
+            <div class="flow-title">Staff taps "Start Drill"</div>
+            <p class="flow-desc">DrillTimer starts counting. Drill type selected (fire / severe_weather / lockdown / earthquake).</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">2</div>
+          <div class="flow-content">
+            <div class="flow-title">Evacuation and "All Clear"</div>
+            <p class="flow-desc">Staff taps "All Clear" when evacuation complete. Timer stops. Staff enters headcount for children and staff present.</p>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step">3</div>
+          <div class="flow-content">
+            <div class="flow-title">Auto-logged and scheduled</div>
+            <p class="flow-desc">Drill logged with date, time, duration, and attendance. System auto-calculates if this month's requirement is met and schedules next reminder based on StateConfig drill frequency.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 6: REVENUE MODEL ===================== -->
+    <div class="section" id="revenue">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">06</div>
+        <h2 class="section-title">Revenue Model</h2>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">Solo</div>
+          <div class="pricing-price">$49</div>
+          <div class="pricing-period">/month</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-check">+</span> 1 facility</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> 5 users</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> 1 state</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Unlimited checklists</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Basic reports</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-name">Team</div>
+          <div class="pricing-price">$99</div>
+          <div class="pricing-period" style="color: rgba(255,255,255,0.5);">/month</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-check">+</span> 1 facility</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> 15 users</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> 1 state</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Custom templates</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> PDF export</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> OCR scanning</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-name">Multi-Site</div>
+          <div class="pricing-price">$199</div>
+          <div class="pricing-period">/month</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-check">+</span> Up to 10 facilities</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Unlimited users</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Multi-state support</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> API access</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Branded reports</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-price" style="font-size: 22px;">Custom</div>
+          <div class="pricing-period">contact sales</div>
+          <ul class="pricing-features">
+            <li class="pricing-feature"><span class="pricing-check">+</span> Unlimited facilities</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Priority support</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Dedicated onboarding</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> Custom integrations</li>
+            <li class="pricing-feature"><span class="pricing-check">+</span> SLA guarantee</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="muted" style="text-align: center; font-size: 12px;"><strong>Annual discount:</strong> 20% off &mdash; pay for 10 months, get 12.</p>
+
+      <h3>Unit Economics at 1,000 Customers</h3>
+      <p>Assuming an average revenue of $79/month per customer across plan mix:</p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">$79K</div>
+          <div class="stat-label">Monthly Recurring Revenue</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$948K</div>
+          <div class="stat-label">Annual Recurring Revenue</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~$2K</div>
+          <div class="stat-label">Infrastructure / mo</div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-value">~97%</div>
+          <div class="stat-label">Gross Margin</div>
+        </div>
+      </div>
+
+      <h4>Infrastructure Cost Breakdown</h4>
+      <div class="economics-bar">
+        <div class="econ-segment" style="flex: 97; background: var(--success);">
+          $77K
+          <span class="econ-label">Gross Profit</span>
+        </div>
+        <div class="econ-segment" style="flex: 1.3; background: var(--warning);">
+          <span class="econ-label">Supa</span>
+        </div>
+        <div class="econ-segment" style="flex: 0.7; background: var(--orange);">
+          <span class="econ-label">Vercel</span>
+        </div>
+        <div class="econ-segment" style="flex: 1; background: var(--info);">
+          <span class="econ-label">GCV</span>
+        </div>
+      </div>
+      <p class="muted" style="font-size: 11px;">Supabase Pro ($25/mo) + Vercel Pro ($20/mo) + Google Cloud Vision API usage (~$1,000/mo at scale) + misc = ~$2,000/mo</p>
+    </div>
+
+    <!-- ===================== SECTION 7: INSPECTION DAY ===================== -->
+    <div class="section" id="inspection">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">07</div>
+        <h2 class="section-title">Inspection Day Experience</h2>
+      </div>
+
+      <p>This is the moment that matters. The inspector walks through the door, clipboard in hand, and the next 90 minutes determine whether your facility stays open. Here's how that day plays out &mdash; with and without ComplianceKit.</p>
+
+      <div class="comparison-grid">
+        <div class="comparison-col bad">
+          <div class="comparison-header">Without ComplianceKit</div>
+          <div class="comparison-body">
+            <ol>
+              <li>Inspector arrives &mdash; director panics</li>
+              <li>Director scrambles to find file folders in the cabinet</li>
+              <li>Can't find immunization records for 2 children</li>
+              <li>CPR cert expired last week for one teacher</li>
+              <li>Fire drill log only has 3 entries (needs 12)</li>
+              <li>Daily checklist? What daily checklist?</li>
+            </ol>
+            <div class="comparison-result">8 deficiencies, 3 high-weight, $2,500 in potential fines</div>
+          </div>
+        </div>
+
+        <div class="comparison-col good">
+          <div class="comparison-header">With ComplianceKit</div>
+          <div class="comparison-body">
+            <ol>
+              <li>Inspector arrives &mdash; director opens app: "Show me your records"</li>
+              <li>Director hands inspector iPad with ComplianceKit open</li>
+              <li>All 45 children's records: green checkmarks, all 21 docs per child</li>
+              <li>All 12 staff credentials: current, next expiry in 4 months</li>
+              <li>Fire drill log: 12 months of entries with timestamps and evacuation times</li>
+              <li>Daily checklist: 260+ days of completed checklists with photos</li>
+            </ol>
+            <div class="comparison-result">Clean inspection, zero deficiencies. Inspector recommends app to other facilities.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout insight">
+        <div class="callout-title">The Referral Loop</div>
+        <p>When an inspector sees a clean facility powered by ComplianceKit, they talk. They visit 3-5 facilities per week. One impressed inspector becomes a passive sales channel for dozens of facilities per month. This is the organic growth engine.</p>
+      </div>
+    </div>
+
+    <!-- ===================== SECTION 8: GO-TO-MARKET ===================== -->
+    <div class="section" id="gtm">
+      <span class="section-anchor"></span>
+      <div class="section-header">
+        <div class="section-number">08</div>
+        <h2 class="section-title">Go-to-Market per State</h2>
+      </div>
+
+      <p>Each state has a different entry strategy based on its regulatory landscape, public data availability, and industry network structure.</p>
+
+      <div class="gtm-grid">
+        <div class="gtm-card tx">
+          <div class="gtm-card-header">
+            <span class="state-badge tx">TX</span>
+            Texas
+          </div>
+          <div class="gtm-card-body">
+            <ul class="gtm-strategy">
+              <li>
+                <span class="gtm-arrow">-></span>
+                Partner with 2-3 childcare licensing consultants in DFW / Houston / Austin
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Consultants recommend ComplianceKit to their clients as part of their service
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                SEO for "Texas daycare inspection checklist" and related keywords
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Content marketing with state-specific compliance guides
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="gtm-card fl">
+          <div class="gtm-card-header">
+            <span class="state-badge fl">FL</span>
+            Florida
+          </div>
+          <div class="gtm-card-body">
+            <ul class="gtm-strategy">
+              <li>
+                <span class="gtm-arrow">-></span>
+                Target after failed inspections (CARES database is public &mdash; we can see who got cited)
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Direct outreach: "We can prevent your next violation"
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Referral program with DCF licensing counselors
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Leverage 2x/year inspection frequency as urgency driver
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="gtm-card ca">
+          <div class="gtm-card-header">
+            <span class="state-badge ca">CA</span>
+            California
+          </div>
+          <div class="gtm-card-body">
+            <ul class="gtm-strategy">
+              <li>
+                <span class="gtm-arrow">-></span>
+                Partner with CCLD Regional Office training events
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Sponsor childcare association conferences
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Target the 17.1% of facilities with background check gaps
+              </li>
+              <li>
+                <span class="gtm-arrow">-></span>
+                Messaging: "Is your facility citation-free?"
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-title">Growth Flywheel</div>
+        <p>Consultant partners (TX) create initial trust. Public violation data (FL) enables targeted outreach. Conference presence (CA) builds brand. All three channels feed into the same product, validated by the same inspector referral loop. Each clean inspection creates a new advocate.</p>
+      </div>
+
+      <hr>
+
+      <!-- Final summary -->
+      <div style="text-align: center; padding: 40px 0 0;">
+        <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--success), #16a34a); border-radius: 10px; position: relative;">
+            <div style="position: absolute; width: 16px; height: 8px; border-left: 3px solid #fff; border-bottom: 3px solid #fff; transform: rotate(-45deg); top: 13px; left: 11px;"></div>
+          </div>
+          <span style="font-size: 22px; font-weight: 900; color: var(--navy); letter-spacing: -0.5px;">ComplianceKit</span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 16px; font-weight: 500; max-width: 500px; margin: 0 auto 8px;">Three states. One codebase. Zero failed inspections.</p>
+        <p style="color: var(--text-light); font-size: 12px;">Master Architecture v2.0 &middot; April 2026 &middot; Confidential</p>
+      </div>
+
+    </div><!-- end content -->
+  </div><!-- end content wrapper -->
+</main>
+
+<!-- Sidebar active state script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.section');
+
+    function updateActive() {
+      let current = '';
+      sections.forEach(function(section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 120) {
+          current = section.id;
+        }
+      });
+
+      navItems.forEach(function(item) {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#' + current) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActive);
+    updateActive();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Product &amp; Strategy Overview</title>
+<style>
+  :root {
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --line-light: #f1f5f9;
+    --paper: #ffffff;
+    --bg: #f8fafc;
+    --accent: #1e40af;
+    --accent-soft: #eff6ff;
+    --accent-border: #93c5fd;
+    --green: #15803d;
+    --green-soft: #f0fdf4;
+    --green-border: #86efac;
+    --red: #b91c1c;
+    --red-soft: #fef2f2;
+    --amber: #b45309;
+    --amber-soft: #fffbeb;
+    --purple: #7c3aed;
+    --purple-soft: #f5f3ff;
+    --teal: #0f766e;
+    --teal-soft: #f0fdfa;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 32px 120px; }
+
+  /* ── Header ── */
+  header.top {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 24px;
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 12px;
+    font-weight: 800;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    color: var(--ink-2);
+    max-width: 720px;
+    line-height: 1.5;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .header-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  .toc-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 12px;
+    column-span: all;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    break-inside: avoid;
+    margin-bottom: 6px;
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 8px;
+    font-family: ui-monospace, 'SF Mono', monospace;
+  }
+
+  .toc a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  /* ── Sections ── */
+  h2 {
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    margin: 56px 0 8px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 32px 0 10px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin: 24px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-2); font-size: 15px; line-height: 1.65; }
+  p strong { color: var(--ink); }
+
+  ul, ol { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 8px; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+  li strong { color: var(--ink); }
+
+  /* ── Callouts ── */
+  .callout {
+    padding: 18px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 20px 0;
+    border-left: 4px solid;
+    line-height: 1.6;
+  }
+
+  .callout p { font-size: 14px; margin-bottom: 8px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout.accent { background: var(--accent-soft); border-color: var(--accent); }
+  .callout.green { background: var(--green-soft); border-color: var(--green); }
+  .callout.red { background: var(--red-soft); border-color: var(--red); }
+  .callout.amber { background: var(--amber-soft); border-color: var(--amber); }
+  .callout.purple { background: var(--purple-soft); border-color: var(--purple); }
+  .callout.teal { background: var(--teal-soft); border-color: var(--teal); }
+
+  .callout .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .callout.accent .label { color: var(--accent); }
+  .callout.green .label { color: var(--green); }
+  .callout.red .label { color: var(--red); }
+  .callout.amber .label { color: var(--amber); }
+  .callout.purple .label { color: var(--purple); }
+  .callout.teal .label { color: var(--teal); }
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: var(--line-light);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-light);
+    color: var(--ink-2);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafbfc; }
+
+  /* ── Stat Grid ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-card .num {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-card .label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Feature Cards ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .feature-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .feature-card:hover {
+    border-color: var(--accent-border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .feature-card .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .feature-card h5 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .feature-card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .feature-card .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 12px;
+  }
+
+  .tag-core { background: var(--accent-soft); color: var(--accent); }
+  .tag-premium { background: var(--purple-soft); color: var(--purple); }
+  .tag-future { background: var(--amber-soft); color: var(--amber); }
+
+  /* ── Pricing Table ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .pricing-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  .pricing-card.featured {
+    border: 2px solid var(--accent);
+    box-shadow: 0 8px 24px rgba(30,64,175,0.1);
+  }
+
+  .pricing-card .plan-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .pricing-card .plan-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .pricing-card .plan-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .pricing-card .plan-price {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .pricing-card .plan-price span {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .pricing-card .plan-period {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pricing-card li {
+    font-size: 13.5px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line-light);
+    color: var(--ink-2);
+  }
+
+  .pricing-card li:last-child { border-bottom: none; }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 24px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    background: var(--paper);
+  }
+
+  .timeline-item.done::before {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .timeline-item .tl-date {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item.done .tl-date { color: var(--green); }
+
+  .timeline-item .tl-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .timeline-item .tl-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  /* ── Revenue Model ── */
+  .rev-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .rev-bar .rev-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    min-width: 110px;
+    text-align: right;
+  }
+
+  .rev-bar .rev-track {
+    flex: 1;
+    height: 28px;
+    background: var(--line-light);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .rev-bar .rev-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #3b82f6, #1e40af);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 60px;
+  }
+
+  /* ── Competitive Table ── */
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: #d1d5db; }
+  .partial { color: var(--amber); font-weight: 600; }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    .wrap { padding: 24px; }
+    .feature-card, .pricing-card, .stat-card { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    .callout { break-inside: avoid; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    .toc { columns: 1; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════ -->
+<header class="top">
+  <div class="eyebrow">Internal Strategy Document</div>
+  <h1>ComplianceKit: Product &amp; Strategy Overview</h1>
+  <p class="subtitle">Compliance management software for child care providers. State-specific inspection readiness, automated tracking, and zero-surprise inspections &mdash; so daycare owners can focus on kids instead of paperwork.</p>
+  <div class="header-meta">
+    <span>April 2026</span>
+    <span>v1.0</span>
+    <span>Confidential</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     TABLE OF CONTENTS
+     ═══════════════════════════════════════════ -->
+<div class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#thesis">Investment Thesis: Why This Works</a></li>
+    <li><a href="#market">Market Opportunity</a></li>
+    <li><a href="#problem">The Problem We Solve</a></li>
+    <li><a href="#features">Complete Feature List</a></li>
+    <li><a href="#state-engine">State Regulatory Engine</a></li>
+    <li><a href="#pricing">Pricing Strategy</a></li>
+    <li><a href="#competitive">Competitive Landscape</a></li>
+    <li><a href="#growth">Growth &amp; Acquisition Strategy</a></li>
+    <li><a href="#revenue">Revenue Model &amp; Projections</a></li>
+    <li><a href="#roadmap">Product Roadmap</a></li>
+    <li><a href="#moat">Defensibility &amp; Moat</a></li>
+    <li><a href="#risks">Risks &amp; Mitigations</a></li>
+  </ol>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     1. INVESTMENT THESIS
+     ═══════════════════════════════════════════ -->
+<h2 id="thesis"><span class="num">1</span> Investment Thesis: Why This Works</h2>
+<p class="section-sub">The 30-second pitch for why ComplianceKit is a real business.</p>
+
+<div class="callout purple">
+  <span class="label">Core Thesis</span>
+  <p><strong>Child care compliance is a $500M+ pain point with no dominant software solution.</strong> Every licensed daycare in America faces mandatory government inspections, state-specific regulatory requirements, and public violation records that directly impact enrollment. The consequences of non-compliance are severe (fines up to $500/day, license revocation, permanent public record). Yet the vast majority of providers manage compliance with paper binders, sticky notes, and prayer. ComplianceKit replaces all of that with a purpose-built SaaS platform &mdash; state-specific, automated, and always current.</p>
+</div>
+
+<p>Five reasons this business model works:</p>
+
+<ol>
+  <li><strong>Non-optional problem.</strong> Compliance isn't a "nice-to-have." Providers are legally required to meet every standard, every day. They can't opt out. The market doesn't shrink during recessions &mdash; child care demand is inelastic.</li>
+  <li><strong>Asymmetric risk/reward.</strong> One missed CPR expiration = a violation. One violation = permanent public record. One bad public record = parents choosing a competitor. $99/month to prevent that? The ROI is obvious and immediate.</li>
+  <li><strong>Recurring revenue with natural retention.</strong> Once a provider builds their compliance system in ComplianceKit, switching costs are high. Their staff files, child files, drill logs, training records &mdash; all live in the platform. Churn will be low.</li>
+  <li><strong>Content-led growth with zero CAC.</strong> Our SEO articles (state-specific inspection guides) target the highest-intent search queries in the market. A daycare owner googling "how to pass daycare inspection Florida" is already in pain. The article demonstrates expertise, the CTA converts.</li>
+  <li><strong>State expansion = compounding moat.</strong> Each state we add (different forms, ratios, agencies, violation classes) widens the competitive gap. A generic tool can't replicate this without the same deep regulatory research.</li>
+</ol>
+
+
+<!-- ═══════════════════════════════════════════
+     2. MARKET OPPORTUNITY
+     ═══════════════════════════════════════════ -->
+<h2 id="market"><span class="num">2</span> Market Opportunity</h2>
+<p class="section-sub">The numbers behind the opportunity.</p>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="num">~500K</div>
+    <div class="label">Licensed child care facilities in the U.S.</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">$12B+</div>
+    <div class="label">Annual child care industry revenue (centers only)</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">50 States</div>
+    <div class="label">Each with unique regulatory frameworks</div>
+  </div>
+  <div class="stat-card">
+    <div class="num">2&ndash;4x/yr</div>
+    <div class="label">Mandatory inspections per facility</div>
+  </div>
+</div>
+
+<h3>Market Segmentation</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Segment</th>
+        <th>Est. Facilities</th>
+        <th>Avg. Revenue</th>
+        <th>Compliance Pain</th>
+        <th>Willingness to Pay</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Single-site child care centers</strong></td>
+        <td>~120,000</td>
+        <td>$300K&ndash;$800K/yr</td>
+        <td>Very high &mdash; owner/director handles everything</td>
+        <td>$79&ndash;$149/mo</td>
+      </tr>
+      <tr>
+        <td><strong>Multi-site operators (2&ndash;10 locations)</strong></td>
+        <td>~25,000</td>
+        <td>$500K&ndash;$2M/yr per site</td>
+        <td>Extreme &mdash; multiplied across locations</td>
+        <td>$149&ndash;$299/mo per site</td>
+      </tr>
+      <tr>
+        <td><strong>Family child care homes</strong></td>
+        <td>~100,000</td>
+        <td>$50K&ndash;$200K/yr</td>
+        <td>Moderate &mdash; fewer requirements but fewer resources</td>
+        <td>$39&ndash;$79/mo</td>
+      </tr>
+      <tr>
+        <td><strong>Large chains / franchises (10+ locations)</strong></td>
+        <td>~5,000 orgs</td>
+        <td>$10M+/yr total</td>
+        <td>High &mdash; multi-state compliance is a nightmare</td>
+        <td>Enterprise pricing</td>
+      </tr>
+      <tr>
+        <td><strong>Head Start / government-funded programs</strong></td>
+        <td>~35,000</td>
+        <td>Government-funded</td>
+        <td>Very high &mdash; federal + state requirements</td>
+        <td>$99&ndash;$199/mo (budget line item)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout green">
+  <span class="label">Beachhead Market</span>
+  <p><strong>Single-site child care centers in Florida, Texas, and California.</strong> These three states represent ~80,000 licensed facilities combined. We have deep regulatory research already completed for all three. The owner/director persona is our ideal early adopter: they feel the compliance pain directly, they make purchasing decisions fast, and $99/month is well within their discretionary budget.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     3. THE PROBLEM
+     ═══════════════════════════════════════════ -->
+<h2 id="problem"><span class="num">3</span> The Problem We Solve</h2>
+<p class="section-sub">What daycare owners are dealing with every day.</p>
+
+<p>Running a daycare means running a small business where a single missing piece of paper can result in a government violation, a public record that drives away customers, and fines that can reach hundreds of dollars per day. Here's what compliance looks like today for the average provider:</p>
+
+<h3>The Daily Compliance Burden</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Frequency</th>
+        <th>What Goes Wrong</th>
+        <th>Consequence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Building &amp; grounds safety check</strong> (TX Form 1100 &mdash; 22 items)</td>
+        <td>Daily</td>
+        <td>Skipped days, backdated forms, incomplete checks</td>
+        <td>Citation for every missing day</td>
+      </tr>
+      <tr>
+        <td><strong>Sign-in/sign-out logs</strong></td>
+        <td>Every arrival/departure</td>
+        <td>Parents forget, staff don't follow up, gaps accumulate</td>
+        <td>Violation; FL requires 12-month retention</td>
+      </tr>
+      <tr>
+        <td><strong>Staff CPR/First Aid tracking</strong></td>
+        <td>Every 2 years per employee</td>
+        <td>Expiration dates missed, renewals scheduled too late</td>
+        <td>Immediate violation if expired; staff can't work with children</td>
+      </tr>
+      <tr>
+        <td><strong>Child immunization records</strong></td>
+        <td>Ongoing as children age</td>
+        <td>Records expire as new shots come due; parents don't bring updates</td>
+        <td>#1 most commonly cited paperwork violation across all three states</td>
+      </tr>
+      <tr>
+        <td><strong>Fire/emergency drills</strong></td>
+        <td>Monthly (fire), quarterly+ (weather/lockdown)</td>
+        <td>Drill done but not documented; month skipped; log incomplete</td>
+        <td>Class 2 violation (FL); cited on Form 7263 (TX)</td>
+      </tr>
+      <tr>
+        <td><strong>Staff background check renewals</strong></td>
+        <td>Per hire + periodic renewal</td>
+        <td>New employee starts before clearance arrives</td>
+        <td>Class 1 violation (FL) &mdash; immediate danger classification</td>
+      </tr>
+      <tr>
+        <td><strong>Training hour tracking</strong></td>
+        <td>Annual per employee</td>
+        <td>Hours not logged, certificates lost, annual totals fall short</td>
+        <td>Staff file violation; potential staffing restriction</td>
+      </tr>
+      <tr>
+        <td><strong>Menu/activity plan posting</strong></td>
+        <td>Weekly updates</td>
+        <td>Outdated menu still on wall, activity plan not posted in every room</td>
+        <td>Wall posting violation &mdash; one of the most commonly cited categories</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout red">
+  <span class="label">The Real Cost of Non-Compliance</span>
+  <p><strong>Florida:</strong> Class 1 violations = $100&ndash;$500/day per violation. 3rd Class 1 = license revoked. All violations permanently public in CARES database.</p>
+  <p><strong>Texas:</strong> $1,000/violation for abuse/neglect findings. $500 for failing to notify parents of injuries. All deficiencies on public compliance history.</p>
+  <p><strong>California:</strong> Type A violations = $50&ndash;$150/day per violation. 3rd citation in 12 months = probation or revocation. Public on CCLD facility search.</p>
+  <p><strong>Across all states:</strong> Violations are permanent public records. Parents check these. A single bad inspection can cost a provider thousands in lost enrollment over the following year &mdash; far more than the fine itself.</p>
+</div>
+
+<h3>How Providers Manage Compliance Today</h3>
+
+<p>The current state of the art is:</p>
+<ul>
+  <li><strong>Paper binders.</strong> Physical folders for every child, every staff member, facility records. Stored in filing cabinets. No alerts, no automation, no backup.</li>
+  <li><strong>Spreadsheets.</strong> Excel or Google Sheets to track expiration dates, training hours, drill schedules. Manual entry. Manual monitoring. Errors everywhere.</li>
+  <li><strong>Memory.</strong> The director "just remembers" when things are due. Until they don't.</li>
+  <li><strong>Panic.</strong> When an inspection is suspected, a frantic multi-day scramble to audit every file, update every posting, and pray nothing is missing.</li>
+</ul>
+
+<p><strong>ComplianceKit replaces all of this with a single platform that knows every requirement for your state, tracks every deadline, and alerts you before anything slips.</strong></p>
+
+
+<!-- ═══════════════════════════════════════════
+     4. COMPLETE FEATURE LIST
+     ═══════════════════════════════════════════ -->
+<h2 id="features"><span class="num">4</span> Complete Feature List</h2>
+<p class="section-sub">Everything ComplianceKit does, organized by functional area.</p>
+
+<h3>A. Compliance Dashboard</h3>
+<p>The single-screen view of your facility's compliance health.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#128994;</div>
+    <h5>Real-Time Compliance Score</h5>
+    <p>A single number (0&ndash;100) showing your facility's overall inspection readiness. Calculated from the status of every tracked item: child files, staff files, drills, postings, certifications, facility records. Green/yellow/red at a glance.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--red-soft);">&#128680;</div>
+    <h5>Critical Alerts Panel</h5>
+    <p>Top-of-dashboard display of items requiring immediate attention: expired certifications, overdue drills, missing documents, approaching deadlines. Sorted by severity (state-specific violation class).</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128197;</div>
+    <h5>Upcoming Deadlines Timeline</h5>
+    <p>A rolling 90-day view of everything coming due: CPR renewals, training hour deadlines, immunization updates, insurance renewals, fire inspection certificates, drill schedules.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#128200;</div>
+    <h5>Historical Compliance Trends</h5>
+    <p>Track your compliance score over time. See whether you're improving or drifting. Identify seasonal patterns (e.g., compliance dips after summer hiring). Great for multi-site operators comparing locations.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+</div>
+
+<h3>B. Child File Management</h3>
+<p>Every document required in every child's file, tracked and validated.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128221;</div>
+    <h5>State-Specific File Checklist</h5>
+    <p>For each child, a dynamic checklist of every required document for your state. Florida: Form 680, DH 3040, enrollment form, emergency contacts, allergy docs. Texas: Form 2935, immunizations, sign-in logs. California: LIC 700, 701, 702, 627, 613A, and 12+ more. Every item tracked.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--amber-soft);">&#9200;</div>
+    <h5>Immunization Expiration Tracking</h5>
+    <p>Automatically calculates when each child's immunization record will need updating based on age and state schedule. Sends alerts to you AND to parents 90, 60, and 30 days before expiry. The #1 most common paperwork violation &mdash; eliminated.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#128279;</div>
+    <h5>Parent Document Portal</h5>
+    <p>Parents can upload required documents (immunization records, physician reports, emergency contacts) directly through a secure portal or mobile link. No more chasing paper. Uploaded docs are automatically filed to the correct child.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--teal-soft);">&#128269;</div>
+    <h5>File Completeness Audit</h5>
+    <p>One-click audit of all children's files against the state checklist. Instantly see which children have incomplete files, what's missing, and how long it's been missing. Generates a report you can act on today &mdash; the same audit inspectors do, but you do it first.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#128172;</div>
+    <h5>Automated Parent Reminders</h5>
+    <p>When a document is missing or expiring, ComplianceKit sends polite, branded email/SMS reminders to the parent with a link to upload the updated document. Configurable cadence. Tracks who has and hasn't responded.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128196;</div>
+    <h5>Digital Sign-In / Sign-Out</h5>
+    <p>Replace paper sign-in sheets with a tablet-based digital sign-in. Captures parent signature, timestamp, and child name. Permanently stored. Eliminates the "parent forgot to sign" problem. Meets FL 12-month retention requirement automatically.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+</div>
+
+<h3>C. Staff File Management</h3>
+<p>Every credential, certification, and clearance for every employee.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128100;</div>
+    <h5>Staff Compliance Profiles</h5>
+    <p>Each staff member gets a profile tracking every required item: background check status, CPR/First Aid certification with expiration, training hours (pre-service, annual, director-specific), health statements, employment affidavits. State-specific requirements automatically applied.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--red-soft);">&#128683;</div>
+    <h5>Certification Expiration Engine</h5>
+    <p>Tracks every expiration date for every staff member. CPR (typically 2-year cycle), First Aid, mandated reporter training (CA: 2-year renewal), background check renewals. Sends alerts at 90, 60, and 30 days. Flags expired items in red on the dashboard.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#127891;</div>
+    <h5>Training Hour Tracker</h5>
+    <p>Logs all training hours per employee per year. Knows the requirement for your state (FL: 40hr intro + 10hr annual; TX: 24hr pre-service + annual; CA: 16hr health &amp; safety). Shows progress toward annual minimums. Director-specific requirements tracked separately.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--amber-soft);">&#128274;</div>
+    <h5>Background Check Status Tracking</h5>
+    <p>Tracks the status of every background check: FL DCF Clearinghouse Level 2, TX fingerprint-based FBI, CA DOJ + FBI + CACI. Shows pending, cleared, or flagged. Blocks scheduling an employee for unsupervised child contact until clearance is confirmed.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#128203;</div>
+    <h5>Onboarding Checklist Generator</h5>
+    <p>When you add a new employee, ComplianceKit generates a state-specific onboarding checklist: every form to sign, every clearance to obtain, every training to complete &mdash; with deadlines based on your state's rules (e.g., TX: 8 hours training before working with children).</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--teal-soft);">&#128202;</div>
+    <h5>Staff Compliance Report</h5>
+    <p>One-page printable report showing every staff member's compliance status. Hand this to your inspector when they ask about staff files. Shows organization and professionalism. Also useful for board reporting and multi-site management.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+</div>
+
+<h3>D. Facility &amp; Operations Compliance</h3>
+<p>Everything about your physical space, drills, and institutional records.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#127751;</div>
+    <h5>Digital Daily Safety Checklist</h5>
+    <p>A mobile-friendly digital version of your state's daily facility check (TX Form 1100, or equivalent). Staff walk the facility, check each item, and submit. Timestamped and signed. No more paper forms. No more backdating. Inspector can see a digital log for every operating day.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--red-soft);">&#128293;</div>
+    <h5>Drill Scheduler &amp; Logger</h5>
+    <p>Automatically schedules fire drills (monthly), severe weather drills (quarterly), and lockdown drills (quarterly) based on your state's requirements. Sends reminders before each due date. After the drill, staff log it directly: date, time, evacuation time, notes. No more missed months.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#128203;</div>
+    <h5>Wall Posting Tracker</h5>
+    <p>Knows every required wall posting for your state and generates a room-by-room checklist. FL: license, evacuation plan per room, room capacity, menu, activity schedule, discipline policy, no-smoking notice. Weekly reminder to verify all postings are current and visible.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--amber-soft);">&#128196;</div>
+    <h5>Facility Record Binder (Digital)</h5>
+    <p>Central digital repository for all facility-level documents: fire inspection certificate, liability insurance, plan of operation, discipline policy, controlling persons documentation, emergency disaster plan, waivers/variances. Tracks expiration dates for time-sensitive items.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--teal-soft);">&#127981;</div>
+    <h5>Room Capacity Calculator</h5>
+    <p>Enter room dimensions, the system calculates maximum capacity based on your state's square footage requirements (FL: 35 sq ft indoor, 45 sq ft outdoor). Generates printable room capacity signs. Flags if enrollment exceeds capacity.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#128205;</div>
+    <h5>Ratio Calculator &amp; Monitor</h5>
+    <p>Real-time ratio monitoring based on children present and staff on duty. Knows your state's exact ratios for every age group. Alerts if you're approaching or exceeding ratio limits. Accounts for mixed-age groups (applies youngest child's ratio). Helps plan staffing schedules.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+</div>
+
+<h3>E. Inspection Readiness</h3>
+<p>The features that make inspection day a non-event.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128270;</div>
+    <h5>Self-Inspection Simulator</h5>
+    <p>Walk through the exact same checklist your state inspector uses. FL: CF-FSP 5316 (32 categories). TX: Forms 7259, 7260, 7261. CA: CARE Tool domains. ComplianceKit maps every item to your actual data and shows you exactly what would pass and what would fail &mdash; before the real inspector arrives.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#128230;</div>
+    <h5>Inspection-Ready Report</h5>
+    <p>One-click generation of a comprehensive report showing your compliance status across all categories. Designed to be handed to an inspector on arrival. Demonstrates organization and professionalism. Includes: staff summary, training status, drill log, facility records index.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--amber-soft);">&#128214;</div>
+    <h5>Violation Risk Assessment</h5>
+    <p>Based on your current compliance status, ComplianceKit calculates your risk exposure: which violations you'd receive if inspected today, their classification (FL Class 1&ndash;4, TX severity, CA Type A/B), and estimated fine exposure. Makes the cost of inaction concrete.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#128221;</div>
+    <h5>Post-Inspection Action Plan</h5>
+    <p>If you receive citations, enter them into ComplianceKit. The system generates a corrective action plan (FL: corrective action; TX: Form 7277 Plan of Action; CA: compliance plan) with specific steps, responsible persons, and deadlines. Tracks completion.</p>
+    <span class="tag tag-future">Future</span>
+  </div>
+</div>
+
+<h3>F. Notifications &amp; Alerts</h3>
+<p>The system that makes sure nothing slips through the cracks.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--red-soft);">&#128276;</div>
+    <h5>Multi-Channel Alert System</h5>
+    <p>Configurable alerts via email, SMS, and in-app push notifications. Different alert thresholds: 90-day advance warning (yellow), 60-day (orange), 30-day (red), overdue (critical). Directors and staff can receive different alert types.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--green-soft);">&#128340;</div>
+    <h5>Weekly Compliance Digest</h5>
+    <p>Every Monday morning, the director receives a summary email: compliance score, items due this week, items overdue, and a quick-action list. A 30-second read that keeps you on track without having to log in.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--accent-soft);">&#128231;</div>
+    <h5>Parent Communication Templates</h5>
+    <p>Pre-written, state-specific email/SMS templates for requesting documents from parents: immunization updates, physician reports, emergency contact updates, allergy documentation. One click to send. Branded with your facility name.</p>
+    <span class="tag tag-core">Core</span>
+  </div>
+</div>
+
+<h3>G. Multi-Site Management</h3>
+<p>For operators running more than one location.</p>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="icon" style="background: var(--purple-soft);">&#127959;</div>
+    <h5>Multi-Location Dashboard</h5>
+    <p>See compliance scores for all your sites on one screen. Identify which locations are at risk and which are clean. Drill down into any site for full details. Compare sites side-by-side.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+  <div class="feature-card">
+    <div class="icon" style="background: var(--teal-soft);">&#127760;</div>
+    <h5>Multi-State Support</h5>
+    <p>If you operate in multiple states, each location automatically gets the correct state-specific requirements. A chain with centers in FL, TX, and CA doesn't need to manually manage three different regulatory frameworks &mdash; ComplianceKit handles it.</p>
+    <span class="tag tag-premium">Premium</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     5. STATE REGULATORY ENGINE
+     ═══════════════════════════════════════════ -->
+<h2 id="state-engine"><span class="num">5</span> State Regulatory Engine</h2>
+<p class="section-sub">The deep regulatory knowledge that powers everything.</p>
+
+<p>ComplianceKit isn't a generic checklist tool. Every feature is powered by a <strong>state-specific regulatory engine</strong> that knows the exact forms, ratios, violation classes, agencies, and requirements for each supported state. This is the core IP of the product.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Regulatory Dimension</th>
+        <th>Florida</th>
+        <th>Texas</th>
+        <th>California</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Regulatory agency</strong></td>
+        <td>DCF (Dept. of Children &amp; Families)</td>
+        <td>HHSC (Health &amp; Human Services Commission)</td>
+        <td>CDSS / CCLD (Community Care Licensing Division)</td>
+      </tr>
+      <tr>
+        <td><strong>Inspector title</strong></td>
+        <td>Licensing Counselor</td>
+        <td>Licensing Representative</td>
+        <td>Licensing Program Analyst (LPA)</td>
+      </tr>
+      <tr>
+        <td><strong>Primary regulation</strong></td>
+        <td>FL Statute 402.305 + Admin Code 65C-22</td>
+        <td>Chapter 746 Minimum Standards</td>
+        <td>Title 22, Division 12</td>
+      </tr>
+      <tr>
+        <td><strong>Inspection form</strong></td>
+        <td>CF-FSP 5316 (32 categories)</td>
+        <td>Forms 7259, 7260, 7261</td>
+        <td>CARE Tools (9 domains)</td>
+      </tr>
+      <tr>
+        <td><strong>Inspection frequency</strong></td>
+        <td>2+ unannounced/year</td>
+        <td>1+ unannounced/year</td>
+        <td>1 annual + unannounced</td>
+      </tr>
+      <tr>
+        <td><strong>Infant ratio</strong></td>
+        <td>1:4</td>
+        <td>1:4</td>
+        <td>1:4</td>
+      </tr>
+      <tr>
+        <td><strong>Preschool ratio (3&ndash;4 yr)</strong></td>
+        <td>1:15 (3yr), 1:20 (4yr)</td>
+        <td>1:15 (3yr), 1:18 (4yr)</td>
+        <td>1:12 (2&ndash;6yr)</td>
+      </tr>
+      <tr>
+        <td><strong>Violation classification</strong></td>
+        <td>Class 1&ndash;4 (1 = immediate danger)</td>
+        <td>Deficiency-based with Plan of Action</td>
+        <td>Type A (immediate) / Type B (potential)</td>
+      </tr>
+      <tr>
+        <td><strong>Max fine per violation</strong></td>
+        <td>$500/day (Class 1)</td>
+        <td>$1,000 per violation (abuse/neglect)</td>
+        <td>$150/day (Type A)</td>
+      </tr>
+      <tr>
+        <td><strong>Public record system</strong></td>
+        <td>CARES database</td>
+        <td>HHSC Compliance History Search</td>
+        <td>CCLD Facility Search</td>
+      </tr>
+      <tr>
+        <td><strong>Background check type</strong></td>
+        <td>DCF Clearinghouse Level 2</td>
+        <td>Fingerprint-based FBI</td>
+        <td>DOJ + FBI + CACI</td>
+      </tr>
+      <tr>
+        <td><strong>Required pre-service training</strong></td>
+        <td>40 hours</td>
+        <td>24 hours (8 before child contact)</td>
+        <td>16-hour health &amp; safety</td>
+      </tr>
+      <tr>
+        <td><strong>Annual training requirement</strong></td>
+        <td>10 hours in-service</td>
+        <td>Annual hours (varies by role)</td>
+        <td>Annual professional development</td>
+      </tr>
+      <tr>
+        <td><strong>Fire drill frequency</strong></td>
+        <td>Monthly</td>
+        <td>Monthly (3-min evacuation)</td>
+        <td>Every 6 months</td>
+      </tr>
+      <tr>
+        <td><strong>Daily facility check</strong></td>
+        <td>Not specified as single form</td>
+        <td>Form 1100 (22 items, daily)</td>
+        <td>Not specified as single form</td>
+      </tr>
+      <tr>
+        <td><strong>Indoor space per child</strong></td>
+        <td>35 sq ft</td>
+        <td>Per Chapter 746</td>
+        <td>Per Title 22</td>
+      </tr>
+      <tr>
+        <td><strong>Earthquake prep required</strong></td>
+        <td>No</td>
+        <td>No</td>
+        <td>Yes (LIC 9148 mandatory)</td>
+      </tr>
+      <tr>
+        <td><strong>Content article status</strong></td>
+        <td style="color: var(--green); font-weight: 700;">Complete (1,801 lines)</td>
+        <td style="color: var(--green); font-weight: 700;">Complete (1,758 lines)</td>
+        <td style="color: var(--green); font-weight: 700;">Complete (1,482 lines)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout accent">
+  <span class="label">Expansion Pipeline</span>
+  <p>Next states for regulatory research and product support: <strong>New York, Illinois, Pennsylvania, Ohio, Georgia</strong> &mdash; selected based on licensed facility count and regulatory complexity. Each state addition takes ~2&ndash;3 weeks of regulatory research and ~1 week of product integration. By end of 2026, target coverage of the <strong>top 15 states by facility count</strong>, representing ~65% of the national market.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     6. PRICING STRATEGY
+     ═══════════════════════════════════════════ -->
+<h2 id="pricing"><span class="num">6</span> Pricing Strategy</h2>
+<p class="section-sub">Simple, transparent, and aligned with value delivered.</p>
+
+<div class="pricing-grid">
+  <div class="pricing-card">
+    <div class="plan-name">Starter</div>
+    <div class="plan-desc">For family child care homes</div>
+    <div class="plan-price">$49 <span>/mo</span></div>
+    <div class="plan-period">Billed monthly or $468/year (save 20%)</div>
+    <ul>
+      <li>1 location</li>
+      <li>Up to 15 children</li>
+      <li>Up to 5 staff members</li>
+      <li>State-specific compliance checklists</li>
+      <li>Certification expiration tracking</li>
+      <li>Drill scheduler &amp; logger</li>
+      <li>Weekly compliance digest</li>
+      <li>Email alerts</li>
+      <li>File completeness audit</li>
+      <li>Wall posting tracker</li>
+    </ul>
+  </div>
+
+  <div class="pricing-card featured">
+    <div class="plan-badge">Most Popular</div>
+    <div class="plan-name">Professional</div>
+    <div class="plan-desc">For single-site child care centers</div>
+    <div class="plan-price">$99 <span>/mo</span></div>
+    <div class="plan-period">Billed monthly or $948/year (save 20%)</div>
+    <ul>
+      <li>1 location</li>
+      <li>Unlimited children</li>
+      <li>Unlimited staff</li>
+      <li><strong>Everything in Starter, plus:</strong></li>
+      <li>Self-inspection simulator</li>
+      <li>Parent document portal</li>
+      <li>Automated parent reminders (email + SMS)</li>
+      <li>Staff onboarding checklist generator</li>
+      <li>Ratio calculator &amp; monitor</li>
+      <li>Inspection-ready report</li>
+      <li>Violation risk assessment</li>
+      <li>Digital daily safety checklist</li>
+      <li>SMS alerts</li>
+      <li>Priority email support</li>
+    </ul>
+  </div>
+
+  <div class="pricing-card">
+    <div class="plan-name">Enterprise</div>
+    <div class="plan-desc">For multi-site operators &amp; chains</div>
+    <div class="plan-price">$199 <span>/site/mo</span></div>
+    <div class="plan-period">Volume discounts for 5+ sites</div>
+    <ul>
+      <li>Unlimited locations</li>
+      <li>Unlimited children &amp; staff</li>
+      <li><strong>Everything in Professional, plus:</strong></li>
+      <li>Multi-location dashboard</li>
+      <li>Multi-state support</li>
+      <li>Cross-site compliance comparison</li>
+      <li>Historical compliance trends</li>
+      <li>Digital sign-in/sign-out (tablet-based)</li>
+      <li>Post-inspection action plan builder</li>
+      <li>API access</li>
+      <li>Dedicated account manager</li>
+      <li>Custom onboarding &amp; training</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout green">
+  <span class="label">Pricing Rationale</span>
+  <p><strong>$99/month = $3.30/day.</strong> A single Type A violation in California costs $50&ndash;$150/day. A Class 1 violation in Florida costs $100&ndash;$500/day. One missed CPR expiration costs more in fines and reputational damage than an entire year of ComplianceKit. The value proposition isn't "this software is cheap" &mdash; it's "this software costs 1/100th of what a single bad inspection costs you."</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     7. COMPETITIVE LANDSCAPE
+     ═══════════════════════════════════════════ -->
+<h2 id="competitive"><span class="num">7</span> Competitive Landscape</h2>
+<p class="section-sub">Where existing solutions fall short.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>ComplianceKit</th>
+        <th>Brightwheel</th>
+        <th>HiMama / Lillio</th>
+        <th>Procare</th>
+        <th>Paper / Spreadsheets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>State-specific compliance rules</strong></td>
+        <td><span class="check">Yes &mdash; deep per-state regulatory engine</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="partial">Minimal</span></td>
+        <td><span class="cross">Manual</span></td>
+      </tr>
+      <tr>
+        <td><strong>Inspection form mapping</strong></td>
+        <td><span class="check">Yes &mdash; exact state inspection forms</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>Certification expiration tracking</strong></td>
+        <td><span class="check">Yes &mdash; automated multi-channel alerts</span></td>
+        <td><span class="partial">Basic staff profiles</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="partial">Manual tracking</span></td>
+        <td><span class="cross">Spreadsheet / memory</span></td>
+      </tr>
+      <tr>
+        <td><strong>Drill scheduling &amp; documentation</strong></td>
+        <td><span class="check">Yes &mdash; auto-scheduled per state rules</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">Paper log</span></td>
+      </tr>
+      <tr>
+        <td><strong>Child file compliance audit</strong></td>
+        <td><span class="check">Yes &mdash; per-state document requirements</span></td>
+        <td><span class="partial">Basic child profiles</span></td>
+        <td><span class="partial">Basic child profiles</span></td>
+        <td><span class="partial">Child records</span></td>
+        <td><span class="cross">Manual audit</span></td>
+      </tr>
+      <tr>
+        <td><strong>Self-inspection simulator</strong></td>
+        <td><span class="check">Yes &mdash; mirrors actual state inspection tools</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>Violation risk scoring</strong></td>
+        <td><span class="check">Yes &mdash; per-state violation classes</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+        <td><span class="cross">No</span></td>
+      </tr>
+      <tr>
+        <td><strong>Parent communication</strong></td>
+        <td><span class="check">Compliance-focused (document requests)</span></td>
+        <td><span class="check">Excellent (daily reports, messaging)</span></td>
+        <td><span class="check">Excellent (daily reports, photos)</span></td>
+        <td><span class="partial">Basic</span></td>
+        <td><span class="cross">Phone/email</span></td>
+      </tr>
+      <tr>
+        <td><strong>Billing &amp; payments</strong></td>
+        <td><span class="cross">Not our focus (integrate later)</span></td>
+        <td><span class="check">Core feature</span></td>
+        <td><span class="partial">Basic</span></td>
+        <td><span class="check">Core feature</span></td>
+        <td><span class="cross">Separate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Pricing</strong></td>
+        <td>$49&ndash;$199/mo</td>
+        <td>$100&ndash;$300+/mo</td>
+        <td>$60&ndash;$150+/mo</td>
+        <td>$79&ndash;$200+/mo</td>
+        <td>"Free" (but it costs you in violations)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout purple">
+  <span class="label">Competitive Position</span>
+  <p><strong>We don't compete with Brightwheel and HiMama &mdash; we complement them.</strong> They handle parent communication, daily reports, and billing. We handle compliance, inspections, and regulatory tracking. A daycare might use Brightwheel for parent engagement AND ComplianceKit for inspection readiness. Our competitive threat is paper and spreadsheets &mdash; our job is to prove that $99/month is worth never worrying about compliance again.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     8. GROWTH & ACQUISITION STRATEGY
+     ═══════════════════════════════════════════ -->
+<h2 id="growth"><span class="num">8</span> Growth &amp; Acquisition Strategy</h2>
+<p class="section-sub">How we get customers without burning cash on ads.</p>
+
+<h3>Channel 1: Content-Led SEO (Primary)</h3>
+
+<p>Our existing content assets already target the highest-intent keywords in the market:</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Content Asset</th>
+        <th>Target Keyword</th>
+        <th>Search Intent</th>
+        <th>Funnel Stage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>"How to Pass a Daycare Inspection in Florida"</strong></td>
+        <td>how to pass daycare inspection florida</td>
+        <td>Provider is stressed about an upcoming inspection or just failed one</td>
+        <td>Bottom of funnel &mdash; high conversion intent</td>
+      </tr>
+      <tr>
+        <td><strong>"How to Pass a Daycare Inspection in Texas"</strong></td>
+        <td>how to pass daycare inspection texas</td>
+        <td>Same &mdash; Texas market</td>
+        <td>Bottom of funnel</td>
+      </tr>
+      <tr>
+        <td><strong>"How to Pass a Daycare Inspection in California"</strong></td>
+        <td>how to pass daycare inspection california</td>
+        <td>Same &mdash; California market</td>
+        <td>Bottom of funnel</td>
+      </tr>
+      <tr>
+        <td><strong>"How to Start a Daycare in [State]"</strong> (3 articles)</td>
+        <td>how to start a daycare florida / texas / california</td>
+        <td>Pre-licensure provider who will need compliance tools</td>
+        <td>Top of funnel &mdash; future customer</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Content expansion roadmap:</strong></p>
+<ul>
+  <li><strong>"How to Pass" guides</strong> for every state we support (15 states by EOY 2026)</li>
+  <li><strong>"How to Start a Daycare"</strong> guides for every supported state (captures pre-licensure market)</li>
+  <li><strong>Form-specific guides:</strong> "How to Fill Out Form 1100 in Texas," "Understanding LIC 311A in California," "CF-FSP 5316 Walkthrough for Florida." These target long-tail, ultra-specific queries with near-zero competition.</li>
+  <li><strong>Ratio reference pages:</strong> "Staff-to-Child Ratios by State" &mdash; a frequently searched, evergreen topic.</li>
+  <li><strong>Violation lookup tools:</strong> Interactive tool that lets providers look up what a specific violation class means in their state and what the fine structure is.</li>
+</ul>
+
+<div class="callout teal">
+  <span class="label">Content Moat</span>
+  <p>Each article is 1,500&ndash;1,800 lines of deeply researched, state-specific content with actual form numbers, actual fine amounts, actual agency names, and actual process descriptions. This level of depth is <strong>extremely hard for competitors to replicate</strong> and <strong>extremely valuable for SEO</strong>. Google rewards authoritative, comprehensive content &mdash; and nothing says "authoritative" like knowing the exact form number your inspector uses.</p>
+</div>
+
+<h3>Channel 2: Direct Outreach to Provider Associations</h3>
+<ul>
+  <li><strong>Florida Child Care Association (FCCA)</strong></li>
+  <li><strong>Texas Licensed Child Care Association (TLCCA)</strong></li>
+  <li><strong>California Child Care Resource &amp; Referral Network</strong></li>
+  <li>National: <strong>National Association for the Education of Young Children (NAEYC)</strong></li>
+</ul>
+<p>These organizations host conferences, send newsletters, and maintain member directories. Sponsoring a webinar on "How to Ace Your Next Inspection" positions ComplianceKit as the expert and drives qualified leads.</p>
+
+<h3>Channel 3: Licensing Consultant Partnerships</h3>
+<p>Independent consultants who help daycares get licensed and stay compliant. They're a natural referral channel: they recommend tools to their clients. An affiliate/partner program with revenue sharing incentivizes ongoing referrals.</p>
+
+<h3>Channel 4: Free Tools as Lead Magnets</h3>
+<ul>
+  <li><strong>Free ratio calculator</strong> (enter your state, get instant ratios)</li>
+  <li><strong>Free wall posting checklist generator</strong> (enter your state, get a printable list)</li>
+  <li><strong>Free file audit template</strong> (state-specific, downloadable PDF)</li>
+</ul>
+<p>These tools provide immediate value, capture an email address, and demonstrate the depth of our state-specific knowledge. They naturally lead to: "If this free tool is this good, imagine what the full product does."</p>
+
+
+<!-- ═══════════════════════════════════════════
+     9. REVENUE MODEL & PROJECTIONS
+     ═══════════════════════════════════════════ -->
+<h2 id="revenue"><span class="num">9</span> Revenue Model &amp; Projections</h2>
+<p class="section-sub">Conservative projections based on content-led growth.</p>
+
+<h3>Revenue Drivers</h3>
+<ul>
+  <li><strong>Average revenue per account (ARPA):</strong> $99/month (weighted toward Professional plan)</li>
+  <li><strong>Annual churn estimate:</strong> 5&ndash;8% (compliance tools are sticky &mdash; all your data is in the system)</li>
+  <li><strong>CAC:</strong> Near-zero for organic/content channel; $200&ndash;400 for paid channels</li>
+  <li><strong>LTV:</strong> At $99/mo with 7% annual churn, LTV = ~$17,000 per customer</li>
+  <li><strong>LTV:CAC ratio:</strong> 40:1+ for organic; 40&ndash;85:1 blended</li>
+</ul>
+
+<h3>Growth Scenario (Conservative)</h3>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Milestone</th>
+        <th>Customers</th>
+        <th>MRR</th>
+        <th>ARR</th>
+        <th>States Covered</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Month 6</strong> (Oct 2026)</td>
+        <td>50</td>
+        <td>$4,950</td>
+        <td>$59K</td>
+        <td>3 (FL, TX, CA)</td>
+      </tr>
+      <tr>
+        <td><strong>Month 12</strong> (Apr 2027)</td>
+        <td>200</td>
+        <td>$19,800</td>
+        <td>$238K</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td><strong>Month 18</strong> (Oct 2027)</td>
+        <td>500</td>
+        <td>$49,500</td>
+        <td>$594K</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td><strong>Month 24</strong> (Apr 2028)</td>
+        <td>1,200</td>
+        <td>$118,800</td>
+        <td>$1.4M</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td><strong>Month 36</strong> (Apr 2029)</td>
+        <td>3,000</td>
+        <td>$297,000</td>
+        <td>$3.6M</td>
+        <td>40</td>
+      </tr>
+      <tr>
+        <td><strong>Month 48</strong> (Apr 2030)</td>
+        <td>6,000</td>
+        <td>$594,000</td>
+        <td>$7.1M</td>
+        <td>50 (nationwide)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Revenue Visualization</h3>
+
+<div style="margin: 24px 0;">
+  <div class="rev-bar">
+    <div class="rev-label">Month 6</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 8%;">$59K</div></div>
+  </div>
+  <div class="rev-bar">
+    <div class="rev-label">Month 12</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 16%;">$238K</div></div>
+  </div>
+  <div class="rev-bar">
+    <div class="rev-label">Month 18</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 28%;">$594K</div></div>
+  </div>
+  <div class="rev-bar">
+    <div class="rev-label">Year 2</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 42%;">$1.4M</div></div>
+  </div>
+  <div class="rev-bar">
+    <div class="rev-label">Year 3</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 68%;">$3.6M</div></div>
+  </div>
+  <div class="rev-bar">
+    <div class="rev-label">Year 4</div>
+    <div class="rev-track"><div class="rev-fill" style="width: 100%;">$7.1M</div></div>
+  </div>
+</div>
+
+<div class="callout green">
+  <span class="label">Path to Independence</span>
+  <p><strong>At 200 customers ($19.8K MRR / $238K ARR)</strong>, this is a sustainable solo business covering all personal and operational costs. That's 0.04% market penetration. At 1,200 customers ($1.4M ARR), it's a serious business that can fund a small team. At 3,000 customers ($3.6M ARR), you have optionality: keep it profitable and independent, raise capital to accelerate, or explore acquisition. <strong>The economics work at every scale.</strong></p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     10. PRODUCT ROADMAP
+     ═══════════════════════════════════════════ -->
+<h2 id="roadmap"><span class="num">10</span> Product Roadmap</h2>
+<p class="section-sub">What we build, in what order.</p>
+
+<div class="timeline">
+  <div class="timeline-item done">
+    <div class="tl-date">Completed &mdash; April 2026</div>
+    <div class="tl-title">Deep regulatory research: FL, TX, CA</div>
+    <div class="tl-desc">Complete analysis of inspection forms, ratios, violation classes, required documents, and forms for three launch states. Published as comprehensive SEO content (6 articles across "how to pass" and "how to start" categories).</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">Q2 2026 (May &ndash; June)</div>
+    <div class="tl-title">MVP: Core compliance dashboard + state engine</div>
+    <div class="tl-desc">Compliance score, child file checklists, staff certification tracking, drill scheduler, expiration alerts, weekly digest. Supporting FL, TX, CA. Web app, mobile-responsive.</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">Q3 2026 (Jul &ndash; Sep)</div>
+    <div class="tl-title">Parent portal + self-inspection simulator</div>
+    <div class="tl-desc">Parent document upload portal. Self-inspection feature that mirrors state inspection forms. Automated parent reminders. Free ratio calculator tool (lead magnet).</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">Q4 2026 (Oct &ndash; Dec)</div>
+    <div class="tl-title">State expansion: 5 additional states + multi-site</div>
+    <div class="tl-desc">Add NY, IL, PA, OH, GA. Multi-location dashboard for operators with 2+ sites. Inspection-ready report generation. Digital daily safety checklist.</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">Q1 2027 (Jan &ndash; Mar)</div>
+    <div class="tl-title">Premium features + integrations</div>
+    <div class="tl-desc">Digital sign-in/sign-out. Ratio monitor (real-time). Historical compliance trends. Post-inspection action plan builder. API for integration with billing/communication tools (Brightwheel, Procare).</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">Q2&ndash;Q4 2027</div>
+    <div class="tl-title">Scale: 25 states + enterprise features</div>
+    <div class="tl-desc">Expand to 25 states. Enterprise tier with multi-state support. Custom onboarding. Dedicated account management. Conference presence (NAEYC, state associations).</div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-date">2028+</div>
+    <div class="tl-title">Nationwide + adjacent markets</div>
+    <div class="tl-desc">All 50 states. Explore expansion into adjacent licensed-care markets (assisted living, group homes, behavioral health facilities &mdash; same compliance-heavy, inspection-driven model). Potential Head Start / federal compliance module.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     11. DEFENSIBILITY & MOAT
+     ═══════════════════════════════════════════ -->
+<h2 id="moat"><span class="num">11</span> Defensibility &amp; Moat</h2>
+<p class="section-sub">Why this gets harder to compete with over time, not easier.</p>
+
+<ol>
+  <li>
+    <strong>State-specific regulatory depth.</strong> Every state we add requires weeks of deep research into unique regulations, forms, ratios, agencies, and violation structures. This knowledge is codified into our product and content. A competitor can't shortcut this &mdash; they have to do the same work, state by state.
+  </li>
+  <li>
+    <strong>SEO content library.</strong> Our long-form, deeply researched guides (1,500+ lines each) build domain authority over time. As we publish more state guides and form-specific articles, our search visibility compounds. A new entrant starts from zero &mdash; we'll have 50+ authoritative pages indexed and ranking.
+  </li>
+  <li>
+    <strong>Customer data lock-in.</strong> Once a provider's child files, staff files, drill logs, training records, and compliance history live in ComplianceKit, switching is painful. This isn't artificial lock-in &mdash; it's genuine value accumulation. The longer they use it, the more valuable the data becomes.
+  </li>
+  <li>
+    <strong>Regulatory update velocity.</strong> Regulations change. Forms get updated. Ratios are revised. We'll build a regulatory monitoring system that catches changes and pushes updates to customers. Providers trust us to stay current so they don't have to.
+  </li>
+  <li>
+    <strong>Network effects (future).</strong> As we accumulate anonymized compliance data across thousands of providers, we can offer benchmarking: "Your facility's compliance score is in the 85th percentile for Florida centers." This creates value that only increases with scale.
+  </li>
+</ol>
+
+<div class="callout accent">
+  <span class="label">The Brightwheel Analogy</span>
+  <p>Brightwheel raised $100M+ and is valued at $1B+ by focusing on daycare parent communication and billing. They've never seriously invested in compliance. <strong>Compliance is an adjacent, equally valuable problem that they've left on the table.</strong> We own that lane. And because compliance requires deep, state-specific regulatory knowledge, it's not something they can bolt on easily &mdash; it would require the same multi-year research investment we're making.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     12. RISKS & MITIGATIONS
+     ═══════════════════════════════════════════ -->
+<h2 id="risks"><span class="num">12</span> Risks &amp; Mitigations</h2>
+<p class="section-sub">Honest assessment of what could go wrong.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Risk</th>
+        <th>Likelihood</th>
+        <th>Impact</th>
+        <th>Mitigation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Brightwheel or Procare adds compliance features</strong></td>
+        <td>Medium</td>
+        <td>High</td>
+        <td>Our state-specific depth is our moat. Generalist platforms will do compliance shallowly. We'll stay deeper. Also pursue integration partnerships (be the compliance module they plug into, not the competitor they have to build).</td>
+      </tr>
+      <tr>
+        <td><strong>Regulation changes invalidate our content/rules</strong></td>
+        <td>Certain (regulations always change)</td>
+        <td>Medium</td>
+        <td>Build a regulatory monitoring system. Subscribe to state agency newsletters and rule change feeds. Budget ongoing time for content and product updates. Position frequent updates as a feature ("We stay current so you don't have to").</td>
+      </tr>
+      <tr>
+        <td><strong>Slow initial adoption / long sales cycle</strong></td>
+        <td>Medium</td>
+        <td>Medium</td>
+        <td>Content strategy means leads come to us (pull, not push). Free tools lower the barrier. Low price point ($99/mo) means the purchase decision is often made by a single person (director) without committee approval. Offer free 30-day trial.</td>
+      </tr>
+      <tr>
+        <td><strong>Provider tech literacy barriers</strong></td>
+        <td>Medium</td>
+        <td>Low&ndash;Medium</td>
+        <td>Design for simplicity. Mobile-first. Minimal training required. Offer white-glove onboarding for early customers. Build trust through the content (they already see us as the expert before they ever use the product).</td>
+      </tr>
+      <tr>
+        <td><strong>State-level compliance data accuracy liability</strong></td>
+        <td>Low</td>
+        <td>High</td>
+        <td>Terms of service clearly position ComplianceKit as a compliance management tool, not legal advice. Always link to official state sources. Maintain a rigorous review process for regulatory data. Carry E&amp;O insurance.</td>
+      </tr>
+      <tr>
+        <td><strong>Economic downturn reduces daycare enrollment</strong></td>
+        <td>Low</td>
+        <td>Low</td>
+        <td>Child care demand is historically inelastic &mdash; parents need care to work. Even during COVID, the industry bounced back quickly. Compliance requirements don't go away during downturns; if anything, budget-constrained providers need efficiency tools more.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout green">
+  <span class="label">Bottom Line</span>
+  <p>ComplianceKit sits at the intersection of <strong>mandatory demand</strong> (compliance isn't optional), <strong>severe consequences</strong> (fines, revocation, public records), <strong>underserved market</strong> (no dominant compliance-specific tool), and <strong>defensible differentiation</strong> (state-specific regulatory depth that compounds over time). The content strategy provides near-zero-CAC customer acquisition. The $99 price point is trivially justifiable against the cost of a single violation. And the product gets stickier the longer customers use it.</p>
+  <p><strong>This isn't a moonshot. This is a grounded, achievable SaaS business with a clear path from $0 to economic independence, built on a real problem that half a million businesses deal with every day.</strong></p>
+</div>
+
+</div><!-- .wrap -->
+</body>
+</html>

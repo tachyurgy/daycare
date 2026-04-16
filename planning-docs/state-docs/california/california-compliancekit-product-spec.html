@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit - California Product Specification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy-deep: #0d0d1a;
+    --navy-dark: #1a1a2e;
+    --navy-mid: #22223a;
+    --navy-light: #2d2d4a;
+    --navy-lighter: #3a3a5c;
+    --accent-blue: #4a6cf7;
+    --accent-blue-light: #6b8cff;
+    --accent-cyan: #00d4aa;
+    --accent-gold: #f7b731;
+    --red-critical: #ff4757;
+    --red-bg: rgba(255, 71, 87, 0.12);
+    --red-border: rgba(255, 71, 87, 0.3);
+    --orange-warning: #ffa502;
+    --orange-bg: rgba(255, 165, 2, 0.12);
+    --orange-border: rgba(255, 165, 2, 0.3);
+    --green-ok: #2ed573;
+    --green-bg: rgba(46, 213, 115, 0.1);
+    --green-border: rgba(46, 213, 115, 0.25);
+    --blue-info: #4a6cf7;
+    --blue-bg: rgba(74, 108, 247, 0.1);
+    --blue-border: rgba(74, 108, 247, 0.25);
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b8;
+    --text-muted: #6a6a85;
+    --border-subtle: rgba(255,255,255,0.06);
+    --border-medium: rgba(255,255,255,0.1);
+    --sidebar-width: 280px;
+    --header-height: 72px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--navy-deep);
+    color: var(--text-primary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--navy-dark);
+    border-right: 1px solid var(--border-subtle);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--navy-lighter); border-radius: 3px; }
+
+  .sidebar-brand {
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand .logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+  }
+
+  .sidebar-brand .logo span {
+    color: var(--accent-blue);
+  }
+
+  .sidebar-brand .subtitle {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  .sidebar-brand .state-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(74,108,247,0.15), rgba(0,212,170,0.1));
+    border: 1px solid rgba(74,108,247,0.25);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent-blue-light);
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar nav {
+    flex: 1;
+    padding: 16px 0;
+  }
+
+  .sidebar nav .nav-group-label {
+    padding: 12px 20px 6px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+  }
+
+  .sidebar nav a {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 450;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+    background: rgba(74,108,247,0.06);
+    border-left-color: var(--accent-blue);
+  }
+
+  .sidebar nav a .nav-num {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-blue-light);
+    background: rgba(74,108,247,0.12);
+    border-radius: 5px;
+    margin-top: 1px;
+  }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer .version {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .sidebar-footer .confidential {
+    font-size: 0.6rem;
+    color: var(--red-critical);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+  }
+
+  /* HERO HEADER */
+  .hero {
+    background: linear-gradient(160deg, var(--navy-dark) 0%, #1a1a3e 40%, #1e2a4a 100%);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 60px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(74,108,247,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 30%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,212,170,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-blue-light);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 30%, var(--accent-blue-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-stat {
+    text-align: left;
+  }
+
+  .hero-stat .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent-cyan);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .hero-stat .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* CONTENT SECTIONS */
+  .content {
+    padding: 0 64px 80px;
+  }
+
+  section {
+    padding-top: 56px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .section-header .section-num {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+  }
+
+  .section-header h2 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    color: var(--text-primary);
+  }
+
+  .section-header .section-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    max-width: 700px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .card-sm {
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 22px;
+  }
+
+  .card-sm .card-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .card-sm h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .card-sm p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+
+  .card p, .card li {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .card ul, .card ol {
+    padding-left: 20px;
+    margin-top: 8px;
+  }
+
+  .card li {
+    margin-bottom: 6px;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .info-box.red {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    color: #ff8a95;
+  }
+
+  .info-box.orange {
+    background: var(--orange-bg);
+    border: 1px solid var(--orange-border);
+    color: #ffc048;
+  }
+
+  .info-box.green {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: #5efa9c;
+  }
+
+  .info-box.blue {
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+    color: #7b9bff;
+  }
+
+  .info-box strong {
+    color: inherit;
+  }
+
+  /* BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+  }
+
+  .badge-critical {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    color: var(--red-critical);
+  }
+
+  .badge-warning {
+    background: var(--orange-bg);
+    border: 1px solid var(--orange-border);
+    color: var(--orange-warning);
+  }
+
+  .badge-ok {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: var(--green-ok);
+  }
+
+  .badge-info {
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+    color: var(--accent-blue-light);
+  }
+
+  .badge-muted {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+  }
+
+  /* TABLES */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+
+  thead th {
+    background: var(--navy-light);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-medium);
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover {
+    background: rgba(74,108,247,0.03);
+  }
+
+  td strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  td code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    background: rgba(74,108,247,0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent-blue-light);
+  }
+
+  /* PROCESS STEPS */
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 16px;
+    position: relative;
+  }
+
+  .step-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 32px;
+  }
+
+  .step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--navy-light);
+    border: 2px solid var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .step-connector {
+    width: 2px;
+    flex: 1;
+    background: var(--border-medium);
+    min-height: 16px;
+  }
+
+  .step-content {
+    padding-bottom: 24px;
+    padding-top: 2px;
+  }
+
+  .step-content h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* DOMAIN LIST */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .domain-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+  }
+
+  .domain-item .domain-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(74,108,247,0.12);
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent-blue-light);
+  }
+
+  /* CITATION CARDS */
+  .citation-card {
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .citation-card.type-a {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+  }
+
+  .citation-card.type-b {
+    background: var(--orange-bg);
+    border: 1px solid var(--orange-border);
+  }
+
+  .citation-card h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .citation-card.type-a h4 { color: var(--red-critical); }
+  .citation-card.type-b h4 { color: var(--orange-warning); }
+
+  .citation-card ul {
+    padding-left: 18px;
+  }
+
+  .citation-card li {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+
+  .citation-card.type-a li { color: #ff8a95; }
+  .citation-card.type-b li { color: #ffc048; }
+
+  /* TOP 10 LIST */
+  .top-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .top-item:last-child { border-bottom: none; }
+
+  .top-rank {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 900;
+    border-radius: 8px;
+    margin-top: 2px;
+  }
+
+  .top-rank.rank-1 { background: rgba(255,71,87,0.15); color: var(--red-critical); }
+  .top-rank.rank-2 { background: rgba(255,71,87,0.12); color: #ff7582; }
+  .top-rank.rank-3 { background: rgba(255,165,2,0.15); color: var(--orange-warning); }
+  .top-rank.rank-rest { background: rgba(74,108,247,0.1); color: var(--accent-blue-light); }
+
+  .top-details h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .top-details p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  .top-details .top-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--accent-cyan);
+  }
+
+  /* CHECKLIST GROUPS */
+  .checklist-group {
+    margin-bottom: 28px;
+  }
+
+  .checklist-group h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checklist-group h4 .count {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    background: rgba(74,108,247,0.12);
+    border-radius: 10px;
+    color: var(--accent-blue-light);
+  }
+
+  .checklist-item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 0.83rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .checklist-item .item-letter {
+    flex-shrink: 0;
+    width: 20px;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding-top: 1px;
+  }
+
+  .checklist-item code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    background: rgba(74,108,247,0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent-blue-light);
+    white-space: nowrap;
+  }
+
+  /* RATIO TABLE SPECIAL */
+  .ratio-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 24px;
+    background: var(--navy-mid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .ratio-card .ratio-age {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 200px;
+  }
+
+  .ratio-card .ratio-age span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .ratio-card .ratio-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    letter-spacing: -1px;
+  }
+
+  /* OPPORTUNITY POINTS */
+  .opp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .opp-card {
+    background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .opp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent-blue);
+  }
+
+  .opp-card .opp-stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent-cyan);
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  .opp-card h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .opp-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: var(--navy-light);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    overflow-x: auto;
+    margin: 16px 0;
+  }
+
+  .code-block .key { color: var(--accent-blue-light); }
+  .code-block .str { color: var(--accent-cyan); }
+  .code-block .type { color: var(--orange-warning); }
+  .code-block .comment { color: var(--text-muted); font-style: italic; }
+
+  /* PROGRESSIVE ENFORCEMENT */
+  .enforcement-ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .enforcement-rung {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    position: relative;
+  }
+
+  .enforcement-rung::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+  }
+
+  .enforcement-rung:first-child::before { top: 50%; }
+  .enforcement-rung:last-child::before { bottom: 50%; }
+
+  .enforcement-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .enforcement-rung:nth-child(1) .enforcement-dot { background: var(--accent-gold); }
+  .enforcement-rung:nth-child(2) .enforcement-dot { background: var(--orange-warning); }
+  .enforcement-rung:nth-child(3) .enforcement-dot { background: #ff7f50; }
+  .enforcement-rung:nth-child(4) .enforcement-dot { background: var(--red-critical); }
+  .enforcement-rung:nth-child(5) .enforcement-dot { background: #cc0022; }
+
+  .enforcement-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* COLUMNS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 0;
+  }
+
+  /* MISC */
+  .divider {
+    height: 1px;
+    background: var(--border-subtle);
+    margin: 40px 0;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .text-accent { color: var(--accent-blue-light); }
+  .text-cyan { color: var(--accent-cyan); }
+  .text-gold { color: var(--accent-gold); }
+  .text-red { color: var(--red-critical); }
+  .text-orange { color: var(--orange-warning); }
+  .text-muted { color: var(--text-muted); }
+
+  .mt-1 { margin-top: 8px; }
+  .mt-2 { margin-top: 16px; }
+  .mt-3 { margin-top: 24px; }
+  .mb-1 { margin-bottom: 8px; }
+  .mb-2 { margin-bottom: 16px; }
+  .mb-3 { margin-bottom: 24px; }
+
+  a {
+    color: var(--accent-blue-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(74,108,247,0.3);
+    transition: border-color 0.2s;
+  }
+  a:hover {
+    border-bottom-color: var(--accent-blue-light);
+  }
+
+  .highlight-row td {
+    background: rgba(74,108,247,0.04);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .hero { padding: 40px 32px; }
+    .content { padding: 0 32px 60px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo">Compliance<span>Kit</span></div>
+    <div class="subtitle">Product Specification</div>
+    <div class="state-badge">California</div>
+  </div>
+  <nav>
+    <div class="nav-group-label">Market Context</div>
+    <a href="#regulatory-landscape"><span class="nav-num">1</span> Regulatory Landscape</a>
+    <a href="#inspection-process"><span class="nav-num">2</span> Inspector &amp; Inspection Process</a>
+    <a href="#citation-system"><span class="nav-num">3</span> Citation Classification</a>
+    <a href="#top-citations"><span class="nav-num">4</span> Top 10 Citations</a>
+
+    <div class="nav-group-label">Requirements</div>
+    <a href="#documentation"><span class="nav-num">5</span> Documentation Requirements</a>
+    <a href="#ratios"><span class="nav-num">6</span> Staff-Child Ratios</a>
+    <a href="#qualifications"><span class="nav-num">7</span> Staff Qualifications</a>
+
+    <div class="nav-group-label">Product</div>
+    <a href="#productization"><span class="nav-num">8</span> Productization Map</a>
+    <a href="#forms-catalog"><span class="nav-num">9</span> 35+ Forms Catalog</a>
+    <a href="#domain-objects"><span class="nav-num">10</span> Domain Objects</a>
+
+    <div class="nav-group-label">Strategy</div>
+    <a href="#opportunity"><span class="nav-num">11</span> Why California</a>
+    <a href="#architecture"><span class="nav-num">12</span> Cross-State Architecture</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="version">v3.1.0 // 2026-04-06</div>
+    <div class="confidential">Confidential</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">ComplianceKit // California Product Specification</div>
+    <h1>Commoditizing California<br>Daycare Compliance</h1>
+    <p class="hero-desc">
+      A complete product specification mapping every California child care inspection requirement to a ComplianceKit feature. Built from primary regulatory sources: Title 22 CCR, the LIC 311A record requirements, and CCLD enforcement data across 28,000+ facilities.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-value">40,000+</div>
+        <div class="stat-label">Licensed Facilities</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value">35+</div>
+        <div class="stat-label">Unique LIC Forms</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value">21 + 19</div>
+        <div class="stat-label">Child + Staff Record Items</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-value">9</div>
+        <div class="stat-label">Inspection Domains</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- SECTION 1: REGULATORY LANDSCAPE -->
+    <section id="regulatory-landscape">
+      <div class="section-header">
+        <div class="section-num">Section 01</div>
+        <h2>California Regulatory Landscape</h2>
+        <p class="section-desc">The institutional architecture governing child care licensing in the largest state market in the United States.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(74,108,247,0.12); color: var(--accent-blue-light);">&#9881;</div>
+          <h4>Regulatory Body</h4>
+          <p>California Department of Social Services (CDSS), Community Care Licensing Division (CCLD)</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(0,212,170,0.12); color: var(--accent-cyan);">&#9878;</div>
+          <h4>Governing Law</h4>
+          <p>Title 22, California Code of Regulations + Health &amp; Safety Code Section 1596.70 et seq.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(247,183,49,0.12); color: var(--accent-gold);">&#9733;</div>
+          <h4>Regional Offices</h4>
+          <p>21 regional offices statewide, each with jurisdiction over facilities in their territory</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(255,71,87,0.12); color: var(--red-critical);">&#9830;</div>
+          <h4>Market Size</h4>
+          <p>40,000+ licensed child care facilities &mdash; the largest single-state addressable market in the U.S.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Key Resources</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Resource</th>
+                <th>Description</th>
+                <th>URL / Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CCLD Facility Search</strong></td>
+                <td>Public inspection database for all licensed child care facilities</td>
+                <td><a href="https://www.ccld.dss.ca.gov/carefacilitysearch/" target="_blank">ccld.dss.ca.gov/carefacilitysearch</a></td>
+              </tr>
+              <tr>
+                <td><strong>CARE Tools</strong></td>
+                <td>Compliance and Regulatory Enforcement Tools &mdash; the inspection framework used by all LPAs</td>
+                <td>Internal CCLD system</td>
+              </tr>
+              <tr>
+                <td><strong>Title 22 CCR</strong></td>
+                <td>California Code of Regulations, Division 12, governing child care center operations</td>
+                <td>California Legislative Information</td>
+              </tr>
+              <tr>
+                <td><strong>LIC 311A</strong></td>
+                <td>Records to Maintain &mdash; official checklist of all required on-site documentation</td>
+                <td>CDSS Forms Library</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INSPECTION PROCESS -->
+    <section id="inspection-process">
+      <div class="section-header">
+        <div class="section-num">Section 02</div>
+        <h2>The Inspector &amp; Inspection Process</h2>
+        <p class="section-desc">How Licensing Program Analysts (LPAs) evaluate facilities using the CARE Tools framework.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Who Inspects</h3>
+          <p><strong>Licensing Program Analysts (LPAs)</strong> &mdash; state employees under CCLD. Each LPA is assigned a caseload of facilities within their regional office territory. They are trained on the CARE Tools framework and carry regulatory authority to issue citations, impose fines, and recommend license actions.</p>
+        </div>
+        <div class="card">
+          <h3>Inspection Types</h3>
+          <p style="margin-bottom:8px;">Four distinct triggers bring an LPA to a facility:</p>
+          <ul>
+            <li><strong>Annual/Routine</strong> &mdash; scheduled compliance review</li>
+            <li><strong>Random Unannounced</strong> &mdash; spot checks without prior notice</li>
+            <li><strong>Complaint-Driven</strong> &mdash; always unannounced, triggered by filed complaints</li>
+            <li><strong>Follow-Up</strong> &mdash; verifying corrective actions from prior citations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>What Happens During an Inspection</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">1</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>LPA Arrives at Facility</h4>
+              <p>May or may not give advance notice for routine inspections. Complaint-driven visits are always unannounced.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">2</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Posts Notice of Site Visit</h4>
+              <p>LPA posts <code>LIC 9213</code> (Notice of Site Visit) at the facility entrance, visible to parents.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">3</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Full Facility Tour</h4>
+              <p>All areas accessible to children are walked and inspected, including outdoor spaces.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">4</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Physical Safety Inspection</h4>
+              <p>Checks cabinets, closets, storage areas, locks/latches, exterior perimeter, all equipment and surfaces.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">5</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Records Review</h4>
+              <p>All required records are reviewed for accuracy, completeness, and currency. This is where most citations originate.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">6</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Verify Posted Items</h4>
+              <p>Confirms all 10 required items are posted, up-to-date, and visible to parents and staff.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">7</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Ratio &amp; Capacity Verification</h4>
+              <p>Verifies staff-child ratios and licensed capacity on the spot by counting children and staff present.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">8</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>CARE Tools Evaluation</h4>
+              <p>Uses the CARE Tools framework to systematically evaluate compliance across all applicable domains.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-line">
+              <div class="step-dot">9</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Document Findings &amp; Issue Citations</h4>
+              <p>All findings are documented. Citations (Type A or Type B) are issued if warranted, with corrective action timelines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>9 Inspection Domains &mdash; Child Care Centers</h3>
+          <div class="domain-grid" style="grid-template-columns: 1fr;">
+            <div class="domain-item"><span class="domain-num">1</span> Care and Supervision</div>
+            <div class="domain-item"><span class="domain-num">2</span> Children's Records</div>
+            <div class="domain-item"><span class="domain-num">3</span> Food Service</div>
+            <div class="domain-item"><span class="domain-num">4</span> Personal Rights</div>
+            <div class="domain-item"><span class="domain-num">5</span> Physical Plant</div>
+            <div class="domain-item"><span class="domain-num">6</span> Reporting Requirements</div>
+            <div class="domain-item"><span class="domain-num">7</span> Staff Records</div>
+            <div class="domain-item"><span class="domain-num">8</span> Staffing Ratio and Capacity</div>
+            <div class="domain-item"><span class="domain-num">9</span> Toddler Component</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>6 Inspection Domains &mdash; Family Child Care Homes</h3>
+          <div class="domain-grid" style="grid-template-columns: 1fr;">
+            <div class="domain-item"><span class="domain-num">1</span> Care and Supervision</div>
+            <div class="domain-item"><span class="domain-num">2</span> Facility Administration</div>
+            <div class="domain-item"><span class="domain-num">3</span> Personal Rights</div>
+            <div class="domain-item"><span class="domain-num">4</span> Physical Plant</div>
+            <div class="domain-item"><span class="domain-num">5</span> Records</div>
+            <div class="domain-item"><span class="domain-num">6</span> Staffing Ratio and Capacity</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CITATION CLASSIFICATION -->
+    <section id="citation-system">
+      <div class="section-header">
+        <div class="section-num">Section 03</div>
+        <h2>Citation Classification System</h2>
+        <p class="section-desc">California uses a two-tier Type A / Type B citation system with progressive enforcement escalation.</p>
+      </div>
+
+      <div class="citation-card type-a">
+        <h4><span class="badge badge-critical" style="margin-right:8px;">Type A</span> Critical &mdash; Immediate Threat to Health, Safety, or Personal Rights</h4>
+        <ul>
+          <li><strong>Fine:</strong> $50/violation/day, escalating up to $150/violation/day until corrected</li>
+          <li><strong>Death or serious injury:</strong> Escalated penalties apply</li>
+          <li><strong>Posting requirement:</strong> Must be posted at facility for 30 days, visible to parents</li>
+          <li><strong>Compliance/non-compliance documentation:</strong> Also posted for 30 days</li>
+          <li><strong>Examples:</strong> Unsupervised children, hazardous conditions, background check violations, corporal punishment</li>
+        </ul>
+      </div>
+
+      <div class="citation-card type-b">
+        <h4><span class="badge badge-warning" style="margin-right:8px;">Type B</span> Warning &mdash; Potential Threat if Uncorrected</h4>
+        <ul>
+          <li><strong>First occurrence:</strong> Corrective action required within specified timeframe; no immediate fine</li>
+          <li><strong>2nd citation within 12 months:</strong> $150/violation + $150/day until corrected</li>
+          <li><strong>3rd citation within 12 months:</strong> $150/violation + $150/day + potential probation or license action</li>
+          <li><strong>Examples:</strong> Missing records, expired certifications, minor posting deficiencies</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Progressive Enforcement Ladder</h3>
+        <p style="margin-bottom:16px; font-size:0.85rem; color:var(--text-secondary);">When citations accumulate or remain uncorrected, CCLD escalates through these enforcement actions:</p>
+        <div class="enforcement-ladder">
+          <div class="enforcement-rung">
+            <div class="enforcement-dot"></div>
+            <div class="enforcement-label"><strong style="color:var(--accent-gold)">Probation</strong> &mdash; Facility continues operating under heightened monitoring and conditions</div>
+          </div>
+          <div class="enforcement-rung">
+            <div class="enforcement-dot"></div>
+            <div class="enforcement-label"><strong style="color:var(--orange-warning)">License Suspension</strong> &mdash; Temporary halt of operations; may be reinstated after compliance</div>
+          </div>
+          <div class="enforcement-rung">
+            <div class="enforcement-dot"></div>
+            <div class="enforcement-label"><strong style="color:#ff7f50">License Revocation</strong> &mdash; Permanent removal of license; facility must cease all operations</div>
+          </div>
+          <div class="enforcement-rung">
+            <div class="enforcement-dot"></div>
+            <div class="enforcement-label"><strong style="color:var(--red-critical)">Temporary Suspension Order</strong> &mdash; Immediate shutdown when children face imminent danger</div>
+          </div>
+          <div class="enforcement-rung">
+            <div class="enforcement-dot"></div>
+            <div class="enforcement-label"><strong style="color:#cc0022">Exclusion of Individuals</strong> &mdash; Specific persons banned from facility contact with children</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TOP 10 CITATIONS -->
+    <section id="top-citations">
+      <div class="section-header">
+        <div class="section-num">Section 04</div>
+        <h2>Top 10 Most Common California Citations</h2>
+        <p class="section-desc">Analysis of enforcement data across 28,000+ facilities. These are the violations ComplianceKit must prevent.</p>
+      </div>
+
+      <div class="card">
+        <div class="top-item">
+          <div class="top-rank rank-1">1</div>
+          <div class="top-details">
+            <h4>Background Check Gaps</h4>
+            <p><span class="top-pct">17.1%</span> of all facilities cited. Missing or incomplete LiveScan fingerprinting, DOJ/FBI/CACI clearance gaps, expired Criminal Record Statements.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-2">2</div>
+          <div class="top-details">
+            <h4>Staff Training Deficiencies</h4>
+            <p><span class="top-pct">10.3%</span> of centers cited. Incomplete 16-hour health &amp; safety training, expired CPR/first aid cards, missing water safety certificates.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-3">3</div>
+          <div class="top-details">
+            <h4>Building Safety Standards</h4>
+            <p><span class="top-pct">9.1%</span> of FCCHs cited. Structural deficiencies, fire safety violations, accessibility issues, hazardous materials storage.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">4</div>
+          <div class="top-details">
+            <h4>Required Postings Missing</h4>
+            <p><span class="top-pct">7.8%</span> of centers cited. License, menus, activity schedules, Personal Rights poster, or Parent's Rights poster not posted or outdated.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">5</div>
+          <div class="top-details">
+            <h4>Mandated Reporter Training</h4>
+            <p><span class="top-pct">4.8%</span> of facilities. Surging <strong class="text-red">187%</strong> in 2026 due to new enforcement emphasis. 2-year renewal cycle frequently missed.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">6</div>
+          <div class="top-details">
+            <h4>Supervision Violations</h4>
+            <p>Children left unsupervised or inadequately supervised. Among the most likely to be classified as Type A (critical).</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">7</div>
+          <div class="top-details">
+            <h4>Incomplete Children's Records</h4>
+            <p>One or more of the 21 required child record items missing, expired, or unsigned. Common gaps: immunization records, emergency contacts, health evaluations.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">8</div>
+          <div class="top-details">
+            <h4>Sanitation / Diapering Violations</h4>
+            <p>Improper diapering procedures, handwashing gaps, sanitation of surfaces and equipment.</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">9</div>
+          <div class="top-details">
+            <h4>Medication Administration Gaps</h4>
+            <p>Missing parental consent forms (<code>LIC 9221</code>), improper storage, incomplete dispensing logs (<code>LIC 622</code>).</p>
+          </div>
+        </div>
+        <div class="top-item">
+          <div class="top-rank rank-rest">10</div>
+          <div class="top-details">
+            <h4>Playground Safety / Fall Surfacing</h4>
+            <p>Inadequate fall zones, non-compliant surfacing materials, equipment in disrepair, age-inappropriate equipment access.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box blue">
+        <strong>Product Insight:</strong> 7 of the top 10 citations are <em>documentation and training tracking</em> issues &mdash; exactly the category of problems software solves best. ComplianceKit's core value proposition maps directly to the most frequent violation types.
+      </div>
+    </section>
+
+    <!-- SECTION 5: DOCUMENTATION REQUIREMENTS -->
+    <section id="documentation">
+      <div class="section-header">
+        <div class="section-num">Section 05</div>
+        <h2>Documentation Requirements</h2>
+        <p class="section-desc">Complete inventory from the official LIC 311A form. Every item below must be maintained on-site and produced upon LPA request.</p>
+      </div>
+
+      <div class="info-box red">
+        <strong>This is the critical section.</strong> The LIC 311A defines the exact records every licensed child care center must maintain. Missing any single item can trigger a citation. ComplianceKit must digitize, track, and alert on every item listed below.
+      </div>
+
+      <!-- I. Child's Records -->
+      <div class="card mt-3">
+        <h3>I. Child's Records <span class="badge badge-info" style="margin-left:8px;">21 items per child</span></h3>
+        <div class="checklist-group">
+          <div class="checklist-item"><span class="item-letter">A.</span><span><code>LIC 700</code> &mdash; Identification and Emergency Information</span></div>
+          <div class="checklist-item"><span class="item-letter">B.</span><span><code>LIC 702</code> &mdash; Child's Pre-admission Health History (Parents' Report)</span></div>
+          <div class="checklist-item"><span class="item-letter">C.</span><span><code>LIC 701</code> &mdash; Pre-admission Health Evaluation (Physician's Report) &mdash; if not in elementary school</span></div>
+          <div class="checklist-item"><span class="item-letter">D.</span><span><code>LIC 627</code> &mdash; Consent for Medical Treatment</span></div>
+          <div class="checklist-item"><span class="item-letter">E.</span><span>Religious exemption or physician immunization statement</span></div>
+          <div class="checklist-item"><span class="item-letter">F.</span><span><code>CDPH 286</code> &mdash; California School Immunization Record</span></div>
+          <div class="checklist-item"><span class="item-letter">G.</span><span>Current Admission Agreement with authorized signatures</span></div>
+          <div class="checklist-item"><span class="item-letter">H.</span><span><code>LIC 622</code> &mdash; Centrally Stored Medication and Destruction Record (if applicable)</span></div>
+          <div class="checklist-item"><span class="item-letter">I.</span><span>Documentation of unusual behavior or illness</span></div>
+          <div class="checklist-item"><span class="item-letter">J.</span><span><code>LIC 624</code> &mdash; Unusual Incident/Injury Report</span></div>
+          <div class="checklist-item"><span class="item-letter">K.</span><span><code>LIC 995/E</code> &mdash; Notification of Parents' Rights receipt (signed and dated)</span></div>
+          <div class="checklist-item"><span class="item-letter">L.</span><span>Quarterly infant needs/services plan (infant centers only)</span></div>
+          <div class="checklist-item"><span class="item-letter">M.</span><span>Toilet-training plan (infant centers only)</span></div>
+          <div class="checklist-item"><span class="item-letter">N.</span><span>Infant-feeding plan (infant centers only)</span></div>
+          <div class="checklist-item"><span class="item-letter">O.</span><span><code>LIC 613A</code> &mdash; Personal Rights receipts (signed and dated)</span></div>
+          <div class="checklist-item"><span class="item-letter">P.</span><span>Medication dispensing authorizations</span></div>
+          <div class="checklist-item"><span class="item-letter">Q.</span><span><code>LIC 9166</code>, <code>LIC 9222</code> &mdash; Health-related services documentation</span></div>
+          <div class="checklist-item"><span class="item-letter">R.</span><span><code>LIC 9224</code> &mdash; Acknowledgement of receipt of licensing reports</span></div>
+          <div class="checklist-item"><span class="item-letter">S.</span><span><code>LIC 9227</code> &mdash; Individual Infant Sleeping Plan</span></div>
+          <div class="checklist-item"><span class="item-letter">T.</span><span><code>LIC 9221</code> &mdash; Parent Consent for Administering Medication</span></div>
+          <div class="checklist-item"><span class="item-letter">U.</span><span><code>PUB 515</code> &mdash; Risks and Effects of Lead Poisoning</span></div>
+        </div>
+      </div>
+
+      <!-- II. Personnel Records -->
+      <div class="card">
+        <h3>II. Personnel Records <span class="badge badge-info" style="margin-left:8px;">19 items per staff</span></h3>
+        <div class="checklist-group">
+          <div class="checklist-item"><span class="item-letter">A.</span><span><code>LIC 503</code> &mdash; Health Screening Report with TB Clearance</span></div>
+          <div class="checklist-item"><span class="item-letter">B.</span><span>TB Clearance and "Good Health" statement from volunteers</span></div>
+          <div class="checklist-item"><span class="item-letter">C.</span><span>Staff Immunizations (Measles, Pertussis, Influenza)</span></div>
+          <div class="checklist-item"><span class="item-letter">D.</span><span><code>LIC 501</code> &mdash; Personnel Record or application/resume</span></div>
+          <div class="checklist-item"><span class="item-letter">E.</span><span><code>LIC 9096</code> &mdash; Evaluation of Director Qualifications</span></div>
+          <div class="checklist-item"><span class="item-letter">F.</span><span><code>LIC 9095</code> &mdash; Evaluation of Teacher Qualifications</span></div>
+          <div class="checklist-item"><span class="item-letter">G.</span><span>Age verification for aides under 18</span></div>
+          <div class="checklist-item"><span class="item-letter">H.</span><span>Infant center aide high school graduation verification</span></div>
+          <div class="checklist-item"><span class="item-letter">I.</span><span>Education/experience/on-the-job training verification</span></div>
+          <div class="checklist-item"><span class="item-letter">J.</span><span><code>LIC 508</code> &mdash; Criminal Record Statement</span></div>
+          <div class="checklist-item"><span class="item-letter">K.</span><span>Fingerprint clearances (State DOJ, FBI, CACI)</span></div>
+          <div class="checklist-item"><span class="item-letter">L.</span><span>Driver's license for staff who transport children</span></div>
+          <div class="checklist-item"><span class="item-letter">M.</span><span>Documentation of actual hours worked</span></div>
+          <div class="checklist-item"><span class="item-letter">N.</span><span>Pediatric CPR/first aid cards (16 hours health &amp; safety training)</span></div>
+          <div class="checklist-item"><span class="item-letter">O.</span><span>Valid water safety certificate</span></div>
+          <div class="checklist-item"><span class="item-letter">P.</span><span><code>LIC 9052</code> &mdash; Notice of Employee Rights</span></div>
+          <div class="checklist-item"><span class="item-letter">Q.</span><span><code>LIC 9108</code> &mdash; Statement Acknowledging Requirement to Report Suspected Child Abuse</span></div>
+          <div class="checklist-item"><span class="item-letter">R.</span><span>Official transcripts</span></div>
+          <div class="checklist-item"><span class="item-letter">S.</span><span>Mandated Reporter Training verification (renewed every 2 years)</span></div>
+        </div>
+      </div>
+
+      <!-- III. Administrative Records -->
+      <div class="card">
+        <h3>III. Administrative Records <span class="badge badge-info" style="margin-left:8px;">12 items</span></h3>
+        <div class="checklist-group">
+          <div class="checklist-item"><span class="item-letter">A.</span><span>Sign-in/sign-out sheets (current 30 days must be retained)</span></div>
+          <div class="checklist-item"><span class="item-letter">B.</span><span>Admission policies (criteria, ages, medical requirements, activities, field trips, food service)</span></div>
+          <div class="checklist-item"><span class="item-letter">C.</span><span><code>LIC 308</code> &mdash; Designation of Facility Responsibility</span></div>
+          <div class="checklist-item"><span class="item-letter">D.</span><span><code>LIC 500</code> &mdash; Personnel Report (current roster)</span></div>
+          <div class="checklist-item"><span class="item-letter">E.</span><span>Licensee affidavit re: fingerprint exemptions</span></div>
+          <div class="checklist-item"><span class="item-letter">F.</span><span><code>LIC 610</code> &mdash; Emergency Disaster Plan + documentation of drills (every 6 months, kept 1 year)</span></div>
+          <div class="checklist-item"><span class="item-letter">G.</span><span><code>LIC 9148</code> &mdash; Earthquake Preparedness Checklist (attached to LIC 610)</span></div>
+          <div class="checklist-item"><span class="item-letter">H.</span><span>Substitute teacher list</span></div>
+          <div class="checklist-item"><span class="item-letter">I.</span><span>Exceptions and waivers documentation</span></div>
+          <div class="checklist-item"><span class="item-letter">J.</span><span>Annual licensing reports and substantiated complaints (last 3 years, available for public review)</span></div>
+          <div class="checklist-item"><span class="item-letter">K.</span><span><code>LIC 9040</code> &mdash; Child Care Facility Roster</span></div>
+          <div class="checklist-item"><span class="item-letter">L.</span><span><code>LIC 309</code> &mdash; Administrative Organization</span></div>
+        </div>
+      </div>
+
+      <!-- IV. Documents to be Posted -->
+      <div class="card">
+        <h3>IV. Documents to Be Posted <span class="badge badge-warning" style="margin-left:8px;">10 items &mdash; must be visible</span></h3>
+        <div class="checklist-group">
+          <div class="checklist-item"><span class="item-letter">A.</span><span>Facility license</span></div>
+          <div class="checklist-item"><span class="item-letter">B.</span><span><code>LIC 613A</code> &mdash; Personal Rights form</span></div>
+          <div class="checklist-item"><span class="item-letter">C.</span><span>Menus (current week)</span></div>
+          <div class="checklist-item"><span class="item-letter">D.</span><span><code>PUB 269</code> &mdash; Child passenger restraint poster (with local health dept phone number)</span></div>
+          <div class="checklist-item"><span class="item-letter">E.</span><span>Daily activity schedule</span></div>
+          <div class="checklist-item"><span class="item-letter">F.</span><span><code>LIC 999</code> &mdash; Facility Sketch</span></div>
+          <div class="checklist-item"><span class="item-letter">G.</span><span><code>PUB 393</code> &mdash; Parent's Rights Poster</span></div>
+          <div class="checklist-item"><span class="item-letter">H.</span><span><code>LIC 9213</code> &mdash; Notice of Site Visit (posted during/after inspection)</span></div>
+          <div class="checklist-item"><span class="item-letter">I.</span><span>Type "A" citation reports (posted for 30 days)</span></div>
+          <div class="checklist-item"><span class="item-letter">J.</span><span>Compliance/non-compliance documents (posted for 30 days)</span></div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <strong>Total documentation burden:</strong> 21 child record items + 19 staff record items + 12 administrative records + 10 posted items = <strong>62 compliance items</strong> per facility. For a center with 50 children and 10 staff, that is <strong>1,050+ child records + 190+ staff records + 22 facility-level items = 1,262+ individual compliance touchpoints.</strong> This is the complexity ComplianceKit eliminates.
+      </div>
+    </section>
+
+    <!-- SECTION 6: RATIOS -->
+    <section id="ratios">
+      <div class="section-header">
+        <div class="section-num">Section 06</div>
+        <h2>Staff-Child Ratios</h2>
+        <p class="section-desc">California mandated ratios verified on-site during every inspection. Violations can trigger Type A citations.</p>
+      </div>
+
+      <div class="ratio-card">
+        <div class="ratio-age">Infants<span>0 &ndash; 2 years</span></div>
+        <div class="ratio-value">1 : 4</div>
+        <div style="flex:1"></div>
+        <span class="badge badge-critical">Strictest Ratio</span>
+      </div>
+      <div class="ratio-card">
+        <div class="ratio-age">Toddlers / Preschool<span>2 &ndash; 6 years</span></div>
+        <div class="ratio-value">1 : 12</div>
+        <div style="flex:1"></div>
+        <span class="badge badge-warning">Standard</span>
+      </div>
+      <div class="ratio-card">
+        <div class="ratio-age">School-Age<span>6 &ndash; 14 years</span></div>
+        <div class="ratio-value">1 : 15</div>
+        <div style="flex:1"></div>
+        <span class="badge badge-ok">Relaxed</span>
+      </div>
+
+      <div class="info-box blue mt-3">
+        <strong>ComplianceKit feature:</strong> Real-time ratio monitoring. Digital sign-in/sign-out feeds into live ratio calculations. Alerts fire when a staff member clocks out and the remaining ratio approaches or exceeds the limit. Dashboard shows current ratio by classroom.
+      </div>
+    </section>
+
+    <!-- SECTION 7: STAFF QUALIFICATIONS -->
+    <section id="qualifications">
+      <div class="section-header">
+        <div class="section-num">Section 07</div>
+        <h2>Staff Qualifications</h2>
+        <p class="section-desc">California credential, education, and clearance requirements that must be verified and documented for every staff member.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Director <span class="badge badge-info" style="margin-left:6px;">LIC 9096</span></h3>
+          <ul>
+            <li>Must meet specific educational and experience requirements defined by Title 22</li>
+            <li>Child Development Permit from the California Commission on Teacher Credentialing</li>
+            <li>Qualifications evaluated via <code>LIC 9096</code> &mdash; Evaluation of Director Qualifications</li>
+            <li>Official transcripts must be on file</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Teachers <span class="badge badge-info" style="margin-left:6px;">LIC 9095</span></h3>
+          <ul>
+            <li>Required educational units in early childhood education or child development</li>
+            <li>Documented experience working with children</li>
+            <li>Qualifications evaluated via <code>LIC 9095</code> &mdash; Evaluation of Teacher Qualifications</li>
+            <li>Official transcripts required and maintained on file</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Background Check Requirements</h3>
+        <p style="margin-bottom:16px;">All staff, volunteers, and household members (for FCCHs) must complete:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Check Type</th>
+                <th>Agency</th>
+                <th>Form</th>
+                <th>Clearance Scope</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>DOJ Live Scan Fingerprinting</strong></td>
+                <td>California Department of Justice</td>
+                <td><code>LIC 9163</code></td>
+                <td>California criminal history</td>
+              </tr>
+              <tr>
+                <td><strong>FBI Check</strong></td>
+                <td>Federal Bureau of Investigation</td>
+                <td>Via Live Scan</td>
+                <td>National criminal history</td>
+              </tr>
+              <tr>
+                <td><strong>Child Abuse Central Index (CACI)</strong></td>
+                <td>California DOJ</td>
+                <td>Via Live Scan</td>
+                <td>Substantiated child abuse reports</td>
+              </tr>
+              <tr>
+                <td><strong>Criminal Record Statement</strong></td>
+                <td>Self-declaration</td>
+                <td><code>LIC 508</code></td>
+                <td>Sworn personal criminal history statement</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: PRODUCTIZATION MAP -->
+    <section id="productization">
+      <div class="section-header">
+        <div class="section-num">Section 08</div>
+        <h2>How ComplianceKit Productizes Each Requirement</h2>
+        <p class="section-desc">The money table. Every California requirement mapped to a specific ComplianceKit feature that eliminates the manual burden.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="min-width:140px;">CA Requirement</th>
+              <th>Form #</th>
+              <th style="min-width:80px;">Scope</th>
+              <th style="min-width:200px;">Current Pain</th>
+              <th style="min-width:260px;">ComplianceKit Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Child Records</strong></td>
+              <td><code>LIC 700</code>, <code>701</code>, <code>702</code>, <code>627</code>, etc.</td>
+              <td>21 items per child</td>
+              <td>21 paper forms per child, scattered across file folders, impossible to audit at a glance</td>
+              <td>Digital child profile with document scanner. Checklist dashboard showing which of 21 docs are complete, missing, or expired per child. Bulk audit view.</td>
+            </tr>
+            <tr>
+              <td><strong>Personnel Records</strong></td>
+              <td><code>LIC 501</code>, <code>503</code>, <code>508</code>, <code>9095</code>, <code>9096</code></td>
+              <td>19 items per staff</td>
+              <td>19 paper docs per employee, TB/CPR expirations routinely missed, qualification gaps undetected</td>
+              <td>Staff compliance dashboard with cert expiry alerts (90/60/30-day warnings). Qualification evaluator tool cross-references education records against Title 22 requirements.</td>
+            </tr>
+            <tr>
+              <td><strong>Sign-In / Sign-Out</strong></td>
+              <td>Admin Record A</td>
+              <td>30 days retained</td>
+              <td>Paper logs, parents skip signing, lose 30-day compliance window, hard to search</td>
+              <td>Digital check-in with parent signature pad. Auto-30-day retention with searchable history. Real-time ratio calculation from live attendance data.</td>
+            </tr>
+            <tr>
+              <td><strong>Emergency Drills</strong></td>
+              <td><code>LIC 610</code></td>
+              <td>Every 6 months, kept 1 year</td>
+              <td>Paper log, frequently forgotten or incomplete, drill dates lost</td>
+              <td>Drill scheduler with 6-month auto-reminders. Attendance capture with staff/child headcount. 1-year auto-retention with date-stamped records.</td>
+            </tr>
+            <tr>
+              <td><strong>Earthquake Prep</strong></td>
+              <td><code>LIC 9148</code></td>
+              <td>Attached to LIC 610</td>
+              <td>Separate paper checklist, gets separated from LIC 610, lost or outdated</td>
+              <td>Digital checklist integrated directly with emergency plan module. Annual review reminders. Always attached to drill records.</td>
+            </tr>
+            <tr>
+              <td><strong>Facility Sketch</strong></td>
+              <td><code>LIC 999</code></td>
+              <td>Posted at facility</td>
+              <td>Hand-drawn, becomes outdated when rooms change, hard to reproduce</td>
+              <td>Digital floor plan editor with drag-and-drop room/equipment placement. Auto-print for posting. Version history tracks changes.</td>
+            </tr>
+            <tr>
+              <td><strong>Immunization Records</strong></td>
+              <td><code>CDPH 286</code></td>
+              <td>Per child, current</td>
+              <td>Paper copies, hard to verify against CA immunization schedule, missing vaccines undetected</td>
+              <td>OCR scanner for immunization cards. Auto-check against California immunization schedule. Flags missing or overdue vaccines with parent notification.</td>
+            </tr>
+            <tr>
+              <td><strong>Mandated Reporter Training</strong></td>
+              <td>N/A</td>
+              <td>Every 2 years, per staff</td>
+              <td>Easy to forget renewal cycle, no automated tracking, 187% citation surge</td>
+              <td>2-year cycle tracker with 90/60/30-day renewal alerts. Direct link integration to approved training providers. Certificate upload and verification.</td>
+            </tr>
+            <tr>
+              <td><strong>Posted Items (10 required)</strong></td>
+              <td>Various</td>
+              <td>Must be visible</td>
+              <td>Forget to post, outdated versions remain, new postings not added</td>
+              <td>"Posted Items" checklist with monthly photo verification workflow. Version tracking ensures current documents are displayed. Print-ready templates.</td>
+            </tr>
+            <tr>
+              <td><strong>Type A Citation Response</strong></td>
+              <td><code>LIC 421</code></td>
+              <td>Immediate + 30-day posting</td>
+              <td>Panic response, scrambling for documentation, miss 30-day posting deadline</td>
+              <td>Citation response workflow with guided corrective action plan builder. 30-day posting timer with countdown and reminders. Document assembly for response.</td>
+            </tr>
+            <tr>
+              <td><strong>3-Year Licensing History</strong></td>
+              <td>Admin Record J</td>
+              <td>Public review copies</td>
+              <td>Paper copies, disorganized, can't quickly produce 3 years of history</td>
+              <td>Auto-archive of all inspection results and complaints. 3-year rolling retention with instant retrieval. Public review packet generator.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 9: FORMS CATALOG -->
+    <section id="forms-catalog">
+      <div class="section-header">
+        <div class="section-num">Section 09</div>
+        <h2>The 35+ California Forms &mdash; Complete Catalog</h2>
+        <p class="section-desc">Every form a California child care facility must manage, who fills it out, and how ComplianceKit digitizes it.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Form #</th>
+              <th style="min-width:220px;">Form Name</th>
+              <th>Filled By</th>
+              <th>Category</th>
+              <th style="min-width:240px;">ComplianceKit Digitization</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>LIC 198A</code></td>
+              <td><strong>Application for License</strong></td>
+              <td>Licensee</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Pre-filled application wizard; auto-populates facility data from onboarding</td>
+            </tr>
+            <tr>
+              <td><code>LIC 308</code></td>
+              <td><strong>Designation of Facility Responsibility</strong></td>
+              <td>Licensee</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Digital form with e-signature; stored in facility admin records module</td>
+            </tr>
+            <tr>
+              <td><code>LIC 309</code></td>
+              <td><strong>Administrative Organization</strong></td>
+              <td>Licensee</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Auto-generated org chart from staff roster; updates when roles change</td>
+            </tr>
+            <tr>
+              <td><code>LIC 500</code></td>
+              <td><strong>Personnel Report</strong></td>
+              <td>Director</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Auto-generated from active staff roster; always current, print-on-demand</td>
+            </tr>
+            <tr>
+              <td><code>LIC 501</code></td>
+              <td><strong>Personnel Record</strong></td>
+              <td>Staff member</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Digital staff profile; application, resume, and credentials in one view</td>
+            </tr>
+            <tr>
+              <td><code>LIC 503</code></td>
+              <td><strong>Health Screening Report &mdash; TB Clearance</strong></td>
+              <td>Physician</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Upload and OCR scan; auto-extract clearance date; expiry tracking</td>
+            </tr>
+            <tr>
+              <td><code>LIC 508</code></td>
+              <td><strong>Criminal Record Statement</strong></td>
+              <td>Staff member</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Digital declaration form with e-signature; linked to LiveScan records</td>
+            </tr>
+            <tr>
+              <td><code>LIC 610</code></td>
+              <td><strong>Emergency Disaster Plan</strong></td>
+              <td>Director</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Guided plan builder; drill scheduler; 6-month reminders; 1-year retention</td>
+            </tr>
+            <tr>
+              <td><code>LIC 613A</code></td>
+              <td><strong>Personal Rights</strong></td>
+              <td>Parent (signs receipt)</td>
+              <td><span class="badge badge-warning">Posted</span> <span class="badge badge-ok">Child</span></td>
+              <td>Digital acknowledgement with parent e-signature; auto-posted version tracking</td>
+            </tr>
+            <tr>
+              <td><code>LIC 622</code></td>
+              <td><strong>Centrally Stored Medication &amp; Destruction Record</strong></td>
+              <td>Director/staff</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital medication log; dispensing timestamps; destruction records with witness fields</td>
+            </tr>
+            <tr>
+              <td><code>LIC 624</code></td>
+              <td><strong>Unusual Incident/Injury Report</strong></td>
+              <td>Staff on duty</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Mobile incident report with photo capture; auto-timestamps; parent notification; CCLD filing integration</td>
+            </tr>
+            <tr>
+              <td><code>LIC 627</code></td>
+              <td><strong>Consent for Medical Treatment</strong></td>
+              <td>Parent</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital consent form with parent e-signature; linked to child profile; renewal alerts</td>
+            </tr>
+            <tr>
+              <td><code>LIC 700</code></td>
+              <td><strong>Identification &amp; Emergency Information</strong></td>
+              <td>Parent</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Parent-facing intake form; emergency contacts with one-tap calling; annual review reminders</td>
+            </tr>
+            <tr>
+              <td><code>LIC 701</code></td>
+              <td><strong>Pre-admission Health Evaluation (Physician)</strong></td>
+              <td>Physician</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Upload and OCR; auto-extract exam date and findings; flag if missing for non-elementary children</td>
+            </tr>
+            <tr>
+              <td><code>LIC 702</code></td>
+              <td><strong>Child's Pre-admission Health History (Parent)</strong></td>
+              <td>Parent</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital health history form; parent completes during enrollment; stored in child profile</td>
+            </tr>
+            <tr>
+              <td><code>LIC 995</code></td>
+              <td><strong>Notification of Parents' Rights</strong></td>
+              <td>Parent (signs receipt)</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital acknowledgement; parent e-signature with date stamp; receipt stored in child record</td>
+            </tr>
+            <tr>
+              <td><code>LIC 995E</code></td>
+              <td><strong>Notification of Parents' Rights (English)</strong></td>
+              <td>Parent (signs receipt)</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Multi-language support; auto-selects based on parent language preference</td>
+            </tr>
+            <tr>
+              <td><code>LIC 999</code></td>
+              <td><strong>Facility Sketch</strong></td>
+              <td>Licensee</td>
+              <td><span class="badge badge-warning">Posted</span></td>
+              <td>Digital floor plan editor; drag-and-drop layout; version history; auto-print for posting</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9040</code></td>
+              <td><strong>Child Care Facility Roster</strong></td>
+              <td>Director</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Auto-generated from enrolled children database; always current; export-ready</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9052</code></td>
+              <td><strong>Notice of Employee Rights</strong></td>
+              <td>Staff (signs receipt)</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Digital acknowledgement during onboarding; e-signature; stored in staff profile</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9095</code></td>
+              <td><strong>Evaluation of Teacher Qualifications</strong></td>
+              <td>Director / LPA</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Qualification evaluator tool; cross-references transcripts and experience against Title 22 requirements; gap analysis</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9096</code></td>
+              <td><strong>Evaluation of Director Qualifications</strong></td>
+              <td>LPA</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Director qualification checklist; education/experience matrix; permit verification integration</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9108</code></td>
+              <td><strong>Statement Acknowledging Requirement to Report Suspected Child Abuse</strong></td>
+              <td>Staff (signs)</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Digital acknowledgement during onboarding; linked to mandated reporter training status</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9148</code></td>
+              <td><strong>Earthquake Preparedness Checklist</strong></td>
+              <td>Director</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Digital checklist attached to LIC 610; annual review reminders; completion tracking</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9163</code></td>
+              <td><strong>Request for Live Scan Service</strong></td>
+              <td>Staff member</td>
+              <td><span class="badge badge-info">Personnel</span></td>
+              <td>Live Scan status tracker; DOJ/FBI/CACI clearance dates; auto-link to staff profile</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9166</code></td>
+              <td><strong>Health-Related Services Plan</strong></td>
+              <td>Parent / physician</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Health services documentation module; care plan with staff action items; review reminders</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9182</code></td>
+              <td><strong>Licensing Compliance Report</strong></td>
+              <td>LPA</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Auto-archive upon receipt; 3-year retention; searchable history; parent access portal</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9188</code></td>
+              <td><strong>Deficiency Report</strong></td>
+              <td>LPA</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Corrective action workflow; deadline tracking; resolution documentation; auto-post if required</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9194</code></td>
+              <td><strong>Quarterly Visit Report</strong></td>
+              <td>LPA</td>
+              <td><span class="badge badge-muted">Admin</span></td>
+              <td>Auto-archive; trend analysis across quarterly reports; compliance score tracking</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9213</code></td>
+              <td><strong>Notice of Site Visit</strong></td>
+              <td>LPA (posts at facility)</td>
+              <td><span class="badge badge-warning">Posted</span></td>
+              <td>Photo verification when posted; auto-log of inspection dates; parent notification</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9221</code></td>
+              <td><strong>Parent Consent for Administering Medication</strong></td>
+              <td>Parent</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital consent with medication details; linked to LIC 622 dispensing log; expiry tracking</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9222</code></td>
+              <td><strong>Health-Related Services Documentation</strong></td>
+              <td>Staff / physician</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Integrated health services records; linked to child profile; staff task assignments</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9224</code></td>
+              <td><strong>Acknowledgement of Receipt of Licensing Reports</strong></td>
+              <td>Parent (signs)</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital acknowledgement; auto-generated when new licensing reports are received; parent portal</td>
+            </tr>
+            <tr>
+              <td><code>LIC 9227</code></td>
+              <td><strong>Individual Infant Sleeping Plan</strong></td>
+              <td>Parent / Director</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Safe sleep plan builder; SIDS prevention guidelines integrated; parent e-signature</td>
+            </tr>
+            <tr>
+              <td><code>PUB 269</code></td>
+              <td><strong>Child Passenger Restraint Poster</strong></td>
+              <td>CDSS (provided)</td>
+              <td><span class="badge badge-warning">Posted</span></td>
+              <td>Version-controlled digital copy; print-ready; local health dept phone auto-populated</td>
+            </tr>
+            <tr>
+              <td><code>PUB 271</code></td>
+              <td><strong>Child Care Center Complaint Information</strong></td>
+              <td>CDSS (provided)</td>
+              <td><span class="badge badge-warning">Posted</span></td>
+              <td>Digital copy with current contact information; print-ready; version tracking</td>
+            </tr>
+            <tr>
+              <td><code>PUB 393</code></td>
+              <td><strong>Parent's Rights Poster</strong></td>
+              <td>CDSS (provided)</td>
+              <td><span class="badge badge-warning">Posted</span></td>
+              <td>Version-controlled; print-ready; multi-language support; posting verification photo</td>
+            </tr>
+            <tr>
+              <td><code>PUB 515</code></td>
+              <td><strong>Risks and Effects of Lead Poisoning</strong></td>
+              <td>CDSS (provided to parent)</td>
+              <td><span class="badge badge-ok">Child</span></td>
+              <td>Digital distribution with parent acknowledgement receipt; stored in child record</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box green mt-2">
+        <strong>38 forms cataloged.</strong> ComplianceKit replaces every paper-based form interaction with a digital workflow: e-signatures, OCR scanning, auto-generated reports, expiry tracking, and version control. Zero paper required for compliance management.
+      </div>
+    </section>
+
+    <!-- SECTION 10: DOMAIN OBJECTS -->
+    <section id="domain-objects">
+      <div class="section-header">
+        <div class="section-num">Section 10</div>
+        <h2>Domain Objects (California-Specific)</h2>
+        <p class="section-desc">Core data model extensions for the California state module. These objects extend the shared ComplianceKit schema with California-specific fields and relationships.</p>
+      </div>
+
+      <div class="code-block">
+<span class="comment">// LicForm - Individual form instance</span>
+<span class="type">LicForm</span> {
+  <span class="key">form_number</span>: <span class="str">"LIC_700"</span>          <span class="comment">// California form identifier</span>
+  <span class="key">title</span>: <span class="str">"Identification &amp; Emergency Information"</span>
+  <span class="key">category</span>: <span class="type">child | personnel | admin | posted</span>
+  <span class="key">child_id</span>?: <span class="str">uuid</span>              <span class="comment">// if category == child</span>
+  <span class="key">staff_id</span>?: <span class="str">uuid</span>              <span class="comment">// if category == personnel</span>
+  <span class="key">upload_date</span>: <span class="str">date</span>
+  <span class="key">status</span>: <span class="type">complete | incomplete | expired | not_applicable</span>
+  <span class="key">file_url</span>: <span class="str">string</span>
+  <span class="key">expiry_date</span>?: <span class="str">date</span>           <span class="comment">// null if no expiry</span>
+}
+      </div>
+
+      <div class="code-block">
+<span class="comment">// ChildComplianceProfile - Aggregated child compliance status</span>
+<span class="type">ChildComplianceProfile</span> {
+  <span class="key">child_id</span>: <span class="str">uuid</span>
+  <span class="key">forms_required</span>: <span class="str">21</span>            <span class="comment">// California mandate</span>
+  <span class="key">forms_complete</span>: <span class="str">number</span>
+  <span class="key">forms_missing</span>: <span class="str">LicForm[]</span>       <span class="comment">// which of 21 are absent</span>
+  <span class="key">forms_expired</span>: <span class="str">LicForm[]</span>       <span class="comment">// which have passed expiry</span>
+  <span class="key">overall_status</span>: <span class="type">compliant | at_risk | non_compliant</span>
+}
+      </div>
+
+      <div class="code-block">
+<span class="comment">// StaffComplianceProfile - Aggregated staff compliance status</span>
+<span class="type">StaffComplianceProfile</span> {
+  <span class="key">staff_id</span>: <span class="str">uuid</span>
+  <span class="key">forms_required</span>: <span class="str">19</span>            <span class="comment">// California mandate</span>
+  <span class="key">forms_complete</span>: <span class="str">number</span>
+  <span class="key">forms_missing</span>: <span class="str">LicForm[]</span>
+  <span class="key">certs_expiring_30d</span>: <span class="str">LicForm[]</span>  <span class="comment">// expiring within 30 days</span>
+  <span class="key">overall_status</span>: <span class="type">compliant | at_risk | non_compliant</span>
+}
+      </div>
+
+      <div class="code-block">
+<span class="comment">// CitationRecord - Type A or Type B citation tracking</span>
+<span class="type">CitationRecord</span> {
+  <span class="key">type</span>: <span class="type">A | B</span>
+  <span class="key">date_received</span>: <span class="str">date</span>
+  <span class="key">description</span>: <span class="str">string</span>
+  <span class="key">regulation_section</span>: <span class="str">string</span>    <span class="comment">// e.g. "Title 22 &sect;101216.2"</span>
+  <span class="key">corrective_action_due</span>: <span class="str">date</span>
+  <span class="key">corrected_date</span>?: <span class="str">date</span>
+  <span class="key">posted_start_date</span>?: <span class="str">date</span>      <span class="comment">// Type A: 30-day posting</span>
+  <span class="key">posted_end_date</span>?: <span class="str">date</span>
+  <span class="key">status</span>: <span class="type">open | corrected | escalated | appealed</span>
+}
+      </div>
+
+      <div class="two-col">
+        <div class="code-block">
+<span class="comment">// MandatedReporterTraining</span>
+<span class="type">MandatedReporterTraining</span> {
+  <span class="key">staff_id</span>: <span class="str">uuid</span>
+  <span class="key">completion_date</span>: <span class="str">date</span>
+  <span class="key">next_renewal_date</span>: <span class="str">date</span>  <span class="comment">// +2 years</span>
+  <span class="key">provider</span>: <span class="str">string</span>
+  <span class="key">cert_url</span>: <span class="str">string</span>
+}
+        </div>
+        <div class="code-block">
+<span class="comment">// EarthquakePrep - CA-specific</span>
+<span class="type">EarthquakePrep</span> {
+  <span class="key">facility_id</span>: <span class="str">uuid</span>
+  <span class="key">lic_9148_complete</span>: <span class="str">boolean</span>
+  <span class="key">last_review_date</span>: <span class="str">date</span>
+  <span class="key">next_review_date</span>: <span class="str">date</span>
+  <span class="key">attached_to_lic_610</span>: <span class="str">boolean</span>
+}
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="code-block">
+<span class="comment">// FacilityPosting - Posted item tracking</span>
+<span class="type">FacilityPosting</span> {
+  <span class="key">item_type</span>: <span class="type">license | personal_rights |
+    menu | activity_schedule | facility_sketch |
+    parents_rights_poster | site_visit_notice |
+    passenger_restraint | type_a_citation |
+    compliance_docs</span>
+  <span class="key">posted</span>: <span class="str">boolean</span>
+  <span class="key">last_verified_date</span>: <span class="str">date</span>
+  <span class="key">photo_proof_url</span>?: <span class="str">string</span>
+  <span class="key">next_verification_date</span>: <span class="str">date</span>
+}
+        </div>
+        <div class="code-block">
+<span class="comment">// LiveScanRecord - Background check tracking</span>
+<span class="type">LiveScanRecord</span> {
+  <span class="key">staff_id</span>: <span class="str">uuid</span>
+  <span class="key">request_date</span>: <span class="str">date</span>
+  <span class="key">doj_clearance_date</span>?: <span class="str">date</span>
+  <span class="key">fbi_clearance_date</span>?: <span class="str">date</span>
+  <span class="key">caci_clearance_date</span>?: <span class="str">date</span>
+  <span class="key">status</span>: <span class="type">pending | cleared |
+    flagged | denied</span>
+  <span class="key">lic_9163_submitted</span>: <span class="str">boolean</span>
+}
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 11: WHY CALIFORNIA -->
+    <section id="opportunity">
+      <div class="section-header">
+        <div class="section-num">Section 11</div>
+        <h2>Why California Is the Biggest Opportunity</h2>
+        <p class="section-desc">Strategic rationale for launching in California first. Every metric points to the highest-leverage market in the country.</p>
+      </div>
+
+      <div class="opp-grid">
+        <div class="opp-card">
+          <div class="opp-stat">40,000+</div>
+          <h4>Largest Addressable Market</h4>
+          <p>More licensed child care facilities than any other state. Single-state go-to-market captures the biggest possible wedge of the national market.</p>
+        </div>
+        <div class="opp-card">
+          <div class="opp-stat">35+</div>
+          <h4>Overwhelming Paper Burden</h4>
+          <p>35+ unique LIC forms per facility. The sheer volume of paperwork creates unbearable manual burden and strong product-market fit for digital compliance.</p>
+        </div>
+        <div class="opp-card">
+          <div class="opp-stat">21 + 19</div>
+          <h4>Complexity That Demands Software</h4>
+          <p>21 child record items and 19 staff record items per person. No spreadsheet or file cabinet can reliably track this many compliance touchpoints with expiry dates.</p>
+        </div>
+        <div class="opp-card">
+          <div class="opp-stat">30 days</div>
+          <h4>Reputation Risk Drives Urgency</h4>
+          <p>Type A citations must be publicly posted for 30 days. Parents see them. This reputation risk creates powerful motivation to invest in prevention.</p>
+        </div>
+        <div class="opp-card">
+          <div class="opp-stat">21</div>
+          <h4>Regional Office Inconsistency</h4>
+          <p>21 regional offices means 21 variations in enforcement emphasis. Providers need a single source of truth that tracks the superset of all requirements.</p>
+        </div>
+        <div class="opp-card">
+          <div class="opp-stat">CA-only</div>
+          <h4>Earthquake Prep = Competitive Moat</h4>
+          <p>LIC 9148 Earthquake Preparedness is California-specific. Building this into ComplianceKit demonstrates deep vertical knowledge that generic tools can never match.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 12: CROSS-STATE ARCHITECTURE -->
+    <section id="architecture">
+      <div class="section-header">
+        <div class="section-num">Section 12</div>
+        <h2>Cross-State Architecture Notes</h2>
+        <p class="section-desc">How California fits into the multi-state ComplianceKit platform. Design principles for state-specific extensibility.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(74,108,247,0.12); color: var(--accent-blue-light);">&#8801;</div>
+          <h4>State-Specific Regulation Engine</h4>
+          <p>Each state loads its own rule set: forms, ratios, timelines, violation classifications, and enforcement procedures. California's module includes all 38 LIC/PUB forms and Title 22 requirements.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(0,212,170,0.12); color: var(--accent-cyan);">&#8644;</div>
+          <h4>Unified Data Model</h4>
+          <p>Core entities (Child, Staff, Facility, Inspection, Citation) are shared across all states. State-specific extensions add fields and validation rules without forking the schema.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(247,183,49,0.12); color: var(--accent-gold);">&#9635;</div>
+          <h4>Multi-State Dashboard</h4>
+          <p>Operators with facilities in TX, FL, and CA can manage compliance across all three states from one dashboard, with state context switching and unified alerts.</p>
+        </div>
+        <div class="card-sm">
+          <div class="card-icon" style="background: rgba(46,213,115,0.12); color: var(--green-ok);">&#10003;</div>
+          <h4>Onboarding State Selector</h4>
+          <p>During onboarding, selecting "California" pre-loads all 38 form templates, California ratios, Title 22 regulation references, and CCLD reporting requirements.</p>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <h3>Architecture Diagram</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Shared / Core</th>
+                <th>California Extension</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Data Model</strong></td>
+                <td>Child, Staff, Facility, Inspection, Citation, Document</td>
+                <td>LicForm, EarthquakePrep, LiveScanRecord, MandatedReporterTraining, FacilityPosting</td>
+              </tr>
+              <tr>
+                <td><strong>Validation Rules</strong></td>
+                <td>Required fields, date ranges, file upload constraints</td>
+                <td>21 child record items, 19 staff record items, 6-month drill cycles, 2-year mandated reporter renewal, 30-day citation posting</td>
+              </tr>
+              <tr>
+                <td><strong>Ratios</strong></td>
+                <td>Configurable age-group ratio engine</td>
+                <td>Infants 1:4, Toddlers/Preschool 1:12, School-Age 1:15</td>
+              </tr>
+              <tr>
+                <td><strong>Citations</strong></td>
+                <td>Generic citation object with severity, deadline, status</td>
+                <td>Type A / Type B classification, progressive enforcement ladder, $50-$150/day fine structure</td>
+              </tr>
+              <tr>
+                <td><strong>Forms Library</strong></td>
+                <td>Templated form system with e-signature, OCR, version control</td>
+                <td>38 California LIC/PUB form templates pre-loaded</td>
+              </tr>
+              <tr>
+                <td><strong>Reporting</strong></td>
+                <td>Compliance score, audit trail, export engine</td>
+                <td>CCLD-formatted reports, 3-year history retention, public review packet generator</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-box blue mt-2">
+        <strong>Expansion path:</strong> With California's 38-form, 9-domain inspection framework fully modeled, adding Texas (HHSC/DFPS) and Florida (DCF) requires only defining their state-specific form sets, ratios, and violation classifications. The core compliance engine, UI framework, and data model remain unchanged.
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center; padding: 20px 0 40px;">
+      <div style="font-size:0.7rem; color:var(--text-muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">ComplianceKit Product Specification</div>
+      <div style="font-size:0.8rem; color:var(--text-secondary);">California Module &mdash; v3.1.0 &mdash; April 2026</div>
+      <div style="font-size:0.65rem; color:var(--text-muted); margin-top:8px;">Confidential. Distribution restricted to product and engineering teams.</div>
+    </footer>
+
+  </div><!-- .content -->
+</div><!-- .main -->
+
+</body>
+</html>

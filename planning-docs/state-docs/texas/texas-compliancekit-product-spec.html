@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit - Texas Product Specification</title>
+<style>
+  /* ── Reset & Base ────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1a1a2e;
+    --navy-light:  #222244;
+    --navy-mid:    #2d2d50;
+    --slate:       #3a3a5c;
+    --accent:      #4fc3f7;
+    --accent-dim:  #2a8abf;
+    --white:       #ffffff;
+    --off-white:   #f4f6f9;
+    --text:        #2c2c3a;
+    --text-light:  #6b7280;
+    --border:      #e2e5ea;
+    --high:        #e53935;
+    --high-bg:     #fdecea;
+    --med-high:    #f57c00;
+    --med-high-bg: #fff3e0;
+    --medium:      #fbc02d;
+    --medium-bg:   #fffde7;
+    --med-low:     #c0ca33;
+    --med-low-bg:  #f9fbe7;
+    --low:         #43a047;
+    --low-bg:      #e8f5e9;
+    --sidebar-w:   270px;
+    --header-h:    64px;
+  }
+
+  html { scroll-behavior: smooth; font-size: 15px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    color: var(--text);
+    background: var(--off-white);
+    line-height: 1.65;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────── */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--navy);
+    color: var(--white);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--slate) var(--navy);
+  }
+
+  .sidebar::-webkit-scrollbar { width: 5px; }
+  .sidebar::-webkit-scrollbar-track { background: var(--navy); }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 3px; }
+
+  .sidebar-brand {
+    padding: 24px 24px 8px;
+    border-bottom: 1px solid var(--navy-mid);
+  }
+
+  .sidebar-brand h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sidebar-brand h1 .logo-icon {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand .subtitle {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .sidebar-meta {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--navy-mid);
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  .sidebar-meta strong { color: rgba(255,255,255,0.7); }
+
+  .sidebar-nav { padding: 16px 0; flex: 1; }
+
+  .sidebar-nav .nav-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.35);
+    padding: 12px 24px 6px;
+    display: block;
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 24px;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: all 0.15s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .sidebar-nav a:hover {
+    background: var(--navy-light);
+    color: var(--white);
+    border-left-color: var(--accent);
+  }
+
+  .sidebar-nav a .nav-num {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 18px;
+  }
+
+  /* ── Main Content ────────────────────────────────────── */
+  .main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(244,246,249,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+  }
+
+  .top-bar .breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  .top-bar .breadcrumb span { color: var(--text); font-weight: 600; }
+
+  .top-bar .badge-live {
+    margin-left: auto;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 48px 120px;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 16px;
+    padding: 56px 48px;
+    color: var(--white);
+    margin-bottom: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(79,195,247,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero .tag {
+    display: inline-block;
+    background: rgba(79,195,247,0.18);
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  .hero .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .hero-stats .stat {
+    text-align: left;
+  }
+
+  .hero .hero-stats .stat .num {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .hero .hero-stats .stat .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  /* ── Sections ────────────────────────────────────────── */
+  .section {
+    margin-bottom: 64px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-num {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-header h3 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--navy);
+  }
+
+  .section p, .section li {
+    color: var(--text);
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+
+  .section p { margin-bottom: 14px; }
+
+  .section ul, .section ol {
+    margin: 0 0 18px 20px;
+  }
+
+  .section li { margin-bottom: 6px; }
+
+  .section h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 32px 0 12px;
+  }
+
+  .section h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--slate);
+    margin: 20px 0 8px;
+  }
+
+  /* ── Cards ───────────────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .card-sm {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .card-sm .card-sm-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .card-sm .card-sm-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy);
+  }
+
+  .card-sm .card-sm-detail {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ── Tables ──────────────────────────────────────────── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  thead {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  thead th {
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  thead th:first-child { border-radius: 9px 0 0 0; }
+  thead th:last-child { border-radius: 0 9px 0 0; }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:nth-child(even) { background: rgba(244,246,249,0.5); }
+
+  tbody tr:hover { background: rgba(79,195,247,0.04); }
+
+  /* ── Badges ──────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .badge-high       { background: var(--high-bg);     color: var(--high); }
+  .badge-med-high   { background: var(--med-high-bg); color: var(--med-high); }
+  .badge-medium     { background: var(--medium-bg);   color: #e6a800; }
+  .badge-med-low    { background: var(--med-low-bg);  color: #8c9900; }
+  .badge-low        { background: var(--low-bg);       color: var(--low); }
+
+  .badge-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 12px;
+    min-width: 48px;
+  }
+
+  /* ── Process Steps ───────────────────────────────────── */
+  .process-steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  .process-steps li {
+    counter-increment: step;
+    padding: 14px 20px 14px 56px;
+    position: relative;
+    border-left: 2px solid var(--border);
+    margin-left: 16px;
+    margin-bottom: 0;
+  }
+
+  .process-steps li:last-child { border-left-color: transparent; }
+
+  .process-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: -15px; top: 12px;
+    width: 28px; height: 28px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Checklist Columns ───────────────────────────────── */
+  .checklist-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin: 12px 0 20px;
+  }
+
+  .checklist-cols li {
+    font-size: 0.84rem;
+    padding-left: 20px;
+    position: relative;
+    list-style: none;
+    margin-bottom: 4px;
+  }
+
+  .checklist-cols li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 10px; height: 10px;
+    border: 2px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ── Posting Items ───────────────────────────────────── */
+  .posted-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  .posted-item {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .posted-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Domain Object Cards ─────────────────────────────── */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .domain-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .domain-card .domain-name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .domain-card .domain-name .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .domain-card .domain-fields {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+
+  /* ── Architecture ────────────────────────────────────── */
+  .arch-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .arch-layer {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease;
+  }
+
+  .arch-layer:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+  .arch-layer .arch-icon {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 800;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .arch-layer .arch-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .arch-layer .arch-desc {
+    font-size: 0.74rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ── Penalty callout ─────────────────────────────────── */
+  .penalty-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .penalty-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .penalty-card .penalty-amount {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--high);
+  }
+
+  .penalty-card .penalty-label {
+    font-size: 0.76rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── Enforcement steps ───────────────────────────────── */
+  .enforcement-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .enforcement-step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--navy);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    white-space: nowrap;
+  }
+
+  .enforcement-arrow {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+
+  /* ── Severity legend (inline) ────────────────────────── */
+  .severity-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0 24px;
+  }
+
+  .severity-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+  }
+
+  .severity-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Callout box ─────────────────────────────────────── */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: rgba(79,195,247,0.06);
+    padding: 18px 22px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+    font-size: 0.88rem;
+  }
+
+  .callout strong { color: var(--navy); }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  .doc-footer {
+    text-align: center;
+    padding: 32px 0;
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    font-size: 0.74rem;
+    color: var(--text-light);
+  }
+
+  /* ── Print / Responsive ──────────────────────────────── */
+  @media (max-width: 1000px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .content { padding: 32px 20px 80px; }
+    .card-grid, .domain-grid { grid-template-columns: 1fr; }
+    .arch-stack { grid-template-columns: 1fr; }
+    .penalty-grid { grid-template-columns: 1fr; }
+    .checklist-cols { grid-template-columns: 1fr; }
+    .hero .hero-stats { flex-wrap: wrap; gap: 24px; }
+  }
+
+  @media print {
+    .sidebar, .top-bar { display: none; }
+    .main { margin-left: 0; }
+    .hero { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <h1><span class="logo-icon">CK</span> ComplianceKit</h1>
+    <span class="subtitle">Product Specification</span>
+  </div>
+  <div class="sidebar-meta">
+    <strong>State:</strong> Texas<br>
+    <strong>Version:</strong> 1.0<br>
+    <strong>Date:</strong> April 6, 2026<br>
+    <strong>Status:</strong> Internal Draft
+  </div>
+  <div class="sidebar-nav">
+    <span class="nav-label">Regulatory Context</span>
+    <a href="#s1"><span class="nav-num">01</span> Regulatory Landscape</a>
+    <a href="#s2"><span class="nav-num">02</span> Inspector & Process</a>
+    <a href="#s3"><span class="nav-num">03</span> Deficiency Weights</a>
+    <a href="#s4"><span class="nav-num">04</span> Top 10 Violations</a>
+    <span class="nav-label">Compliance Surface</span>
+    <a href="#s5"><span class="nav-num">05</span> Documentation Requirements</a>
+    <a href="#s6"><span class="nav-num">06</span> Staff-Child Ratios</a>
+    <a href="#s7"><span class="nav-num">07</span> Training Requirements</a>
+    <a href="#s8"><span class="nav-num">08</span> Fines & Penalties</a>
+    <span class="nav-label">Product</span>
+    <a href="#s9"><span class="nav-num">09</span> Feature Mapping</a>
+    <a href="#s10"><span class="nav-num">10</span> Domain Objects</a>
+    <a href="#s11"><span class="nav-num">11</span> Architecture</a>
+  </div>
+</nav>
+
+<!-- ════════════════════ MAIN ═══════════════════════ -->
+<div class="main">
+  <div class="top-bar">
+    <div class="breadcrumb">ComplianceKit / States / <span>Texas</span></div>
+    <div class="badge-live">Internal Product Spec</div>
+  </div>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="tag">Texas Market Entry</div>
+      <h2>Commoditizing Daycare Compliance for the State of Texas</h2>
+      <p>A complete product specification mapping every HHSC Child Care Regulation requirement to a digital-first ComplianceKit feature. This document demonstrates market understanding, regulatory depth, and product-market fit.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="num">14,000+</div>
+          <div class="label">Licensed Centers</div>
+        </div>
+        <div class="stat">
+          <div class="num">746</div>
+          <div class="label">Minimum Standards</div>
+        </div>
+        <div class="stat">
+          <div class="num">7,107</div>
+          <div class="label">Top-10 Violations (2022)</div>
+        </div>
+        <div class="stat">
+          <div class="num">$1K</div>
+          <div class="label">Max Per-Violation Fine</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────── SECTION 1: Regulatory Landscape ────────── -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h3>Texas Regulatory Landscape</h3>
+      </div>
+
+      <p>Texas child care operations are governed by the <strong>Health and Human Services Commission (HHSC) Child Care Regulation (CCR) Division</strong>. The CCR Division licenses, monitors, and inspects all child care operations in the state under <strong>Texas Human Resources Code, Chapter 42</strong> and the <strong>Texas Administrative Code, Title 26, Chapters 744-749</strong>.</p>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Regulatory Body</div>
+          <div class="card-sm-value">HHSC CCR</div>
+          <div class="card-sm-detail">Child Care Regulation Division under Health and Human Services Commission</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Licensed Centers</div>
+          <div class="card-sm-value">14,000+</div>
+          <div class="card-sm-detail">Licensed child care centers statewide</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Online System</div>
+          <div class="card-sm-value">CLASS</div>
+          <div class="card-sm-detail">Child Care Licensing Automation Support System</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Public Records</div>
+          <div class="card-sm-value">Search TX</div>
+          <div class="card-sm-detail">Search Texas Child Care website for public inspection records</div>
+        </div>
+      </div>
+
+      <p>The primary standards governing licensed child care centers are found in <strong>Chapter 746 - Minimum Standards for Child-Care Centers</strong>. These standards cover every aspect of operation, from physical facility requirements to staff qualifications, child-to-staff ratios, health and safety protocols, and administrative record-keeping.</p>
+
+      <div class="callout">
+        <strong>Market Opportunity:</strong> With over 14,000 licensed centers and a regulatory framework that demands meticulous documentation, the Texas market represents the single largest state opportunity for ComplianceKit. The majority of these centers still rely on paper-based compliance tracking.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 2: Inspector & Process ────────── -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h3>The Inspector & Inspection Process</h3>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Who Inspects</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">CCR Licensing Representatives</div>
+          <div class="card-sm-detail">State employees under HHSC</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Inspection Frequency</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">1+ Annual</div>
+          <div class="card-sm-detail">Unannounced + complaint-driven + follow-up</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">New Operations</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">Enhanced Monitoring</div>
+          <div class="card-sm-detail">Initial inspection before licensing + extra visits in first year</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Duration</div>
+          <div class="card-sm-value" style="font-size:1.1rem;">2-4 Hours</div>
+          <div class="card-sm-detail">Typical full annual inspection</div>
+        </div>
+      </div>
+
+      <h4>What Happens During an Inspection</h4>
+      <ol class="process-steps">
+        <li>Inspector arrives unannounced and presents HHSC identification to facility staff</li>
+        <li>Walks through <strong>all areas accessible to children</strong> -- indoor classrooms, outdoor play areas, storage rooms, and sleeping/nap areas</li>
+        <li>Reviews documentation in the office/admin area, cross-referencing staff and children's records against required forms</li>
+        <li>Checks all <strong>posted items on walls</strong> -- license, emergency numbers, menus, activity plans, discipline policy, evacuation routes</li>
+        <li>Observes <strong>staff-child interactions and ratios in real-time</strong>, counting heads in each classroom against age group requirements</li>
+        <li>Documents any deficiencies found, noting the specific minimum standard violated and the severity weight</li>
+        <li>Notifies the operation <strong>in writing</strong> of any violations before departing the facility</li>
+        <li>Violations are posted to the <strong>public online record</strong> via the Search Texas Child Care website, visible to any parent</li>
+      </ol>
+
+      <h4>Inspector Tools</h4>
+      <p>Inspectors use the <strong>CLASS system</strong> on a laptop or tablet during their visit, along with standardized inspection evaluation forms:</p>
+      <ul>
+        <li><strong>Form 7259</strong> -- Personnel Records Evaluation</li>
+        <li><strong>Form 7260</strong> -- Children's Records Evaluation</li>
+        <li><strong>Form 7261</strong> -- Center Records Evaluation</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Product Insight:</strong> ComplianceKit's inspection readiness dashboard mirrors exactly what inspectors check using Forms 7259, 7260, and 7261. By structuring our data model around these forms, we ensure that facilities can self-audit against the exact same criteria inspectors use.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 3: Deficiency Weight System ────────── -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h3>Deficiency Weight System</h3>
+      </div>
+
+      <p>Texas assigns each minimum standard a <strong>deficiency weight</strong> based on the level of risk the violation poses to children. This weight system drives the severity of enforcement actions and determines whether administrative penalties apply.</p>
+
+      <div class="severity-legend">
+        <div class="severity-item"><div class="severity-dot" style="background:var(--high)"></div> High</div>
+        <div class="severity-item"><div class="severity-dot" style="background:var(--med-high)"></div> Medium-High</div>
+        <div class="severity-item"><div class="severity-dot" style="background:var(--medium)"></div> Medium</div>
+        <div class="severity-item"><div class="severity-dot" style="background:var(--med-low)"></div> Medium-Low</div>
+        <div class="severity-item"><div class="severity-dot" style="background:var(--low)"></div> Low</div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Weight</th>
+              <th>Risk Level</th>
+              <th>Examples</th>
+              <th>Consequences</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Greatest risk to children</td>
+              <td>Background check violations, supervision failures, abuse/neglect incidents</td>
+              <td>Administrative penalties up to <strong>$1,000 per violation</strong>; possible immediate adverse action</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-med-high">Med-High</span></td>
+              <td>Significant risk</td>
+              <td>Staff-to-child ratio violations, safety hazards (accessible pools, broken gates)</td>
+              <td>Corrective action required; repeated violations escalate to probation</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>Moderate risk</td>
+              <td>Training requirement gaps, incomplete documentation, expired certifications</td>
+              <td>Written plan of correction; follow-up inspection to verify</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-med-low">Med-Low</span></td>
+              <td>Lower risk</td>
+              <td>Minor facility maintenance issues, cosmetic repairs needed</td>
+              <td>Documented deficiency; correction expected by next inspection</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-low">Low</span></td>
+              <td>Minimal risk</td>
+              <td>Administrative/procedural issues, minor record-keeping oversights</td>
+              <td>Documented; technical assistance offered</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Product Insight:</strong> ComplianceKit color-codes every checklist item and alert using this exact five-tier weight system. High-weight items are surfaced first in the dashboard, ensuring operators focus on the violations that carry the most risk.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 4: Top 10 Violations ────────── -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h3>Top 10 Most-Cited Violations (2022)</h3>
+      </div>
+
+      <p>Analysis of 2022 HHSC inspection data reveals the most frequent violations across Texas licensed child care centers. These represent the highest-volume compliance failures and the core problem space ComplianceKit is designed to eliminate.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Violation Category</th>
+              <th>Standard</th>
+              <th style="text-align:center;">Count</th>
+              <th>Weight</th>
+              <th>ComplianceKit Prevention</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Treatment & Supervision of Children</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.1203(4)</td>
+              <td style="text-align:center;"><span class="badge-count">1,073</span></td>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Real-time ratio monitoring alerts when supervision thresholds are at risk; supervision checkpoint prompts during transitions</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>Background Check Protocol</td>
+              <td style="font-family:monospace;font-size:0.78rem;">745.641</td>
+              <td style="text-align:center;"><span class="badge-count">959</span></td>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Staff credential tracker with 30/60/90-day expiration alerts; clearance status dashboard prevents anyone from working without current check</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>Fire Safety Certification</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.5101(a)</td>
+              <td style="text-align:center;"><span class="badge-count">662</span></td>
+              <td><span class="badge badge-med-high">Med-High</span></td>
+              <td>Annual fire inspection tracking with renewal reminders 90 days in advance; document upload and expiration monitoring</td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td>Staff-to-Child Ratios</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.1601</td>
+              <td style="text-align:center;"><span class="badge-count">640</span></td>
+              <td><span class="badge badge-med-high">Med-High</span></td>
+              <td>Live ratio calculator fed by digital check-in/check-out; alerts when approaching limit; historical ratio snapshots for audit trail</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td>Building & Equipment Maintenance</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.3407</td>
+              <td style="text-align:center;"><span class="badge-count">553</span></td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>Daily building checklist (digitized Form 1100) with photo evidence for maintenance items; work order generation for flagged issues</td>
+            </tr>
+            <tr>
+              <td><strong>6</strong></td>
+              <td>Judgment & Self-Control Toward Children</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.1201(1)</td>
+              <td style="text-align:center;"><span class="badge-count">549</span></td>
+              <td><span class="badge badge-high">High</span></td>
+              <td>Staff training tracker ensures all caregivers complete behavior management training; incident documentation workflow captures context</td>
+            </tr>
+            <tr>
+              <td><strong>7</strong></td>
+              <td>Environmental Hazards</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.3701</td>
+              <td style="text-align:center;"><span class="badge-count">457</span></td>
+              <td><span class="badge badge-med-high">Med-High</span></td>
+              <td>Daily hazard checklist items with photo-proof; auto-generated maintenance tickets for unresolved hazards</td>
+            </tr>
+            <tr>
+              <td><strong>8</strong></td>
+              <td>Health & Immunization Records</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.603(a)(4)</td>
+              <td style="text-align:center;"><span class="badge-count">423</span></td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>OCR scanning of immunization cards; auto-flagging of missing or expired vaccines; parent notification for records updates</td>
+            </tr>
+            <tr>
+              <td><strong>9</strong></td>
+              <td>Sanitation Inspection Documentation</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.3401(a)</td>
+              <td style="text-align:center;"><span class="badge-count">396</span></td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>Sanitation certificate upload with expiration tracking; renewal reminder workflow 90 days prior</td>
+            </tr>
+            <tr>
+              <td><strong>10</strong></td>
+              <td>Infant Feeding Instructions</td>
+              <td style="font-family:monospace;font-size:0.78rem;">746.2421(b)</td>
+              <td style="text-align:center;"><span class="badge-count">395</span></td>
+              <td><span class="badge badge-medium">Medium</span></td>
+              <td>Per-child feeding instruction cards within the child profile; parent-editable via app; printed and posted in infant room</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Key Takeaway:</strong> These 10 violation categories account for <strong>7,107 individual deficiencies</strong> in a single year. Every one of them is preventable with the right digital tooling. ComplianceKit directly addresses each category with a purpose-built feature.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 5: Documentation Requirements ────────── -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <h3>Documentation Requirements</h3>
+      </div>
+
+      <p>Texas requires three categories of documentation to be physically present and inspection-ready at every licensed facility. This section maps every required document, what it contains, and how ComplianceKit digitizes it.</p>
+
+      <!-- 5A: Inspector Evaluation Forms -->
+      <h4>A. Inspector Evaluation Forms</h4>
+      <p>These are the forms the CCR inspector uses to systematically evaluate the facility. Understanding what inspectors check item-by-item is the basis for ComplianceKit's self-audit feature.</p>
+
+      <div class="card" style="border-left:4px solid var(--accent);">
+        <h5 style="margin-top:0;">Form 7259 -- Personnel Records Evaluation</h5>
+        <p style="margin-bottom:8px;">For <strong>each staff member</strong>, the inspector verifies:</p>
+        <ul>
+          <li>Background check clearances (DPS, FBI, DFPS)</li>
+          <li>Pre-employment affidavits</li>
+          <li>Training documentation and transcripts</li>
+          <li>Health statements</li>
+          <li>CPR and First Aid certifications (current and valid)</li>
+          <li>Professional development records and annual training hours</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--accent);">
+        <h5 style="margin-top:0;">Form 7260 -- Children's Records Evaluation</h5>
+        <p style="margin-bottom:8px;">For <strong>each enrolled child</strong>, the inspector verifies:</p>
+        <ul>
+          <li>Admission information (Form 2935) with complete fields</li>
+          <li>Emergency contacts and authorized pickup persons</li>
+          <li>Immunization records (current per Texas DSHS schedule)</li>
+          <li>Allergy and medical condition documentation</li>
+          <li>Parent authorizations (field trips, photos, sunscreen, etc.)</li>
+          <li>Sign-in/sign-out logs (Form 2941) with parent signatures</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--accent);">
+        <h5 style="margin-top:0;">Form 7261 -- Center Records Evaluation</h5>
+        <p style="margin-bottom:8px;">Facility-wide records the inspector reviews:</p>
+        <ul>
+          <li>Current license and permits</li>
+          <li>Plan of operation (Form 2948)</li>
+          <li>Liability insurance certificate (current)</li>
+          <li>Fire, health, and gas inspection records</li>
+          <li>Emergency preparedness and evacuation documentation</li>
+          <li>Posted menus and activity plans</li>
+          <li>Controlling persons documentation</li>
+          <li>Waivers and variances (if any)</li>
+        </ul>
+      </div>
+
+      <!-- 5B: Provider-Maintained Operational Forms -->
+      <h4>B. Provider-Maintained Operational Forms</h4>
+
+      <div class="card" style="border-left:4px solid var(--med-high);">
+        <h5 style="margin-top:0;">Form 1100 -- Daily Building & Grounds Checklist</h5>
+        <p style="margin-bottom:8px;"><strong>24 items, completed Monday through Friday.</strong> This is the most operationally intensive recurring compliance task:</p>
+        <ul class="checklist-cols">
+          <li>Environment free of choking objects (under-3 rooms)</li>
+          <li>Cloth toys washed weekly</li>
+          <li>Linens washed weekly</li>
+          <li>Sleeping equipment sanitized between children</li>
+          <li>Garbage cans inaccessible to children</li>
+          <li>Floors, ceilings, and walls in good repair</li>
+          <li>Areas well heated, lighted, and ventilated</li>
+          <li>Table tops sanitized when soiled</li>
+          <li>Hazardous materials stored properly</li>
+          <li>Electrical outlets childproofed (under-5 rooms)</li>
+          <li>Glass in sliding doors marked at eye level</li>
+          <li>Play materials safe and non-toxic</li>
+          <li>Bodies of water inaccessible</li>
+          <li>Active play space inspected before use</li>
+          <li>Broken equipment removed or repaired</li>
+          <li>Current menu posted</li>
+          <li>Current activity plans posted</li>
+          <li>Toxic/cleaning supplies out of reach</li>
+          <li>Toilet paper available in restrooms</li>
+          <li>Soap and disposable towels available</li>
+          <li>Naptime lighting appropriate for supervision</li>
+          <li>Adequate space between cribs/cots/mats</li>
+          <li>Nap mats arranged with walkway access</li>
+          <li>Televisions securely anchored</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-left:4px solid var(--med-high);">
+        <h5 style="margin-top:0;">Form 7263 -- Emergency Practices Log</h5>
+        <p style="margin-bottom:8px;"><strong>Monthly and quarterly drill tracking:</strong></p>
+        <ul>
+          <li><strong>Fire drills</strong> -- Monthly, must evacuate in under 3 minutes</li>
+          <li><strong>Shelter / severe weather drills</strong> -- 4 times per year</li>
+          <li><strong>Lock-down drills</strong> -- 4 times per year</li>
+          <li><strong>Carbon monoxide alarm tests</strong> -- Monthly</li>
+          <li><strong>Smoke detector tests</strong> -- Monthly</li>
+          <li><strong>Fire extinguisher checks</strong> -- Monthly</li>
+        </ul>
+      </div>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Form 2935</div>
+          <div class="card-sm-value" style="font-size:0.95rem;">Admission Information</div>
+          <div class="card-sm-detail">Complete intake form for each child including emergency contacts, medical info, and authorizations</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Form 2941</div>
+          <div class="card-sm-value" style="font-size:0.95rem;">Sign-in / Sign-out Log</div>
+          <div class="card-sm-detail">Daily attendance record with parent/guardian signature, time in, and time out</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Form 7239</div>
+          <div class="card-sm-value" style="font-size:0.95rem;">Incident / Illness Report</div>
+          <div class="card-sm-detail">Documents injuries, illnesses, incidents with details, actions taken, and parent notification</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Form 2948</div>
+          <div class="card-sm-value" style="font-size:0.95rem;">Plan of Operation</div>
+          <div class="card-sm-detail">Operational blueprint covering hours, services, policies, and procedures</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Form 2947</div>
+          <div class="card-sm-value" style="font-size:0.95rem;">Personnel Information Record</div>
+          <div class="card-sm-detail">Staff record with qualifications, background check status, training, and certifications</div>
+        </div>
+      </div>
+
+      <!-- 5C: Items Posted on Walls -->
+      <h4>C. Items That Must Be Posted on Walls</h4>
+      <p>Inspectors verify these are physically posted and visible in the facility:</p>
+      <div class="posted-items">
+        <div class="posted-item">Current License</div>
+        <div class="posted-item">Emergency Telephone Numbers</div>
+        <div class="posted-item">Current Menu</div>
+        <div class="posted-item">Current Activity Plans</div>
+        <div class="posted-item">Discipline & Guidance Policy</div>
+        <div class="posted-item">Evacuation Routes</div>
+      </div>
+      <div class="callout">
+        <strong>Product Insight:</strong> ComplianceKit includes a "Wall Posting Audit" checklist that reminds operators to update posted items on a schedule. Digital menus and activity plans can be generated and printed directly from the app, ensuring the posted version always matches the current plan.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 6: Staff-Child Ratios ────────── -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <h3>Staff-to-Child Ratios</h3>
+      </div>
+
+      <p>Chapter 746 of the Texas Administrative Code mandates specific staff-to-child ratios based on the age of children in care. Ratios must be maintained <strong>at all times</strong>, including during transitions, outdoor play, and field trips. This is the fourth most-cited violation category in Texas.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Age Group</th>
+              <th style="text-align:center;">Staff : Children Ratio</th>
+              <th style="text-align:center;">Maximum Group Size</th>
+              <th>ComplianceKit Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>0 - 11 months</strong></td>
+              <td style="text-align:center;">1 : 4</td>
+              <td style="text-align:center;">10</td>
+              <td rowspan="9" style="vertical-align:middle; font-size:0.82rem; color:var(--text-light);">Real-time ratio calculator auto-updates from digital check-in/check-out. Dashboard shows current ratio per classroom with color-coded compliance status. Alerts fire when ratio approaches limit (1 child away). Historical snapshots logged every 15 minutes for audit trail.</td>
+            </tr>
+            <tr>
+              <td><strong>12 - 17 months</strong></td>
+              <td style="text-align:center;">1 : 5</td>
+              <td style="text-align:center;">13</td>
+            </tr>
+            <tr>
+              <td><strong>18 - 23 months</strong></td>
+              <td style="text-align:center;">1 : 9</td>
+              <td style="text-align:center;">18</td>
+            </tr>
+            <tr>
+              <td><strong>2 years</strong></td>
+              <td style="text-align:center;">1 : 11</td>
+              <td style="text-align:center;">22</td>
+            </tr>
+            <tr>
+              <td><strong>3 years</strong></td>
+              <td style="text-align:center;">1 : 15</td>
+              <td style="text-align:center;">30</td>
+            </tr>
+            <tr>
+              <td><strong>4 years</strong></td>
+              <td style="text-align:center;">1 : 18</td>
+              <td style="text-align:center;">35</td>
+            </tr>
+            <tr>
+              <td><strong>5 years</strong></td>
+              <td style="text-align:center;">1 : 22</td>
+              <td style="text-align:center;">35</td>
+            </tr>
+            <tr>
+              <td><strong>6 - 8 years</strong></td>
+              <td style="text-align:center;">1 : 26</td>
+              <td style="text-align:center;">35</td>
+            </tr>
+            <tr>
+              <td><strong>9 - 12 years</strong></td>
+              <td style="text-align:center;">1 : 26</td>
+              <td style="text-align:center;">35</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>Why This Matters:</strong> Ratio violations are cited 640 times per year and carry a <strong>Medium-High</strong> deficiency weight. They most commonly occur during transitions (e.g., lunch, outdoor play, staff breaks). ComplianceKit's real-time monitoring catches these gaps before an inspector does.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 7: Training Requirements ────────── -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <h3>Training Requirements</h3>
+      </div>
+
+      <p>Texas imposes structured training requirements on all child care personnel. Failure to meet training requirements results in a <strong>Medium</strong> weight deficiency and is a common finding during inspections.</p>
+
+      <div class="card-grid">
+        <div class="card-sm">
+          <div class="card-sm-label">Pre-Service Training</div>
+          <div class="card-sm-value">24 hrs</div>
+          <div class="card-sm-detail">Required before hire; 8 hours must be completed before working directly with children</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Director Annual</div>
+          <div class="card-sm-value">30 hrs</div>
+          <div class="card-sm-detail">Directors must complete 30 hours of training annually</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">Caregiver Annual</div>
+          <div class="card-sm-value">Required</div>
+          <div class="card-sm-detail">Annual training hours mandated for all caregivers</div>
+        </div>
+        <div class="card-sm">
+          <div class="card-sm-label">CPR / First Aid</div>
+          <div class="card-sm-value">Current</div>
+          <div class="card-sm-detail">Certification must be valid at all times for required staff</div>
+        </div>
+      </div>
+
+      <h4>Required Training Topics</h4>
+      <ul>
+        <li>Child developmental stages for the age group served</li>
+        <li>Age-appropriate supervision techniques</li>
+        <li>Safety practices and emergency procedures</li>
+        <li>Health practices, including universal precautions</li>
+        <li>Nutrition and age-appropriate feeding</li>
+        <li>Behavior management and positive guidance</li>
+        <li>Recognition and prevention of child abuse and neglect</li>
+      </ul>
+
+      <div class="callout">
+        <strong>ComplianceKit Feature:</strong> The Staff Training Tracker maintains a per-employee record of completed training hours, topics covered, and certification dates. Auto-reminders fire at 30, 60, and 90 days before CPR/First Aid expiration. A training gap analysis report identifies any staff member who is behind on required hours, surfacing the issue before an inspector finds it.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 8: Fines & Penalties ────────── -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <h3>Fines & Penalties</h3>
+      </div>
+
+      <p>Texas uses a progressive enforcement model. Administrative penalties are applied based on the severity of the violation and the operation's compliance history.</p>
+
+      <div class="penalty-grid">
+        <div class="penalty-card">
+          <div class="penalty-amount">$1,000</div>
+          <div class="penalty-label">Per violation for abuse, neglect, or exploitation of a child</div>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-amount">$500</div>
+          <div class="penalty-label">Failure to report an injury that requires medical treatment</div>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-amount">$50/day</div>
+          <div class="penalty-label">Failure to report violations to parents as required</div>
+        </div>
+      </div>
+
+      <h4>Progressive Enforcement Ladder</h4>
+      <div class="enforcement-flow">
+        <div class="enforcement-step" style="border-left:3px solid var(--low);">Corrective Action</div>
+        <div class="enforcement-arrow">&rarr;</div>
+        <div class="enforcement-step" style="border-left:3px solid var(--medium);">Probation</div>
+        <div class="enforcement-arrow">&rarr;</div>
+        <div class="enforcement-step" style="border-left:3px solid var(--med-high);">Adverse Action</div>
+        <div class="enforcement-arrow">&rarr;</div>
+        <div class="enforcement-step" style="border-left:3px solid var(--high);">Revocation</div>
+      </div>
+
+      <p style="margin-top:20px;">After receiving a penalty notice, the operation has a <strong>30-day window</strong> to request a hearing to contest the finding. During probation, the facility remains open but is subject to increased monitoring visits.</p>
+
+      <div class="callout">
+        <strong>Product Insight:</strong> ComplianceKit's dashboard prominently displays any unresolved HIGH-weight deficiencies and tracks corrective action deadlines. For facilities on probation, the system activates an enhanced monitoring mode with more frequent self-audit reminders and automated compliance reports for the director.
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 9: Feature Mapping ────────── -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-num">09</div>
+        <h3>How ComplianceKit Productizes Each Requirement</h3>
+      </div>
+
+      <p>The following table maps every major regulatory requirement to the specific pain point operators face today and the ComplianceKit feature that eliminates it. This is the core product-market fit argument.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:22%;">Regulatory Requirement</th>
+              <th style="width:30%;">Current Pain Point</th>
+              <th style="width:48%;">ComplianceKit Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Daily Building Check</strong><br><span style="font-size:0.72rem;color:var(--text-light);">Form 1100</span></td>
+              <td>Paper form that is easy to forget, hard to prove completion, and impossible to audit retroactively</td>
+              <td>Digital daily checklist with timestamps, photo attachments, GPS proof of on-site completion, and auto-reminders at 6:00 AM. Completion history visible to directors and inspectors.</td>
+            </tr>
+            <tr>
+              <td><strong>Staff Background Checks</strong><br><span style="font-size:0.72rem;color:var(--text-light);">745.641</span></td>
+              <td>Paper tracking of multiple check types; easy to miss expirations; new hires fall through cracks</td>
+              <td>Staff profile with integrated credential tracker. 30/60/90-day expiration alerts. Status dashboard shows red/yellow/green for every employee. Prevents scheduling staff with expired checks.</td>
+            </tr>
+            <tr>
+              <td><strong>Fire & Safety Drill Logs</strong><br><span style="font-size:0.72rem;color:var(--text-light);">Form 7263</span></td>
+              <td>Paper log that is often incomplete or backdated; missed drills discovered only during inspection</td>
+              <td>Digital drill logger with built-in timer, attendance capture, and auto-scheduled reminders. Calendar view shows drill compliance at a glance. Cannot be backdated -- timestamps are server-generated.</td>
+            </tr>
+            <tr>
+              <td><strong>Children's Records</strong><br><span style="font-size:0.72rem;color:var(--text-light);">Form 2935</span></td>
+              <td>Paper files in filing cabinets; hard to locate during an inspection; missing fields discovered too late</td>
+              <td>Searchable digital enrollment records with field-level completeness validation. Immunization scan and OCR. Expiration tracking for health evaluations. Inspector can be shown complete records in seconds.</td>
+            </tr>
+            <tr>
+              <td><strong>Sign-in / Sign-out</strong><br><span style="font-size:0.72rem;color:var(--text-light);">Form 2941</span></td>
+              <td>Paper log at the front desk; parents forget to sign; handwriting illegible; times inaccurate</td>
+              <td>Digital check-in/check-out with parent signature capture on tablet, automatic timestamp, optional photo verification. Feeds directly into ratio calculator.</td>
+            </tr>
+            <tr>
+              <td><strong>Incident Reports</strong><br><span style="font-size:0.72rem;color:var(--text-light);">Form 7239</span></td>
+              <td>Paper forms filed late; hard to track patterns; parent notification not documented</td>
+              <td>Digital incident form with photo upload, staff witness selection, injury body map, parent notification with read receipt, and full audit trail. Pattern analysis surfaces repeat incidents.</td>
+            </tr>
+            <tr>
+              <td><strong>Staff-Child Ratios</strong><br><span style="font-size:0.72rem;color:var(--text-light);">746.1601</span></td>
+              <td>Manual headcounts; violations during transitions when staff don't realize ratio has changed</td>
+              <td>Real-time ratio calculator that updates automatically from check-in data. Per-classroom dashboard. Alerts when approaching limit. Historical ratio snapshots every 15 minutes for audit defense.</td>
+            </tr>
+            <tr>
+              <td><strong>Immunization Tracking</strong><br><span style="font-size:0.72rem;color:var(--text-light);">746.603(a)(4)</span></td>
+              <td>Paper copies of shot records; difficult to verify if records are current against DSHS schedule</td>
+              <td>OCR scanning of immunization cards via phone camera. Auto-comparison against Texas DSHS schedule. Flags missing or expired vaccines. Parent notification to update records.</td>
+            </tr>
+            <tr>
+              <td><strong>Inspection Readiness</strong><br><span style="font-size:0.72rem;color:var(--text-light);">General</span></td>
+              <td>Panic mode the night before (or during) an inspection; scrambling to find missing documents</td>
+              <td>Compliance dashboard showing green/yellow/red status for every minimum standard category. One-tap "inspection readiness" report. Surfaces all gaps before the inspector arrives.</td>
+            </tr>
+            <tr>
+              <td><strong>Menu & Activity Posting</strong><br><span style="font-size:0.72rem;color:var(--text-light);">746.3401</span></td>
+              <td>Staff forgets to update posted menu; inspector sees a stale or outdated menu on the wall</td>
+              <td>Digital menu and activity plan builder with weekly auto-posting reminders. Printable format designed for wall display. Parent-facing view in the app mirrors what's on the wall.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 10: Domain Objects ────────── -->
+    <section class="section" id="s10">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <h3>Domain Objects</h3>
+      </div>
+
+      <p>The following data model captures every entity required to digitize Texas daycare compliance. Each object maps directly to a regulatory requirement or operational form.</p>
+
+      <div class="domain-grid">
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> Facility</div>
+          <div class="domain-fields">name, license_number, address, capacity, license_type, license_expiration</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> Classroom</div>
+          <div class="domain-fields">name, age_group, max_capacity, current_enrollment</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> Child</div>
+          <div class="domain-fields">name, dob, enrollment_date, emergency_contacts[], allergies[], medical_conditions[]</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> ChildDocument</div>
+          <div class="domain-fields">type: immunization | health_eval | admission_form, upload_date, expiration_date, file_url</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> Staff</div>
+          <div class="domain-fields">name, role, hire_date, qualifications[]</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> StaffCredential</div>
+          <div class="domain-fields">type: background_check | cpr | first_aid | training, issue_date, expiration_date, status</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> DailyChecklist</div>
+          <div class="domain-fields">date, completed_by, items[], completion_time, facility_id</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> ChecklistItem</div>
+          <div class="domain-fields">description, checked, photo_url, note, timestamp</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> DrillLog</div>
+          <div class="domain-fields">type: fire | weather | lockdown, date, time_started, time_evacuated, duration_seconds, attendance_count, conducted_by, notes</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> EquipmentCheck</div>
+          <div class="domain-fields">type: smoke_detector | co_alarm | fire_extinguisher, date, status, checked_by</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> IncidentReport</div>
+          <div class="domain-fields">child_id, date, time, description, injury_type, action_taken, parent_notified, photos[], staff_involved[]</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> AttendanceRecord</div>
+          <div class="domain-fields">child_id, date, check_in_time, check_in_by, check_out_time, check_out_by, signature</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> RatioSnapshot</div>
+          <div class="domain-fields">classroom_id, timestamp, children_count, staff_count, required_ratio, compliant</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> InspectionPrep</div>
+          <div class="domain-fields">date, overall_status, categories[], deficiencies_found[]</div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-name"><span class="dot"></span> ComplianceAlert</div>
+          <div class="domain-fields">type, severity, entity_id, message, due_date, acknowledged</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ────────── SECTION 11: Architecture ────────── -->
+    <section class="section" id="s11">
+      <div class="section-header">
+        <div class="section-num">11</div>
+        <h3>Architecture</h3>
+      </div>
+
+      <p>ComplianceKit is built as an <strong>offline-first Progressive Web App (PWA)</strong> to ensure reliability in field conditions where internet connectivity may be limited. The architecture prioritizes data integrity, real-time updates, and regulatory-grade audit trails.</p>
+
+      <div class="arch-stack">
+        <div class="arch-layer">
+          <div class="arch-icon">FE</div>
+          <div class="arch-title">Next.js 15 PWA</div>
+          <div class="arch-desc">Offline-first progressive web app with service worker caching for field use. App Shell architecture ensures instant load.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-icon">DB</div>
+          <div class="arch-title">Supabase</div>
+          <div class="arch-desc">Postgres + Auth + Storage + Row-Level Security. Multi-tenant data isolation. HIPAA-eligible configuration.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-icon">RT</div>
+          <div class="arch-title">Realtime Ratios</div>
+          <div class="arch-desc">Supabase Realtime subscriptions power live ratio monitoring. Changes propagate to all connected devices instantly.</div>
+        </div>
+      </div>
+
+      <div class="arch-stack">
+        <div class="arch-layer">
+          <div class="arch-icon">PDF</div>
+          <div class="arch-title">Report Generation</div>
+          <div class="arch-desc">React-PDF produces inspection-ready reports matching the format inspectors expect. Export to PDF with one tap.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-icon">PN</div>
+          <div class="arch-title">Push Notifications</div>
+          <div class="arch-desc">Web Push API for expiration alerts, drill reminders, checklist nudges, and ratio warnings. Works on iOS and Android.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-icon">OCR</div>
+          <div class="arch-title">Document Scanning</div>
+          <div class="arch-desc">Tesseract.js or Google Vision API for immunization card OCR. Extracts vaccine names, dates, and lot numbers automatically.</div>
+        </div>
+      </div>
+
+      <h4>Key Architecture Decisions</h4>
+      <ul>
+        <li><strong>Offline-first with sync:</strong> All checklists, attendance, and incident reports can be completed offline and sync when connectivity returns. Conflict resolution uses last-write-wins with server timestamps.</li>
+        <li><strong>Row-Level Security:</strong> Supabase RLS policies ensure facilities can only access their own data. Staff see only their assigned classrooms. Parents see only their child's records.</li>
+        <li><strong>Immutable audit trail:</strong> All compliance-critical records (checklist completions, drill logs, ratio snapshots) are append-only. Timestamps are server-generated and cannot be modified by clients.</li>
+        <li><strong>Multi-state extensibility:</strong> Domain model supports state-specific configuration (ratio tables, form definitions, weight systems) to enable expansion beyond Texas without architectural changes.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Why PWA over native:</strong> Licensed child care centers range from large corporate chains to single-location family operations. A PWA eliminates app store friction, works on any device with a browser, and can be installed to the home screen. Offline support ensures the app works even in areas with poor connectivity -- a real concern for rural Texas facilities.
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="doc-footer">
+      ComplianceKit Product Specification &middot; Texas Market &middot; Version 1.0 &middot; April 2026 &middot; Confidential &amp; Internal Use Only
+    </div>
+
+  </div><!-- .content -->
+</div><!-- .main -->
+
+</body>
+</html>
