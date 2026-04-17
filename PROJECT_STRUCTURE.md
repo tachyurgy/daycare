@@ -6,6 +6,7 @@ Top-level map of the ComplianceKit repository.
 daycare/
 ├── README.md                         Quickstart + links to major docs
 ├── STATUS.md                         What's done, what's next, integration gaps closed
+├── FEATURES.md                       Plain-language tour of all 20 features w/ state per feature
 ├── SPEC.md                           Master product + technical spec (3k+ words)
 ├── ARCHITECTURE.md                   System context, packages, data flow, security
 ├── ROADMAP.md                        Day-by-day Week 1 plan, Week 2-8 post-MVP

@@ -2,7 +2,7 @@
 
 Snapshot as of **2026-04-16** (Day 1 of the 1-week MVP sprint).
 
-This file is the at-a-glance index of what exists in the repo right now. If you read nothing else after cloning, read this, then [`README.md`](./README.md), then [`SPEC.md`](./SPEC.md).
+This file is the at-a-glance index of what exists in the repo right now. If you read nothing else after cloning, read this, then [`README.md`](./README.md), then [`SPEC.md`](./SPEC.md). For a plain-language tour of every feature, see [`FEATURES.md`](./FEATURES.md).
 
 ## What is done
 
