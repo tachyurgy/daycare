@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Idaho — ComplianceKit Data Report</title>
+<style>
+:root{--bg:#0d0d1a;--panel:#15162a;--panel-2:#1c1d34;--border:#2a2b45;--text:#f0f0f5;--muted:#a0a3c0;--accent:#00d4aa;--accent-dim:#0a8068;--warn:#ffb86b}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;line-height:1.55}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-dim)}
+a:hover{color:#33e7c3;border-bottom-color:var(--accent)}
+header{padding:48px 40px 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#15162a 0%,#0d0d1a 100%)}
+header .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;font-weight:600}
+header h1{margin:8px 0 4px;font-size:40px;font-weight:700;letter-spacing:-0.02em}
+header .meta{color:var(--muted);font-size:14px}
+main{max-width:1120px;margin:0 auto;padding:32px 40px 80px}
+section{margin:36px 0;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:28px 32px}
+section h2{margin:0 0 16px;font-size:20px;font-weight:600;display:flex;align-items:center;gap:12px}
+section h2 .num{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;background:var(--accent);color:#0d0d1a;border-radius:50%;font-size:13px;font-weight:700}
+section h3{margin:20px 0 8px;font-size:15px;font-weight:600;color:var(--accent)}
+p,li{font-size:14px}
+.muted{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pill.ok{background:rgba(0,212,170,.12);color:var(--accent)}
+.pill.warn{background:rgba(255,184,107,.12);color:var(--warn)}
+.pill.info{background:rgba(160,163,192,.14);color:var(--muted)}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:8px 18px;margin:6px 0 0}
+.kv dt{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+.kv dd{margin:0;font-size:14px}
+ul{padding-left:20px;margin:6px 0}
+ul li{margin:4px 0}
+.linklist a{display:block;padding:4px 0;border:none;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+footer{padding:32px 40px;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--border)}
+code{background:var(--panel-2);padding:2px 6px;border-radius:4px;font-size:12px;color:#c6c8e0}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Idaho</h1>
+  <div class="meta">State rank #38 &middot; Compiled 2026-04-18 &middot; 2,045 real provider rows in <code>idaho_leads.csv</code> &middot; <span class="pill ok">Public per-facility violation data</span></div>
+</header>
+<main>
+
+<section id="authority">
+  <h2><span class="num">2</span>Licensing Authority</h2>
+  <dl class="kv">
+    <dt>Agency</dt><dd>Idaho Dept of Health and Welfare (IDHW) &mdash; Division of Family and Community Services (Child Care Licensing)</dd>
+    <dt>Address</dt><dd>PO Box 83720, Boise, ID 83720-0036</dd>
+    <dt>Phone</dt><dd>208-334-5700</dd>
+    <dt>Program page</dt><dd><a href="https://healthandwelfare.idaho.gov/services-programs/child-care">healthandwelfare.idaho.gov/services-programs/child-care</a></dd>
+    <dt>Delegated inspectors</dt><dd>7 regional public health districts (CDHD, EIPH, SWDH, SCDH, PHD, NCDPH, PHD3)</dd>
+    <dt>Complaint intake</dt><dd>Idaho 211 CareLine</dd>
+    <dt>QRIS partner</dt><dd><a href="https://idahostars.org/">IdahoSTARS</a></dd>
+  </dl>
+</section>
+
+<section id="citation">
+  <h2><span class="num">3</span>Primary Regulatory Citation</h2>
+  <ul>
+    <li><strong>Statute:</strong> <a href="https://legislature.idaho.gov/statutesrules/idstat/title39/t39ch11/">Idaho Code &sect;&sect;39-1101 &ndash; 39-1120</a> (Basic Day Care License Law); &sect;39-1110 (Health Standards).</li>
+    <li><strong>Regulations:</strong> <a href="https://adminrules.idaho.gov/rules/current/16/160602.pdf">IDAPA 16.06.02</a> &mdash; Rules Governing Standards for Child Care Licensing.</li>
+    <li><strong>Ratio rule:</strong> <a href="https://www.law.cornell.edu/regulations/idaho/IDAPA-16.06.02.335">IDAPA 16.06.02.335</a> &mdash; point-based ratio (12 points per staff, each age group has a point value).</li>
+    <li><strong>2025 Deregulation:</strong> <a href="https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/legislation/H0243E1.pdf">HB 243 (2025)</a> adjusted point values, retained 12-point cap.</li>
+  </ul>
+</section>
+
+<section id="contacts">
+  <h2><span class="num">4</span>Contact / Provider Data</h2>
+  <p class="muted">Leads file: <code>/Users/magnusfremont/Desktop/daycare/idaho_leads.csv</code> &mdash; 2,045 rows, Gold tier (idahochildcarecheck.org scrape).</p>
+  <table>
+    <thead><tr><th>Source</th><th>Format</th><th>Records</th><th>Fields</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Idaho Child Care Check (search)</td>
+        <td>Drupal 8 HTML, paginated 208 pages</td>
+        <td>~2,080 providers (filtered to 2,045 unique)</td>
+        <td>name 100% &middot; city ~99% &middot; phone ~98% &middot; email 0% &middot; website 0%</td>
+        <td><a href="https://www.idahochildcarecheck.org/search">idahochildcarecheck.org/search</a></td>
+      </tr>
+      <tr>
+        <td>Idaho Child Care Check (per-provider)</td>
+        <td>HTML; <code>/provider/{id}</code> pattern</td>
+        <td>Per-provider page</td>
+        <td>Inspection history, 31 criteria, substantiated incidents</td>
+        <td><a href="https://www.idahochildcarecheck.org/provider/11796">sample</a></td>
+      </tr>
+      <tr>
+        <td>Idaho Complaint Tracker (internal)</td>
+        <td>Staff-facing (no public content)</td>
+        <td>&mdash;</td>
+        <td>Incident workflow for ~20 investigators</td>
+        <td><a href="https://www.idcctracker.org/">idcctracker.org</a></td>
+      </tr>
+      <tr>
+        <td>IDHW Find Quality Child Care</td>
+        <td>Web directory</td>
+        <td>Live</td>
+        <td>Provider + IdahoSTARS rating</td>
+        <td><a href="https://healthandwelfare.idaho.gov/services-programs/children-families/find-quality-child-care">healthandwelfare.idaho.gov</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="framework">
+  <h2><span class="num">5</span>Compliance Framework Links</h2>
+  <div class="linklist">
+    <a href="https://adminrules.idaho.gov/rules/current/16/160602.pdf">IDAPA 16.06.02 (PDF)</a>
+    <a href="https://legislature.idaho.gov/statutesrules/idstat/title39/t39ch11/">Idaho Code Title 39 Chapter 11</a>
+    <a href="https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/legislation/H0243E1.pdf">HB 243 (2025) &mdash; point-value adjustments</a>
+    <a href="https://www.law.cornell.edu/regulations/idaho/IDAPA-16.06.02.335">IDAPA 16.06.02.335 ratio rule</a>
+    <a href="https://idahostars.org/Child-Care-Providers/Child-Care-Licensing">IdahoSTARS Licensing overview</a>
+    <a href="https://healthandwelfare.idaho.gov/providers/child-care-providers/becoming-child-care-provider">Becoming a Child Care Provider (IDHW)</a>
+    <a href="https://eiph.id.gov/wp-content/uploads/2025/07/EIPH-CC-Guidelines-2025.pdf">EIPH 2025 Child Care Guidelines (PDF)</a>
+    <a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/idaho">ACF National Licensing DB &mdash; Idaho</a>
+  </div>
+</section>
+
+<section id="forms">
+  <h2><span class="num">6</span>Licensing Forms</h2>
+  <ul>
+    <li>Day Care License Application (IDHW)</li>
+    <li>Enhanced Background Check Request (re-run at least every 5 years)</li>
+    <li>Fire Marshal Inspection Report</li>
+    <li>Public Health District Inspection Report (sanitation + food service)</li>
+    <li>First Aid / Infant-Child CPR certification</li>
+    <li>Local city license (where applicable, e.g., Boise)</li>
+  </ul>
+</section>
+
+<section id="violations">
+  <h2><span class="num">7</span>Violations &amp; Inspection Data</h2>
+  <div class="grid2">
+    <div>
+      <h3>Access mode</h3>
+      <p><span class="pill ok">Open HTML</span> &nbsp; <span class="pill ok">Per-provider URL</span> &nbsp; <span class="pill ok">No auth</span></p>
+      <p>idahochildcarecheck.org is the best per-facility violation/incident dataset among our assigned states. Published as rolling HTML with stable CSS selectors.</p>
+    </div>
+    <div>
+      <h3>Inspection cadence</h3>
+      <p><strong>~1 unannounced inspection per year</strong> per facility, plus complaint-driven follow-ups. Critical violations require immediate correction or a scheduled follow-up visit.</p>
+      <p>Public data starts October 2017; minimum 3-year retention.</p>
+    </div>
+  </div>
+
+  <h3>Key fields exposed per provider</h3>
+  <ul>
+    <li>Aggregate: total inspections, passes, fails ("13 Inspections Conducted: 10 passed 3 failed")</li>
+    <li>Per-inspection: date, pass/fail, type (Annual / Investigation / Follow-Up), resolution status</li>
+    <li>31 numbered inspection criteria (supervision, CPR, ratios, food safety, emergency planning)</li>
+    <li>Inspector comments (narrative text)</li>
+    <li>Substantiated incidents: category, date, description, resolution</li>
+  </ul>
+
+  <h3>Scraping strategy</h3>
+  <ol>
+    <li>Search-page enumeration: <code>/search?page={N}</code> for N in [0, 207]. 10 providers per page. Already captured for leads CSV.</li>
+    <li>Per-provider scrape: iterate integer IDs extracted from search page; fetch <code>/provider/{id}</code>.</li>
+    <li>Parse HTML with <code>BeautifulSoup</code>; target Drupal <code>views-field-*</code> selectors (stable).</li>
+    <li>Weekly incremental sync: track latest-seen inspection date per provider; re-fetch only changed records.</li>
+    <li>Conservative rate limit: 1-2 req/sec with exponential backoff on 5xx.</li>
+  </ol>
+
+  <h3>FOIA path</h3>
+  <p><strong>Idaho Public Records Act</strong> (Idaho Code &sect;74-101 et seq.). IDHW is the custodian. Standard response window 3-10 business days. Delegated regional public health districts also subject to PRA. Use PRA to obtain: complete provider roster in CSV with addresses &amp; emails; pre-Oct-2017 historical inspection records; full substantiated-incident narratives.</p>
+
+  <h3>Violations / inspection data sources</h3>
+  <div class="linklist">
+    <a href="https://www.idahochildcarecheck.org/">Idaho Child Care Check (home)</a>
+    <a href="https://www.idahochildcarecheck.org/search">Provider Search</a>
+    <a href="https://www.idahochildcarecheck.org/provider/11796">Sample provider detail page</a>
+    <a href="https://www.idcctracker.org/">Idaho Complaint Tracker (internal)</a>
+    <a href="https://www.govwebworks.com/work/childcare-incident-tracker/">GovWebworks project page</a>
+    <a href="https://www.cdhd.idaho.gov/eh-childcare-inspections.php">Central District Health inspections</a>
+    <a href="https://swdh.id.gov/licensing-permitting/child-care-program/">Southwest District Health CC</a>
+    <a href="https://eiph.id.gov/wp-content/uploads/2025/07/EIPH-CC-Guidelines-2025.pdf">EIPH 2025 Guidelines</a>
+    <a href="https://idahopublichealth.com/child-care/">North Central District PH</a>
+    <a href="https://healthandwelfare.idaho.gov/services-programs/children-families-older-adults/file-child-care-complaint">File a Complaint (IDHW)</a>
+  </div>
+</section>
+
+<section id="signals">
+  <h2><span class="num">8</span>Outreach Signals</h2>
+  <ul>
+    <li><span class="pill ok">Best-in-class public data</span> &mdash; per-facility violation counts, substantiated incidents, and inspector comments all publicly accessible. Enables precise lead scoring by "risk score."</li>
+    <li><span class="pill warn">0% email fill</span> &mdash; emails not exposed on Idaho Child Care Check. Enrichment mandatory.</li>
+    <li><span class="pill info">Point-based ratio is unique</span> &mdash; providers often need calculator tooling; ComplianceKit can include an Idaho-specific 12-point ratio calculator.</li>
+    <li><span class="pill warn">HB 243 (2025) deregulation</span> &mdash; ongoing changes to point values create confusion; time-sensitive sales angle.</li>
+    <li>Seven public health districts each conduct inspections with slightly different emphasis. ComplianceKit checklists can be tuned per district.</li>
+    <li>Family Daycare Homes (&le; 6 children) are exempt from state license; voluntary licensure unlocks ICCP subsidy &mdash; a subsegment actively adopting compliance tooling.</li>
+    <li>Boise's additional city license is stricter than state minimums &mdash; Boise operators are highest-intent prospects.</li>
+  </ul>
+</section>
+
+<section id="nextsteps">
+  <h2><span class="num">9</span>Next-Step Data Acquisition</h2>
+  <ol>
+    <li>Extend the existing scraper to pull per-provider detail pages (<code>/provider/{id}</code>) &mdash; build a violations database keyed on provider ID.</li>
+    <li>Compute a "compliance risk score" per provider (recent fails / total inspections, open substantiated incidents, criterion-level frequency) &mdash; direct input to sales prioritization.</li>
+    <li>Weekly diff job to catch net-new inspections; trigger email / postcard outreach for providers with newly-failed inspections.</li>
+    <li>Email enrichment (Hunter + Apollo) against 2,045 providers.</li>
+    <li>File IDHW PRA request for complete roster + addresses + emails + pre-2017 history.</li>
+    <li>Build Boise-specific campaign leveraging the extra-strict city rules.</li>
+  </ol>
+</section>
+
+<section id="links">
+  <h2><span class="num">10</span>All Links</h2>
+  <h3>Licensing &amp; regulations</h3>
+  <div class="linklist">
+    <a href="https://healthandwelfare.idaho.gov/services-programs/child-care">IDHW Child Care program</a>
+    <a href="https://adminrules.idaho.gov/rules/current/16/160602.pdf">IDAPA 16.06.02 (PDF)</a>
+    <a href="https://legislature.idaho.gov/statutesrules/idstat/title39/t39ch11/">Idaho Code Title 39 Ch. 11</a>
+    <a href="https://www.law.cornell.edu/regulations/idaho/IDAPA-16.06.02.335">IDAPA 16.06.02.335 ratio rule</a>
+    <a href="https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/legislation/H0243E1.pdf">HB 243 (2025)</a>
+    <a href="https://healthandwelfare.idaho.gov/providers/child-care-providers/becoming-child-care-provider">Becoming a Provider</a>
+    <a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/idaho">ACF Licensing DB</a>
+  </div>
+  <h3>Inspection / violations / complaints</h3>
+  <div class="linklist">
+    <a href="https://www.idahochildcarecheck.org/">Idaho Child Care Check</a>
+    <a href="https://www.idahochildcarecheck.org/search">Provider Search</a>
+    <a href="https://www.idahochildcarecheck.org/provider/11796">Sample provider page</a>
+    <a href="https://www.idcctracker.org/">Idaho Complaint Tracker</a>
+    <a href="https://www.govwebworks.com/work/childcare-incident-tracker/">GovWebworks project</a>
+    <a href="https://healthandwelfare.idaho.gov/services-programs/children-families-older-adults/file-child-care-complaint">File a Complaint</a>
+  </div>
+  <h3>Regional public health districts</h3>
+  <div class="linklist">
+    <a href="https://www.cdhd.idaho.gov/eh-childcare-inspections.php">Central District Health (CDHD)</a>
+    <a href="https://eiph.id.gov/wp-content/uploads/2025/07/EIPH-CC-Guidelines-2025.pdf">Eastern Idaho Public Health (EIPH) 2025 Guidelines</a>
+    <a href="https://swdh.id.gov/licensing-permitting/child-care-program/">Southwest District Health (SWDH)</a>
+    <a href="https://idahopublichealth.com/child-care/">North Central District PH</a>
+  </div>
+  <h3>QRIS &amp; referral partners</h3>
+  <div class="linklist">
+    <a href="https://idahostars.org/">IdahoSTARS home</a>
+    <a href="https://idahostars.org/Child-Care-Providers/Child-Care-Licensing">IdahoSTARS Licensing</a>
+    <a href="https://healthandwelfare.idaho.gov/services-programs/children-families/find-quality-child-care">Find Quality Child Care</a>
+  </div>
+</section>
+
+</main>
+<footer>ComplianceKit state research &mdash; Idaho &mdash; 2026-04-18</footer>
+</body>
+</html>

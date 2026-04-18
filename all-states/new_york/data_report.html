@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New York — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --fg:#f0f0f5; --accent:#00d4aa; --muted:#8a8aa0; --panel:#15152a; --border:#26263f; --warn:#ffb347; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:48px 32px; }
+  header h1 { font-size:34px; margin:0 0 4px; letter-spacing:-0.5px; }
+  header .sub { color:var(--muted); margin:0; font-size:14px; }
+  .pill { display:inline-block; padding:3px 10px; border:1px solid var(--accent); color:var(--accent); border-radius:20px; font-size:12px; margin-right:6px; }
+  h2 { color:var(--accent); font-size:20px; margin-top:40px; border-bottom:1px solid var(--border); padding-bottom:6px; letter-spacing:-0.2px; }
+  h3 { font-size:16px; color:var(--fg); margin-top:20px; margin-bottom:6px; }
+  a { color:var(--accent); text-decoration:none; word-break:break-word; }
+  a:hover { text-decoration:underline; }
+  code { background:var(--panel); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+  th, td { padding:9px 10px; text-align:left; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { background:var(--panel); color:var(--accent); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+  tr:hover td { background:#12122a; }
+  .tier { padding:2px 8px; border-radius:3px; font-size:11px; font-weight:600; letter-spacing:0.5px; }
+  .gold { background:#3a3010; color:#ffd166; border:1px solid #5c4818; }
+  .silver { background:#2a2a33; color:#c8c8d2; border:1px solid #40404d; }
+  .bronze { background:#2a1a10; color:#d48a5e; border:1px solid #4d2e1e; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .panel { background:var(--panel); border:1px solid var(--border); padding:14px 18px; border-radius:6px; margin:12px 0; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:20px; }
+  .link-list li { font-size:13.5px; }
+  .note { color:var(--warn); font-size:13px; }
+  .footer { color:var(--muted); font-size:12px; margin-top:60px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>New York</h1>
+  <p class="sub">Population rank: #4 (≈19.5M) · Report compiled 2026-04-18 · <span class="pill">ComplianceKit</span></p>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<div class="panel">
+  <strong>New York State Office of Children and Family Services (OCFS)</strong> — Division of Child Care Services (DCCS) · <a href="https://ocfs.ny.gov/programs/childcare/">https://ocfs.ny.gov/programs/childcare/</a><br>
+  NYC-sited centers also regulated by <strong>NYC Department of Health and Mental Hygiene (DOHMH), Bureau of Child Care</strong> under NYC Health Code Article 47.
+</div>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li>Enabling statute: <a href="https://law.justia.com/codes/new-york/sos/article-6/title-1/390/">Social Services Law § 390</a></li>
+  <li>Operating rule: <a href="https://www.law.cornell.edu/regulations/new-york/title-18/chapter-II/subchapter-C/article-2/part-418/subpart-418-1">18 NYCRR Subpart 418-1 — Child Day Care Centers</a></li>
+  <li>Supervision rule: <a href="https://www.law.cornell.edu/regulations/new-york/18-NYCRR-418-1.8">18 NYCRR § 418-1.8</a></li>
+  <li>NYC overlay: NYC Health Code Article 47</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Rows</th><th>Tier</th><th>Limitations</th></tr>
+  <tr>
+    <td>Child Care Regulated Programs (<code>cb42-qumz</code>)</td>
+    <td><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs/cb42-qumz">data.ny.gov</a></td>
+    <td>Socrata CSV / JSON</td>
+    <td>16,770 (active filter applied)</td>
+    <td><span class="tier gold">GOLD</span></td>
+    <td>No email/website fields; no NYC Article 47 centers</td>
+  </tr>
+  <tr>
+    <td>Child Care Regulated Programs Map (<code>s8uq-s4wq</code>)</td>
+    <td><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs-Map/s8uq-s4wq">data.ny.gov</a></td>
+    <td>Socrata geospatial view</td>
+    <td>≈16,770</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Same rows as <code>cb42-qumz</code>, geocoded</td>
+  </tr>
+  <tr>
+    <td>Child Care Regulated Programs API (<code>fymg-3wv3</code>)</td>
+    <td><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs-API/fymg-3wv3">data.ny.gov</a></td>
+    <td>SODA API</td>
+    <td>≈16,770</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Alias of <code>cb42-qumz</code></td>
+  </tr>
+  <tr>
+    <td>DOHMH Childcare Center Inspections (<code>dsg6-ifza</code>)</td>
+    <td><a href="https://data.cityofnewyork.us/Health/DOHMH-Childcare-Center-Inspections/dsg6-ifza">data.cityofnewyork.us</a></td>
+    <td>Socrata CSV / JSON, daily refresh</td>
+    <td>NYC-only; tens of thousands of inspection rows</td>
+    <td><span class="tier gold">GOLD</span></td>
+    <td>NYC only; inspection-level (not facility-level contact)</td>
+  </tr>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul class="link-list">
+  <li><a href="https://law.justia.com/codes/new-york/sos/article-6/title-1/390/">Social Services Law § 390 — enabling statute</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/new-york/title-18/chapter-II/subchapter-C/article-2/part-418/subpart-418-1">18 NYCRR Subpart 418-1 (Cornell LII)</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/regulations/">OCFS Regulations landing</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/assets/docs/DCCS-Inspections-Violations-Enforcement.pdf">Inspections, Violations, and Enforcement explainer (PDF)</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/data/">OCFS Child Care Data hub</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul class="link-list">
+  <li><code>OCFS-LDSS-4699</code> — Application for License/Registration</li>
+  <li><code>OCFS-LDSS-4700</code> — Day Care Services Application</li>
+  <li><code>OCFS-6001</code> — Staff/Volunteer Application &amp; Medical Statement</li>
+  <li><code>OCFS-6002</code> — Staff Medical Statement</li>
+  <li><code>OCFS-6003</code> — Criminal History Information (fingerprints)</li>
+  <li><code>OCFS-4930</code> — Statewide Central Register check</li>
+  <li><code>OCFS-LDSS-4443</code> — Child Abuse / Maltreatment reporting</li>
+  <li><code>OCFS-LDSS-7002</code> — Child's Medical Statement</li>
+  <li><code>OCFS-5188</code> — Child Enrollment / Emergency Information</li>
+  <li><code>OCFS-LDSS-4441</code> — Medication Administration record</li>
+  <li><code>CCFS-Inspection-Checklist-DCC</code> — OCFS inspector checklist</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<h3>Primary sources</h3>
+<ul>
+  <li><strong>OCFS Child Care Facility Search:</strong> <a href="https://ocfs.ny.gov/programs/childcare/looking/">ocfs.ny.gov/programs/childcare/looking/</a> — per-facility Program Profile pages expose violation history for the prior 2 years.</li>
+  <li><strong>OCFS Enforcement Action list:</strong> <a href="https://ocfs.ny.gov/programs/childcare/looking/ccfs-fie.php">ccfs-fie.php</a> — facilities currently under probation, pending revocation, suspension, or denial.</li>
+  <li><strong>NYC DOHMH Child Care Connect:</strong> <a href="https://a816-healthpsi.nyc.gov/ChildCare/childCareList.action">a816-healthpsi.nyc.gov</a> — NYC-regulated centers only.</li>
+</ul>
+
+<h3>Data format</h3>
+<p>State <code>cb42-qumz</code> dataset contains <strong>33 columns</strong> but no structured violation field — only a <code>Facility Status</code> (Pending Revocation, Suspended, etc.) and a URL to each facility's HTML Program Profile where violations are rendered. OCFS violation severity tiers: <strong>Class I</strong> (serious/imminent), <strong>Class II</strong> (public health; max fine $450/day first offense), <strong>Class III</strong> (minor; max $400/day first offense).</p>
+<p>NYC <code>dsg6-ifza</code> publishes structured violation rows: <code>inspection_date</code>, <code>inspection_status</code>, <code>violation_category</code>, <code>violation_rate_per_child</code>, <code>health_violation_rate_per_child</code>, <code>regulation_summary</code>. <strong>Refresh: daily.</strong></p>
+
+<h3>Freshness</h3>
+<ul>
+  <li><code>cb42-qumz</code>: weekly (facility status)</li>
+  <li>Program Profile HTML: 1–3 week lag after inspection close</li>
+  <li>NYC <code>dsg6-ifza</code>: daily</li>
+</ul>
+
+<h3>Scraping / access strategy</h3>
+<ul>
+  <li>State: SODA API <code>https://data.ny.gov/resource/cb42-qumz.json?$limit=50000</code>; then for each row fetch the Program Profile URL and parse the violations HTML block. ASP.NET Core backend, no ViewState encryption on public route.</li>
+  <li>NYC: pure SODA query; filter by <code>inspection_date</code> and <code>violation_category is not null</code>.</li>
+  <li>Enforcement: scrape the static <code>ccfs-fie.php</code> page for a hot-leads list.</li>
+</ul>
+
+<h3>FOIA path</h3>
+<p>NY FOIL (Public Officers Law Art. 6) — <a href="https://ocfs.ny.gov/main/legal/foil.asp">OCFS FOIL</a>. Used for pre-2-year violation history and un-redacted investigation narratives.</p>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>Facility Status = "Pending Revocation" / "Suspended"</strong> <em>(available via <code>cb42-qumz</code> SODA query)</em> — highest-intent signal.</li>
+  <li><strong>New Class II/III violation in last 30 days</strong> <em>(requires Program Profile HTML scrape)</em>.</li>
+  <li><strong>License expiring in next 90 days</strong> <em>(available — <code>license_expiration_date</code> column)</em>.</li>
+  <li><strong>Appears on Enforcement Action page</strong> <em>(available via simple static scrape)</em>.</li>
+  <li><strong>NYC: SRNC-equivalent Critical Violation in last 90 days</strong> <em>(available via <code>dsg6-ifza</code> SODA query)</em>.</li>
+</ul>
+
+<h2>8. Next-step Data Acquisition</h2>
+<ul>
+  <li>Run SODA export of <code>cb42-qumz</code> weekly; diff <code>Facility Status</code> to detect newly-endangered licenses.</li>
+  <li>Playwright-based harvester against OCFS Program Profile HTML to capture violation narratives into a warehouse table (16,770 facilities × ~1 req/sec ≈ 5 hours).</li>
+  <li>Daily SODA pull of NYC <code>dsg6-ifza</code> filtered on <code>inspection_date</code> &gt; 7-days-ago for real-time violation alerts.</li>
+  <li>Hunter.io / Apollo email-append on the OCFS dataset (no email field published).</li>
+  <li>FOIL request for pre-2022 Class I violation data (not retained on public portal).</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="link-list">
+  <li><a href="https://ocfs.ny.gov/programs/childcare/">OCFS Child Care Services home</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/looking/">OCFS Facility Search</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/looking/ccfs-fie.php">OCFS Enforcement Action list</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/data/">OCFS Data hub</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/aggregate-data.php">OCFS Aggregate Data (CCDBG)</a></li>
+  <li><a href="https://ocfs.ny.gov/programs/childcare/assets/docs/DCCS-Inspections-Violations-Enforcement.pdf">Inspections/Violations explainer PDF</a></li>
+  <li><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs/cb42-qumz">data.ny.gov — cb42-qumz</a></li>
+  <li><a href="https://data.ny.gov/api/views/cb42-qumz/rows.csv?accessType=DOWNLOAD">Direct CSV download</a></li>
+  <li><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs-Map/s8uq-s4wq">s8uq-s4wq Map view</a></li>
+  <li><a href="https://data.ny.gov/Human-Services/Child-Care-Regulated-Programs-API/fymg-3wv3">fymg-3wv3 API alias</a></li>
+  <li><a href="https://data.cityofnewyork.us/Health/DOHMH-Childcare-Center-Inspections/dsg6-ifza">NYC dsg6-ifza</a></li>
+  <li><a href="https://a816-healthpsi.nyc.gov/ChildCare/childCareList.action">NYC Child Care Connect</a></li>
+  <li><a href="https://ocfs.ny.gov/main/legal/foil.asp">OCFS FOIL page</a></li>
+  <li><a href="https://www.nysenate.gov/sites/default/files/hidden_dangers_in_daycare_full_report.pdf">Hidden Dangers in Daycare (NYS Senate IDC)</a></li>
+  <li><a href="https://daycaredanger.nycitynewsservice.com/new-york/">Day Care Danger (NYC News Service)</a></li>
+  <li><a href="https://law.justia.com/codes/new-york/sos/article-6/title-1/390/">Social Services Law § 390</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/new-york/title-18/chapter-II/subchapter-C/article-2/part-418/subpart-418-1">18 NYCRR 418-1 (Cornell LII)</a></li>
+</ul>
+
+<p class="footer">ComplianceKit internal data report · generated 2026-04-18 · state: New York</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nebraska — ComplianceKit Data Report</title>
+<style>
+:root{--bg:#0d0d1a;--panel:#15162a;--panel-2:#1c1d34;--border:#2a2b45;--text:#f0f0f5;--muted:#a0a3c0;--accent:#00d4aa;--accent-dim:#0a8068;--warn:#ffb86b}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;line-height:1.55}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-dim)}
+a:hover{color:#33e7c3;border-bottom-color:var(--accent)}
+header{padding:48px 40px 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#15162a 0%,#0d0d1a 100%)}
+header .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;font-weight:600}
+header h1{margin:8px 0 4px;font-size:40px;font-weight:700;letter-spacing:-0.02em}
+header .meta{color:var(--muted);font-size:14px}
+main{max-width:1120px;margin:0 auto;padding:32px 40px 80px}
+section{margin:36px 0;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:28px 32px}
+section h2{margin:0 0 16px;font-size:20px;font-weight:600;display:flex;align-items:center;gap:12px}
+section h2 .num{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;background:var(--accent);color:#0d0d1a;border-radius:50%;font-size:13px;font-weight:700}
+section h3{margin:20px 0 8px;font-size:15px;font-weight:600;color:var(--accent)}
+p,li{font-size:14px}
+.muted{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pill.ok{background:rgba(0,212,170,.12);color:var(--accent)}
+.pill.warn{background:rgba(255,184,107,.12);color:var(--warn)}
+.pill.info{background:rgba(160,163,192,.14);color:var(--muted)}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:8px 18px;margin:6px 0 0}
+.kv dt{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+.kv dd{margin:0;font-size:14px}
+ul{padding-left:20px;margin:6px 0}
+ul li{margin:4px 0}
+.linklist a{display:block;padding:4px 0;border:none;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+footer{padding:32px 40px;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--border)}
+code{background:var(--panel-2);padding:2px 6px;border-radius:4px;font-size:12px;color:#c6c8e0}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Nebraska</h1>
+  <div class="meta">State rank #37 &middot; Compiled 2026-04-18 &middot; 2,248 real provider rows in <code>nebraska_leads.csv</code> &middot; <span class="pill ok">Monthly negative-action PDFs</span></div>
+</header>
+<main>
+
+<section id="authority">
+  <h2><span class="num">2</span>Licensing Authority</h2>
+  <dl class="kv">
+    <dt>Agency</dt><dd>Nebraska DHHS &mdash; Division of Public Health, Licensure Unit, Office of Children&rsquo;s Services Licensing</dd>
+    <dt>Address</dt><dd>PO Box 94986, Lincoln, NE 68509-4986</dd>
+    <dt>Phone</dt><dd>1-800-600-1289 (in NE) &middot; 402-471-9278 (Lincoln)</dd>
+    <dt>Email</dt><dd><a href="mailto:DHHS.LicensureUnit@nebraska.gov">DHHS.LicensureUnit@nebraska.gov</a></dd>
+    <dt>Program page</dt><dd><a href="https://dhhs.ne.gov/Pages/Child-Care-Licensing.aspx">dhhs.ne.gov/Child-Care-Licensing</a></dd>
+  </dl>
+</section>
+
+<section id="citation">
+  <h2><span class="num">3</span>Primary Regulatory Citation</h2>
+  <ul>
+    <li><strong>Statute:</strong> Nebraska Child Care Licensing Act (Neb. Rev. Stat. &sect;71-1908 <em>et seq.</em>)</li>
+    <li><strong>Disciplinary grounds:</strong> <a href="https://nebraskalegislature.gov/laws/statutes.php?statute=71-1919">Neb. Rev. Stat. &sect;71-1919</a></li>
+    <li><strong>Regulations:</strong> <a href="https://dhhs.ne.gov/licensure/Documents/CCC391-3.pdf">Title 391 NAC Chapter 3 (Child Care Centers)</a>; Chapter 2 (FCC Home I), Chapter 4+ (school-age / dual license).</li>
+    <li><strong>Effective:</strong> 2/20/13 &amp; 5/20/13 (current Title 391).</li>
+  </ul>
+</section>
+
+<section id="contacts">
+  <h2><span class="num">4</span>Contact / Provider Data</h2>
+  <p class="muted">Leads file: <code>/Users/magnusfremont/Desktop/daycare/nebraska_leads.csv</code> &mdash; 2,248 rows, Gold tier (DHHS weekly roster PDF).</p>
+  <table>
+    <thead><tr><th>Source</th><th>Format</th><th>Records</th><th>Fields</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>DHHS Weekly Roster</td>
+        <td>Native PDF (text, 453 pp)</td>
+        <td>2,248</td>
+        <td>name 100% &middot; city ~98% &middot; phone ~95% &middot; email 0% &middot; website 0%</td>
+        <td><a href="https://dhhs.ne.gov/licensure/Documents/ChildCareRoster.pdf">ChildCareRoster.pdf</a></td>
+      </tr>
+      <tr>
+        <td>NebraskaMAP &mdash; DHHS Licensed Child Care</td>
+        <td>ArcGIS FeatureServer</td>
+        <td>Same records + lat/lon</td>
+        <td>geo + license type + metadata</td>
+        <td><a href="https://www.nebraskamap.gov/datasets/dhhs-licensed-child-care">nebraskamap.gov</a></td>
+      </tr>
+      <tr>
+        <td>HHS License Search</td>
+        <td>CGI per-licensee lookup</td>
+        <td>Live</td>
+        <td>Licensee + disciplinary/non-disciplinary history</td>
+        <td><a href="https://www.nebraska.gov/LISSearch/search.cgi">LISSearch</a></td>
+      </tr>
+      <tr>
+        <td>Step Up to Quality provider search</td>
+        <td>Web directory</td>
+        <td>Live</td>
+        <td>QRIS level + provider metadata</td>
+        <td><a href="https://www.nebraskachildcare.org/">nebraskachildcare.org</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="framework">
+  <h2><span class="num">5</span>Compliance Framework Links</h2>
+  <div class="linklist">
+    <a href="https://dhhs.ne.gov/licensure/Documents/CCC391-3.pdf">Title 391 NAC Ch. 3 &mdash; Child Care Centers (PDF)</a>
+    <a href="https://dhhs.ne.gov/Pages/Title-391.aspx">Title 391 landing page</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/QandAonNewCenterRegs.pdf">Q&amp;A on Center Regulations</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Child%20Care%20Licensure.pdf">2024 Statutes Relating to Child Care Licensure</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/ChildCareLicensure.pdf">2025 Statutes Relating to Child Care Licensure</a>
+    <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/nebraska-department-health-and-human-services-division-public-health-licensure">ACF National Licensing DB &mdash; Nebraska</a>
+  </div>
+</section>
+
+<section id="forms">
+  <h2><span class="num">6</span>Licensing Forms</h2>
+  <ul>
+    <li>Child Care License Application (initial / provisional)</li>
+    <li><a href="https://dhhs.ne.gov/licensure/Documents/DualLicAppAgreeForm.pdf">Dual License Application &amp; Agreement (PDF)</a></li>
+    <li>Health Information Report (per-staff, 391 NAC 3-006.03F)</li>
+    <li>Background Check Request (NE State Patrol + FBI + Sex Offender Registry + CPS Registry)</li>
+    <li>Fire Inspection Approval (state fire marshal or delegated AHJ)</li>
+    <li>Sanitation Inspection Approval</li>
+    <li>Annual Immunization Report (173 NAC 4 / &sect;&sect;71-1913.01-.03)</li>
+  </ul>
+</section>
+
+<section id="violations">
+  <h2><span class="num">7</span>Violations &amp; Inspection Data</h2>
+  <div class="grid2">
+    <div>
+      <h3>Access mode</h3>
+      <p><span class="pill ok">Monthly PDF</span> &nbsp; <span class="pill ok">Predictable URLs</span></p>
+      <p>DHHS publishes monthly negative-action PDFs around the 5th of each month at <code>{MM}-{YY}ccnegactions.pdf</code>. A 10-year cumulative archive is also maintained.</p>
+    </div>
+    <div>
+      <h3>Action types captured</h3>
+      <ul style="margin-top:6px"><li>Provisional license, probation</li><li>Denial, emergency suspension, suspension, revocation</li><li>Voluntary surrender in lieu of discipline</li><li>Fine, consent order, stipulated agreement</li></ul>
+    </div>
+  </div>
+
+  <h3>Key fields per action</h3>
+  <ul>
+    <li>Licensee / facility name, license number, license type</li>
+    <li>Action type + effective date</li>
+    <li>Grounds (tied to &sect;71-1919 / Title 391 NAC)</li>
+    <li>County, city (address where applicable)</li>
+  </ul>
+
+  <h3>Automation strategy</h3>
+  <ol>
+    <li>Scheduled curl on the 6th of each month to <code>https://dhhs.ne.gov/licensure/Documents/{MM}-{YY}ccnegactions.pdf</code>.</li>
+    <li>Parse via <code>pdftotext -layout</code> + regex on license-# column.</li>
+    <li>Diff against prior month; push new enforcement actions into ComplianceKit sales-trigger pipeline.</li>
+    <li>Re-run the weekly roster parser documented in <code>nebraska/SOURCES.md</code> every Friday to track new entrants / closures.</li>
+    <li>Supplement per-licensee detail via the HHS License Search CGI (no captcha).</li>
+  </ol>
+
+  <h3>FOIA path</h3>
+  <p>Nebraska Public Records Statute (Neb. Rev. Stat. &sect;84-712 et seq.). Most licensure data is already public; formal request only needed for structured CSV or pre-2016 records. Contact: <a href="mailto:DHHS.LicensureUnit@nebraska.gov">DHHS.LicensureUnit@nebraska.gov</a>.</p>
+
+  <h3>Violations / inspection data sources</h3>
+  <div class="linklist">
+    <a href="https://dhhs.ne.gov/licensure/pages/disciplinary-actions-against-health-care-professionals-and-child-care-providers.aspx">Disciplinary Actions landing</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Mar16-26ccnegactions.pdf">10-year CC negative actions archive (Mar 2016-Mar 2026)</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/03-26ccnegactions.pdf">March 2026 monthly PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/02-26ccnegactions.pdf">February 2026 monthly PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/01-26ccnegactions.pdf">January 2026 monthly PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Aug14-24ccnegactions.pdf">Aug 2024 cumulative PDF</a>
+    <a href="https://www.nebraska.gov/LISSearch/search.cgi">HHS License Search (per-licensee)</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/ChildCareRoster.pdf">Weekly Roster PDF</a>
+    <a href="https://nebraskalegislature.gov/pdf/reports/oversight/child_care_monitoring_report_2024-2025.pdf">OIG Child Welfare monitoring report 2024-2025</a>
+  </div>
+</section>
+
+<section id="signals">
+  <h2><span class="num">8</span>Outreach Signals</h2>
+  <ul>
+    <li><span class="pill ok">Predictable enforcement feed</span> &mdash; monthly PDFs at known URL = automated "recently-cited" alert for sales.</li>
+    <li><span class="pill warn">No bulk email</span> &mdash; enrichment required (Hunter/Apollo); phone coverage is strong.</li>
+    <li>Twice-a-year inspection cadence for centers &ge; 30 children creates a natural twice-yearly renewal anchor for ComplianceKit pitches.</li>
+    <li>Provisional-license transition (90-day cliff after first year) is a common failure point &mdash; offer ComplianceKit as "graduation insurance."</li>
+    <li>Step Up to Quality (NE QRIS) participants are premium prospects (voluntarily opting into more paperwork = receptive to compliance software).</li>
+    <li>Annual Immunization Report mandate is a recurring pain-point that ComplianceKit's Child File Management feature solves directly.</li>
+  </ul>
+</section>
+
+<section id="nextsteps">
+  <h2><span class="num">9</span>Next-Step Data Acquisition</h2>
+  <ol>
+    <li>Ingest the <strong>10-year archive PDF</strong> for full historical enforcement dataset; structure into Postgres.</li>
+    <li>Stand up monthly cron to fetch next negative-action PDF (first business day after the 5th).</li>
+    <li>Supplement leads CSV with NebraskaMAP geocoded layer for regional sales segmentation.</li>
+    <li>Email enrichment pass against 2,248 providers.</li>
+    <li>Scrape the HHS License Search CGI per licensee to attach full disciplinary history to leads &mdash; no captcha, no auth required.</li>
+    <li>Cross-reference Omaha World-Herald and NE Public Media archives (manual) for high-profile enforcement stories to use as sales case studies.</li>
+  </ol>
+</section>
+
+<section id="links">
+  <h2><span class="num">10</span>All Links</h2>
+  <h3>Licensing &amp; regulations</h3>
+  <div class="linklist">
+    <a href="https://dhhs.ne.gov/Pages/Child-Care-Licensing.aspx">DHHS Child Care Licensing (home)</a>
+    <a href="https://dhhs.ne.gov/Pages/Title-391.aspx">Title 391 landing</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/CCC391-3.pdf">Title 391 NAC Ch. 3 (PDF)</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/DualLicAppAgreeForm.pdf">Dual License Application (PDF)</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Child%20Care%20Licensure.pdf">2024 Statutes (PDF)</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/ChildCareLicensure.pdf">2025 Statutes (PDF)</a>
+    <a href="https://nebraskalegislature.gov/laws/statutes.php?statute=71-1919">&sect;71-1919 Disciplinary Grounds</a>
+  </div>
+  <h3>Enforcement / disciplinary</h3>
+  <div class="linklist">
+    <a href="https://dhhs.ne.gov/licensure/pages/disciplinary-actions-against-health-care-professionals-and-child-care-providers.aspx">Disciplinary Actions landing</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Mar16-26ccnegactions.pdf">10-year CC Neg Actions Archive</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/03-26ccnegactions.pdf">March 2026 PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/02-26ccnegactions.pdf">February 2026 PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/01-26ccnegactions.pdf">January 2026 PDF</a>
+    <a href="https://dhhs.ne.gov/licensure/Documents/Aug14-24ccnegactions.pdf">Aug 2024 cumulative PDF</a>
+    <a href="https://www.nebraska.gov/LISSearch/search.cgi">HHS License Search</a>
+    <a href="https://nebraskalegislature.gov/pdf/reports/oversight/child_care_monitoring_report_2024-2025.pdf">OIG Monitoring Report (2024-2025)</a>
+    <a href="https://content.govdelivery.com/accounts/NESTATE/bulletins/3e8572c">GovDelivery NE bulletin</a>
+  </div>
+  <h3>Rosters / directories</h3>
+  <div class="linklist">
+    <a href="https://dhhs.ne.gov/licensure/Documents/ChildCareRoster.pdf">Weekly Roster PDF</a>
+    <a href="https://www.nebraskamap.gov/datasets/dhhs-licensed-child-care">NebraskaMAP dataset</a>
+    <a href="https://dhhs.ne.gov/Pages/Search-for-Child-Care-Providers.aspx">Find a Provider</a>
+    <a href="https://www.nebraskachildcare.org/">Step Up to Quality provider search</a>
+  </div>
+</section>
+
+</main>
+<footer>ComplianceKit state research &mdash; Nebraska &mdash; 2026-04-18</footer>
+</body>
+</html>

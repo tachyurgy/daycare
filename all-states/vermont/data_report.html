@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vermont — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a; --bg-elev: #15152a; --bg-card: #1a1a30;
+    --text: #f0f0f5; --text-dim: #a0a0b5;
+    --accent: #00d4aa; --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45; --warn: #ffb347; --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 24px; margin-bottom: 40px; }
+  header .tag { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.3rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-elev); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.5px; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0 6px 18px; position: relative; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  code { background: var(--bg-elev); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+  .highlight { background: linear-gradient(90deg, rgba(0, 212, 170, 0.1), transparent); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Vermont</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 49</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated programs:</strong> ~1,000-1,350</span>
+    <span><strong>BFIS public posting horizon:</strong> 5 years</span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>Vermont Department for Children and Families (DCF), Child Development Division (CDD)</strong>. Bright Futures Information System (BFIS) is the canonical data system (licensing, subsidy/CCFAP, STARS quality rating, public directory).</p>
+    <div class="kv"><strong>Address</strong> VT DCF, CDD, 280 State Drive, Waterbury, VT 05671-1040</div>
+    <div class="kv"><strong>Helpline</strong> 800-649-2642</div>
+    <div class="kv"><strong>BFIS</strong> <a href="https://www.brightfutures.dcf.state.vt.us">brightfutures.dcf.state.vt.us</a></div>
+    <div class="kv"><strong>Find Child Care</strong> <a href="https://dcf.vermont.gov/cdd/families/find-care">dcf.vermont.gov/cdd/families/find-care</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> <strong>33 V.S.A. Chapter 35</strong> (Child Care Services). § 3502 CDD authority; § 3511 registered family homes.</p>
+    <p><strong>Code of Vermont Rules (CVR):</strong></p>
+    <ul>
+      <li><strong>CVR 13-171-004</strong> — Center Based Child Care &amp; Preschool Programs (CBCCPP)</li>
+      <li><strong>CVR 13-171-005</strong> — Registered &amp; Licensed Family Child Care Homes</li>
+      <li><strong>CVR 13-171-006</strong> — After-School Programs</li>
+      <li><strong>CVR 13-162-009</strong> — Non-Recurring Drop-In Care</li>
+    </ul>
+    <p><strong>Act 76 (2023)</strong> — 0.44% payroll tax funding universal child care expansion.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows (current)</td><td>86</td><td><code>vermont_leads.csv</code> (project root)</td></tr>
+        <tr><td>Coverage of state market</td><td>~6-8%</td><td>Burlington, S. Burlington, Essex, Montpelier, Rutland</td></tr>
+        <tr><td>Email / website fields</td><td><span class="pill pill-warn">Blank</span></td><td>Secondary enrichment required</td></tr>
+        <tr><td>Primary lead source</td><td>childcarecenter.us mirror</td><td>Individual FCC operators excluded for B2B suitability</td></tr>
+        <tr><td>Authoritative registry</td><td>BFIS (session-protected)</td><td><a href="https://www.brightfutures.dcf.state.vt.us">brightfutures.dcf.state.vt.us</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dcf.vermont.gov/cdd">VT DCF CDD</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/families/find-care">Find Child Care (BFIS public)</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/providers/care/regs">Licensing Regulations index</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/laws-rules/licensing">Law &amp; rules</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Shared%20Documents/CDD/Licensing/CC-CenterBased-Regs.pdf">CBCCPP Regulations PDF</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Policies%20Procedures%20Guidance/CDD-Guidance-CC-CBCCPP-Guidance-Manual.pdf">CBCCPP Guidance Manual</a></li>
+      <li><a href="https://legislature.vermont.gov/statutes/section/33/035/03502">33 V.S.A. § 3502</a></li>
+      <li><a href="https://regulations.justia.com/states/vermont/agency-13/sub-agency-171/chapter-004/section-13-171-004/">CVR 13-171-004 (center)</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/vermont/13-005-Code-Vt-R-13-171-005-X">CVR 13-171-005 (family home)</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms</h2>
+  <div class="card">
+    <ul>
+      <li>Application for Child Care License / Registration (in BFIS)</li>
+      <li>Background Records Check (BRC) — VCIC + FBI + Child Protection Registry + Sex Offender + Adult Protective Services</li>
+      <li>Child Program Record Check Authorization (<a href="https://outside.vermont.gov/dept/DCF/Shared%20Documents/CDD/Forms/CC-Criminal-Record-Check.pdf">PDF</a>)</li>
+      <li>Health History &amp; Immunization (VT DOH approved)</li>
+      <li>Staff / Home Member Health Statement &amp; TB screening</li>
+      <li>Emergency Preparedness Plan template</li>
+      <li>Medication authorization</li>
+      <li>Nutrition / meal plan, Floor plan &amp; exit map</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="highlight">
+      <strong>VT is mandated-public by federal law.</strong> CCDBG requires public posting of regulatory non-compliance — VT implements via BFIS. Minimum <strong>5 years</strong> of violation + corrective-action history per facility (with documented gaps flagged in the March 2026 State Auditor report).
+    </div>
+    <div class="grid2">
+      <div>
+        <h3>Source</h3>
+        <p>BFIS public provider profiles. Each licensing visit date expands to show facts of violation + required corrective action.</p>
+      </div>
+      <div>
+        <h3>Format</h3>
+        <p>Per-facility HTML (session-protected ASP.NET-style app). <span class="pill pill-danger">No bulk export</span> <span class="pill pill-warn">JS-rendered</span></p>
+      </div>
+      <div>
+        <h3>Classification issue</h3>
+        <p>2026 State Auditor found 11 of 40 "standard" citations should have been "serious." Expect label inconsistency.</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p>1 V.S.A. §§ 315-320 Public Records Act via DCF records officer (<a href="https://dcf.vermont.gov/contacts/public-records">portal</a>).</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Strictest infant ratio in US</strong> — 1:4 for both infants AND toddlers up to 24 months. Payroll pressure creates willingness to pay for ratio-optimization tools.</li>
+      <li><strong>90% rule</strong> — only staff spending ≥90% of assigned time with children count in ratio. Eliminates director ratio-shopping, which forces real-time tracking software.</li>
+      <li><strong>Act 76 payroll tax</strong> — providers operate on thinner effective margins post-2023; ROI messaging resonates.</li>
+      <li><strong>STARS tied to subsidy rates</strong> — QRIS participation is economically necessary for most programs, and STARS evidence collection maps cleanly to the Documents module.</li>
+      <li><strong>Triennial license cycle for compliant programs</strong> — 3-year renewal with annual monitoring in between. Annual monitoring = annual buying touch-point.</li>
+      <li><strong>2026 audit flag → vendor trust premium</strong> — state oversight gaps are documented; providers who can show audit-ready records outperform peers in parent acquisition.</li>
+      <li><strong>Chittenden County dominates</strong> — Burlington / S. Burlington / Essex / Winooski is the concentrated first-wave target.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px;">
+      <li style="margin-bottom:8px;"><strong>BFIS scrape</strong> via Playwright: iterate the town filter (VT has ~250 towns/cities); session-persist; extract each provider profile + licensing history.</li>
+      <li style="margin-bottom:8px;"><strong>Per-visit violation extraction</strong> — each dated visit expands to show violation text + required corrective action; normalize to <code>(provider, date, citation, severity, corrective_action, due_date)</code>.</li>
+      <li style="margin-bottom:8px;"><strong>File 1 V.S.A. §§ 315-320 request</strong> to DCF (and the Vermont State Auditor's office for the 2026 audit underlying dataset) for a full BFIS licensing-visit extract, 7 years.</li>
+      <li style="margin-bottom:8px;"><strong>Layer VTDigger investigative dataset</strong> as a qualitative signal feed — named enforcement actions are a useful outbound hook ("We saw Little Beginnings was in the news — here's how ComplianceKit would have caught that").</li>
+      <li style="margin-bottom:8px;"><strong>Northern Lights Career Development Center registry</strong> cross-reference for staff PD completeness data — integrate when API/records become available.</li>
+      <li><strong>Expand leads</strong> to Windham, Windsor, Franklin, Addison, Caledonia, Orange, Orleans, Grand Isle, Lamoille, Bennington, Essex counties.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dcf.vermont.gov/cdd">VT DCF Child Development Division</a></li>
+      <li><a href="https://www.brightfutures.dcf.state.vt.us">BFIS public portal</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/families/find-care">Find Child Care</a></li>
+      <li><a href="https://dcf.vermont.gov/dail/cdd/providers/care/BFIS">Manage Your Program's Information (BFIS provider page)</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/providers/care/regs">Licensing Regulations index</a></li>
+      <li><a href="https://dcf.vermont.gov/cdd/laws-rules/licensing">DCF Law &amp; Rules</a></li>
+      <li><a href="https://dcf.vermont.gov/contacts/public-records">DCF Public Records request</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Shared%20Documents/CDD/Licensing/CC-CenterBased-Regs.pdf">CBCCPP Regulations PDF</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Policies%20Procedures%20Guidance/CDD-Guidance-CC-CBCCPP-Guidance-Manual.pdf">CBCCPP Guidance Manual</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Policies%20Procedures%20Guidance/CDD-Guidance-CC-FCCH-Guidance-Manual.pdf">FCCH Guidance Manual</a></li>
+      <li><a href="https://outside.vermont.gov/dept/DCF/Shared%20Documents/CDD/Licensing/Registered-FCCH-Application-Process.pdf">Registered FCCH Application Process</a></li>
+      <li><a href="https://regulations.justia.com/states/vermont/agency-13/sub-agency-171/chapter-004/section-13-171-004/">CVR 13-171-004 (CBCCPP)</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/vermont/13-005-Code-Vt-R-13-171-005-X">CVR 13-171-005 (Family)</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/vermont/13-009-Code-Vt-R-13-162-009-X">CVR 13-162-009 (Non-Recurring)</a></li>
+      <li><a href="https://legislature.vermont.gov/statutes/section/33/035/03502">33 V.S.A. § 3502</a></li>
+      <li><a href="https://legislature.vermont.gov/statutes/chapter/01/005">1 V.S.A. Ch. 5 (Public Records Act)</a></li>
+      <li><a href="https://auditor.vermont.gov/sites/auditor/files/CCD%20Final%20Report.pdf">VT State Auditor CCD Final Report (2026)</a></li>
+      <li><a href="https://vtdigger.org/2026/03/09/audit-finds-gaps-in-vermont-child-care-oversight-pose-risks-to-children-threaten-federal-dollars/">VTDigger — 2026 audit coverage</a></li>
+      <li><a href="https://vtdigger.org/2025/04/03/south-burlington-child-care-faces-state-violations/">VTDigger — South Burlington violations</a></li>
+      <li><a href="https://vtdigger.org/2023/08/18/barre-town-child-care-center-partially-shuttered-staff-member-criminally-cited/">VTDigger — Barre Town suspension</a></li>
+      <li><a href="https://www.vermontpublic.org/local-news/2026-03-09/vermont-child-care-inspectors-undercount-serious-violations-audit-finds">Vermont Public — undercount coverage</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Vermont · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

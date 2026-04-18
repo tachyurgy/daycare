@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Dakota — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --bg-elev: #15152a;
+    --bg-card: #1a1a30;
+    --text: #f0f0f5;
+    --text-dim: #a0a0b5;
+    --accent: #00d4aa;
+    --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45;
+    --warn: #ffb347;
+    --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  header .tag {
+    display: inline-block;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 1.3rem;
+    color: var(--accent);
+    border-left: 3px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg-elev);
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+  }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+  }
+  ul li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+  code {
+    background: var(--bg-elev);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>South Dakota</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 46</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated programs:</strong> ~700-750</span>
+    <span><strong>Inspection records horizon:</strong> 4 years public</span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>South Dakota Department of Social Services (DSS), Division of Child Care Services (CCS)</strong> — licensing administered through the <strong>Office of Licensing and Accreditation (OLA)</strong>.</p>
+    <div class="kv"><strong>Address</strong> 700 Governors Drive, Pierre, SD 57501</div>
+    <div class="kv"><strong>Phone</strong> (605) 773-4766 | Toll-free: 800-227-3020</div>
+    <div class="kv"><strong>Public portal</strong> <a href="https://olapublic.sd.gov/child-care-provider-search/">olapublic.sd.gov/child-care-provider-search</a></div>
+    <div class="kv"><strong>Provider portal</strong> <a href="https://olaprovider.sd.gov/">olaprovider.sd.gov</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> SDCL Title 26, Chapter 26-6 (Child Welfare; Foster Homes, Shelters, and Child Care).</p>
+    <p><strong>Administrative Rules:</strong> <strong>ARSD Chapter 67:42</strong> (Child Care Services) — key articles: 67:42:10 (Registered Family Day Care), 67:42:15 (Before/After School), 67:42:17 (Licensed Centers & School-Age).</p>
+    <p><strong>Background-check statute:</strong> SDCL 26-6-14.4 (state + FBI fingerprint + Central Registry for all adults with unsupervised access).</p>
+    <div class="kv"><strong>Full rule text</strong> <a href="https://sdlegislature.gov/Rules/Administrative/67:42">sdlegislature.gov/Rules/Administrative/67:42</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows (current)</td><td>152</td><td><code>south_dakota_leads.csv</code> (project root)</td></tr>
+        <tr><td>Coverage of state market</td><td>~20%</td><td>Sioux Falls, Rapid City, Aberdeen, Brookings, Watertown</td></tr>
+        <tr><td>Email / website fields</td><td><span class="pill pill-warn">Blank</span></td><td>Requires secondary enrichment per lead</td></tr>
+        <tr><td>Primary lead source</td><td>childcarecenter.us mirror</td><td>Name / city / zip / phone only</td></tr>
+        <tr><td>Authoritative registry</td><td>OLA Constituent Portal</td><td>JS-rendered, no bulk export</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dss.sd.gov/childcare/licensing/">DSS Child Care Licensing landing</a></li>
+      <li><a href="https://dss.sd.gov/childcare/">DSS Child Care Services hub</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/dccmonitoring.aspx">DSS monitoring process — centers</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/fdcmonitoring.aspx">DSS monitoring process — family day care</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/childcaredata.aspx">DSS Child Care Data hub</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/south-dakota/ARSD-67-42-17-19">ARSD 67:42:17:19 — center/school-age ratio</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/south-dakota/ARSD-67-42-17-21">ARSD 67:42:17:21 — family day care ratios</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/south-dakota">ACF Licensing Regulations Database — SD</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms</h2>
+  <div class="card">
+    <p>All application / renewal / incident-reporting / correction-plan activity routes through the OLA Constituent Portal. Published paper forms include:</p>
+    <ul>
+      <li>Child Care Licensing / Registration Application (OLA portal)</li>
+      <li>DCI fingerprint card — criminal background check request</li>
+      <li>Central Registry check (Child Abuse &amp; Neglect)</li>
+      <li>Medical / Health Statement (staff and enrolled children)</li>
+      <li>Immunization Record (SD DOH-approved)</li>
+      <li>Fire Marshal inspection report (centers)</li>
+      <li>Correction plan / variance request (online submission)</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <h3>Source</h3>
+        <p>OLA Constituent Portal publishes <strong>4 years</strong> of inspection history, compliance plans, corrective-action plans, and stipulation / consent agreements per provider profile.</p>
+      </div>
+      <div>
+        <h3>Format</h3>
+        <p>Per-facility HTML + PDF attachments. <span class="pill pill-danger">No bulk export</span> <span class="pill pill-warn">JS-rendered</span></p>
+      </div>
+      <div>
+        <h3>Access strategy</h3>
+        <p>Headless browser (Playwright) to enumerate by zip/county; parse each provider profile; OCR the attached inspection PDFs.</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p>SDCL 1-27 open-records request to DSS / OLA for machine-readable extract of preceding 7 years.</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Annual renewal cadence</strong> — every license/registration renews every 12 months. Renewal stress is a predictable, recurring buying trigger.</li>
+      <li><strong>Public posting of violations</strong> — every SD provider has 3-4 years of inspection results visible to parents. Reputational stake in "clean" compliance is high.</li>
+      <li><strong>Tight market (~700-750 programs)</strong> — full-TAM outreach is feasible in two weeks of sequencing.</li>
+      <li><strong>Sioux Falls + Rapid City</strong> account for majority of licensed centers — concentrate first-wave outreach there.</li>
+      <li><strong>CACFP / Head Start double-enrolled</strong> programs carry additional federal paperwork — higher pain tier, higher willingness to pay.</li>
+      <li><strong>Background-check rigor (SDCL 26-6-14.4)</strong> — strict FBI + Central Registry + sex-offender triangulation creates ongoing credential-tracking need that maps cleanly to the Staff File module.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px; color:var(--text);">
+      <li style="margin-bottom:8px;"><strong>Scrape OLA portal</strong> via Playwright: enumerate all provider profiles, extract license-number + address + email (when shown) + phone + inspection-history URL set. Target: full statewide registry in ≤48 hours of compute.</li>
+      <li style="margin-bottom:8px;"><strong>Download + OCR inspection PDFs</strong> for every profile. Normalize to <code>(provider_id, date, type, rule_cited, corrected_by, narrative)</code>. Run ML classifier to tag severity (high/med/low) since SD doesn't publish a formal weight system.</li>
+      <li style="margin-bottom:8px;"><strong>File SDCL 1-27 open-records request</strong> to DSS / OLA for: full inspection-database extract preceding 7 years, all enforcement actions, all stipulation / consent agreements. Targeted fields per violations.md.</li>
+      <li style="margin-bottom:8px;"><strong>Enrich leads CSV</strong> with emails from: CACFP sponsor listings (federal), SD Head Start association, CCR&amp;R (Child Care Resource &amp; Referral) network partner lookups.</li>
+      <li><strong>Expand lead coverage</strong> to Pierre, Mitchell, Yankton, Vermillion, Huron, Madison, Spearfish to close the ~80% gap left from the first pass.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dss.sd.gov/childcare/licensing/">DSS Child Care Licensing</a></li>
+      <li><a href="https://dss.sd.gov/childcare/">DSS Child Care Services</a></li>
+      <li><a href="https://olapublic.sd.gov/child-care-provider-search/">OLA Constituent Portal (public search)</a></li>
+      <li><a href="https://olapublic.sd.gov/child-care-program-profile/80035">Sample OLA provider profile</a></li>
+      <li><a href="https://olaprovider.sd.gov/">OLA Provider Portal</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/dccmonitoring.aspx">DSS center monitoring process</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/fdcmonitoring.aspx">DSS family day care monitoring</a></li>
+      <li><a href="https://dss.sd.gov/childcare/licensing/childcaredata.aspx">DSS Child Care Data hub</a></li>
+      <li><a href="https://dss.sd.gov/childprotection/licensing.aspx">Child Protection licensing</a></li>
+      <li><a href="https://sdlegislature.gov/Rules/Administrative/67:42">ARSD 67:42 full text</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/south-dakota/ARSD-67-42-17-18">ARSD 67:42:17:18 (supervision / group size)</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/south-dakota/ARSD-67-42-17-19">ARSD 67:42:17:19 (ratios)</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/south-dakota/ARSD-67-42-17-21">ARSD 67:42:17:21 (family day care)</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/south-dakota">ACF Licensing DB — SD</a></li>
+      <li><a href="https://sdlegislature.gov/Statutes/1-27">SDCL 1-27 (Open Records)</a></li>
+      <li><a href="https://www.keloland.com/keloland-com-original/parents-can-search-sd-day-care-complaints-inspections-through-dss-site/">KELOLAND: how parents use the DSS portal</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  South Dakota · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

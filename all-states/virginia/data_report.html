@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Virginia — Child Care Compliance Data Report (2026-04-18)</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #15162a;
+    --panel-2: #1c1d33;
+    --text: #f0f0f5;
+    --muted: #a3a6b8;
+    --accent: #00d4aa;
+    --accent-dim: #0a7561;
+    --border: #2a2c44;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
+  body { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 14px; color: var(--accent); letter-spacing: 0.02em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); }
+  a:hover { border-bottom-style: solid; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 0; }
+  code { background: var(--panel-2); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 18px; font-size: 13.5px; background: var(--panel); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; background: var(--panel-2); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 20px; margin: 6px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 18px; margin: 14px 0; border-radius: 3px; }
+  .links-list { columns: 2; column-gap: 32px; font-size: 13px; }
+  .links-list li { break-inside: avoid; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .badge { display: inline-block; background: var(--accent-dim); color: var(--bg); font-weight: 600; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; letter-spacing: 0.03em; }
+</style>
+</head>
+<body>
+
+<h1>Virginia — Child Care Compliance Data Report</h1>
+<p class="meta">Population rank: <strong>12</strong> &middot; ~8.7M residents &middot; Prepared 2026-04-18 for ComplianceKit</p>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Virginia Department of Education (VDOE), Division of Early Childhood Care and Education, Office of Child Care Licensing (OCCL).</strong> Licensing transferred from VDSS to VDOE effective July 1, 2021 (HB 2299). The public-search tool still resides on the legacy <code>dss.virginia.gov</code> domain.
+</p>
+<ul>
+  <li>Agency: <a href="https://www.doe.virginia.gov/teaching-learning-assessment/early-childhood-care-education">doe.virginia.gov/.../early-childhood-care-education</a></li>
+  <li>Consumer portal: <a href="https://www.childcare.virginia.gov/find-care">Child Care VA Find Care</a></li>
+  <li>Public search (legacy): <a href="https://dss.virginia.gov/facility/search/cc2.cgi">Search for Child Day Care (cc2.cgi)</a></li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>Statute:</strong> Code of Virginia <a href="https://law.lis.virginia.gov/vacode/22.1-289.010/">§ 22.1-289.010 et seq.</a> (formerly § 63.2-1700)</li>
+  <li><strong>Rules — Centers:</strong> <a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter780/">8VAC20-780</a> (amendments effective Jan 1, 2026; proposed rulemaking 42:8, Dec 1, 2025)</li>
+  <li><strong>Rules — Family Day Homes:</strong> <a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter790/">8VAC20-790</a></li>
+  <li><strong>Background Checks (new):</strong> <a href="https://register.dls.virginia.gov/details.aspx?id=9691">8VAC20-821</a> — effective Feb 1, 2026</li>
+  <li><strong>General Procedures:</strong> <a href="https://law.lis.virginia.gov/admincodefull/title8/agency20/chapter820/">8VAC20-820</a></li>
+</ul>
+
+<h2>3. Contact / Provider Data Inventory</h2>
+<table>
+  <thead>
+    <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Row Count</th><th>Tier</th><th>Limits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>VA Licensed Child Care Centers Dec 2025</td>
+      <td><a href="https://services3.arcgis.com/PJoVv2u1K1SOrkmR/arcgis/rest/services/VA_Licensed_Child_Care_Centers_December_2025/FeatureServer/0/query?where=1%3D1&outFields=*&f=json">ArcGIS FeatureServer</a> <code>4bfba163369843338d731fdd4a8aabd0</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td><strong>1,531</strong></td>
+      <td>Primary</td>
+      <td>No phone/email/website</td>
+    </tr>
+    <tr>
+      <td>VA Licensed Family Day Homes Dec 2025</td>
+      <td><a href="https://services3.arcgis.com/PJoVv2u1K1SOrkmR/arcgis/rest/services/VA_Licensed_Family_Day_Homes_December_2025/FeatureServer/0/query?where=1%3D1&outFields=*&f=json">ArcGIS FeatureServer</a> <code>5f155519e0fb46bb894f63b29fda9eaf</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td><strong>1,325</strong></td>
+      <td>Primary</td>
+      <td>No contact fields</td>
+    </tr>
+    <tr>
+      <td>Combined leads CSV</td>
+      <td><code>virginia_leads.csv</code></td>
+      <td>CSV</td>
+      <td><strong>2,856</strong></td>
+      <td>Output</td>
+      <td>Centers + FDHs</td>
+    </tr>
+    <tr>
+      <td>Religious Exempt Centers May 2025</td>
+      <td>ArcGIS <code>3a4d97faf182486e82367652471350aa</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td>~500</td>
+      <td>Supplemental</td>
+      <td>Not in main roster; CCDBG background-check requirements apply</td>
+    </tr>
+    <tr>
+      <td>Voluntary Registered FDHs Dec 2025</td>
+      <td>ArcGIS <code>8c37db08f15147b298c1ccc754350d1d</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td>—</td>
+      <td>Supplemental</td>
+      <td>≤4 kids; optional registration</td>
+    </tr>
+    <tr>
+      <td>NOVA Local Permits &amp; Ordinances Dec 2025</td>
+      <td>ArcGIS <code>9987caa671ac4f1b989c99cfd5d4d474</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td>—</td>
+      <td>Supplemental</td>
+      <td>Fairfax / Arlington / Alexandria / Prince William / Falls Church</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li>8VAC20-780 Centers (full chapter): <a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter780/">link</a></li>
+  <li>8VAC20-780-350 Ratios: <a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter780/section350/">link</a></li>
+  <li>8VAC20-790 Family Day Homes: <a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter790/">link</a></li>
+  <li>8VAC20-820 General Procedures: <a href="https://law.lis.virginia.gov/admincodefull/title8/agency20/chapter820/">link</a></li>
+  <li>8VAC20-821 Background Checks (new, 2026-02-01): <a href="https://register.dls.virginia.gov/details.aspx?id=9691">link</a></li>
+  <li>HHS Licensing Regulations Database (VDOE OCCL entry): <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/virginia-department-education-office-child-care-licensing">link</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><code>032-05-0001</code> — Application for a License to Operate a Child Day Program</li>
+  <li><code>032-05-0024</code> — Injury Report (serious injury — 2 business days)</li>
+  <li><code>032-05-0075</code> — Child's Physical Examination Report</li>
+  <li><code>032-05-0029</code> — Sworn Disclosure Statement (background)</li>
+  <li><code>032-05-0030</code> — Central Registry Release of Information</li>
+  <li><code>OBC-SP-130-081-08</code> — Fingerprint card / Livescan submission</li>
+  <li>Emergency Preparedness Plan (written) &middot; Self-inspection checklist (annual)</li>
+  <li>Child Care PASS (Provider Attendance Submission System) — launched Dec 1, 2025</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data <span class="badge">new</span></h2>
+<p>
+  Virginia publishes one of the most comprehensive per-facility inspection archives in the country. Every licensed center, licensed family day home, voluntarily-registered home, religious-exempt center, and certified preschool has a compliance-history page with every inspection since July 1, 2003.
+</p>
+
+<h3>Sources</h3>
+<ul>
+  <li><strong>Search for Child Day Care:</strong> <a href="https://dss.virginia.gov/facility/search/cc2.cgi">dss.virginia.gov/facility/search/cc2.cgi</a></li>
+  <li><strong>Facility-view URL pattern:</strong> <code>cc2.cgi?ID=&lt;facility_id&gt;</code> (landing) &middot; <code>cc2.cgi?ID=&lt;facility_id&gt;&amp;Inspection=&lt;inspection_id&gt;&amp;rm=Inspection</code> (report)</li>
+  <li><strong>Example:</strong> <a href="https://dss.virginia.gov/facility/search/cc2.cgi?ID=38205&Inspection=130833&rm=Inspection">facility 38205, inspection 130833</a></li>
+  <li><strong>Consumer finder:</strong> <a href="https://www.childcare.virginia.gov/find-care">childcare.virginia.gov/find-care</a></li>
+  <li><strong>Fairfax County (local ordinance homes):</strong> <a href="https://www.fairfaxcounty.gov/ofcsearch/standardsearch/childcaresearch">CCMSIS</a></li>
+</ul>
+
+<h3>Report Fields</h3>
+<table>
+  <thead><tr><th>Field</th><th>Typical Values</th></tr></thead>
+  <tbody>
+    <tr><td>Inspection type</td><td>Initial / Renewal / Monitoring (announced / unannounced) / Complaint / Technical Assistance / Self-Reported Incident</td></tr>
+    <tr><td>Standard citation</td><td>8VAC20-780-XXX (centers) &middot; 8VAC20-790-XXX (FDH)</td></tr>
+    <tr><td>Risk rating</td><td>Low / Medium / High / <strong>Key / Core</strong> (key health &amp; safety standards)</td></tr>
+    <tr><td>Plan of Correction</td><td>Corrected-by date + inspector verification initials</td></tr>
+    <tr><td>Outcome</td><td>Full / Conditional (up to 1 yr) / Provisional (up to 6 mo) / Denial / Revocation</td></tr>
+  </tbody>
+</table>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Inspection reports post within ~10 business days of the inspector's close-out meeting.</li>
+  <li>Coverage: post-July-1-2003 online; earlier via licensing inspector / FOIA.</li>
+  <li>Enforcement-order announcements posted to VDOE Early Childhood press feed.</li>
+</ul>
+
+<h3>Access Strategy</h3>
+<ul>
+  <li><strong>requests / httpx</strong> against <code>cc2.cgi</code> — GET parameters only; deterministic URL pattern. Force <code>cp1252</code> decode to handle occasional character-encoding quirks.</li>
+  <li>Enumerate <code>ID</code> in the observed 20000–50000 range (sparse); crawl each facility landing page, then fetch each linked inspection report.</li>
+  <li><strong>Rate:</strong> ≤1 req/sec; long User-Agent tolerated; no captcha observed.</li>
+  <li><strong>Confirmation layer:</strong> Intercept <code>childcare.virginia.gov/find-care</code> XHR to capture VDOE's backing JSON endpoint and cross-check facility metadata.</li>
+</ul>
+
+<div class="callout">
+  <strong>FOIA backup.</strong> Virginia FOIA (<a href="https://law.lis.virginia.gov/vacode/2.2-3700/">Va. Code § 2.2-3700 et seq.</a>) — 5 working days + 7-day extension. VDOE FOIA: <a href="https://www.doe.virginia.gov/about-vdoe/open-government/freedom-of-information-act">office page</a>. Use for pre-2003 records and structured CSV exports; routine requests are typically redirected to <code>cc2.cgi</code>.
+</div>
+
+<h2>7. Outreach Signals (Hot-Lead Detection)</h2>
+<ul>
+  <li><strong>Conditional or Provisional license on cc2.cgi</strong> — owner has a hard deadline (6–12 months) to reach Full status. Top outreach priority.</li>
+  <li><strong>Key / Core standard violation in last cycle</strong> — "key" violations are the exact checklist an inspector opens with; repeat citations signal unresolved process gaps.</li>
+  <li><strong>Self-Reported Incident in past 90 days</strong> — indicates active risk-management work; good context for a needs-analysis conversation.</li>
+  <li><strong>Religious-Exempt → recently converted to Licensed</strong> (compare the religious-exempt ArcGIS layer to the licensed layer) — these operators are newly under VDOE oversight and face a steep learning curve.</li>
+  <li><strong>2026-02-01 background-check rule</strong> (8VAC20-821) applies retroactively to staff whose last check is older than 5 years — every center has a backlog to clear.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ul>
+  <li><strong>requests scraper:</strong> <code>dss.virginia.gov/facility/search/cc2.cgi</code> — enumerate IDs 20000–50000; download each facility landing page + all linked inspections. Budget ~8 worker-hours with polite rate limiting.</li>
+  <li><strong>ArcGIS cross-source:</strong> pull the five supplemental layers (religious-exempt, voluntary-registered FDH, NOVA local ordinance, Head Start, certified preschools) to build a complete "regulated child care" universe beyond the 2,856 in the current leads CSV.</li>
+  <li><strong>FOIA:</strong> one request per fiscal year for adverse-action orders (revocation, denial, non-renewal) to complement cc2.cgi with final enforcement dispositions.</li>
+  <li><strong>Email append:</strong> Leads CSV lacks phone/email; run against Apollo / Hunter using business name + address. Owner titles often on facility landing page.</li>
+  <li><strong>Fairfax/NOVA supplement:</strong> scrape <code>fairfaxcounty.gov/ofcsearch</code> and each of Arlington/Alexandria/Prince William/Falls Church permit systems for NOVA coverage (VDOE doesn't license these).</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="links-list">
+  <li><a href="https://www.doe.virginia.gov/teaching-learning-assessment/early-childhood-care-education">VDOE Early Childhood</a></li>
+  <li><a href="https://www.childcare.virginia.gov/find-care">Child Care VA Find Care</a></li>
+  <li><a href="https://www.childcare.virginia.gov/families/finding-child-care">Child Care VA — Finding Child Care</a></li>
+  <li><a href="https://www.childcare.virginia.gov/providers/what-s-new">Child Care VA — What's New</a></li>
+  <li><a href="https://dss.virginia.gov/facility/search/cc2.cgi">cc2.cgi search</a></li>
+  <li><a href="https://dss.virginia.gov/facility/search/cc2.cgi?ID=38205&Inspection=130833&rm=Inspection">cc2.cgi example</a></li>
+  <li><a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter780/">8VAC20-780</a></li>
+  <li><a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter780/section350/">8VAC20-780-350 Ratios</a></li>
+  <li><a href="https://law.lis.virginia.gov/admincode/title8/agency20/chapter790/">8VAC20-790 FDH</a></li>
+  <li><a href="https://law.lis.virginia.gov/admincodefull/title8/agency20/chapter820/">8VAC20-820 Procedures</a></li>
+  <li><a href="https://register.dls.virginia.gov/details.aspx?id=9691">8VAC20-821 Background Checks</a></li>
+  <li><a href="https://register.dls.virginia.gov/details.aspx?id=12032">8VAC20-780 Proposed (42:8 Dec 2025)</a></li>
+  <li><a href="https://register.dls.virginia.gov/details.aspx?id=12019">8VAC20-780 Fast-Track (42:7 Nov 2025)</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/virginia-department-education-office-child-care-licensing">HHS Licensing Regulations</a></li>
+  <li><a href="https://law.lis.virginia.gov/vacode/2.2-3700/">Virginia FOIA (Va. Code § 2.2-3700)</a></li>
+  <li><a href="https://www.doe.virginia.gov/about-vdoe/open-government/freedom-of-information-act">VDOE FOIA office</a></li>
+  <li><a href="https://www.fairfaxcounty.gov/ofcsearch/standardsearch/childcaresearch">Fairfax CCMSIS</a></li>
+  <li><a href="https://www.wtvr.com/news/local-news/fortress-of-god-vdoe-letter-feb-25-2025">WTVR — Fortress of God VDOE letter 2025</a></li>
+  <li><a href="https://content.govdelivery.com/attachments/VADOE/2022/07/06/file_attachments/2202767/cdc-standards-8vac20-780.pdf">CDC Standards PDF</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/VA_Center_Oct_2021_508.pdf">VA Centers Oct 2021 regs PDF</a></li>
+</ul>
+
+<div class="footer">
+  ComplianceKit state intelligence &middot; Virginia &middot; 2026-04-18. All URLs verified at prep time. &copy; 2026.
+</div>
+
+</body>
+</html>

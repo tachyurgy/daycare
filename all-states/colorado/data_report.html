@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colorado — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --panel:#14142b; --panel-hi:#1b1b3a; --border:#2a2a4a; --text:#f0f0f5; --muted:#9a9ab0; --accent:#00d4aa; --warn:#ffb347; --link:#7cf5d8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1040px; margin:0 auto; padding:48px 32px 96px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:40px; }
+  header .tag { display:inline-block; background:rgba(0,212,170,0.12); color:var(--accent); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  header h1 { font-size:42px; font-weight:700; margin:16px 0 8px; letter-spacing:-.01em; }
+  header .meta { color:var(--muted); font-size:14px; }
+  header .meta span { margin-right:24px; }
+  header .meta strong { color:var(--text); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h2 .num { display:inline-block; color:var(--accent); font-family:ui-monospace,Menlo,monospace; font-size:14px; margin-right:10px; vertical-align:2px; }
+  a { color:var(--link); text-decoration:none; border-bottom:1px dotted var(--link); }
+  a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  p,li { font-size:15px; } ul { padding-left:20px; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--panel-hi); color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; } tr:hover td { background:rgba(0,212,170,0.03); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-family:ui-monospace,Menlo,monospace; background:rgba(0,212,170,0.1); color:var(--accent); border:1px solid rgba(0,212,170,0.3); }
+  .pill.warn { background:rgba(255,179,71,0.1); color:var(--warn); border-color:rgba(255,179,71,0.3); }
+  code { font-family:ui-monospace,Menlo,monospace; background:var(--panel); color:var(--accent); padding:2px 6px; border-radius:3px; font-size:13px; }
+  .callout { background:var(--panel); border-left:3px solid var(--accent); padding:16px 20px; margin:16px 0; border-radius:0 6px 6px 0; color:var(--muted); font-size:14px; }
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; }
+  .link-grid { columns:2; column-gap:32px; font-size:13px; } .link-grid a { display:block; padding:2px 0; word-break:break-all; }
+  @media (max-width:720px){ .link-grid{columns:1;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Colorado</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 21st (~5.9M)</span>
+    <span><strong>Licensed facilities:</strong> 4,544</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Colorado Department of Early Childhood (CDEC)</strong> — <strong>created 2022</strong>, taking over licensing from CDHS. Division of Early Learning Licensing and Administration (DELLA). Consumer portal: <a href="https://www.coloradoshines.com/">Colorado Shines</a>. Licensing hub: <a href="https://cdec.colorado.gov/for-providers/child-care-licensing-and-administration">CDEC Licensing</a>.</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>12 CCR 2509-8 § 7.702</strong> — Child Care Centers (&lt; 24-hour care) — <a href="https://www.law.cornell.edu/regulations/colorado/12-CCR-2509-8-7.702">Cornell LII</a></li>
+  <li><strong>§ 7.707</strong> — Large Family Child Care Homes</li>
+  <li><strong>§ 7.708</strong> — Family Child Care Homes (regular)</li>
+  <li><strong>§ 7.712</strong> — School-Age Child Care Centers</li>
+  <li><strong>§ 7.701</strong> — General Rules for Child Care Facilities</li>
+  <li><strong>Enabling statute:</strong> C.R.S. § 26.5-5-301 et seq.</li>
+  <li><em>Agency migration 2022: regulations administered by CDEC DELLA; legacy CCR path (12 CCR 2509-8) retained for continuity.</em></li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead><tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr><td>CO Licensed Child Care Facilities Report (Socrata)</td><td>Primary bulk</td><td>CSV / JSON / SoDA</td><td>Twice monthly</td><td><a href="https://data.colorado.gov/Early-childhood/Colorado-Licensed-Child-Care-Facilities-Report/a9rr-k8mu">a9rr-k8mu</a></td></tr>
+    <tr><td>Socrata bulk endpoint</td><td>API</td><td>CSV</td><td>Live</td><td><a href="https://data.colorado.gov/resource/a9rr-k8mu.csv">resource CSV</a></td></tr>
+    <tr><td>Colorado Shines Search</td><td>Consumer</td><td>HTML (Salesforce)</td><td>Live</td><td><a href="https://www.coloradoshines.com/search">Colorado Shines Search</a></td></tr>
+    <tr><td>CDPHE ArcGIS layer</td><td>Geo layer</td><td>REST / GeoJSON</td><td>Monthly</td><td><a href="https://data-cdphe.opendata.arcgis.com/datasets/ba8161673d734074a081006adc7ea496">CDPHE ArcGIS</a></td></tr>
+    <tr><td>County Dashboard</td><td>Aggregate stories</td><td>Socrata story</td><td>Twice monthly</td><td><a href="https://data.colorado.gov/stories/s/Colorado-Licensed-Child-Care-Facilities-County-Das/ukut-mhzu">County dashboard</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 1,000 rows of CO-licensed facilities (name + city). Colorado's Socrata dataset is one of the <strong>cleanest in the U.S.</strong> — twice-monthly refresh, 4,544 rows, fully-enumerated fields including capacity by age, Quality Rating, and CCCAP subsidy status. Only downside: no phone/email/website published — enrich via SOS business registry or commercial B2B data.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>CDEC Licensing home</td><td><a href="https://cdec.colorado.gov/for-providers/child-care-licensing-and-administration">Licensing home</a></td></tr>
+    <tr><td>Safe Child Care Tools</td><td><a href="https://cdec.colorado.gov/for-providers/safe-child-care-tools">Safe Child Care Tools</a></td></tr>
+    <tr><td>Quality Initiatives / QRIS</td><td><a href="https://cdec.colorado.gov/for-providers/quality-initiatives">Quality Initiatives</a></td></tr>
+    <tr><td>Reports &amp; Data (CORA landing)</td><td><a href="https://cdec.colorado.gov/resources/reports-data-and-cora">reports-data-and-cora</a></td></tr>
+    <tr><td>Public Notice (enforcement)</td><td><a href="https://cdec.colorado.gov/resources/public-notice-information">Public Notice</a></td></tr>
+    <tr><td>CORA open records</td><td><a href="https://cdec.colorado.gov/colorado-open-records-act-cora">CORA</a></td></tr>
+    <tr><td>Colorado Shines (QRIS)</td><td><a href="https://www.coloradoshines.com/">coloradoshines.com</a></td></tr>
+    <tr><td>ACF national licensing</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/colorado">ACF CO state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li><strong>DCEE1001</strong> — Application for License to Operate a Child Care Facility</li>
+  <li>Medical Statement (Adult &amp; Child) forms</li>
+  <li>Central Registry of Child Protection (<strong>Trails</strong>) background authorization</li>
+  <li>Fingerprint-based FBI / CBI Background Check submission</li>
+  <li>Incident Report</li>
+  <li>Emergency Preparedness Plan</li>
+  <li>Colorado Shines QRIS enrollment forms</li>
+  <li><strong>CIIS</strong> — Colorado Immunization Information System access setup</li>
+  <li><strong>CCCAP Fiscal Agreement</strong> (subsidy participation)</li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://www.coloradoshines.com/search">Colorado Shines detail pages</a></td><td>Per-program: inspection report, licensing history, violation narratives, Quality Rating</td><td>HTML (Salesforce) + PDF</td><td><span class="pill warn">No bulk</span></td></tr>
+    <tr><td><a href="https://cdec.colorado.gov/resources/public-notice-information">CDEC Public Notice</a></td><td>Closed / revoked / enforcement-action facilities</td><td>HTML</td><td><span class="pill">Yes</span></td></tr>
+    <tr><td>Socrata facilities dataset (<code>a9rr-k8mu</code>)</td><td>Facility universe — <strong>no</strong> violations</td><td>CSV / API</td><td><span class="pill">Yes</span></td></tr>
+    <tr><td><a href="https://decl.my.salesforce-sites.com/apex/OEC_File_Review_Request">Public File Review Request</a></td><td>Per-facility full inspection file</td><td>On request</td><td><span class="pill">Per-provider</span></td></tr>
+    <tr><td>CORA request</td><td>Statewide violation extract</td><td>Excel</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+  </tbody>
+</table>
+<p>CDEC recommends <strong>emailing the CDEC Legal Team before filing a formal CORA</strong> — routine violation extracts are often produced informally, faster. CORA: first hour free, $41.37/hr thereafter; 3-working-day response. Colorado moved to <strong>continuous licensure</strong>, so there's no renewal deadline pressure — monitor through annual unannounced inspections.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>Universal Preschool (UPK) contracting pain.</strong> Since 2023, universal pre-K has shifted administration to CDEC; providers need aligned compliance tracking for both licensing AND UPK contracts — double paperwork, single pain point.</li>
+  <li><strong>Two-year agency migration recency.</strong> CDEC was created in 2022; directors are still adjusting. Content-led SEO around "Colorado child care licensing 2026" has low competition and high intent.</li>
+  <li><strong>PDIS professional registry</strong> is mandatory statewide — ComplianceKit staff-file sync to PDIS is a wedge.</li>
+  <li><strong>Altitude-specific requirements</strong> (Rocky Mountain programs) create a niche sub-segment for content.</li>
+  <li><strong>CCCAP Fiscal Agreement</strong> separates subsidy providers — higher ARPA, more willing to pay for compliance.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Scale to full 4,544 facilities</strong> by removing the 1,000-row cap on the Socrata pull.</li>
+  <li><strong>Enrich with Shines program_details</strong> — join <code>provider_id</code> to Salesforce IDs via Shines search, then scrape detail pages for inspection history + violations.</li>
+  <li><strong>Add phone/email/website</strong> via Colorado SOS business registry (open data) or a commercial B2B enrichment vendor.</li>
+  <li><strong>File a CORA informal request</strong> (email CDEC Legal) for 2024–2026 violation extract with rule citation + facility crosswalk.</li>
+  <li><strong>Monitor CDEC Public Notice page</strong> weekly — a source of lapsed-license leads and competitive-pain narratives.</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://cdec.colorado.gov/">cdec.colorado.gov</a>
+  <a href="https://cdec.colorado.gov/for-providers/child-care-licensing-and-administration">Licensing &amp; Administration</a>
+  <a href="https://cdec.colorado.gov/for-providers/safe-child-care-tools">Safe Child Care Tools</a>
+  <a href="https://cdec.colorado.gov/for-providers/quality-initiatives">Quality Initiatives</a>
+  <a href="https://cdec.colorado.gov/for-families/find-child-care">Find Child Care</a>
+  <a href="https://cdec.colorado.gov/resources/reports-data-and-cora">Reports &amp; Data</a>
+  <a href="https://cdec.colorado.gov/resources/public-notice-information">Public Notice</a>
+  <a href="https://cdec.colorado.gov/colorado-open-records-act-cora">CORA</a>
+  <a href="https://www.coloradoshines.com/">Colorado Shines</a>
+  <a href="https://www.coloradoshines.com/search">Shines Search</a>
+  <a href="https://www.coloradoshines.com/families?p=Review-Child-Care-Options">Shines — Review options</a>
+  <a href="https://www.coloradoshines.com/families?p=Frequently-Asked-Questions-Family">Shines FAQ</a>
+  <a href="https://www.coloradoshines.com/programs?p=Overview-of-the-ratings-process">Ratings process</a>
+  <a href="https://www.coloradoshines.com/resource/1440607605000/asset_pdfs1/asset_pdfs1/ColoradoShinesProgramGuide.pdf">Shines Program Guide</a>
+  <a href="https://decl.my.salesforce-sites.com/apex/OEC_File_Review_Request">Public File Review Request</a>
+  <a href="https://data.colorado.gov/Early-childhood/Colorado-Licensed-Child-Care-Facilities-Report/a9rr-k8mu">Socrata dataset a9rr-k8mu</a>
+  <a href="https://data.colorado.gov/widgets/a9rr-k8mu">Socrata widget</a>
+  <a href="https://data.colorado.gov/stories/s/Colorado-Licensed-Child-Care-Facilities-County-Das/ukut-mhzu">County dashboard</a>
+  <a href="https://data-cdphe.opendata.arcgis.com/datasets/ba8161673d734074a081006adc7ea496">CDPHE ArcGIS</a>
+  <a href="https://www.opendatanetwork.com/dataset/data.colorado.gov/a9rr-k8mu">OpenDataNetwork</a>
+  <a href="https://raisingcoloradokids.com/en/finding-child-care/how-do-i-find-child-care/check-the-safety-of-a-program/">Raising CO Kids safety check</a>
+  <a href="https://www.law.cornell.edu/regulations/colorado/12-CCR-2509-8-7.702">12 CCR 2509-8 § 7.702 (Cornell)</a>
+  <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/CO_Center_Dec_2021.pdf">ACF CO center regs</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/colorado">ACF CO state page</a>
+  <a href="https://www.chalkbeat.org/colorado/2023/10/16/23919301/colorado-shines-preschool-child-care-quality-rating-system/">Chalkbeat — Shines overview</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Colorado · Generated 2026-04-18 · Cleanest Socrata feed in the target set; violations require Shines scrape or CORA.
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minnesota — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #151528;
+    --panel-2: #1c1c33;
+    --text: #f0f0f5;
+    --muted: #8a8aa8;
+    --accent: #00d4aa;
+    --accent-dim: #00a888;
+    --border: #26264a;
+    --warn: #ffc266;
+    --bad: #ff6b8a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  header.top {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  h1 {
+    margin: 0.4rem 0 0.3rem;
+    font-size: 2.6rem;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  h1 .rank {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  h2 .n {
+    color: var(--accent);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.95rem;
+    margin-right: 0.6rem;
+    font-weight: 400;
+  }
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-dim);
+    word-break: break-word;
+  }
+  a:hover {
+    color: #6affd4;
+    border-bottom-style: solid;
+  }
+  p { margin: 0.5rem 0 1rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    background: var(--panel);
+    font-size: 0.92rem;
+  }
+  thead th {
+    background: var(--panel-2);
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  tbody td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--panel-2); }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.3rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .pill {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-right: 0.4rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .pill.good { color: var(--accent); border-color: var(--accent-dim); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.bad { color: var(--bad); border-color: var(--bad); }
+  code {
+    background: var(--panel-2);
+    color: var(--accent);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.88em;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 720px) {
+    h1 { font-size: 2rem; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+  .footer {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ComplianceKit Research Pack</div>
+  <h1>Minnesota <span class="rank">Rank #22 by population</span></h1>
+  <div class="meta">Compiled 2026-04-18 &middot; Midwestern expansion corridor &middot; ~2,376 licensed child-care centers and certified centers</div>
+</header>
+
+<h2><span class="n">1.</span>Licensing Authority</h2>
+<div class="card">
+  <p><strong>Minnesota Department of Children, Youth, and Families (DCYF), Licensing Division.</strong> Authority transitioned from the Minnesota Department of Human Services (DHS) to DCYF during the 2023-2024 reorganization; inspection records remain mirrored on the legacy DHS Licensing Information Lookup.</p>
+  <ul>
+    <li>DCYF — <a href="https://dcyf.mn.gov/">dcyf.mn.gov</a></li>
+    <li>DHS Licensing Information Lookup (LIL) — <a href="https://licensinglookup.dhs.state.mn.us/">licensinglookup.dhs.state.mn.us</a></li>
+    <li>DCYF Licensing Inspections page — <a href="https://dcyf.mn.gov/licensing-inspections-child-care-centers">dcyf.mn.gov/licensing-inspections-child-care-centers</a></li>
+    <li>DCYF Forms library — <a href="https://dcyf.mn.gov/forms-licensed-child-care-centers">dcyf.mn.gov/forms-licensed-child-care-centers</a></li>
+  </ul>
+  <p><span class="pill">Child Care Center (Rule 3)</span><span class="pill">Certified Child Care Center</span><span class="pill">Family Child Care (Rule 2)</span></p>
+</div>
+
+<h2><span class="n">2.</span>Primary Regulatory Citation</h2>
+<table>
+  <thead><tr><th>Authority</th><th>Citation</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>Center licensing rule</td><td>Minn. Rules Ch. 9503</td><td><a href="https://www.revisor.mn.gov/rules/9503/">revisor.mn.gov/rules/9503</a></td></tr>
+    <tr><td>Staff ratios &amp; group size</td><td>Minn. Rule 9503.0040</td><td><a href="https://www.revisor.mn.gov/rules/9503.0040/">revisor.mn.gov/rules/9503.0040</a></td></tr>
+    <tr><td>Drop-in / school-age</td><td>Minn. Rule 9503.0075</td><td><a href="https://www.revisor.mn.gov/rules/9503.0075/">revisor.mn.gov/rules/9503.0075</a></td></tr>
+    <tr><td>Family child care</td><td>Minn. Rules Ch. 9502</td><td><a href="https://www.revisor.mn.gov/rules/9502/">revisor.mn.gov/rules/9502</a></td></tr>
+    <tr><td>Human Services Licensing Act</td><td>Minn. Stat. Ch. 245A</td><td><a href="https://www.revisor.mn.gov/statutes/cite/245A">revisor.mn.gov/statutes/cite/245A</a></td></tr>
+    <tr><td>Licensing of Programs for Children</td><td>Minn. Stat. Ch. 142B</td><td><a href="https://www.revisor.mn.gov/statutes/cite/142B">revisor.mn.gov/statutes/cite/142B</a></td></tr>
+    <tr><td>Background studies</td><td>Minn. Stat. Ch. 245C</td><td><a href="https://www.revisor.mn.gov/statutes/cite/245C">revisor.mn.gov/statutes/cite/245C</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">3.</span>Contact / Provider Data Pull</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Data source type</td><td><span class="pill good">Gold — state bulk shapefile</span></td></tr>
+    <tr><td>Dataset</td><td>Minnesota Geospatial Commons — Family and Child Care Centers, Minnesota</td></tr>
+    <tr><td>Dataset page</td><td><a href="https://gisdata.mn.gov/dataset/econ-child-care">gisdata.mn.gov/dataset/econ-child-care</a></td></tr>
+    <tr><td>Download (Shapefile ZIP, 801 KB)</td><td><a href="https://resources.gisdata.mn.gov/pub/gdrs/data/pub/us_mn_state_mngeo/econ_child_care/shp_econ_child_care.zip">resources.gisdata.mn.gov/...</a></td></tr>
+    <tr><td>Format</td><td>ESRI Shapefile + DBF (also FGDB, GPKG)</td></tr>
+    <tr><td>Dataset updated</td><td>April 3, 2023 (mirrors DHS licensing records)</td></tr>
+    <tr><td>Total records in dataset</td><td>8,571</td></tr>
+    <tr><td>Center-class subset (center + certified)</td><td>2,376</td></tr>
+    <tr><td>Leads CSV rows in repo</td><td>1,000 (plus header) — <code>/Users/magnusfremont/Desktop/daycare/minnesota_leads.csv</code></td></tr>
+    <tr><td>Fields available</td><td><code>License_Nu</code>, <code>License_Ty</code>, <code>Name_of_Pr</code>, <code>AddressLin</code>, <code>AddressL_1</code>, <code>City</code>, <code>State</code>, <code>Zip</code></td></tr>
+    <tr><td>Phone / email / website</td><td><span class="pill warn">Blank — require LIL detail-page scrape or commercial enrichment</span></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">4.</span>Compliance Framework Links</h2>
+<ul>
+  <li>DHS Ratio and Group Size Standards (PDF) — <a href="https://mn.gov/dhs/assets/ratio-and-group-size-standards-for-licensed-child-care_tcm1053-340437.pdf">mn.gov/dhs/assets/ratio-and-group-size-standards</a></li>
+  <li>ACF Licensing Regulations Database — MN Centers (Oct 2021) — <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/MN_CENTER_OCT_2021_508.pdf">licensingregulations.acf.hhs.gov/MN_CENTER_OCT_2021</a></li>
+  <li>Parent Aware (MN QRIS) — <a href="https://www.parentaware.org/">parentaware.org</a></li>
+  <li>Parent Aware — Understanding Licensing Records — <a href="https://www.parentaware.org/understanding-licensing-records/">parentaware.org/understanding-licensing-records</a></li>
+  <li>DHS Monitoring Licensed Child Care (DHS-6385-ENG) — <a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-6385-ENG">edocs.dhs.state.mn.us/.../DHS-6385-ENG</a></li>
+  <li>MN DHS General Licensing Info — <a href="https://mn.gov/dhs/partners-and-providers/licensing/child-care-and-early-education/centers/">mn.gov/dhs/partners-and-providers/licensing</a></li>
+  <li>DCYF Phases of Application — <a href="https://dcyf.mn.gov/phases-application-process-child-care-center-certification">dcyf.mn.gov/phases-application-process-child-care-center-certification</a></li>
+</ul>
+
+<h2><span class="n">5.</span>Licensing Forms</h2>
+<table>
+  <thead><tr><th>Form</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>DHS-5148</td><td>Applicant Agreement, Acknowledgment, and Verification (notarized, required for new applications)</td></tr>
+    <tr><td>DHS-4477</td><td>Child Care Center License Application (Rule 3 initial)</td></tr>
+    <tr><td>DHS-5148-B / -F</td><td>Change Request — capacity, age served, location</td></tr>
+    <tr><td>NETStudy 2.0</td><td>Background Study (staff, volunteers, owners, board, age-13+ household members)</td></tr>
+    <tr><td>Child Care Immunization Form</td><td>Parent-submitted at enrollment</td></tr>
+    <tr><td>Emergency / Risk Reduction / Health & Safety Plans</td><td>Written plans per Rule 9503.0140 / 0150</td></tr>
+    <tr><td>Drop-In / School-Age policies</td><td>Required under 9503.0075</td></tr>
+  </tbody>
+</table>
+<p>Forms index: <a href="https://dcyf.mn.gov/forms-licensed-child-care-centers">dcyf.mn.gov/forms-licensed-child-care-centers</a></p>
+
+<h2><span class="n">6.</span>Violations &amp; Inspection Data</h2>
+<div class="card">
+<p>Minnesota runs a robust public-transparency regime. Monitoring-visit results are posted to the Licensing Information Lookup <strong>three days after each visit</strong> and remain public for <strong>four years</strong>. Correction orders, licensing actions (suspension, conditional, revocation), and maltreatment investigative memoranda are all posted.</p>
+<p><strong>Full details:</strong> <a href="./violations.md">violations.md</a></p>
+<ul>
+  <li>Per-facility URL pattern — <code>https://licensinglookup.dhs.state.mn.us/Details.aspx?l={License_Nu}</code></li>
+  <li>Example facility — <a href="https://licensinglookup.dhs.state.mn.us/Details.aspx?l=1076213">Details.aspx?l=1076213</a></li>
+  <li>Sample story — Star Tribune viral-video scrutiny (Jan 2026) — <a href="https://www.startribune.com/viral-video-prompts-new-scrutiny-of-alleged-fraud-and-draws-quick-reaction-from-mn-regulators/601554058">startribune.com/601554058</a></li>
+  <li>Sample story — KSTP 62 investigations — <a href="https://kstp.com/kstp-news/top-news/62-investigations-underway-involving-federally-funded-minnesota-child-care-centers/">kstp.com</a></li>
+  <li>Bulk extracts via MN Government Data Practices Act — <a href="https://mn.gov/dhs/general-public/about-dhs/data-requests/index.jsp">mn.gov/dhs/.../data-requests</a></li>
+</ul>
+<p><span class="pill good">5-day deficit window via shapefile + LIL scrape</span><span class="pill good">4-year retention</span><span class="pill">Maltreatment memos posted</span></p>
+</div>
+
+<h2><span class="n">7.</span>Outreach Signals</h2>
+<div class="two-col">
+<div class="card">
+  <h3>Regulatory pain points</h3>
+  <ul>
+    <li>NETStudy 2.0 background studies renewed every 5 years — compliance tracking pain.</li>
+    <li>Annual unannounced inspection + four "Early and Often" visits in year one.</li>
+    <li>Written Risk Reduction Plan must be updated annually + after any significant incident.</li>
+    <li>Shaken Baby / AHT training required annually for staff working with children under 5.</li>
+    <li>Public LIL transparency = reputational pressure to correct fast.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Current events &amp; political heat</h3>
+  <ul>
+    <li>January 2026 viral video reopened scrutiny of DHS/DCYF child-care fraud controls.</li>
+    <li>Legislative Auditor recommended replacing handwritten sign-in sheets with electronic attendance — <strong>product opportunity</strong>.</li>
+    <li>62+ active investigations involving federally-funded MN child care centers (late 2025 / early 2026).</li>
+    <li>Parent Aware QRIS participation is the key "quality-tier" marker for subsidy bonuses.</li>
+  </ul>
+</div>
+</div>
+
+<h2><span class="n">8.</span>Next-Step Data Acquisition</h2>
+<ol>
+  <li>Write a per-license-number LIL scraper (Python + Requests; no JS required for <code>Details.aspx?l={id}</code>). Seed from shapefile license numbers.</li>
+  <li>File a Minnesota Data Practices Act request with DCYF for a machine-readable extract of all correction orders, licensing actions, and maltreatment determinations 2022-present — scope template in <a href="./violations.md">violations.md</a>.</li>
+  <li>Enrich with phones &amp; emails: either scrape LIL detail pages (phones often listed) or use commercial enrichment (Apollo, ZoomInfo) against the 2,376 center-class rows.</li>
+  <li>Add county-level segmentation (Hennepin, Ramsey, Dakota, Anoka, Washington dominate volume).</li>
+  <li>Score leads by "recent correction order" + "non-Gold Parent Aware rating" — likely highest compliance-software interest.</li>
+</ol>
+
+<h2><span class="n">9.</span>All Links</h2>
+<div class="card">
+<h3>Licensing &amp; Rules</h3>
+<ul>
+  <li><a href="https://dcyf.mn.gov/">DCYF (licensing authority)</a></li>
+  <li><a href="https://licensinglookup.dhs.state.mn.us/">DHS Licensing Information Lookup</a></li>
+  <li><a href="https://dcyf.mn.gov/licensing-inspections-child-care-centers">DCYF Licensing Inspections</a></li>
+  <li><a href="https://dcyf.mn.gov/forms-licensed-child-care-centers">DCYF Forms</a></li>
+  <li><a href="https://dcyf.mn.gov/phases-application-process-child-care-center-certification">DCYF Phases of Application</a></li>
+  <li><a href="https://www.revisor.mn.gov/rules/9503/">Minn. Rules Ch. 9503</a></li>
+  <li><a href="https://www.revisor.mn.gov/rules/9503.0040/">Rule 9503.0040 (ratios)</a></li>
+  <li><a href="https://www.revisor.mn.gov/rules/9503.0075/">Rule 9503.0075 (drop-in / school-age)</a></li>
+  <li><a href="https://www.revisor.mn.gov/statutes/cite/245A">Minn. Stat. 245A</a></li>
+  <li><a href="https://www.revisor.mn.gov/statutes/cite/245C">Minn. Stat. 245C</a></li>
+  <li><a href="https://www.revisor.mn.gov/statutes/cite/142B">Minn. Stat. 142B</a></li>
+  <li><a href="https://www.revisor.mn.gov/statutes/cite/13">Minn. Stat. Ch. 13 (MGDPA)</a></li>
+  <li><a href="https://mn.gov/dhs/assets/ratio-and-group-size-standards-for-licensed-child-care_tcm1053-340437.pdf">DHS ratio &amp; group size PDF</a></li>
+  <li><a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-6385-ENG">DHS-6385-ENG Monitoring Licensed Child Care</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/MN_CENTER_OCT_2021_508.pdf">ACF Licensing DB — MN Chapter 9503</a></li>
+</ul>
+<h3>Provider &amp; Lead Data</h3>
+<ul>
+  <li><a href="https://gisdata.mn.gov/dataset/econ-child-care">MN Geospatial Commons — Child Care dataset</a></li>
+  <li><a href="https://resources.gisdata.mn.gov/pub/gdrs/data/pub/us_mn_state_mngeo/econ_child_care/shp_econ_child_care.zip">Shapefile direct download</a></li>
+  <li><a href="https://www.parentaware.org/">Parent Aware</a></li>
+  <li><a href="https://www.parentaware.org/understanding-licensing-records/">Parent Aware — Understanding Licensing Records</a></li>
+  <li><a href="https://mn.gov/dhs/general-public/about-dhs/data-requests/index.jsp">MN DHS Data Requests</a></li>
+</ul>
+<h3>Sample facility detail + news</h3>
+<ul>
+  <li><a href="https://licensinglookup.dhs.state.mn.us/Details.aspx?l=1076213">Sample LIL facility detail</a></li>
+  <li><a href="https://www.startribune.com/viral-video-prompts-new-scrutiny-of-alleged-fraud-and-draws-quick-reaction-from-mn-regulators/601554058">Star Tribune — viral video scrutiny (Jan 2026)</a></li>
+  <li><a href="https://www.startribune.com/minnesota-pauses-licenses-for-new-adult-day-care-centers-amid-fraud-concerns/601546733">Star Tribune — license pause</a></li>
+  <li><a href="https://kstp.com/kstp-news/top-news/62-investigations-underway-involving-federally-funded-minnesota-child-care-centers/">KSTP — 62 investigations</a></li>
+  <li><a href="https://www.house.mn.gov/sessiondaily/Story/18508">MN House Session Daily — oversight</a></li>
+  <li><a href="https://19thnews.org/2026/01/child-care-fraud-minnesota-fact-check/">19th News fact-check</a></li>
+</ul>
+</div>
+
+<div class="footer">
+  ComplianceKit research pack &middot; Minnesota data report &middot; 2026-04-18. Internal use — no public distribution.
+</div>
+
+</div>
+</body>
+</html>

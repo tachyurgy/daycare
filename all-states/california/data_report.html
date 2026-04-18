@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>California — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a; --bg-elev: #15152a; --bg-card: #1a1a30;
+    --text: #f0f0f5; --text-dim: #a0a0b5;
+    --accent: #00d4aa; --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45; --warn: #ffb347; --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 24px; margin-bottom: 40px; }
+  header .tag { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.3rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-elev); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.5px; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0 6px 18px; position: relative; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  code { background: var(--bg-elev); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+  .highlight { background: linear-gradient(90deg, rgba(0, 212, 170, 0.1), transparent); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>California</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 1</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated programs:</strong> ~28,000+</span>
+    <span><strong>Inspection records horizon:</strong> Apr 2015 - present</span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>California Department of Social Services (CDSS), Community Care Licensing Division (CCLD) — Child Care Program Office.</strong> Operates through 21 Regional Offices statewide. Licensing Program Analysts (LPAs) conduct all inspections using the <strong>CARE</strong> (Compliance and Regulatory Enforcement) framework.</p>
+    <div class="kv"><strong>Headquarters</strong> 744 P Street, Sacramento, CA 95814</div>
+    <div class="kv"><strong>Phone</strong> (916) 651-8848 | Complaint hotline: 844-LET-US-NO</div>
+    <div class="kv"><strong>Facility search</strong> <a href="https://www.ccld.dss.ca.gov/carefacilitysearch/">ccld.dss.ca.gov/carefacilitysearch</a></div>
+    <div class="kv"><strong>CDSS CCL</strong> <a href="https://www.cdss.ca.gov/inforesources/child-care-licensing">cdss.ca.gov/inforesources/child-care-licensing</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> California Health &amp; Safety Code <strong>§ 1596.70 et seq.</strong> (California Child Day Care Facilities Act).</p>
+    <p><strong>Administrative Code:</strong> <strong>Title 22, California Code of Regulations, Division 12</strong> — the binding rule set.</p>
+    <p><strong>Enforcement framework:</strong> CCLD <strong>CARE Tools</strong> — standardized inspection &amp; deficiency framework.</p>
+    <p><strong>Citations:</strong> <strong>Type A</strong> (immediate health/safety/personal-rights risk) and <strong>Type B</strong> (operational but not immediate risk). LIC 421 civil penalty assessment follows.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows</td><td>9,402 (incl. header)</td><td><code>california_leads.csv</code> (project root)</td></tr>
+        <tr><td>Data rows</td><td>~9,401 providers</td><td>Name / city / zip / phone schema</td></tr>
+        <tr><td>Est. state market</td><td>~28,000+ facilities</td><td>Centers + Family Child Care Homes</td></tr>
+        <tr><td>Coverage</td><td>~33-35%</td><td>Major MSAs well represented</td></tr>
+        <tr><td>Pre-existing product spec</td><td>2,250-line HTML</td><td><code>planning-docs/state-docs/california/california-compliancekit-product-spec.html</code></td></tr>
+        <tr><td>Facility registry (bulk)</td><td><span class="pill pill-ok">CHHS Open Data (roster)</span></td><td><a href="https://data.chhs.ca.gov/dataset/ccl-facilities">data.chhs.ca.gov/dataset/ccl-facilities</a></td></tr>
+        <tr><td>Inspection detail (bulk)</td><td><span class="pill pill-danger">Scrape + CPRA only</span></td><td>No public deficiency feed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://www.cdss.ca.gov/inforesources/child-care-licensing">CDSS Child Care Licensing portal</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/community-care-licensing/policy/child-care-regulations">Title 22 Div. 12 regulations</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/community-care-licensing/facility-search-welcome">Facility Search welcome</a></li>
+      <li><a href="https://cdss.ca.gov/inforesources/cdss-programs/community-care-licensing/ccld-data">CCLD Data Hub (aggregate)</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/child-care-licensing/public-information-and-resources">Public Information &amp; Resources</a></li>
+      <li><a href="https://ccld.childcarevideos.org/">CCLD-sanctioned video resources</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/california-department-social-services-community-care-licensing-division-child">ACF Licensing Regulations DB — CA</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms (LIC series)</h2>
+  <div class="card">
+    <ul>
+      <li><code>LIC 281A</code> — Child Care Center Application Booklet</li>
+      <li><code>LIC 279A</code> — Family Child Care Home License Application</li>
+      <li><code>LIC 311A</code> — Records to Maintain (Center)</li>
+      <li><code>LIC 311D</code> — Family Child Care Home Records</li>
+      <li><code>LIC 421</code> — Civil Penalty Assessment</li>
+      <li><code>LIC 508</code> — Criminal Record Statement</li>
+      <li><code>LIC 613A</code> — Personal Rights form</li>
+      <li><code>LIC 622</code> — Centrally Stored Medication / Medication Administration Log</li>
+      <li><code>LIC 700</code> — Identification &amp; Emergency Information</li>
+      <li><code>LIC 701</code> — Physician's Report — Child</li>
+      <li><code>LIC 702</code> — Consent for Emergency Medical Treatment</li>
+      <li><code>LIC 9163</code> — Applicant Submission Package</li>
+      <li><code>LIC 9213</code> — Notice of Site Visit (posted during/after inspection)</li>
+      <li><code>LIC 9221</code> — Parent Consent for Medication</li>
+      <li><code>LIC 9227</code> — Individual Infant Sleeping Plan</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="highlight">
+      <strong>Rich per-facility transparency; no public bulk feed.</strong> CCLD Facility Search publishes full inspection PDFs Apr 2015-present for every licensed facility. There is no Socrata / JSON / ArcGIS deficiency export. Bulk acquisition = (1) scrape facility-by-facility + OCR PDFs, or (2) CPRA request for the LIS extract.
+    </div>
+    <div class="grid2">
+      <div>
+        <h3>CCLD Facility Search</h3>
+        <p>Per-facility HTML + PDF. April 2015 - present. Excel export of facility roster available; deficiency detail requires per-PDF extraction.</p>
+      </div>
+      <div>
+        <h3>CHHS Open Data (roster)</h3>
+        <p>CCL Facilities dataset — statewide roster (<a href="https://data.chhs.ca.gov/dataset/ccl-facilities">data.chhs.ca.gov/dataset/ccl-facilities</a>). Name, address, status, license number. No deficiencies.</p>
+      </div>
+      <div>
+        <h3>Citations</h3>
+        <p>Type A (immediate risk) / Type B (operational). LIC 421 civil penalty assessment. 9 inspection domains for centers, 6 for FCCH.</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p>California Public Records Act (Gov. Code § 7920 et seq.) to CDSS. 10-calendar-day initial determination. Target: full LIS extract.</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Biennial (2-year) renewal</strong> — half the market in renewal at any time. Persistent buying trigger.</li>
+      <li><strong>9 inspection domains for centers</strong> — one of the most detailed inspection frameworks nationally. Self-inspection simulator value prop is high.</li>
+      <li><strong>Title 22 depth</strong> — infant-center plans (quarterly needs/services, toilet-training, feeding, individual sleeping) are ongoing paper-intensive asks that map 1:1 to ComplianceKit document modules.</li>
+      <li><strong>CTC Permit Matrix</strong> — staff qualification tracking is genuinely hard in CA; lead-teacher permit levels + ongoing PD = ComplianceKit Staff File winner.</li>
+      <li><strong>LA + Bay Area + San Diego + Orange + Inland Empire + Sacramento</strong> — six MSAs likely cover ~75% of the center-based market. Concentration-first outreach.</li>
+      <li><strong>Municipal overlays (SF, Berkeley)</strong> — stacked requirements increase willingness to pay.</li>
+      <li><strong>Public inspection transparency since 2015</strong> — operators keenly aware their deficiencies are online; reputation-management angle opens sales conversations.</li>
+      <li><strong>$99 Professional tier aligns with CA center economics</strong> — typical ARPA is comfortable for a 40-60 child facility even in high-cost markets.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px;">
+      <li style="margin-bottom:8px;"><strong>Pull CHHS Open Data</strong> <code>ccl-facilities</code> dataset as the canonical statewide roster. Join to existing <code>california_leads.csv</code> to de-dup and fill missing license numbers.</li>
+      <li style="margin-bottom:8px;"><strong>Scrape CCLD Facility Search</strong> incrementally by county (58 counties). Priority order: LA, San Diego, Santa Clara, Alameda, Orange, San Francisco, Riverside, San Bernardino, Sacramento, Contra Costa.</li>
+      <li style="margin-bottom:8px;"><strong>Download + OCR inspection PDFs</strong> — normalize to <code>(license_number, visit_date, visit_type, citation, Type_A_B, narrative, CAP_due, civil_penalty)</code>. Plan for millions of PDFs across 10+ years × 28k facilities.</li>
+      <li style="margin-bottom:8px;"><strong>File CPRA request</strong> to CDSS for full LIS extract — request as outlined in violations.md (license rosters, visits, deficiencies, civil penalties, complaints, 2016-present). Initial determination in 10 days; production on reasonable-time basis.</li>
+      <li style="margin-bottom:8px;"><strong>Enrich leads with emails</strong> via the facility search (contact info on each profile), CACFP sponsor listings, CA QualityStartCA child care quality-rating registry, regional R&amp;R network partners.</li>
+      <li><strong>Integrate CA QRIS (Quality Rating &amp; Improvement System) / Quality Counts California</strong> as an additional signal layer — QRIS-participating centers have evidence-collection pain that aligns with the Documents module.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://www.cdss.ca.gov/inforesources/child-care-licensing">CDSS Child Care Licensing</a></li>
+      <li><a href="https://www.ccld.dss.ca.gov/carefacilitysearch/">CCLD Facility Search</a></li>
+      <li><a href="https://cdss.ca.gov/inforesources/cdss-programs/community-care-licensing/ccld-data">CCLD Data Hub</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/community-care-licensing/facility-search-welcome">Facility Search welcome</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/community-care-licensing/policy/child-care-regulations">Title 22 Div. 12 regulations</a></li>
+      <li><a href="https://www.cdss.ca.gov/inforesources/child-care-licensing/public-information-and-resources">Public info &amp; resources</a></li>
+      <li><a href="https://data.chhs.ca.gov/dataset/ccl-facilities">CHHS Open Data — CCL facilities</a></li>
+      <li><a href="https://data.ca.gov/dataset/community-care-licensing-facilities">data.ca.gov mirror</a></li>
+      <li><a href="https://catalog.data.gov/dataset/community-care-licensing-facilities">catalog.data.gov federated entry</a></li>
+      <li><a href="https://ccld.childcarevideos.org/">CCLD-sanctioned video resources</a></li>
+      <li><a href="https://ccld.childcarevideos.org/family-child-care-providers/community-care-licensing-inspection-authority/">CCLD inspection authority explainer</a></li>
+      <li><a href="https://www.berkeleyparentsnetwork.org/advice/childcare/violations">Berkeley Parents Network — how to look up a license</a></li>
+      <li><a href="https://www.ylc.org/wp-content/uploads/2023/06/CCL-Complaint-Overview-062323.pdf">Youth Law Center complaint-process overview</a></li>
+      <li><a href="https://clearpolappstorage.blob.core.windows.net/media/docs/user_1/document_25381/PIN%2024-01-CCLD.pdf">PIN 24-01-CCLD (2024 policy)</a></li>
+      <li><a href="https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=HSC&amp;division=2.&amp;title=&amp;part=&amp;chapter=3.4.&amp;article=">HSC § 1596.70 et seq.</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/california-department-social-services-community-care-licensing-division-child">ACF Licensing DB — CA</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  California · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

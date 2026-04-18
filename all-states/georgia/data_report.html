@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Georgia — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --fg:#f0f0f5; --accent:#00d4aa; --muted:#8a8aa0; --panel:#15152a; --border:#26263f; --warn:#ffb347; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:48px 32px; }
+  header h1 { font-size:34px; margin:0 0 4px; letter-spacing:-0.5px; }
+  header .sub { color:var(--muted); margin:0; font-size:14px; }
+  .pill { display:inline-block; padding:3px 10px; border:1px solid var(--accent); color:var(--accent); border-radius:20px; font-size:12px; margin-right:6px; }
+  h2 { color:var(--accent); font-size:20px; margin-top:40px; border-bottom:1px solid var(--border); padding-bottom:6px; letter-spacing:-0.2px; }
+  h3 { font-size:16px; color:var(--fg); margin-top:20px; margin-bottom:6px; }
+  a { color:var(--accent); text-decoration:none; word-break:break-word; }
+  a:hover { text-decoration:underline; }
+  code { background:var(--panel); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+  th, td { padding:9px 10px; text-align:left; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { background:var(--panel); color:var(--accent); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+  tr:hover td { background:#12122a; }
+  .tier { padding:2px 8px; border-radius:3px; font-size:11px; font-weight:600; letter-spacing:0.5px; }
+  .gold { background:#3a3010; color:#ffd166; border:1px solid #5c4818; }
+  .silver { background:#2a2a33; color:#c8c8d2; border:1px solid #40404d; }
+  .bronze { background:#2a1a10; color:#d48a5e; border:1px solid #4d2e1e; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .panel { background:var(--panel); border:1px solid var(--border); padding:14px 18px; border-radius:6px; margin:12px 0; }
+  .link-list li { font-size:13.5px; }
+  .note { color:var(--warn); font-size:13px; }
+  .footer { color:var(--muted); font-size:12px; margin-top:60px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Georgia</h1>
+  <p class="sub">Population rank: #8 (≈11M) · Report compiled 2026-04-18 · <span class="pill">ComplianceKit</span></p>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<div class="panel">
+  <strong>Georgia Department of Early Care and Learning (DECAL)</strong> — branded <em>Bright from the Start</em>, Child Care Services Division · <a href="https://www.decal.ga.gov/">https://www.decal.ga.gov/</a><br>
+  Public search: <a href="https://families.decal.ga.gov/ChildCare/Search">families.decal.ga.gov</a>. 24-hour residential care and group homes are regulated separately by GA DHS — not DECAL.
+</div>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li>O.C.G.A. Title 20, Chapter 1A — DECAL enabling statute</li>
+  <li>O.C.G.A. § 20-1A-2 — CCLC / FCCLH definitions</li>
+  <li><a href="https://rules.sos.state.ga.us/gac/591-1-1">Ga. Comp. R. &amp; Regs., Rule Chapter 591-1-1 — CCLCs</a></li>
+  <li>Rule Chapter 591-1-2 — Family Child Care Learning Homes</li>
+  <li>Rule Chapter 591-1-3 — Georgia's Pre-K Program</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Rows</th><th>Tier</th><th>Limitations</th></tr>
+  <tr>
+    <td>DECAL Provider Data Export</td>
+    <td><a href="https://families.decal.ga.gov/Provider/Data">families.decal.ga.gov/Provider/Data</a></td>
+    <td>UTF-16 CSV (converted to UTF-8)</td>
+    <td>7,914</td>
+    <td><span class="tier gold">GOLD</span></td>
+    <td>No website field; some phones/emails blank</td>
+  </tr>
+  <tr>
+    <td>DECAL Enforcement Actions (fines / restrictions, <code>type=3</code>)</td>
+    <td><a href="https://www.decal.ga.gov/EnforcementActions/EnforcementList.aspx?type=3">EnforcementList.aspx?type=3</a></td>
+    <td>HTML + "Save results to File" (CSV)</td>
+    <td>Hundreds of actions</td>
+    <td><span class="tier gold">GOLD</span></td>
+    <td>Pagination; 4 action types must be pulled separately</td>
+  </tr>
+  <tr>
+    <td>Quality Rated star rating data</td>
+    <td><a href="https://www.decal.ga.gov/QualityRated/">decal.ga.gov/QualityRated</a></td>
+    <td>Included in Provider Data Export</td>
+    <td>7,914</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Star ratings 1-3 only (not 4-5)</td>
+  </tr>
+  <tr>
+    <td>Compliance at a Glance (per provider)</td>
+    <td><a href="https://families.decal.ga.gov/Provider/ComplianceFAQ.aspx">ComplianceFAQ.aspx</a></td>
+    <td>HTML dashboard per facility</td>
+    <td>Per-facility</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Rolling 12-month window only; scrape required</td>
+  </tr>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul class="link-list">
+  <li><a href="https://www.decal.ga.gov/documents/attachments/CCLCRulesandRegulations.pdf">CCLC Rules and Regulations (Ch. 591-1-1) PDF</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/georgia/department-591/chapter-591-1/subject-591-1-1">Cornell LII Subject 591-1-1</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-591-1-1-.32">Rule 591-1-1-.32 (Ratios)</a></li>
+  <li><a href="https://rules.sos.state.ga.us/gac/591-1-1">GA Sec. of State Rules Portal — 591-1-1</a></li>
+  <li><a href="https://www.decal.ga.gov/documents/attachments/CCS-1700LicensingStudiesPolicy.pdf">DECAL CCS-1700 Licensing Studies Policy</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul class="link-list">
+  <li>Application for Child Care Learning Center License</li>
+  <li>Application for Family Child Care Learning Home License</li>
+  <li>Director/Provider Background Check Application (CRC)</li>
+  <li>Staff Background Check Application (GBI / FBI fingerprint via IdentoGO)</li>
+  <li><code>Form 3231</code> — Child Immunization Certificate (Ga. DPH)</li>
+  <li><code>Form 3300</code> — Hearing, Vision, Dental screening</li>
+  <li>Child Enrollment / Emergency Contact</li>
+  <li>Fire Marshal Inspection Certificate</li>
+  <li>Health Department Sanitation Inspection (food prep)</li>
+  <li>Certificate of Occupancy</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<h3>Primary sources</h3>
+<ul>
+  <li><strong>DECAL Enforcement Actions tracker:</strong> <a href="https://www.decal.ga.gov/EnforcementActions/Default.aspx">EnforcementActions/Default.aspx</a> with <code>type=1</code> (Denials), <code>type=2</code> (Revocations/Refusals), <code>type=3</code> (Fines/Restrictions).</li>
+  <li><strong>Compliance at a Glance dashboard:</strong> <a href="https://families.decal.ga.gov/Provider/ComplianceFAQ.aspx">per-provider compliance zones</a> (Good Standing / Support / Deficient) with 12-month visit history.</li>
+  <li><strong>Visit Report PDFs:</strong> linked from provider detail pages (pattern: <code>/Provider/PrintVisitReport.aspx?VisitID={id}</code>).</li>
+</ul>
+
+<h3>Data format</h3>
+<p>ASP.NET portal with "Save results to File" CSV export on Enforcement pages. Inspection types (per CCS-1700): <strong>Licensing Study</strong> (annual full), <strong>Monitoring Visit</strong> (annual partial), <strong>Complaint / Incident Investigation</strong> (reactive). Compliance zones: Good Standing, Support, Deficient.</p>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Provider Data Export: nightly refresh</li>
+  <li>Enforcement list: 30–60 day lag from initial adverse action to posting</li>
+  <li>Compliance at a Glance: rolling 12-month window</li>
+  <li>Visit Report PDFs: posted within 14 days of visit closure</li>
+</ul>
+
+<h3>Scraping / access strategy</h3>
+<ul>
+  <li>Enforcement CSVs — union of <code>type=1..4</code> via Save-results-to-File (trivial ASP.NET postback).</li>
+  <li>Provider detail + Compliance at a Glance: iterate Facility IDs from the Provider Data Export CSV; fetch <code>/ChildCare/Details/{FacilityId}</code>.</li>
+  <li>Visit Report PDFs: discover via detail pages; archive for OCR.</li>
+  <li>No CAPTCHA; basic session cookie required.</li>
+</ul>
+
+<h3>FOIA path</h3>
+<p>Georgia Open Records Act (O.C.G.A. § 50-18-70 et seq.). Submit to <code>decal.openrecords@decal.ga.gov</code>; 3-business-day statutory response. <a href="https://www.decal.ga.gov/AboutUs/OpenRecordsRequest.aspx">DECAL Open Records form</a>. Useful for un-redacted complaint files and deficiency statements (CCS-1800).</p>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>Compliance zone = "Deficient" on Compliance at a Glance</strong> <em>(available via per-provider scrape)</em> — highest intent.</li>
+  <li><strong>Fine or Restricted License issued in last 90 days</strong> <em>(available in type=3 CSV export)</em>.</li>
+  <li><strong>Revocation / Refusal to Renew pending</strong> <em>(available in type=2 CSV)</em>.</li>
+  <li><strong>License expiration within 90 days</strong> <em>(available — annual renewal cycle, end-date in Provider Data Export)</em>.</li>
+  <li><strong>Quality Rated star rating = 0 (not yet rated) or recently downgraded</strong> <em>(available in Provider Data Export)</em>.</li>
+</ul>
+
+<h2>8. Next-step Data Acquisition</h2>
+<ul>
+  <li>Cron the 4 enforcement CSV exports (types 1-4) weekly; diff to produce new-enforcement alerts.</li>
+  <li>Full Compliance at a Glance harvester for all 7,914 facilities → "Deficient" / "Support" zone list.</li>
+  <li>Visit Report PDF archive + OCR pipeline to extract Rule 591-1-1 citation-level violations.</li>
+  <li>Hunter.io / Apollo email-append for ~30% of rows with blank email.</li>
+  <li>Open-records request for: full visit-report dataset in CSV, internal compliance-score formula, and CAPS subsidy participation detail beyond the public flag.</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="link-list">
+  <li><a href="https://www.decal.ga.gov/">DECAL / Bright from the Start home</a></li>
+  <li><a href="https://families.decal.ga.gov/ChildCare/Search">Child Care Provider Search</a></li>
+  <li><a href="https://families.decal.ga.gov/Provider/Data">Provider Data Export</a></li>
+  <li><a href="https://www.decal.ga.gov/Documents/Attachments/DataExportDataDictionary.pdf">Provider Data Dictionary</a></li>
+  <li><a href="https://families.decal.ga.gov/Provider/ComplianceFAQ.aspx">Compliance at a Glance FAQ</a></li>
+  <li><a href="https://www.decal.ga.gov/EnforcementActions/Default.aspx">Enforcement Actions landing</a></li>
+  <li><a href="https://www.decal.ga.gov/EnforcementActions/EnforcementList.aspx?type=3">Enforcement Fines / Restricted (type=3)</a></li>
+  <li><a href="https://www.decal.ga.gov/QualityRated/">Quality Rated</a></li>
+  <li><a href="https://www.decal.ga.gov/ReportFraud/FAQ.aspx">DECAL Report Fraud / Complaint FAQ</a></li>
+  <li><a href="https://www.decal.ga.gov/AboutUs/OpenRecordsRequest.aspx">DECAL Open Records Request</a></li>
+  <li><a href="https://www.decal.ga.gov/documents/attachments/CCLCRulesandRegulations.pdf">CCLC Rules PDF</a></li>
+  <li><a href="https://www.decal.ga.gov/documents/attachments/CCS-1700LicensingStudiesPolicy.pdf">CCS-1700 Policy</a></li>
+  <li><a href="https://rules.sos.state.ga.us/gac/591-1-1">GA Rules 591-1-1</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/georgia/Ga-Comp-R-Regs-R-591-1-1-.32">Rule 591-1-1-.32 (Cornell)</a></li>
+</ul>
+
+<p class="footer">ComplianceKit internal data report · generated 2026-04-18 · state: Georgia</p>
+
+</div>
+</body>
+</html>

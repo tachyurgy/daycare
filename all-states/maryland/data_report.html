@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Maryland — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --panel:#14142b; --panel-hi:#1b1b3a; --border:#2a2a4a; --text:#f0f0f5; --muted:#9a9ab0; --accent:#00d4aa; --warn:#ffb347; --link:#7cf5d8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1040px; margin:0 auto; padding:48px 32px 96px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:40px; }
+  header .tag { display:inline-block; background:rgba(0,212,170,0.12); color:var(--accent); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  header h1 { font-size:42px; font-weight:700; margin:16px 0 8px; letter-spacing:-.01em; }
+  header .meta { color:var(--muted); font-size:14px; }
+  header .meta span { margin-right:24px; }
+  header .meta strong { color:var(--text); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h2 .num { display:inline-block; color:var(--accent); font-family:ui-monospace,Menlo,monospace; font-size:14px; margin-right:10px; vertical-align:2px; }
+  a { color:var(--link); text-decoration:none; border-bottom:1px dotted var(--link); }
+  a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  p,li { font-size:15px; } ul { padding-left:20px; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--panel-hi); color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(0,212,170,0.03); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-family:ui-monospace,Menlo,monospace; background:rgba(0,212,170,0.1); color:var(--accent); border:1px solid rgba(0,212,170,0.3); }
+  .pill.warn { background:rgba(255,179,71,0.1); color:var(--warn); border-color:rgba(255,179,71,0.3); }
+  code { font-family:ui-monospace,Menlo,monospace; background:var(--panel); color:var(--accent); padding:2px 6px; border-radius:3px; font-size:13px; }
+  .callout { background:var(--panel); border-left:3px solid var(--accent); padding:16px 20px; margin:16px 0; border-radius:0 6px 6px 0; color:var(--muted); font-size:14px; }
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; }
+  .link-grid { columns:2; column-gap:32px; font-size:13px; } .link-grid a { display:block; padding:2px 0; word-break:break-all; }
+  @media (max-width:720px){ .link-grid{columns:1;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Maryland</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 19th (~6.2M)</span>
+    <span><strong>Open providers:</strong> ~3,579 (centers + homes)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Maryland State Department of Education (MSDE)</strong> — Division of Early Childhood (DEC) — Office of Child Care (OCC), Licensing Branch. Administered through <strong>13 Regional Licensing Offices</strong>. Public inspection portal: <a href="https://www.checkccmd.org/">CheckCCMD.org</a> (mandated public publication of inspection findings since January 2011).</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>COMAR 13A.16</strong> — Child Care Centers</li>
+  <li><strong>COMAR 13A.15</strong> — Family Child Care Homes</li>
+  <li><strong>COMAR 13A.17</strong> — Letters of Compliance (public school / recreational)</li>
+  <li><strong>COMAR 13A.18</strong> — Large Family Child Care Homes</li>
+  <li><strong>Enabling statute:</strong> Md. Code, Educ. Article, Title 9.5</li>
+  <li>Ratios (13A.16.08.03): <a href="https://www.law.cornell.edu/regulations/maryland/COMAR-13A-16-08-03">Cornell LII</a></li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead><tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr><td>CheckCCMD Open Provider Report</td><td>Primary bulk</td><td>PDF (dynamic)</td><td>Daily regen</td><td><a href="https://www.checkccmd.org/PublicReports/OpenProviderReport.aspx?ft=ALL">Open Provider Report</a></td></tr>
+    <tr><td>CheckCCMD search</td><td>Per-facility</td><td>HTML (ASP.NET)</td><td>Live</td><td><a href="https://www.checkccmd.org/SearchResults.aspx">SearchResults.aspx</a></td></tr>
+    <tr><td>MD EXCELS (QRIS) roster</td><td>Quality ratings</td><td>HTML</td><td>Monthly</td><td><a href="https://marylandexcels.org/">marylandexcels.org</a></td></tr>
+    <tr><td>LOCATE (MFN)</td><td>Consumer referral</td><td>HTML</td><td>Live</td><td><a href="https://marylandchild.org/care/">marylandchild.org</a></td></tr>
+    <tr><td>MD Open Data Portal</td><td>No CC dataset</td><td>—</td><td>—</td><td><a href="https://opendata.maryland.gov/">opendata.maryland.gov</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 1,000 rows with name, city, state, and email (where CheckCCMD publishes it). Phone is NOT in the OCC public report. PDF extraction used <code>mutool draw -F txt</code> because pdftotext couldn't parse the xref dictionary.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>Regulations</td><td><a href="https://earlychildhood.marylandpublicschools.org/regulations">earlychildhood.marylandpublicschools.org/regulations</a></td></tr>
+    <tr><td>Licensing branch</td><td><a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing">Licensing home</a></td></tr>
+    <tr><td>Regional Licensing Offices (13)</td><td><a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing/regional-licensing-offices">Regional offices</a></td></tr>
+    <tr><td>Licensing forms</td><td><a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing/licensing-forms">Licensing forms</a></td></tr>
+    <tr><td>Inspection form (blank)</td><td><a href="https://earlychildhood.marylandpublicschools.org/system/files/filedepot/3/center_inspection_report.pdf">Center Inspection Report (PDF)</a></td></tr>
+    <tr><td>Maryland EXCELS</td><td><a href="https://marylandexcels.org/">marylandexcels.org</a></td></tr>
+    <tr><td>ACF national licensing</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/maryland-state-department-education-division-early-childhood-office-child-care">ACF MD state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li><strong>OCC 1201</strong> — Application for a Child Care Center License</li>
+  <li><strong>OCC 1203</strong> — Background Clearance Application (CBC)</li>
+  <li><strong>OCC 1207</strong> — Fire Marshal Inspection</li>
+  <li><strong>OCC 1214</strong> — Health Inventory (child)</li>
+  <li><strong>OCC 1205</strong> — Emergency Form</li>
+  <li><strong>OCC 1215</strong> — Individual Child Care Plan</li>
+  <li><strong>OCC 1216</strong> — Medication Authorization</li>
+  <li><strong>OCC 1228</strong> — Annual License Renewal</li>
+  <li><strong>OCC 1231</strong> — Criminal Background Clearance (fingerprint)</li>
+  <li>All forms: <a href="https://marylandchild.org/licensing-inspection-forms/">Maryland Child OCC forms</a></li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://www.checkccmd.org/">CheckCCMD</a></td><td>Per-facility: license status, verified complaints, inspection results, COMAR citations, CAP</td><td>HTML + PDF</td><td><span class="pill warn">No bulk</span></td></tr>
+    <tr><td>Per-visit inspection PDF</td><td>InspectionReport.aspx rendered template</td><td>PDF</td><td>Per-inspection</td></tr>
+    <tr><td>MD Public Information Act request</td><td>Statewide OCC inspection + violation extract</td><td>Excel (on request)</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+  </tbody>
+</table>
+<p>Maryland is the <strong>strongest state for public inspection transparency</strong> in our target set — CheckCCMD has published every inspection since Jan 2011. Typical lag: 30 days from inspection. No API or CSV — bulk violation harvest requires scraping <code>ProviderInformation.aspx?ProvNum=&lt;id&gt;</code> pages. PIA path: <a href="https://marylandpublicschools.org/programs/pages/superintendent/communications/pia/index.aspx">MSDE PIA</a>; 30-day standard response, first 2 hours free.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>Inspection transparency = competitive pressure.</strong> Because every violation is public on CheckCCMD, directors face real reputational risk from even minor lapses — a strong "sleep-at-night" sales narrative.</li>
+  <li><strong>13 Regional Offices = variable enforcement.</strong> Directors in Prince George's / Baltimore City experience heavier scrutiny than Western MD; geo-segmented outreach resonates.</li>
+  <li><strong>Maryland EXCELS Level 3+ is subsidy-gated.</strong> Programs chasing tiered reimbursement need a structured document vault — natural upsell.</li>
+  <li><strong>CPDR staff registry</strong> is MSDE-mandatory; ComplianceKit staff-file sync to CPDR could be a wedge feature.</li>
+  <li><strong>MFN LOCATE</strong> provides a second discovery channel for marketing — programs listed there expect parents to comparison-shop.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Enrich leads with inspection risk tiers</strong> — scrape CheckCCMD per-provider pages for the 1,000 rows and classify by last-12-month violation count. "High-violation" cohort = best cold-call targets.</li>
+  <li><strong>Add phone numbers</strong> — combine with Maryland EXCELS roster (includes phone for rated programs) or SDAT business registry.</li>
+  <li><strong>File a targeted MSDE PIA</strong> for a 2020–2026 inspection extract (Excel) with COMAR citation + correction status — first 2 hours free.</li>
+  <li><strong>Expand to remaining ~2,579 open providers</strong> beyond the 1,000 cap.</li>
+  <li><strong>Build regional-office heatmap</strong> (violation density by region) to guide territory planning and content-led SEO by sub-state geography.</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing">Licensing home</a>
+  <a href="https://earlychildhood.marylandpublicschools.org/regulations">Regulations</a>
+  <a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing/licensing-forms">Licensing forms</a>
+  <a href="https://earlychildhood.marylandpublicschools.org/child-care-providers/licensing/regional-licensing-offices">Regional offices</a>
+  <a href="https://earlychildhood.marylandpublicschools.org/data">DEC data page</a>
+  <a href="https://www.checkccmd.org/">CheckCCMD</a>
+  <a href="https://www.checkccmd.org/default.aspx">CheckCCMD default</a>
+  <a href="https://www.checkccmd.org/SearchResults.aspx">CheckCCMD Search</a>
+  <a href="https://www.checkccmd.org/PublicReports/OpenProviderReport.aspx?ft=ALL">Open Provider Report</a>
+  <a href="https://marylandchild.org/care/">MFN LOCATE</a>
+  <a href="https://marylandchild.org/licensing-inspection-forms/">OCC forms</a>
+  <a href="https://marylandchild.org/parenting/">MFN parenting resources</a>
+  <a href="https://marylandexcels.org/">MD EXCELS</a>
+  <a href="https://onestop.md.gov/licenses/child-care-licensing-and-registration-5d1540b054f24d03e999826f">MD OneStop licenses</a>
+  <a href="https://dhs.maryland.gov/licensing-and-monitoring/">DHS licensing &amp; monitoring</a>
+  <a href="https://www.law.cornell.edu/regulations/maryland/COMAR-13A-16-08-03">COMAR 13A.16.08.03 ratios</a>
+  <a href="https://marylandpublicschools.org/programs/pages/superintendent/communications/pia/index.aspx">MSDE PIA</a>
+  <a href="https://mldscenter.maryland.gov/MDPIA.html">MD PIA general</a>
+  <a href="https://www.marylandcomptroller.gov/content/dam/mdcomp/md/reports/research/childcare.pdf">Comptroller child care report (2024)</a>
+  <a href="https://opendata.maryland.gov/">MD Open Data Portal</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/maryland-state-department-education-division-early-childhood-office-child-care">ACF MD state page</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Maryland · Generated 2026-04-18 · CheckCCMD publishes inspection data since 2011 — the cleanest public-violation pipeline of the 6 target states.
+</footer>
+
+</div>
+</body>
+</html>

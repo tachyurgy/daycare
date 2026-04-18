@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Washington — Child Care Compliance Data Report (2026-04-18)</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #15162a;
+    --panel-2: #1c1d33;
+    --text: #f0f0f5;
+    --muted: #a3a6b8;
+    --accent: #00d4aa;
+    --accent-dim: #0a7561;
+    --border: #2a2c44;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
+  body { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 14px; color: var(--accent); letter-spacing: 0.02em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); }
+  a:hover { border-bottom-style: solid; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 0; }
+  code { background: var(--panel-2); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 18px; font-size: 13.5px; background: var(--panel); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; background: var(--panel-2); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 20px; margin: 6px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 18px; margin: 14px 0; border-radius: 3px; }
+  .links-list { columns: 2; column-gap: 32px; font-size: 13px; }
+  .links-list li { break-inside: avoid; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .badge { display: inline-block; background: var(--accent-dim); color: var(--bg); font-weight: 600; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; letter-spacing: 0.03em; }
+</style>
+</head>
+<body>
+
+<h1>Washington — Child Care Compliance Data Report</h1>
+<p class="meta">Population rank: <strong>13</strong> &middot; ~7.8M residents &middot; Prepared 2026-04-18 for ComplianceKit</p>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Washington State Department of Children, Youth, and Families (DCYF), Licensing Division.</strong> DCYF absorbed DEL (Department of Early Learning) in July 2018.
+</p>
+<ul>
+  <li>Agency: <a href="https://dcyf.wa.gov/services/early-learning-providers">dcyf.wa.gov/services/early-learning-providers</a></li>
+  <li>Consumer portal: <a href="https://www.findchildcarewa.org/">findchildcarewa.org</a> (Child Care Check)</li>
+  <li>Phone: 1-866-482-4325</li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>Statute:</strong> <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=43.216">RCW 43.216</a> (DCYF) &middot; RCW 43.216.055 (Background Checks) &middot; RCW 43.216.325 (Health &amp; Safety)</li>
+  <li><strong>Rules:</strong> <a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300">WAC 110-300</a> — Foundational Quality Standards for Early Learning Programs (centers + family home); WAC 110-301 school-age programs</li>
+</ul>
+
+<h2>3. Contact / Provider Data Inventory</h2>
+<table>
+  <thead>
+    <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Row Count</th><th>Tier</th><th>Limits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DCYF Licensed Childcare Center and School-Age Program Providers</td>
+      <td><a href="https://data.wa.gov/education/DCYF-Licensed-Childcare-Center-and-School-Age-Prog/was8-3ni8">data.wa.gov</a> <code>was8-3ni8</code></td>
+      <td>CSV / Socrata SODA</td>
+      <td><strong>2,563</strong> (<strong>2,506</strong> in leads CSV)</td>
+      <td>Primary</td>
+      <td>Centers + school-age only; family homes in a sibling dataset; phone sparse, email has substantial coverage</td>
+    </tr>
+    <tr>
+      <td>Child Care Check (findchildcarewa.org)</td>
+      <td><a href="https://www.findchildcarewa.org/">findchildcarewa.org</a></td>
+      <td>Salesforce Sites; Apex Remoting JSON (<code>/apexremote</code>)</td>
+      <td>~2,500+</td>
+      <td>Verification &amp; inspection data</td>
+      <td>Facility URL: <code>PSS_Provider?id=&lt;sf_id&gt;</code></td>
+    </tr>
+    <tr>
+      <td>Child Care Aware of WA Search (third-party mirror)</td>
+      <td><a href="https://ccawa.my.salesforce-sites.com/onlinesearch/">ccawa.my.salesforce-sites.com</a></td>
+      <td>Salesforce Sites</td>
+      <td>—</td>
+      <td>Supplemental</td>
+      <td>Consumer-facing alternative; subset of data</td>
+    </tr>
+    <tr>
+      <td>Child Care Aware data dashboards</td>
+      <td><a href="https://data.childcareaware.org/">data.childcareaware.org</a></td>
+      <td>Aggregate dashboards</td>
+      <td>—</td>
+      <td>Reference only</td>
+      <td>Aggregate; no per-facility</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li>WAC 110-300 (centers + family home): <a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300">link</a></li>
+  <li>WAC 110-300-0356 Center capacity &amp; ratio: <a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300-0356">link</a></li>
+  <li>WAC 110-300-0355 Family home capacity &amp; ratio: <a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300-0355">link</a></li>
+  <li>WAC 110-300-0107 In-service training: <a href="https://lawfilesext.leg.wa.gov/law/WACArchive/2020/pdf/WAC%20110%20%20TITLE/WAC%20110%20-300%20%20CHAPTER/WAC%20110%20-300%20-0107.pdf">PDF</a></li>
+  <li>DCYF Forms &amp; Documents: <a href="https://dcyf.wa.gov/services/early-learning-providers/licensed-provider/forms-documents">link</a></li>
+  <li>DCYF Training Requirements: <a href="https://dcyf.wa.gov/services/early-learning-providers/qualifications/child-care-providers/training">link</a></li>
+  <li>RCW 43.216: <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=43.216">link</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><code>DCYF 15-955</code> — License / Certification Application</li>
+  <li><code>DCYF 15-879</code> — Child Care Registration Form (enrollment)</li>
+  <li><code>DCYF 15-968</code> — Medication Authorization</li>
+  <li><code>DCYF 15-970</code> — Individual Care Plan</li>
+  <li><code>DCYF 15-874 / 15-875</code> — Center / School-Age Licensing Checklist</li>
+  <li><code>DCYF 15-937 / 15-949</code> — Background Check Checklists (center / family home)</li>
+  <li><code>DCYF 15-963sp</code> — Facility Feasibility Checklist</li>
+  <li><code>DCYF 15-966</code> — Health Consultant Agreement</li>
+  <li><code>DCYF 15-974</code> — Declaration of Compliance</li>
+  <li><code>DCYF 15-895</code> — Overnight Care Planning Form</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data <span class="badge">new</span></h2>
+<p>
+  Child Care Check is DCYF's Salesforce-hosted public database where each licensed provider has a detail page listing current status, <strong>valid complaints</strong> (DCYF-verified — unfounded complaints are not shown), monitoring visit outcomes, and enforcement actions.
+</p>
+
+<h3>Sources</h3>
+<ul>
+  <li><strong>findchildcarewa.org</strong> — <a href="https://www.findchildcarewa.org/">root</a>. Search URL pattern: <a href="https://www.findchildcarewa.org/PSS_Search?ft=Child+Care+Center%3BFamily+Child+Care+Home&p=DEL+Licensed"><code>PSS_Search?ft=...&amp;p=DEL+Licensed</code></a>. Provider detail: <a href="https://www.findchildcarewa.org/PSS_Provider?id=001t000000DzJU3AAN"><code>PSS_Provider?id=&lt;18-char-sf-id&gt;</code></a>.</li>
+  <li><strong>DCYF Child Care Check explainer:</strong> <a href="https://www.dcyf.wa.gov/services/earlylearning-childcare/child-care-check">link</a>.</li>
+  <li><strong>DCYF Child Care Complaints process:</strong> <a href="https://dcyf.wa.gov/safety/child-care-complaints">link</a>.</li>
+  <li><strong>DCYF Policy 3.20.80 Licensing Investigations:</strong> <a href="https://dcyf.wa.gov/dcyf-policies/3-20-80-licensing-investigations">link</a>.</li>
+  <li><strong>DCYF Policy 3.20.90 Adverse Actions:</strong> <a href="https://dcyf.wa.gov/dcyf-policies/3-20-90-adverse-actions-foster-home-licenses-and-group-care-facility-licenses">link</a>.</li>
+  <li><strong>Third-party scraper reference:</strong> <a href="https://github.com/fulldecent/findchildcarewa.org-scraper">fulldecent/findchildcarewa.org-scraper</a> (documents the <code>/apexremote</code> pattern).</li>
+</ul>
+
+<h3>Report Fields</h3>
+<table>
+  <thead><tr><th>Field</th><th>Typical Values</th></tr></thead>
+  <tbody>
+    <tr><td>Inspection type</td><td>Monitoring / Re-licensing / Complaint Investigation / Compliance Agreement Review</td></tr>
+    <tr><td>WAC citation</td><td>WAC 110-300-XXXX (e.g., 0100 qualifications, 0285 safe sleep, 0356 ratio)</td></tr>
+    <tr><td>Severity</td><td>High / Medium / Low (differential monitoring rubric)</td></tr>
+    <tr><td>Facility Licensing Compliance Agreement (FLCA)</td><td>Written plan issued on patterns of non-compliance; expedited follow-up</td></tr>
+    <tr><td>Enforcement action</td><td>No Action / Technical Assistance / Compliance Agreement / Probationary / Summary Suspension / Revocation / Denial / Non-Renewal</td></tr>
+  </tbody>
+</table>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Valid complaints post after DCYF investigation closes (45-day median).</li>
+  <li>Monitoring reports post ~2–3 weeks post-visit.</li>
+  <li>Roster (Socrata <code>was8-3ni8</code>): near-real-time / monthly.</li>
+</ul>
+
+<h3>Access Strategy</h3>
+<ul>
+  <li><strong>Apex Remoting:</strong> load <code>PSS_Search?...</code> to capture session + CSRF tokens, then POST against <code>/apexremote</code> with the <code>PSS_SearchController.queryProviders</code> action for bulk JSON. Follow with per-facility <code>PSS_Provider?id=&lt;sf_id&gt;</code> loads for inspection-document URLs.</li>
+  <li><strong>Playwright</strong> fallback for non-scriptable paths. Salesforce Sites tolerates ~1 req/sec per worker.</li>
+  <li><strong>Socrata roster join:</strong> CSV download at <code>data.wa.gov/api/views/was8-3ni8/rows.csv?accessType=DOWNLOAD</code> gives identifiers; cross-walk via <code>FamLinkId</code> / <code>SSPSProviderNumber</code> against Salesforce account IDs.</li>
+</ul>
+
+<div class="callout">
+  <strong>PRA backup.</strong> Washington Public Records Act (<a href="https://app.leg.wa.gov/rcw/default.aspx?cite=42.56">RCW 42.56</a>) — 5-business-day initial response required. DCYF portal: <a href="https://dcyf.wa.gov/practice/public-records">dcyf.wa.gov/practice/public-records</a>. Use for structured CSV of licensing investigations, summary suspensions, revocations, denials, and non-renewal orders scoped by date range.
+</div>
+
+<h2>7. Outreach Signals (Hot-Lead Detection)</h2>
+<ul>
+  <li><strong>Probationary license on Child Care Check</strong> — immediate compliance fix required; highest-intent.</li>
+  <li><strong>Facility Licensing Compliance Agreement (FLCA) in effect</strong> — DCYF has formally identified a pattern; provider is working against a deadline.</li>
+  <li><strong>Valid complaint in past 12 months</strong> — post-incident operators are the most receptive buyers.</li>
+  <li><strong>Early Achievers rating below Level 3</strong> — subsidy reimbursement gated above Level 3; providers below are losing revenue.</li>
+  <li><strong>License expiration in next 90 days</strong> (computed from <code>LicenseExpirationDate</code> in Socrata) — renewal inspection is the year's biggest event.</li>
+  <li><strong>Outdoor Nature-Based Programs</strong> (WA-unique) — small sub-segment with unique compliance checklist; niche but high-fit.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ul>
+  <li><strong>Playwright + Apex Remoting scrape:</strong> enumerate 2,500+ provider records, harvest complaint/inspection metadata + PDF URLs. Budget ~12 worker-hours at 3 concurrent browsers.</li>
+  <li><strong>PRA filing:</strong> aggregate revocations / summary suspensions / non-renewals fiscal year by fiscal year.</li>
+  <li><strong>Family-home sibling dataset:</strong> pull the DCYF family-home feed (separate from <code>was8-3ni8</code>) to round out non-center universe.</li>
+  <li><strong>Email append:</strong> leads CSV already has email for a substantial minority; enrich phone via Apollo/Clearbit on business name + address.</li>
+  <li><strong>DCYF news feed monitor:</strong> daily scrape of <code>dcyf.wa.gov/news</code> for named enforcement actions.</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="links-list">
+  <li><a href="https://dcyf.wa.gov/services/early-learning-providers">DCYF Early Learning Providers</a></li>
+  <li><a href="https://www.dcyf.wa.gov/services/earlylearning-childcare/child-care-check">Child Care Check (DCYF page)</a></li>
+  <li><a href="https://www.findchildcarewa.org/">findchildcarewa.org</a></li>
+  <li><a href="https://www.findchildcarewa.org/PSS_Search?ft=Child+Care+Center%3BFamily+Child+Care+Home&p=DEL+Licensed">PSS_Search pattern</a></li>
+  <li><a href="https://www.findchildcarewa.org/PSS_Provider?id=001t000000DzJU3AAN">PSS_Provider pattern (example)</a></li>
+  <li><a href="https://ccawa.my.salesforce-sites.com/onlinesearch/">Child Care Aware of WA search</a></li>
+  <li><a href="https://github.com/fulldecent/findchildcarewa.org-scraper">findchildcarewa scraper (third-party)</a></li>
+  <li><a href="https://dcyf.wa.gov/safety/child-care-complaints">DCYF complaints process</a></li>
+  <li><a href="https://dcyf.wa.gov/dcyf-policies/3-20-80-licensing-investigations">DCYF Policy 3.20.80</a></li>
+  <li><a href="https://dcyf.wa.gov/dcyf-policies/3-20-90-adverse-actions-foster-home-licenses-and-group-care-facility-licenses">DCYF Policy 3.20.90</a></li>
+  <li><a href="https://data.wa.gov/education/DCYF-Licensed-Childcare-Center-and-School-Age-Prog/was8-3ni8">Socrata <code>was8-3ni8</code></a></li>
+  <li><a href="https://data.wa.gov/">data.wa.gov</a></li>
+  <li><a href="https://data.childcareaware.org/">Child Care Aware dashboards</a></li>
+  <li><a href="https://childcareawarewa.org/data-advocacy/child-care-data-statistics/">CCAWA data &amp; statistics</a></li>
+  <li><a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300">WAC 110-300</a></li>
+  <li><a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300-0356">WAC 110-300-0356 Center ratios</a></li>
+  <li><a href="https://app.leg.wa.gov/wac/default.aspx?cite=110-300-0355">WAC 110-300-0355 Family home</a></li>
+  <li><a href="https://lawfilesext.leg.wa.gov/law/WACArchive/2020/pdf/WAC%20110%20%20TITLE/WAC%20110%20-300%20%20CHAPTER/WAC%20110%20-300%20-0107.pdf">WAC 110-300-0107 training (PDF)</a></li>
+  <li><a href="https://dcyf.wa.gov/services/early-learning-providers/licensed-provider/forms-documents">DCYF forms &amp; documents</a></li>
+  <li><a href="https://app.leg.wa.gov/rcw/default.aspx?cite=42.56">RCW 42.56 (PRA)</a></li>
+  <li><a href="https://dcyf.wa.gov/practice/public-records">DCYF public records</a></li>
+  <li><a href="https://dcyf.wa.gov/news">DCYF news</a></li>
+</ul>
+
+<div class="footer">
+  ComplianceKit state intelligence &middot; Washington &middot; 2026-04-18. All URLs verified at prep time. &copy; 2026.
+</div>
+
+</body>
+</html>

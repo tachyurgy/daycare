@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Massachusetts — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #14142b;
+    --panel-hi: #1b1b3a;
+    --border: #2a2a4a;
+    --text: #f0f0f5;
+    --muted: #9a9ab0;
+    --accent: #00d4aa;
+    --accent-dim: #00b894;
+    --warn: #ffb347;
+    --link: #7cf5d8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 48px 32px 96px; }
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+  header .tag {
+    display: inline-block;
+    background: rgba(0,212,170,0.12);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 16px 0 8px;
+    letter-spacing: -0.01em;
+  }
+  header .meta {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  header .meta span { margin-right: 24px; }
+  header .meta strong { color: var(--text); font-weight: 600; }
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  h2 .num {
+    display: inline-block;
+    color: var(--accent);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+  h3 { font-size: 16px; color: var(--accent); margin: 24px 0 8px; }
+  a { color: var(--link); text-decoration: none; border-bottom: 1px dotted var(--link); }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  p, li { font-size: 15px; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--panel-hi);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: rgba(0,212,170,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,170,0.3);
+  }
+  .pill.warn { background: rgba(255,179,71,0.1); color: var(--warn); border-color: rgba(255,179,71,0.3); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--panel);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .callout {
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .card h4 {
+    margin: 0 0 6px;
+    color: var(--accent);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .link-grid {
+    columns: 2;
+    column-gap: 32px;
+    font-size: 13px;
+  }
+  .link-grid a { display: block; padding: 2px 0; word-break: break-all; }
+  @media (max-width: 720px) {
+    .grid-2, .link-grid { grid-template-columns: 1fr; columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Massachusetts</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 16th (~7.0M)</span>
+    <span><strong>Licensed providers:</strong> ~8,345</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Massachusetts Department of Early Education and Care (EEC)</strong>, a cabinet-level agency under the Executive Office of Education. Created under M.G.L. c. 15D; operates the <strong>LEAD</strong> (Licensing Education Analytic Database) system statewide. Consumer portal: <a href="https://childcare.mass.gov/findchildcare">childcare.mass.gov/findchildcare</a>. Provider portal: <a href="https://childcare.mass.gov/providerlicensing">childcare.mass.gov/providerlicensing</a>.</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>606 CMR 7.00</strong> — Standards for Family, Small Group and School Age, and Large Group and School Age Child Care Programs — <a href="https://www.mass.gov/doc/family-group-school-age-child-care-programs-606-cmr-7/download">full PDF</a></li>
+  <li><strong>606 CMR 14.00</strong> — Criminal and Background Record Checks</li>
+  <li><strong>105 CMR 430.00</strong> (DPH) — sanitation/health overlay</li>
+  <li><strong>Enabling statute:</strong> M.G.L. c. 15D</li>
+  <li>Ratios (606 CMR 7.10): <a href="https://www.law.cornell.edu/regulations/massachusetts/606-CMR-7-10">Cornell LII mirror</a></li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead>
+    <tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>EEC Licensed &amp; Funded Providers (Socrata)</td><td>Primary bulk</td><td>CSV / JSON / API</td><td>Monthly snapshot</td><td><a href="https://educationtocareer.data.mass.gov/Early-Education-and-Care-/Licensed-and-Funded-Child-Care-Providers/dn4d-tjbb">dn4d-tjbb</a></td></tr>
+    <tr><td>Socrata bulk endpoint</td><td>API</td><td>CSV</td><td>Daily</td><td><a href="https://educationtocareer.data.mass.gov/api/views/dn4d-tjbb/rows.csv?accessType=DOWNLOAD">rows.csv</a></td></tr>
+    <tr><td>Find Child Care (consumer)</td><td>Per-facility</td><td>HTML (Salesforce Exp. Cloud)</td><td>Live</td><td><a href="https://childcare.mass.gov/findchildcare">childcare.mass.gov/findchildcare</a></td></tr>
+    <tr><td>Provider Licensing (LEAD)</td><td>Provider portal</td><td>Auth-gated</td><td>Live</td><td><a href="https://childcare.mass.gov/providerlicensing">LEAD portal</a></td></tr>
+    <tr><td>EEC Data Reports</td><td>Aggregate</td><td>PDF / Excel</td><td>Annual</td><td><a href="https://www.mass.gov/eec-reports-and-research">mass.gov/eec-reports-and-research</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 1,000 rows of currently-licensed MA providers with name, city, and phone (for centers). Emails are not published for family child care homes per EEC privacy policy. ~7,345 additional current providers remain available from the same feed.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>Regulations home</td><td><a href="https://www.mass.gov/lists/eec-laws-and-regulations">mass.gov/lists/eec-laws-and-regulations</a></td></tr>
+    <tr><td>Program licensing overview</td><td><a href="https://www.mass.gov/child-care-program-licensing">mass.gov/child-care-program-licensing</a></td></tr>
+    <tr><td>QRIS (Quality Rating)</td><td><a href="https://www.mass.gov/massachusetts-quality-rating-and-improvement-system">MA QRIS levels 1–4</a></td></tr>
+    <tr><td>Professional Qualifications Registry</td><td><a href="https://www.eec.state.ma.us/PQRegistry/">eec.state.ma.us/PQRegistry</a></td></tr>
+    <tr><td>Commonwealth Cares for Children (C3)</td><td><a href="https://www.mass.gov/commonwealth-cares-for-children-c3-stabilization-grants">C3 stabilization grants</a></td></tr>
+    <tr><td>ACF national licensing database</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/massachusetts">ACF MA state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li>Application for a License (Family / Small Group / Large Group)</li>
+  <li>Background Record Check (BRC) Authorization — for staff and household members ≥ 15</li>
+  <li>Professional Qualifications Registry / EEC Certification packet</li>
+  <li>Transportation Plan &amp; Vehicle Inspection Form</li>
+  <li>Health Care Policy template (606 CMR 7.11)</li>
+  <li>Individual Health Care Plan (IHCP)</li>
+  <li>Injury &amp; Incident Report</li>
+  <li>Emergency Evacuation / Shelter-in-Place Plan</li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://childcare.mass.gov/findchildcare">Find Child Care detail pages</a></td><td>Per-facility: status, findings, CAPs, complaint summaries</td><td>HTML + PDF</td><td><span class="pill warn">No</span></td></tr>
+    <tr><td>LEAD portal</td><td>Full inspection history for logged-in providers/licensors</td><td>Auth-gated</td><td><span class="pill warn">No</span></td></tr>
+    <tr><td>Socrata provider dataset</td><td>License/funded status only — <strong>no</strong> violations</td><td>CSV / API</td><td><span class="pill">Yes</span></td></tr>
+    <tr><td>EEC Public Record Request</td><td>Bulk LEAD extract of violations/CAPs/enforcement</td><td>Excel (on request)</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+  </tbody>
+</table>
+<p>Findings and Corrective Action Plans are posted to the public search within <strong>90 days</strong> of case closure and remain visible for up to <strong>5 years</strong>. Investigative coverage of EEC oversight gaps appeared in a 2024–2025 Boston 25 News "25 Investigates" series (<a href="https://www.boston25news.com/news/local/25-investigates-some-family-childcare-providers-operating-despite-red-flags-records-show/KRNRXXGY45BBDF7OQNNWDL3LLU/">family-childcare red flags</a>) and a 2024 State Audit of EEC (<a href="https://www.mass.gov/news/early-education-and-care-audit-reveals-compromised-investigations-lack-of-background-checks-and-training">OSA press release</a>). FOIA path: <a href="https://www.mass.gov/how-to/file-a-public-record-request-with-eec">File a Public Record Request with EEC</a>, eec.rao@mass.gov — first 4 hours free.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>Compliance anxiety is fresh.</strong> 2024 State Auditor report documented systemic oversight lapses — directors are being told by parents &amp; C3 reviewers to raise their own compliance game.</li>
+  <li><strong>C3 attestation burden is monthly.</strong> Every licensed provider drawing C3 stabilization funds must attest to compliance and submit enrollment monthly — a recurring, painful admin workflow ComplianceKit can eliminate.</li>
+  <li><strong>MA QRIS has stalled at Levels 2–3.</strong> Providers want to move up but lack bandwidth to assemble evidence binders — a natural upsell for automated document archiving.</li>
+  <li><strong>BRC re-checks every 3 years</strong> (606 CMR 14) is a frequently-missed deadline — staff-file tracking is a high-value wedge.</li>
+  <li><strong>Boston-metro FCC density</strong> means a highly clustered, word-of-mouth market — one referring champion in Cambridge/Somerville unlocks 10 more.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Enrich existing lead list</strong> by crawling the Salesforce Exp. Cloud detail pages (Aura action <code>ProgramDetailController.getProgram</code>) to add director name, license expiration, and QRIS level to all 1,000 rows.</li>
+  <li><strong>File a targeted EEC Public Record Request</strong> for the LEAD violation extract FY2023–FY2026 by provider (Excel), citing M.G.L. c. 66 § 10. First 4 hours free; scope tightly to stay under $0 cost.</li>
+  <li><strong>Scale to 100% of current licensees</strong> by removing the 1,000-row cap — expand to ~8,345 rows with minimal additional effort.</li>
+  <li><strong>Add email enrichment</strong> via Apollo / Clearbit against business names where EEC doesn't publish contact email.</li>
+  <li><strong>Cross-reference</strong> with C3 grant recipient list (also EEC-published) to prioritize providers who must file monthly compliance attestations — highest-pain ICP.</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://www.mass.gov/orgs/department-of-early-education-and-care">mass.gov/orgs/department-of-early-education-and-care</a>
+  <a href="https://www.mass.gov/child-care-program-licensing">mass.gov/child-care-program-licensing</a>
+  <a href="https://www.mass.gov/lists/eec-laws-and-regulations">mass.gov/lists/eec-laws-and-regulations</a>
+  <a href="https://www.mass.gov/doc/family-group-school-age-child-care-programs-606-cmr-7/download">606 CMR 7 (PDF)</a>
+  <a href="https://www.law.cornell.edu/regulations/massachusetts/606-CMR-7-10">606 CMR 7.10 (Cornell)</a>
+  <a href="https://childcare.mass.gov/findchildcare">childcare.mass.gov/findchildcare</a>
+  <a href="https://childcare.mass.gov/providerlicensing">LEAD portal</a>
+  <a href="https://eeclead.my.site.com/EEC_CCRRSearch">eeclead CCRR search</a>
+  <a href="https://childcare.mass.gov/EEC_Login">EEC login</a>
+  <a href="https://www.eec.state.ma.us/PQRegistry/">PQ Registry</a>
+  <a href="https://educationtocareer.data.mass.gov/Early-Education-and-Care-/Licensed-and-Funded-Child-Care-Providers/dn4d-tjbb">Socrata dataset dn4d-tjbb</a>
+  <a href="https://educationtocareer.data.mass.gov/api/views/dn4d-tjbb/rows.csv?accessType=DOWNLOAD">Socrata CSV download</a>
+  <a href="https://www.mass.gov/lists/data-on-licensed-and-funded-child-care-programs">Data on Licensed Programs</a>
+  <a href="https://www.mass.gov/eec-reports-and-research">EEC Reports &amp; Research</a>
+  <a href="https://www.mass.gov/eec-public-record-requests">EEC Public Record Requests</a>
+  <a href="https://www.mass.gov/how-to/file-a-public-record-request-with-eec">File Public Record Request</a>
+  <a href="https://www.mass.gov/news/early-education-and-care-audit-reveals-compromised-investigations-lack-of-background-checks-and-training">2024 OSA Audit of EEC</a>
+  <a href="https://www.boston25news.com/news/local/25-investigates-some-family-childcare-providers-operating-despite-red-flags-records-show/KRNRXXGY45BBDF7OQNNWDL3LLU/">Boston 25 — FCC red flags</a>
+  <a href="https://www.boston25news.com/news/25-investigates/25-investigates-mass-daycare-providers-with-heroin-assault-charges-pass-background-checks/VSBRGHKPHZCRXLTTOZLYFIW5SI/">Boston 25 — background checks</a>
+  <a href="https://www.boston25news.com/news/local/areas-risk-identified-audit-state-childcare-agency/IXVSA5YWJFBD7JG4H62JFIXJHQ/">Boston 25 — audit coverage</a>
+  <a href="https://www.wbur.org/news/2024/02/28/massachusetts-day-care-vicente-desoto-cocaine">WBUR — 2024 license rules review</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/massachusetts">ACF MA state page</a>
+  <a href="https://www.mass.gov/guides/find-a-licensed-family-group-or-school-age-child-care-program">mass.gov find-a-licensed program</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Massachusetts · Generated 2026-04-18 · Sources verified via Socrata Open Data, EEC LEAD public pages, and state audit records.
+</footer>
+
+</div>
+</body>
+</html>

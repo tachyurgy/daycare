@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nevada — ComplianceKit State Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-alt:#14142a; --bg-card:#1a1a30; --fg:#f0f0f5; --fg-dim:#a8a8bd; --accent:#00d4aa; --accent-alt:#6b8cff; --border:#26264a; --warn:#ffb347; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; font-size:15px; line-height:1.55; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { color:var(--accent-alt); text-decoration:underline; }
+  .wrap { max-width:960px; margin:0 auto; padding:40px 32px 80px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:32px; }
+  .eyebrow { color:var(--accent); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; }
+  h1 { font-size:38px; margin:8px 0 6px; letter-spacing:-0.02em; }
+  h2 { font-size:20px; margin:40px 0 12px; color:var(--fg); border-left:3px solid var(--accent); padding-left:12px; }
+  h3 { font-size:15px; margin:24px 0 8px; color:var(--accent-alt); text-transform:uppercase; letter-spacing:0.08em; }
+  .meta { color:var(--fg-dim); font-size:13px; }
+  .meta strong { color:var(--fg); font-weight:600; }
+  .rank-pill { display:inline-block; background:var(--bg-card); color:var(--accent); border:1px solid var(--border); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; margin-right:8px; }
+  .card { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:20px 24px; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; }
+  th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { background:var(--bg-alt); color:var(--accent); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul.clean { list-style:none; padding:0; margin:12px 0; }
+  ul.clean li { padding:8px 0; border-bottom:1px dashed var(--border); }
+  ul.clean li:last-child { border-bottom:none; }
+  .kv { display:grid; grid-template-columns:180px 1fr; gap:4px 16px; font-size:14px; }
+  .kv dt { color:var(--fg-dim); }
+  .kv dd { margin:0; color:var(--fg); }
+  .tag { display:inline-block; background:var(--bg-alt); color:var(--fg-dim); padding:2px 8px; border-radius:4px; font-size:11px; margin-right:6px; border:1px solid var(--border); }
+  .tag.hot { color:var(--warn); border-color:var(--warn); }
+  .tag.good { color:var(--accent); border-color:var(--accent); }
+  code { background:var(--bg-alt); padding:2px 6px; border-radius:4px; font-size:13px; color:var(--accent); }
+  footer { margin-top:60px; padding-top:20px; border-top:1px solid var(--border); color:var(--fg-dim); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">ComplianceKit — State Data Report</div>
+  <h1>Nevada</h1>
+  <div class="meta">
+    <span class="rank-pill">Rank #32</span>
+    <strong>Compiled:</strong> 2026-04-18 &nbsp;&middot;&nbsp;
+    <strong>Regulator:</strong> DSS Child Care Licensing (post-7/1/2024 consolidation) &nbsp;&middot;&nbsp;
+    <strong>Target cohort:</strong> ~1,400 licensed centers + homes statewide; Clark + Washoe concentrate >80%
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<div class="card">
+  <dl class="kv">
+    <dt>Agency</dt><dd>State of Nevada — Division of Supportive Services (DSS), Child Care Licensing Program (CCL)</dd>
+    <dt>Reorg</dt><dd>Consolidated 7/1/2024; previously split between DPBH + DWSS</dd>
+    <dt>Portals</dt><dd><a href="https://www.dss.nv.gov/programs/child-care-licensing-ccl/">dss.nv.gov CCL</a> &nbsp;&middot;&nbsp; <a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/">dpbh.nv.gov legacy</a></dd>
+    <dt>Find-a-facility</dt><dd><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/media/find-child-care/">findchildcare.nv.gov</a></dd>
+    <dt>Registry</dt><dd><a href="https://www.nevadaregistry.org">Nevada Registry</a></dd>
+    <dt>County-local</dt><dd>Clark County (family homes) &mdash; Clark County Business License; Washoe pre-7/1/2024 records at county level</dd>
+  </dl>
+</div>
+
+<h2>2. Primary Regulatory Citation</h2>
+<div class="card">
+  <ul class="clean">
+    <li><a href="https://www.leg.state.nv.us/nrs/nrs-432a.html">NRS Chapter 432A</a> — Services and Facilities for Care of Children</li>
+    <li><a href="https://www.leg.state.nv.us/nac/NAC-432A.html">NAC Chapter 432A</a> — implementing regs</li>
+    <li><a href="https://www.law.cornell.edu/regulations/nevada/NAC-432A-5205">NAC 432A.5205</a> — Minimum staffing ratios</li>
+    <li>NAC 432A.190 — Inspections (2 unannounced / 12-mo period)</li>
+    <li>NRS 432A.1773–432A.1775 — Licensee registration & 24-hr annual training</li>
+  </ul>
+</div>
+
+<h2>3. Contact / Provider Data</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Source</th><th>Type</th><th>Rows</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://nvdpbh.aithent.com/Protected/LIC/LicenseeSearch.aspx?Program=HF&PubliSearch=Y&returnURL=~/Login.aspx?TI=2">Aithent ALiS Licensee Search (HF)</a></td><td>ASP.NET public search</td><td>Statewide</td><td>Primary live source; Regulatory Actions per facility</td></tr>
+      <tr><td><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/media/find-child-care/">findchildcare.nv.gov</a></td><td>Wrapper</td><td>Same pool</td><td>Redirects to Aithent</td></tr>
+      <tr><td><a href="https://www.dpbh.nv.gov/globalassets/dpbh/regulatory/childcare/dta/providers/Facility_List_March_2016.pdf">2016 archival PDF</a></td><td>Static PDF</td><td>Archival</td><td>10 years stale; retained for reference</td></tr>
+      <tr><td>dpbh.nv.gov 2024 statewide PDF</td><td>Static PDF</td><td>404</td><td>Broken URL post-consolidation; data-gap signal</td></tr>
+      <tr><td><a href="https://childcarecenter.us/nevada/">childcarecenter.us — NV</a></td><td>HTML directory (secondary)</td><td>~48 rows extracted</td><td>Top 4 metros; Sparks under-covered</td></tr>
+    </tbody>
+  </table>
+  <p class="meta">Output CSV: <code>/Users/magnusfremont/Desktop/daycare/nevada_leads.csv</code>. Aithent is the only live path; county records for Clark family-home licensing out-of-band.</p>
+</div>
+
+<h2>4. Compliance Framework Links</h2>
+<div class="card">
+  <ul class="clean">
+    <li><a href="https://www.dss.nv.gov/programs/child-care-licensing-ccl/">DSS CCL home (post-reorg)</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/statutes/child-care-statutes-and-regulations/">DPBH Statutes & Regulations</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatorypgms/child-care-facilities/nevada-child-care-licensing-faqs/">Child Care Licensing FAQ</a></li>
+    <li><a href="https://dpbh.nv.gov/Reg/ChildCare/dta/Complaints/Child_Care_Licensing_-_Complaints/">Child Care Complaints page</a></li>
+    <li><a href="https://www.nevadaregistry.org/ece-resources/child-care-licensing/">Nevada Registry — Licensing</a></li>
+    <li><a href="https://www.nevadachildcare.org/licensing/">Nevada CCR&R — Licensing</a></li>
+  </ul>
+</div>
+
+<h2>5. Licensing Forms</h2>
+<div class="card">
+  <table>
+    <thead><tr><th>Form</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>CCL-001</td><td>Application for License</td></tr>
+      <tr><td>CCL-002</td><td>Facility Information / Floor Plan</td></tr>
+      <tr><td>CCL-100</td><td>Staff Roster & Background Check Attestation</td></tr>
+      <tr><td>NRS 432A.170</td><td>Background Check Authorization (DPS + FBI fingerprint + CANS + sex-offender)</td></tr>
+      <tr><td>Emergency / Disaster Plan</td><td>Annual</td></tr>
+      <tr><td>Medication Administration Authorization</td><td>Per medication event</td></tr>
+      <tr><td>Injury/Incident Report</td><td>Per incident</td></tr>
+      <tr><td>Immunization Record</td><td>Per NV Division of Public Health schedule</td></tr>
+      <tr><td>Director Qualifications</td><td>Mgmt role</td></tr>
+    </tbody>
+  </table>
+  <p class="meta">Forms index (legacy DPBH): <a href="https://www.dpbh.nv.gov/regulatorypgms/child-care-facilities/child-care-licensing-forms/">CCL Forms</a></p>
+</div>
+
+<h2>6. Violations & Inspection Data</h2>
+<div class="card">
+  <h3>Primary source</h3>
+  <p><strong>Aithent ALiS Licensee Search</strong> &mdash; per-facility profile exposes a <strong>Regulatory Actions</strong> tab with inspection reports, complaint investigation outcomes, enforcement actions. Supports public access via the <code>PubliSearch=Y</code> flag on the Protected path. Same backend serves <a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/media/find-child-care/">findchildcare.nv.gov</a>.</p>
+  <h3>Format</h3>
+  <p><span class="tag hot">ASP.NET VIEWSTATE</span> <span class="tag good">No Cloudflare block</span> <span class="tag">No Socrata / ArcGIS</span> Playwright is the simplest enumeration path.</p>
+  <h3>Freshness</h3>
+  <p><strong>2 unannounced inspections per 12-month licensing period</strong> (NRS 432A.180 / NAC 432A.190) + complaint follow-ups. Aithent reflects filings within days.</p>
+  <h3>Aggregate reports</h3>
+  <p><strong>Statewide Annual Licensing Report</strong> (latest Jan–Dec 2022): total licensed facilities by type, substantiated / unsubstantiated complaint counts, jurisdiction breakdown. A "Serious Injury, Death, and Substantiated Abuse & Neglect 2023–2025" report is referenced in agency copy but URL is not stable &mdash; request via DSS public-records desk.</p>
+  <h3>County-local gaps</h3>
+  <p>Clark County family-home licensing is separate from state CCL (county business-license layer). Washoe legacy records (pre-7/1/2024) live at county level. These records are <strong>not</strong> in Aithent &mdash; require local records request.</p>
+  <h3>Open-records path</h3>
+  <p>Nevada Public Records Act &mdash; <a href="https://www.leg.state.nv.us/NRS/NRS-239.html">NRS 239</a>. DHHS portal: <a href="https://dhhs.nv.gov/about/publicrecordsrequest/">dhhs.nv.gov/about/publicrecordsrequest</a>. DHS: <a href="https://www.dhs.nv.gov/aboutus/publicrecordsrequest/">dhs.nv.gov</a>. Response window: <strong>5 business days</strong> for acknowledgment.</p>
+</div>
+
+<h2>7. Outreach Signals</h2>
+<div class="card">
+  <ul class="clean">
+    <li><span class="tag hot">24-hour annual training (NRS 432A.1775)</span> &mdash; higher than most states; sustained tracking burden = clear ComplianceKit pitch</li>
+    <li><span class="tag">Awake-at-night staff rule (night-care facilities)</span> &mdash; unique NV requirement; operational complexity</li>
+    <li><span class="tag">Accommodation Facility category</span> (casino / hotel drop-in) &mdash; hyper-local Vegas niche; episodic staffing &rarr; outsized compliance cost</li>
+    <li><span class="tag good">Nevada Registry enrollment</span> required &mdash; ComplianceKit integration surfaces here</li>
+    <li><span class="tag hot">Substantiated complaint in Aithent</span> &mdash; 12-mo buyer window post-finding</li>
+    <li><span class="tag">Wildfire / AQI outdoor-play guidance</span> &mdash; climate-specific emergency-ops module fit</li>
+    <li><span class="tag">Post-consolidation data gaps</span> &mdash; old URLs 404, contact info in flux; ComplianceKit's "stay current" value prop lands especially well here</li>
+  </ul>
+</div>
+
+<h2>8. Next-step Data Acquisition</h2>
+<div class="card">
+  <ol>
+    <li><strong>Playwright enumeration of Aithent ALiS:</strong> iterate search results by ZIP; persist license numbers; fetch Regulatory Actions per facility at ≤1 req/sec.</li>
+    <li><strong>DSS public-records request:</strong> ask DHHS records custodian for a current CSV export of all CCL licensees + last-36-month regulatory actions. 5-day acknowledgment, 2–4 weeks to deliver.</li>
+    <li><strong>Annual report harvest:</strong> scrape the 2022 Statewide Annual Licensing Report PDF + quarterly poll DSS for 2023/2024/2025 follow-ons; parse tables into rows for marketing/content use.</li>
+    <li><strong>Clark County family-home overlay:</strong> separate records request to Clark County Business License (Social Service) for the family-home cohort that the state portal misses.</li>
+    <li><strong>Carson City / Washoe environmental health overlay:</strong> merge local sanitation inspections (Carson City already published online) by facility address.</li>
+  </ol>
+</div>
+
+<h2>9. All Links</h2>
+<div class="card">
+  <ul class="clean">
+    <li><a href="https://www.dss.nv.gov/programs/child-care-licensing-ccl/">DSS CCL home</a></li>
+    <li><a href="https://www.dss.nv.gov/child-care/child-care-licensing-ccl/">DSS CCL alt</a></li>
+    <li><a href="https://dss.nv.gov/Care/CCL/ccl-licensing-home/">DSS CCL legacy</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/">DPBH Child Care Facilities (legacy host)</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/statutes/child-care-statutes-and-regulations/">DPBH Statutes & Regulations</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatorypgms/child-care-facilities/child-care-licensing-forms/">DPBH CCL Forms</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatorypgms/child-care-facilities/nevada-child-care-licensing-faqs/">DPBH CCL FAQ</a></li>
+    <li><a href="https://dpbh.nv.gov/Reg/ChildCare/dta/Complaints/Child_Care_Licensing_-_Complaints/">DPBH Complaints</a></li>
+    <li><a href="https://www.dpbh.nv.gov/regulatory/child-care-facilities/media/find-child-care/">findchildcare.nv.gov</a></li>
+    <li><a href="https://www.dss.nv.gov/programs/child-care-licensing-ccl/find-a-health-facility/">DSS Find a Facility</a></li>
+    <li><a href="https://nvdpbh.aithent.com/Protected/LIC/LicenseeSearch.aspx?Program=HF&PubliSearch=Y&returnURL=~/Login.aspx?TI=2">Aithent ALiS Licensee Search (HF)</a></li>
+    <li><a href="https://nvdpbh.aithent.com/Protected/LIC/LicenseeSearch.aspx?Program=HHF&PubliSearch=Y&returnURL=~/Login.aspx?TI%3D0">Aithent Licensee Search (HHF)</a></li>
+    <li><a href="https://www.dpbh.nv.gov/globalassets/dpbh/regulatory/childcare/dta/providers/Facility_List_March_2016.pdf">2016 archival facility list PDF</a></li>
+    <li><a href="https://www.leg.state.nv.us/nrs/nrs-432a.html">NRS 432A</a></li>
+    <li><a href="https://www.leg.state.nv.us/nac/NAC-432A.html">NAC 432A</a></li>
+    <li><a href="https://www.law.cornell.edu/regulations/nevada/NAC-432A-5205">NAC 432A.5205 Ratios</a></li>
+    <li><a href="https://www.nevadaregistry.org/">Nevada Registry</a></li>
+    <li><a href="https://www.nevadaregistry.org/ece-resources/child-care-licensing/">Nevada Registry — Licensing</a></li>
+    <li><a href="https://www.nevadaregistry.org/ece-resources/child-care-licensing/statewide-contact-list/">NV Licensing Contact List</a></li>
+    <li><a href="https://www.nevadachildcare.org/licensing/">Nevada CCR&R</a></li>
+    <li><a href="https://www.gethealthycarsoncity.org/divisions/environmental-health/programs-inspections/child-care">Carson City Environmental Health Child Care</a></li>
+    <li><a href="https://www.leg.state.nv.us/NRS/NRS-239.html">NRS 239 Public Records</a></li>
+    <li><a href="https://dhhs.nv.gov/about/publicrecordsrequest/">DHHS Public Records Request</a></li>
+    <li><a href="https://www.dhs.nv.gov/aboutus/publicrecordsrequest/">DHS Public Records Request</a></li>
+    <li><a href="https://nsla.nv.gov/public-records/nevada-public-records-act-resources">NV State Library Public Records Resources</a></li>
+  </ul>
+</div>
+
+<footer>
+  ComplianceKit &middot; Nevada Data Report &middot; Generated 2026-04-18 &middot; Sources verified against DSS / DPBH / Aithent as of compile date. Post-7/1/2024 consolidation in flux.
+</footer>
+
+</div>
+</body>
+</html>

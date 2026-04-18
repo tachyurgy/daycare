@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Montana Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-2:#151528; --bg-3:#1d1d33; --fg:#f0f0f5; --fg-dim:#b0b0c0; --accent:#00d4aa; --accent-dim:#008c70; --border:#2a2a44; --warn:#ffb86c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 32px 80px; }
+  header { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:40px; }
+  .eyebrow { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  h1 { font-size:48px; margin:0 0 12px; font-weight:700; letter-spacing:-0.02em; }
+  .meta-row { display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--fg-dim); }
+  .meta-row strong { color:var(--fg); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); font-weight:600; }
+  h3 { font-size:16px; margin:20px 0 8px; font-weight:600; color:var(--accent); }
+  p { margin:0 0 12px; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px dotted var(--accent-dim); }
+  a:hover { color:var(--fg); border-bottom-color:var(--fg); }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; background:var(--bg-2); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--bg-3); color:var(--accent); font-weight:600; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul { padding-left:22px; margin:10px 0 16px; }
+  li { margin-bottom:6px; }
+  .callout { background:var(--bg-2); border-left:3px solid var(--accent); padding:14px 18px; margin:16px 0; border-radius:0 6px 6px 0; font-size:14px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .rank-badge { display:inline-block; background:var(--bg-3); border:1px solid var(--accent-dim); color:var(--accent); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.5px; }
+  .pill { display:inline-block; background:var(--bg-3); padding:2px 8px; border-radius:3px; font-size:11px; color:var(--fg-dim); margin-right:6px; }
+  code { background:var(--bg-3); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; font-family:'SF Mono',Monaco,Consolas,monospace; }
+  pre { background:var(--bg-2); border:1px solid var(--border); padding:14px; border-radius:6px; overflow-x:auto; font-size:12px; font-family:'SF Mono',Monaco,Consolas,monospace; color:var(--fg-dim); }
+  .link-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:13px; }
+  @media (max-width:700px){ .link-grid{grid-template-columns:1fr;} h1{font-size:36px;} .wrap{padding:24px 18px 60px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Montana</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Wave 7 (SansWrite API — full-state JSON feed)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>montana</code></span>
+    <span class="rank-badge">TIER: HIGH</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Montana Department of Public Health and Human Services (DPHHS)</strong>, Early Childhood and Family
+  Support Division (ECFSD), <a href="https://dphhs.mt.gov/ecfsd/childcare/childcarelicensing/">Child Care Licensing Program</a>.
+  Bureau: Early Childhood Services Bureau (ECSB). Quality Assurance Division (provider search portal): <a href="https://dphhs.mt.gov/qad">dphhs.mt.gov/qad</a>.
+</p>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>ARM Title 37, Chapter 95</strong> — Licensing of Day Care Facilities. <a href="http://www.mtrules.org/gateway/ChapterHome.asp?Chapter=37.95">Index</a></li>
+  <li><strong>ARM 37.95.108</strong> — <a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.108">Licensing Procedures</a></li>
+  <li><strong>ARM 37.95.141</strong> — <a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.141">Records</a></li>
+  <li><strong>ARM 37.95.623</strong> — <a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.623">Child-to-Staff Ratios</a> (post-HB 422)</li>
+  <li><strong>HB 422 (2023)</strong> — <a href="https://archive.legmt.gov/bills/2023/billhtml/HB0422.htm">Ratio revision (1-year-olds 1:6, 6+ 1:20)</a></li>
+  <li><strong>Enabling statute:</strong> MCA Title 52, Chapter 2, Part 7</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value / Source</th></tr></thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td><strong>928</strong> (full state, from SansWrite X JSON API)</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://webapp.sanswrite.com/MontanaDPHHS/ChildCare">SansWrite X Public Portal</a> (reverse-engineered JSON endpoint)</td></tr>
+    <tr><td>Endpoint</td><td><code>POST https://webapp.sanswrite.com/MontanaDPHHS/ChildCare/search-identifiers</code></td></tr>
+    <tr><td>Auth</td><td>None — anonymous</td></tr>
+    <tr><td>Format</td><td>JSON array of provider records</td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state</td></tr>
+    <tr><td>Phone</td><td><span class="pill">REDACTED</span> (`**********` in public API)</td></tr>
+    <tr><td>Street address</td><td><span class="pill">REDACTED</span> (`**********` in public API)</td></tr>
+    <tr><td>License # (available, not yet parsed)</td><td>`number` field (e.g., `PV109736`) — prefix segments facility type</td></tr>
+    <tr><td>Refresh cadence</td><td>DPHHS updates the portal "at least once per month"; in practice same-day changes appear</td></tr>
+  </tbody>
+</table>
+
+<h3>Endpoint body (used in Wave 7)</h3>
+<pre>POST https://webapp.sanswrite.com/MontanaDPHHS/ChildCare/search-identifiers
+Content-Type: application/json
+
+{
+  "searchPrams": {
+    "columnQueryPairs": {"number":"","name":"","city":"","state":"","zip":""},
+    "orderBy": "name",
+    "ascending": true,
+    "pageNumber": 1,
+    "resultsPerPage": 10000
+  }
+}</pre>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://dphhs.mt.gov/ecfsd/childcare/childcarelicensing/">DPHHS Child Care Licensing</a></li>
+  <li><a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/LicensingRequirementsforChildCareCenters.pdf">Child Care Center Licensing Requirements PDF</a></li>
+  <li><a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/RegistrationRequirementsforFamilyGroup.pdf">Family/Group Registration Requirements PDF</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/mt">Public Health Law Center — MT</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/montana">National Database (ACF — MT)</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li>DPHHS-CCL-1 — Child Care Center License Application</li>
+  <li>DPHHS-CCL Family/Group Registration Application</li>
+  <li>Practitioner Registry Application (required before staff count toward ratios)</li>
+  <li>Child Care Background Check Form (state, FBI, CPS via Centralized Background Check Unit)</li>
+  <li>Fire Marshal Inspection Report</li>
+  <li>Health Authority Certificate of Approval (local sanitarian)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout">
+  <strong>Montana is the clearest bulk-data win among assigned states.</strong> The SansWrite X portal exposes 3 years
+  of inspection history + deficiencies per facility via a JSON backend already used for the leads pull. Per-facility
+  endpoints follow the SansWrite X pattern (<code>list-completed-inspections</code>, <code>get-inspection-details</code>)
+  and can be reverse-engineered from a single devtools session.
+</div>
+<h3>Sources</h3>
+<ul>
+  <li><strong>SansWrite X Public Portal:</strong> <a href="https://webapp.sanswrite.com/MontanaDPHHS/ChildCare">webapp.sanswrite.com/MontanaDPHHS/ChildCare</a></li>
+  <li><strong>DPHHS Complaint Form:</strong> <a href="https://mt.accessgov.com/dphhs/Forms/Page/dphhs-ecfs/childcarecomplaint/0">AccessGov child care complaint</a></li>
+  <li><strong>CCL Complaint Procedure PDF:</strong> <a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/ccl009complaintreferralsandinvestigations.pdf">CCL-009</a></li>
+  <li><strong>Open-records:</strong> MCA §2-6-1003 (Public Records Act) + Montana Constitution Art. II §9.</li>
+</ul>
+<h3>Access strategy</h3>
+<ul>
+  <li><strong>Done:</strong> bulk facility roster via JSON POST (928 rows).</li>
+  <li><strong>Next:</strong> capture the SansWrite X per-facility endpoint from devtools and loop over <code>uuid</code>s to build a full inspection history table.</li>
+  <li><strong>Address/phone recovery:</strong> MCA public records request (5-10 day response) — the portal redacts both fields.</li>
+  <li><strong>License prefix parsing:</strong> segment by facility type using the <code>number</code> field prefix.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>HB 422 (2023) loosened ratios</strong> — 1-year-olds 1:4 → 1:6; 6+ 1:14 → 1:20. Cross-check a provider's pre-vs-post-2023 license history for historical compliance confusion.</li>
+  <li><strong>Annual renewal</strong> with fire marshal inspection required at each renewal — predictable annual trigger.</li>
+  <li><strong>Practitioner Registry gatekeeping</strong> — staff qualifications verified annually; expired registry = staff can't count toward ratio = service disruption. Identical pain to Hawaii's PATCH.</li>
+  <li><strong>Drop-in care special rules</strong> (ARM 37.95.1105+) — common in ski/tourism zones (Big Sky, Whitefish, Bozeman). Distinct ICP.</li>
+  <li><strong>Massive geography + low density</strong> — DPHHS inspection travel drag; complaint response occasionally slow in rural counties. Self-serve readiness software is disproportionately valuable.</li>
+  <li><strong>Tribal jurisdiction overlap</strong> — seven reservations; some programs state-licensed, others tribal. Segment carefully.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Monthly re-pull</strong> of the SansWrite JSON endpoint (zero cost, full coverage).</li>
+  <li><strong>Per-facility inspection scrape</strong> — confirm and loop <code>list-completed-inspections</code> / <code>get-inspection-details</code> endpoints across 928 <code>uuid</code>s.</li>
+  <li><strong>MCA public records request</strong> to DPHHS for unredacted street address + phone + capacity fields.</li>
+  <li><strong>License prefix parsing</strong> for ICP segmentation (center vs. family vs. group home).</li>
+  <li><strong>Enrichment pipeline</strong> — Google / LinkedIn: <code>"&lt;name&gt;" "&lt;city&gt;" Montana</code> → recover director name, email, website.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://dphhs.mt.gov/ecfsd/childcare/childcarelicensing/">DPHHS Child Care Licensing</a></div>
+  <div><a href="https://dphhs.mt.gov/ecfsd/childcare/childcarelicensing/providersearch">DPHHS Licensed Provider Search</a></div>
+  <div><a href="https://dphhs.mt.gov/qad/licensure/childcareprovidersearch">QAD Child Care Provider Search</a></div>
+  <div><a href="https://webapp.sanswrite.com/MontanaDPHHS/ChildCare">SansWrite X Public Portal</a></div>
+  <div><a href="https://mt.accessgov.com/dphhs/Forms/Page/dphhs-ecfs/childcarecomplaint/0">Child Care Complaint Form</a></div>
+  <div><a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/ccl009complaintreferralsandinvestigations.pdf">CCL-009 Complaint Procedure PDF</a></div>
+  <div><a href="http://www.mtrules.org/gateway/ChapterHome.asp?Chapter=37.95">ARM 37.95 Index</a></div>
+  <div><a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.108">ARM 37.95.108 (Licensing)</a></div>
+  <div><a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.141">ARM 37.95.141 (Records)</a></div>
+  <div><a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.172">ARM 37.95.172 (Supervision)</a></div>
+  <div><a href="https://rules.mt.gov/gateway/ruleno.asp?RN=37.95.623">ARM 37.95.623 (Ratios)</a></div>
+  <div><a href="https://archive.legmt.gov/bills/2023/billhtml/HB0422.htm">HB 422 (2023)</a></div>
+  <div><a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/LicensingRequirementsforChildCareCenters.pdf">Center Licensing Requirements PDF</a></div>
+  <div><a href="https://dphhs.mt.gov/assets/ecfsd/childcarelicensing/RegistrationRequirementsforFamilyGroup.pdf">Family/Group Requirements PDF</a></div>
+  <div><a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/mt">Public Health Law Center — MT</a></div>
+  <div><a href="https://missoulian.com/news/state-and-regional/montana-dphhs-advises-parents-to-check-complaints-against-child-care-facilities/article_0d266cce-ef37-11e1-8d73-001a4bcf887a.html">Missoulian coverage</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/montana">National Database (ACF — MT)</a></div>
+</div>
+
+</div>
+</body>
+</html>

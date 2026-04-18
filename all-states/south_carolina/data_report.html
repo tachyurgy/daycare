@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>South Carolina — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #151528;
+    --panel-2: #1c1c33;
+    --text: #f0f0f5;
+    --muted: #8a8aa8;
+    --accent: #00d4aa;
+    --accent-dim: #00a888;
+    --border: #26264a;
+    --warn: #ffc266;
+    --bad: #ff6b8a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  header.top { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; }
+  h1 { margin: 0.4rem 0 0.3rem; font-size: 2.6rem; letter-spacing: -0.02em; font-weight: 700; }
+  h1 .rank { color: var(--accent); font-size: 1.2rem; margin-left: 0.6rem; vertical-align: middle; font-weight: 500; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  h2 { margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  h2 .n { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.95rem; margin-right: 0.6rem; font-weight: 400; }
+  h3 { margin-top: 2rem; margin-bottom: 0.6rem; font-size: 1.05rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); word-break: break-word; }
+  a:hover { color: #6affd4; border-bottom-style: solid; }
+  p { margin: 0.5rem 0 1rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; background: var(--panel); font-size: 0.92rem; }
+  thead th { background: var(--panel-2); text-align: left; padding: 0.7rem 0.9rem; color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--panel-2); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem 1.5rem; margin: 1rem 0; }
+  .pill { display: inline-block; padding: 0.15rem 0.55rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; font-size: 0.78rem; color: var(--muted); margin-right: 0.4rem; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .pill.good { color: var(--accent); border-color: var(--accent-dim); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.bad { color: var(--bad); border-color: var(--bad); }
+  code { background: var(--panel-2); color: var(--accent); padding: 0.1rem 0.35rem; border-radius: 3px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 720px) { h1 { font-size: 2rem; } .two-col { grid-template-columns: 1fr; } }
+  .footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ComplianceKit Research Pack</div>
+  <h1>South Carolina <span class="rank">Rank #23 by population</span></h1>
+  <div class="meta">Compiled 2026-04-18 &middot; Southeastern expansion corridor &middot; ~5,500 licensed / registered child-care facilities</div>
+</header>
+
+<h2><span class="n">1.</span>Licensing Authority</h2>
+<div class="card">
+  <p><strong>South Carolina Department of Social Services (DSS), Division of Early Care and Education</strong> — operating as "SC Child Care Services."</p>
+  <ul>
+    <li>SC Child Care Services — <a href="https://www.scchildcare.org/">scchildcare.org</a></li>
+    <li>DSS Child Care — <a href="https://dss.sc.gov/child-care/">dss.sc.gov/child-care</a></li>
+    <li>Main office: 1535 Confederate Ave., Columbia, SC 29201 &middot; 803-898-2570</li>
+    <li>ABC Quality (QRIS) — <a href="https://abcquality.org/families/find-a-provider/">abcquality.org</a></li>
+  </ul>
+  <p><span class="pill">Licensed Child Care Center (13+ children)</span><span class="pill">Group Child Care Home (7-12)</span><span class="pill">Family Child Care Home (&lt;=6)</span><span class="pill">Church-Operated (registered)</span></p>
+</div>
+
+<h2><span class="n">2.</span>Primary Regulatory Citation</h2>
+<table>
+  <thead><tr><th>Authority</th><th>Citation</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>Licensing statute</td><td>S.C. Code Ann. Title 63, Ch. 13, Art. 3 (§ 63-13-20 – 1100)</td><td><a href="https://www.scstatehouse.gov/code/t63c013.php">scstatehouse.gov/code/t63c013</a></td></tr>
+    <tr><td>Center regulations</td><td>S.C. Code of Regs. Ch. 114, Art. 5 Subart. 1, R.114-500 series</td><td><a href="https://www.scstatehouse.gov/coderegs/Chapter%20114.pdf">scstatehouse.gov/coderegs/Chapter 114</a></td></tr>
+    <tr><td>Group Child Care Homes</td><td>R. 114-510 series</td><td><a href="https://regulations.justia.com/states/south-carolina/chapter-114/article-5/subarticle-1/">regulations.justia.com/chapter-114/article-5</a></td></tr>
+    <tr><td>Family Child Care Homes</td><td>R. 114-520 series</td><td><a href="https://regulations.justia.com/states/south-carolina/chapter-114/article-5/subarticle-1/">regulations.justia.com/chapter-114/article-5</a></td></tr>
+    <tr><td>Background checks</td><td>S.C. Code § 63-13-180 (SLED + FBI + Central Registry)</td><td><a href="https://www.scstatehouse.gov/code/t63c013.php">scstatehouse.gov/code/t63c013</a></td></tr>
+    <tr><td>Ratio card</td><td>DSS 2966</td><td><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2966.pdf">dss.sc.gov/.../2966.pdf</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">3.</span>Contact / Provider Data Pull</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Data source type</td><td><span class="pill bad">Bronze — aggregator (no state bulk feed)</span></td></tr>
+    <tr><td>Aggregator used</td><td>childcarecenter.us (DSS licensee data upstream)</td></tr>
+    <tr><td>Cities captured</td><td>Columbia (40), Charleston (20), Greenville (20), Rock Hill (20), Myrtle Beach (20)</td></tr>
+    <tr><td>Leads CSV rows in repo</td><td>117 unique (120 raw rows after minor inter-city dedup) — <code>/Users/magnusfremont/Desktop/daycare/south_carolina_leads.csv</code></td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state, phone</td></tr>
+    <tr><td>Email / website</td><td><span class="pill warn">Not captured — not surfaced by aggregator</span></td></tr>
+    <tr><td>Authoritative search portal</td><td><a href="https://www.scchildcare.org/search.aspx">scchildcare.org/search.aspx</a></td></tr>
+    <tr><td>Per-provider URL pattern</td><td><code>scchildcare.org/provider/{id}/{slug}/</code></td></tr>
+    <tr><td>Example provider pages</td><td>
+      <a href="https://scchildcare.org/provider/165/sunshine-house-2/">Sunshine House 2</a>,
+      <a href="https://www.scchildcare.org/provider/47701/melanie-pierce-greer/">Melanie Pierce-Greer</a>,
+      <a href="https://www.scchildcare.org/provider/47986/vivian-goldsborough/">Vivian Goldsborough</a>,
+      <a href="https://www.scchildcare.org/provider/48030/alicia-leaks/">Alicia Leaks</a>,
+      <a href="https://www.scchildcare.org/provider/48462/debra-eaddy/">Debra Eaddy</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">4.</span>Compliance Framework Links</h2>
+<ul>
+  <li>Licensed Center Regulations (PDF) — <a href="https://www.scchildcare.org/media/t3yfftje/licensed-centers-regulations.pdf">scchildcare.org/.../licensed-centers-regulations.pdf</a></li>
+  <li>2018 Side-by-Side Companion Guide to Center Regulations — <a href="https://www.scchildcare.org/media/60243/Side-by-Side-Companion-Guide-to-the-2018-Center-Regulations.pdf">Side-by-Side Companion Guide</a></li>
+  <li>2018 CCC Regulations (PDF) — <a href="https://www.scchildcare.org/media/59009/2018-CCC-regulations-updated.pdf">scchildcare.org/.../2018-CCC-regulations-updated.pdf</a></li>
+  <li>Staff-to-Child Ratios (DSS 2966) — <a href="https://dss.sc.gov/resource-library/forms_brochures/files/2966.pdf">dss.sc.gov/.../2966.pdf</a></li>
+  <li>SC Child Care Licensing Law handbook (DSS 2955) — <a href="https://dss.sc.gov/resource-library/forms_brochures/files/2955.pdf">dss.sc.gov/.../2955.pdf</a></li>
+  <li>Issue Brief 501 — <a href="https://dss.sc.gov/media/dtypqqif/dss-brochure-501.pdf">dss.sc.gov/.../dss-brochure-501.pdf</a></li>
+  <li>ACF Licensing Regulations Database — SC Centers (June 2018) — <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/SC_Center_June_2018_0.pdf">licensingregulations.acf.hhs.gov/SC_Center_June_2018</a></li>
+</ul>
+
+<h2><span class="n">5.</span>Licensing Forms</h2>
+<table>
+  <thead><tr><th>Form #</th><th>Title / Purpose</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>DSS 2902</td><td>Application to Operate a Child Care Facility</td><td><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2902.pdf">PDF</a></td></tr>
+    <tr><td>DSS 2905</td><td>Health – Fire Inspection Request</td><td>DSS forms library</td></tr>
+    <tr><td>DSS 2924</td><td>Consent to Release Information / Compliance Statement</td><td>DSS forms library</td></tr>
+    <tr><td>DSS 2926</td><td>Health Assessment (operator, caregivers, household members)</td><td>DSS forms library</td></tr>
+    <tr><td>DSS 2955</td><td>SC Child Care Licensing Law handbook</td><td><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2955.pdf">PDF</a></td></tr>
+    <tr><td>DSS 2964</td><td>Staff List</td><td>DSS forms library</td></tr>
+    <tr><td>DSS 2966</td><td>Staff-to-Child Ratio Reference Card</td><td><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2966.pdf">PDF</a></td></tr>
+    <tr><td>DSS 3086</td><td>Child's Enrollment Form</td><td>DSS forms library</td></tr>
+    <tr><td>DSS 501</td><td>Issue Brief — Child Care Licensing Requirements</td><td><a href="https://dss.sc.gov/media/dtypqqif/dss-brochure-501.pdf">PDF</a></td></tr>
+  </tbody>
+</table>
+<p>Forms library: <a href="https://dss.sc.gov/resource-library/forms_brochures/">dss.sc.gov/resource-library/forms_brochures</a></p>
+
+<h2><span class="n">6.</span>Violations &amp; Inspection Data</h2>
+<div class="card">
+<p>SC publishes per-provider compliance history directly on the DSS SC Child Care Services website. Each provider detail page exposes a <strong>Compliance Violations</strong> table with date, regulation, severity (High / Medium / Low), and resolution status, covering the previous <strong>36 months</strong>.</p>
+<p><strong>Full details:</strong> <a href="./violations.md">violations.md</a></p>
+<ul>
+  <li>Per-provider URL — <code>scchildcare.org/provider/{id}/{slug}/</code></li>
+  <li>Children's Trust of SC investigation (2021): 8,537 serious violations over 4 years; top offenders — improper supervision (3,044 high-severity) &amp; out-of-ratio (2,605) — <a href="https://scchildren.org/despite-violations-many-child-care-facilities-stay-in-business/">scchildren.org</a></li>
+  <li>No bulk CSV export; per-facility HTML scrape is reliable.</li>
+</ul>
+<p><span class="pill good">Public high/med/low severity per violation</span><span class="pill">36-month rolling window</span><span class="pill warn">No API, no bulk</span></p>
+</div>
+
+<h2><span class="n">7.</span>Outreach Signals</h2>
+<div class="two-col">
+<div class="card">
+  <h3>Regulatory pain points</h3>
+  <ul>
+    <li>SLED + FBI + Central Registry checks must clear before staff contact — no conditional starts.</li>
+    <li>15 hrs annual in-service training per staff member.</li>
+    <li>Health Assessment (DSS 2926) required for operator + all caregivers + household members 16+.</li>
+    <li>Posted license, latest inspection report, evacuation plan, complaint phone must be visible to parents.</li>
+    <li>BRIGHT Act (2019) limits expulsion/suspension — written policy required.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Market heat &amp; channel</h3>
+  <ul>
+    <li>Children's Trust of SC report surfaced chronic violations; media attention drives director urgency.</li>
+    <li>ABC Quality participation mandatory for SC Voucher (subsidy) providers — quality tier upgrade is a budget line.</li>
+    <li>Columbia (state capital), Charleston, Greenville, Rock Hill, Myrtle Beach = top 5 MSAs to target first.</li>
+    <li>DSS regional offices answer individual questions — channel for ComplianceKit partnerships.</li>
+  </ul>
+</div>
+</div>
+
+<h2><span class="n">8.</span>Next-Step Data Acquisition</h2>
+<ol>
+  <li>File SC FOIA with DSS Division of Early Care and Education for the full licensee roster + 24-month violation history (CSV/Excel). Turnaround 10-30 business days.</li>
+  <li>Scrape <code>scchildcare.org/provider/{id}/{slug}/</code> using seed IDs from the childcarecenter.us pull + paginated city searches. Extract compliance table to structure per-provider risk scores.</li>
+  <li>Cross-reference with ABC Quality ratings; low-rated providers with recurring violations = highest-intent prospects.</li>
+  <li>Enrich phones/emails via per-record detail-page scrape or commercial enrichment.</li>
+  <li>Expand city coverage beyond top-5 metros: Spartanburg, Florence, Hilton Head, North Charleston, Anderson.</li>
+</ol>
+
+<h2><span class="n">9.</span>All Links</h2>
+<div class="card">
+<h3>Licensing &amp; Rules</h3>
+<ul>
+  <li><a href="https://www.scchildcare.org/">SC Child Care Services</a></li>
+  <li><a href="https://dss.sc.gov/child-care/">DSS Child Care landing</a></li>
+  <li><a href="https://www.scstatehouse.gov/code/t63c013.php">SC Code Title 63 Ch. 13</a></li>
+  <li><a href="https://www.scstatehouse.gov/coderegs/Chapter%20114.pdf">SC Code of Regs Ch. 114 (DSS)</a></li>
+  <li><a href="https://www.scchildcare.org/media/t3yfftje/licensed-centers-regulations.pdf">Licensed Center Regulations PDF</a></li>
+  <li><a href="https://www.scchildcare.org/media/60243/Side-by-Side-Companion-Guide-to-the-2018-Center-Regulations.pdf">Side-by-Side Companion Guide</a></li>
+  <li><a href="https://www.scchildcare.org/media/59009/2018-CCC-regulations-updated.pdf">2018 CCC Regulations (PDF)</a></li>
+  <li><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2966.pdf">Ratios (DSS 2966)</a></li>
+  <li><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2955.pdf">SC Child Care Licensing Law (DSS 2955)</a></li>
+  <li><a href="https://dss.sc.gov/resource-library/forms_brochures/files/2902.pdf">DSS Application 2902</a></li>
+  <li><a href="https://dss.sc.gov/media/dtypqqif/dss-brochure-501.pdf">Issue Brief 501</a></li>
+  <li><a href="https://dss.sc.gov/resource-library/forms_brochures/">DSS forms library</a></li>
+  <li><a href="https://regulations.justia.com/states/south-carolina/chapter-114/article-5/subarticle-1/">Justia — Chapter 114, Article 5</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/SC_Center_June_2018_0.pdf">ACF — SC Centers (2018)</a></li>
+  <li><a href="https://www.scstatehouse.gov/code/t30c004.php">SC FOIA (§ 30-4-10 et seq.)</a></li>
+  <li><a href="https://dss.sc.gov/about/foia/">DSS FOIA process</a></li>
+</ul>
+<h3>Provider search &amp; QRIS</h3>
+<ul>
+  <li><a href="https://www.scchildcare.org/search.aspx">SC Child Care Services provider search</a></li>
+  <li><a href="https://www.scchildcare.org/families/filing-a-complaint/">Filing a Complaint</a></li>
+  <li><a href="https://abcquality.org/families/find-a-provider/">ABC Quality provider directory</a></li>
+  <li><a href="https://abcquality.org/">ABC Quality QRIS</a></li>
+</ul>
+<h3>Sample provider pages + research</h3>
+<ul>
+  <li><a href="https://scchildcare.org/provider/165/sunshine-house-2/">Sunshine House 2</a></li>
+  <li><a href="https://www.scchildcare.org/provider/47701/melanie-pierce-greer/">Melanie Pierce-Greer</a></li>
+  <li><a href="https://www.scchildcare.org/provider/47986/vivian-goldsborough/">Vivian Goldsborough</a></li>
+  <li><a href="https://www.scchildcare.org/provider/48030/alicia-leaks/">Alicia Leaks</a></li>
+  <li><a href="https://www.scchildcare.org/provider/48462/debra-eaddy/">Debra Eaddy</a></li>
+  <li><a href="https://scchildren.org/despite-violations-many-child-care-facilities-stay-in-business/">Children's Trust of SC — 4-year violation report</a></li>
+  <li><a href="https://winnie.com/resources/how-to-look-up-daycare-violations">Winnie — SC walkthrough</a></li>
+</ul>
+</div>
+
+<div class="footer">
+  ComplianceKit research pack &middot; South Carolina data report &middot; 2026-04-18. Internal use — no public distribution.
+</div>
+
+</div>
+</body>
+</html>

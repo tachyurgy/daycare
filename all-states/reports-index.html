@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — 50-State Data & Violations Atlas</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy-deep: #0d0d1a;
+    --navy-dark: #1a1a2e;
+    --navy-mid: #22223a;
+    --navy-light: #2d2d4a;
+    --accent-cyan: #00d4aa;
+    --accent-blue: #4a6cf7;
+    --accent-gold: #f7b731;
+    --red-crit: #ff4757;
+    --orange-warn: #ffa502;
+    --green-ok: #2ed573;
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b8;
+    --text-muted: #6a6a85;
+    --border-subtle: rgba(255,255,255,0.08);
+    --border-medium: rgba(255,255,255,0.14);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: var(--navy-deep);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 48px 32px; }
+  header.page { border-bottom: 1px solid var(--border-subtle); padding-bottom: 24px; margin-bottom: 36px; }
+  h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  h1 .cyan { color: var(--accent-cyan); }
+  .subtitle { color: var(--text-secondary); font-size: 1.05rem; }
+  .date { color: var(--text-muted); font-size: 0.9rem; margin-top: 6px; }
+
+  h2 { font-size: 1.4rem; font-weight: 700; margin: 42px 0 14px; letter-spacing: -0.01em; color: var(--text-primary); }
+  h2::before { content: "▸ "; color: var(--accent-cyan); }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; color: var(--text-primary); }
+  p { color: var(--text-secondary); margin-bottom: 12px; }
+  p.lede { font-size: 1.05rem; color: var(--text-primary); }
+  a { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px dotted rgba(0,212,170,0.35); }
+  a:hover { border-bottom-style: solid; }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin: 20px 0 8px;
+  }
+  .stat {
+    background: var(--navy-dark); border: 1px solid var(--border-subtle); border-radius: 10px;
+    padding: 18px 16px;
+  }
+  .stat .num { font-size: 1.8rem; font-weight: 800; color: var(--accent-cyan); line-height: 1; }
+  .stat .label { color: var(--text-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 6px; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 14px 0 8px;
+    font-size: 0.92rem; background: var(--navy-dark); border: 1px solid var(--border-subtle); border-radius: 8px; overflow: hidden;
+  }
+  thead th {
+    background: var(--navy-mid); color: var(--text-primary); text-align: left; padding: 12px 14px;
+    font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border-medium);
+  }
+  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); vertical-align: top; color: var(--text-secondary); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody td.state { color: var(--text-primary); font-weight: 600; }
+  tbody td.rank { color: var(--text-muted); font-variant-numeric: tabular-nums; width: 48px; }
+  tbody td.num { font-variant-numeric: tabular-nums; text-align: right; width: 88px; }
+
+  .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid;
+  }
+  .pill.gold { color: var(--accent-gold); border-color: rgba(247,183,49,0.4); background: rgba(247,183,49,0.08); }
+  .pill.silver { color: #b8c2cc; border-color: rgba(184,194,204,0.35); background: rgba(184,194,204,0.06); }
+  .pill.bronze { color: #c88b6a; border-color: rgba(200,139,106,0.35); background: rgba(200,139,106,0.06); }
+  .pill.api { color: var(--green-ok); border-color: rgba(46,213,115,0.35); background: rgba(46,213,115,0.08); }
+  .pill.scrape { color: var(--accent-blue); border-color: rgba(74,108,247,0.35); background: rgba(74,108,247,0.08); }
+  .pill.foia { color: var(--orange-warn); border-color: rgba(255,165,2,0.35); background: rgba(255,165,2,0.08); }
+  .pill.dark { color: var(--red-crit); border-color: rgba(255,71,87,0.35); background: rgba(255,71,87,0.08); }
+
+  ul { margin-left: 22px; color: var(--text-secondary); }
+  ul li { margin-bottom: 6px; }
+  code { font-family: 'JetBrains Mono', 'Menlo', monospace; background: var(--navy-mid); color: var(--accent-cyan); padding: 1px 6px; border-radius: 4px; font-size: 0.85em; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 10px 0 12px; align-items: center; }
+  .legend span.k { color: var(--text-muted); font-size: 0.82rem; }
+
+  .notebox {
+    background: var(--navy-dark); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent-cyan);
+    padding: 14px 18px; border-radius: 6px; margin: 14px 0;
+  }
+  .notebox.warn { border-left-color: var(--orange-warn); }
+  .notebox.crit { border-left-color: var(--red-crit); }
+
+  footer.page { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.85rem; }
+  .small { font-size: 0.82rem; color: var(--text-muted); }
+  @media (max-width: 760px) {
+    .wrap { padding: 28px 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <h1>ComplianceKit — <span class="cyan">50-State Data &amp; Violations Atlas</span></h1>
+  <div class="subtitle">Per-state licensed-facility contacts, compliance framework, and violation/inspection-failure data access strategy.</div>
+  <div class="date">Compiled 2026-04-18 · 50 of 50 states · ~120,708 real provider rows · 50 data reports · 50 violations strategies</div>
+</header>
+
+<section>
+  <div class="stats">
+    <div class="stat"><div class="num">50</div><div class="label">States covered</div></div>
+    <div class="stat"><div class="num">120,708</div><div class="label">Licensed provider rows</div></div>
+    <div class="stat"><div class="num">47</div><div class="label">Bulk data sources mapped</div></div>
+    <div class="stat"><div class="num">150+</div><div class="label">Per-state research files</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>What this atlas contains</h2>
+  <p class="lede">For every U.S. state, four artifacts:</p>
+  <ul>
+    <li><strong>compliance.md</strong> — licensing authority, primary reg cite, facility types, forms, ratios, records, inspection + renewal cadence, state-specific flags.</li>
+    <li><strong>SOURCES.md</strong> — exact URL, format, row count, extraction method, and limits for the provider contact list (<code>{state}_leads.csv</code> at project root).</li>
+    <li><strong>violations.md</strong> — where recent violations/deficiencies/failed inspections are published, format, freshness, scraping/access strategy, FOIA fallback.</li>
+    <li><strong>data_report.html</strong> — self-contained stakeholder-ready report linking every source. One per state, listed below.</li>
+  </ul>
+  <div class="notebox">
+    <strong>No fabrication.</strong> Every contact row was pulled from authoritative public sources. States where bulk data was unavailable document the authoritative search portal and use childcarecenter.us as a fallback for major-city samples (marked Bronze below). Every limitation is disclosed in the per-state SOURCES.md.
+  </div>
+</section>
+
+<section>
+  <h2>Per-state reports (ranked by 2024 population)</h2>
+  <p>Click any state to open its self-contained HTML data report.</p>
+  <div class="legend">
+    <span class="k">Contact tier:</span>
+    <span class="pill gold">Gold — bulk state dataset w/ phones</span>
+    <span class="pill silver">Silver — bulk w/ fewer fields</span>
+    <span class="pill bronze">Bronze — portal-only, aggregator fallback</span>
+  </div>
+  <div class="legend">
+    <span class="k">Violations access:</span>
+    <span class="pill api">API / Socrata / ArcGIS</span>
+    <span class="pill scrape">Scrapable (ASP.NET / HTML)</span>
+    <span class="pill foia">Salesforce / Playwright / FOIA</span>
+    <span class="pill dark">Records-request only</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>State</th>
+        <th>Licensing Agency</th>
+        <th>Reg Cite</th>
+        <th class="num">Leads</th>
+        <th>Contact</th>
+        <th>Violations Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="rank">1</td><td class="state"><a href="california/data_report.html">California</a></td><td>CDSS CCLD</td><td>22 CCR</td><td class="num">9,401</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">PDFs per facility + CPRA</span></td></tr>
+      <tr><td class="rank">2</td><td class="state"><a href="texas/data_report.html">Texas</a></td><td>HHSC CCR</td><td>26 TAC Ch. 744–747</td><td class="num">9,685</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Socrata + 14-day publish</span></td></tr>
+      <tr><td class="rank">3</td><td class="state"><a href="florida/data_report.html">Florida</a></td><td>DCF Child Care</td><td>F.A.C. 65C-22</td><td class="num">7,647</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">Per-facility + Sunshine Law</span></td></tr>
+      <tr><td class="rank">4</td><td class="state"><a href="new_york/data_report.html">New York</a></td><td>OCFS</td><td>18 NYCRR Part 418</td><td class="num">16,770</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">OCFS CCFS profile pages; NYC DOHMH Socrata overlay</span></td></tr>
+      <tr><td class="rank">5</td><td class="state"><a href="pennsylvania/data_report.html">Pennsylvania</a></td><td>DHS / OCDEL</td><td>55 Pa. Code Ch. 3270</td><td class="num">7,473</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">COMPASS + Quarterly PDF</span></td></tr>
+      <tr><td class="rank">6</td><td class="state"><a href="illinois/data_report.html">Illinois</a></td><td>DCFS</td><td>89 IAC 407</td><td class="num">8,586</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Sunshine CSV export</span></td></tr>
+      <tr><td class="rank">7</td><td class="state"><a href="ohio/data_report.html">Ohio</a></td><td>ODJFS / DCY</td><td>OAC 5101:2-12</td><td class="num">8,116</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">Deterministic PDF URLs</span></td></tr>
+      <tr><td class="rank">8</td><td class="state"><a href="georgia/data_report.html">Georgia</a></td><td>DECAL</td><td>Rules 591-1-1</td><td class="num">7,914</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">DECAL Enforcement CSV</span></td></tr>
+      <tr><td class="rank">9</td><td class="state"><a href="north_carolina/data_report.html">North Carolina</a></td><td>NCDHHS DCDEE</td><td>10A NCAC 09</td><td class="num">1,152</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">Telerik + records request</span></td></tr>
+      <tr><td class="rank">10</td><td class="state"><a href="michigan/data_report.html">Michigan</a></td><td>MiLEAP / LARA</td><td>R 400.8101–8182</td><td class="num">7,908</td><td><span class="pill gold">Gold</span></td><td><span class="pill foia">CCHIRP (Salesforce) + ASP.NET archive</span></td></tr>
+      <tr><td class="rank">11</td><td class="state"><a href="new_jersey/data_report.html">New Jersey</a></td><td>DCF Office of Licensing</td><td>N.J.A.C. 3A:52</td><td class="num">4,093</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">NJCCIS JSON + PDF</span></td></tr>
+      <tr><td class="rank">12</td><td class="state"><a href="virginia/data_report.html">Virginia</a></td><td>VDOE Early Childhood</td><td>8VAC20-780, -821</td><td class="num">2,856</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">Legacy CGI deterministic URL</span></td></tr>
+      <tr><td class="rank">13</td><td class="state"><a href="washington/data_report.html">Washington</a></td><td>DCYF</td><td>WAC 110-300</td><td class="num">2,506</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Apex Remoting JSON</span></td></tr>
+      <tr><td class="rank">14</td><td class="state"><a href="arizona/data_report.html">Arizona</a></td><td>ADHS BCCL</td><td>9 A.A.C. 5</td><td class="num">2,536</td><td><span class="pill gold">Gold</span></td><td><span class="pill foia">AZ Care Check Salesforce LWC</span></td></tr>
+      <tr><td class="rank">15</td><td class="state"><a href="tennessee/data_report.html">Tennessee</a></td><td>TDHS</td><td>Rule 1240-04-01</td><td class="num">4,178</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">ServiceNow + SWORPS</span></td></tr>
+      <tr><td class="rank">16</td><td class="state"><a href="massachusetts/data_report.html">Massachusetts</a></td><td>EEC</td><td>606 CMR 7</td><td class="num">1,000</td><td><span class="pill gold">Gold</span></td><td><span class="pill foia">LEAD Salesforce Exp. Cloud</span></td></tr>
+      <tr><td class="rank">17</td><td class="state"><a href="indiana/data_report.html">Indiana</a></td><td>FSSA / OECOSL</td><td>470 IAC 3-4.7</td><td class="num">752</td><td><span class="pill silver">Silver</span></td><td><span class="pill scrape">Carefinder ASP.NET + APRA</span></td></tr>
+      <tr><td class="rank">18</td><td class="state"><a href="maryland/data_report.html">Maryland</a></td><td>MSDE OCC</td><td>COMAR 13A.16</td><td class="num">1,000</td><td><span class="pill silver">Silver</span></td><td><span class="pill scrape">CheckCCMD (Jan 2011+)</span></td></tr>
+      <tr><td class="rank">19</td><td class="state"><a href="missouri/data_report.html">Missouri</a></td><td>DESE SCCR</td><td>5 CSR 25-500</td><td class="num">1,000</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill dark">Sunshine Law (legacy blocks POST)</span></td></tr>
+      <tr><td class="rank">20</td><td class="state"><a href="wisconsin/data_report.html">Wisconsin</a></td><td>DCF BCCR</td><td>DCF 250 / 251</td><td class="num">1,000</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Angular JSON + daily XLSX</span></td></tr>
+      <tr><td class="rank">21</td><td class="state"><a href="colorado/data_report.html">Colorado</a></td><td>CDEC</td><td>12 CCR 2509-8-7.702</td><td class="num">1,000</td><td><span class="pill silver">Silver</span></td><td><span class="pill foia">Colorado Shines Salesforce</span></td></tr>
+      <tr><td class="rank">22</td><td class="state"><a href="minnesota/data_report.html">Minnesota</a></td><td>MN DHS Licensing</td><td>MN Rule 9503</td><td class="num">1,000</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">DHS Lookup + Data Practices Act</span></td></tr>
+      <tr><td class="rank">23</td><td class="state"><a href="south_carolina/data_report.html">South Carolina</a></td><td>SC DSS CCL</td><td>SC DSS regs</td><td class="num">120</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">scchildcare.org per-provider</span></td></tr>
+      <tr><td class="rank">24</td><td class="state"><a href="alabama/data_report.html">Alabama</a></td><td>AL DHR CCS</td><td>Admin Code 660-5</td><td class="num">100</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill dark">AL Open Records Act (30-60 days)</span></td></tr>
+      <tr><td class="rank">25</td><td class="state"><a href="louisiana/data_report.html">Louisiana</a></td><td>LDE Licensing</td><td>LAC 28:CLXI</td><td class="num">93</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">louisianaschools.com inspections</span></td></tr>
+      <tr><td class="rank">26</td><td class="state"><a href="kentucky/data_report.html">Kentucky</a></td><td>CHFS DCC</td><td>922 KAR 2:120</td><td class="num">68</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">kynect Salesforce Lightning</span></td></tr>
+      <tr><td class="rank">27</td><td class="state"><a href="oregon/data_report.html">Oregon</a></td><td>DELC / ELD</td><td>OAR 414-305</td><td class="num">98</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">Find Child Care OR (5-yr valid findings)</span></td></tr>
+      <tr><td class="rank">28</td><td class="state"><a href="oklahoma/data_report.html">Oklahoma</a></td><td>OKDHS CCS</td><td>OAC 340:110</td><td class="num">100</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">License-ID sweep + Joshua's List</span></td></tr>
+      <tr><td class="rank">29</td><td class="state"><a href="connecticut/data_report.html">Connecticut</a></td><td>CT OEC</td><td>CGS 19a-79</td><td class="num">77</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">eLicense ASP.NET PDFs</span></td></tr>
+      <tr><td class="rank">30</td><td class="state"><a href="utah/data_report.html">Utah</a></td><td>DHHS DLBC</td><td>R381-100</td><td class="num">100</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">ccl.utah.gov checklist path</span></td></tr>
+      <tr><td class="rank">31</td><td class="state"><a href="iowa/data_report.html">Iowa</a></td><td>IA HHS BCC</td><td>IAC 441-109</td><td class="num">140</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">Titan ComplianceReport ASP.NET</span></td></tr>
+      <tr><td class="rank">32</td><td class="state"><a href="nevada/data_report.html">Nevada</a></td><td>DSS CCL</td><td>NRS/NAC 432A</td><td class="num">47</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">Aithent ALiS (post-2024 reorg)</span></td></tr>
+      <tr><td class="rank">33</td><td class="state"><a href="arkansas/data_report.html">Arkansas</a></td><td>DHS-DCCECE</td><td>Rule 016.22.20-005</td><td class="num">120</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill dark">DHS NextRequest FOIA (3-day SLA)</span></td></tr>
+      <tr><td class="rank">34</td><td class="state"><a href="mississippi/data_report.html">Mississippi</a></td><td>MSDH CCF Licensure</td><td>15 Miss. Admin. Code 15-11-55</td><td class="num">1,414</td><td><span class="pill gold">Gold</span></td><td><span class="pill scrape">MSDH provider search + PRA</span></td></tr>
+      <tr><td class="rank">35</td><td class="state"><a href="kansas/data_report.html">Kansas</a></td><td>KDHE (→ OEC 7/1/26)</td><td>K.A.R. 28-4-428</td><td class="num">770</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">KORA (OIDS captcha-locked)</span></td></tr>
+      <tr><td class="rank">36</td><td class="state"><a href="new_mexico/data_report.html">New Mexico</a></td><td>ECECD Licensing</td><td>8.16.2 NMAC</td><td class="num">770</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">ECECD PDFs (3-yr) + IPRA</span></td></tr>
+      <tr><td class="rank">37</td><td class="state"><a href="nebraska/data_report.html">Nebraska</a></td><td>NE DHHS CCL</td><td>Title 391 NAC Ch. 3</td><td class="num">2,248</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Monthly neg-action PDFs (predictable URL)</span></td></tr>
+      <tr><td class="rank">38</td><td class="state"><a href="idaho/data_report.html">Idaho</a></td><td>ID HW CCL</td><td>IDAPA 16.06.02</td><td class="num">2,045</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">idahochildcarecheck.org HTML</span></td></tr>
+      <tr><td class="rank">39</td><td class="state"><a href="west_virginia/data_report.html">West Virginia</a></td><td>WVDHHR BCF</td><td>78 CSR 1</td><td class="num">1,255</td><td><span class="pill silver">Silver</span></td><td><span class="pill scrape">Classic ASP get_details.asp</span></td></tr>
+      <tr><td class="rank">40</td><td class="state"><a href="hawaii/data_report.html">Hawaii</a></td><td>DHS / PATCH</td><td>HRS 346-151</td><td class="num">469</td><td><span class="pill silver">Silver</span></td><td><span class="pill dark">UIPA request only (no online data since 2016)</span></td></tr>
+      <tr><td class="rank">41</td><td class="state"><a href="new_hampshire/data_report.html">New Hampshire</a></td><td>NH DHHS CCLU</td><td>He-C 4002</td><td class="num">114</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">Salesforce Exp. Cloud + RSA 91-A</span></td></tr>
+      <tr><td class="rank">42</td><td class="state"><a href="maine/data_report.html">Maine</a></td><td>ME DHHS OCFS</td><td>10-148 CMR Ch. 32</td><td class="num">96</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">ASP.NET WebForms + FOAA</span></td></tr>
+      <tr><td class="rank">43</td><td class="state"><a href="montana/data_report.html">Montana</a></td><td>MT DPHHS CCL</td><td>ARM 37.95</td><td class="num">928</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">SansWrite JSON API</span></td></tr>
+      <tr><td class="rank">44</td><td class="state"><a href="rhode_island/data_report.html">Rhode Island</a></td><td>RI DHS / DCYF</td><td>DHS/DCYF CCL regs</td><td class="num">137</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">RISES Salesforce LWC + APRA</span></td></tr>
+      <tr><td class="rank">45</td><td class="state"><a href="delaware/data_report.html">Delaware</a></td><td>DE DOE OCCL</td><td>14 DE Admin 101</td><td class="num">1,250</td><td><span class="pill gold">Gold</span></td><td><span class="pill api">Socrata: wb83-pkcv + pnbd-85r6</span></td></tr>
+      <tr><td class="rank">46</td><td class="state"><a href="south_dakota/data_report.html">South Dakota</a></td><td>SD DSS OLA</td><td>ARSD 67:42</td><td class="num">153</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">OLA Constituent Portal + SDCL 1-27</span></td></tr>
+      <tr><td class="rank">47</td><td class="state"><a href="north_dakota/data_report.html">North Dakota</a></td><td>ND DHHS EC Licensing</td><td>NDCC 50-11.1</td><td class="num">131</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">CCL System + NDCC 44-04</span></td></tr>
+      <tr><td class="rank">48</td><td class="state"><a href="alaska/data_report.html">Alaska</a></td><td>DOH/DPA CCPO</td><td>7 AAC 57</td><td class="num">103</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill api">Anchorage Socrata abmr-hyh6 (rest = scrape)</span></td></tr>
+      <tr><td class="rank">49</td><td class="state"><a href="vermont/data_report.html">Vermont</a></td><td>DCF CDD</td><td>CVR 13-171-004/-005</td><td class="num">87</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill foia">BFIS session-protected (5-yr CCDBG post)</span></td></tr>
+      <tr><td class="rank">50</td><td class="state"><a href="wyoming/data_report.html">Wyoming</a></td><td>WY DFS</td><td>W.S. 14-4-101</td><td class="num">102</td><td><span class="pill bronze">Bronze</span></td><td><span class="pill scrape">Find Child Care WY (2019+ substantiated)</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Violation-data access patterns across the country</h2>
+  <p>Only two states expose a true Socrata/JSON API for per-facility inspection data: <a href="texas/data_report.html">Texas</a> and the Municipality of Anchorage (inside <a href="alaska/data_report.html">Alaska</a>). The rest fall into four access tiers.</p>
+
+  <h3>Tier 1 — Bulk API / Socrata / ArcGIS (minimal engineering)</h3>
+  <ul>
+    <li><a href="texas/data_report.html">Texas</a> — HHSC publishes every deficiency within 14 days + <code>data.texas.gov</code> CCL operations dataset.</li>
+    <li><a href="delaware/data_report.html">Delaware</a> — <code>data.delaware.gov</code> exposes <code>wb83-pkcv</code> (~12.4k compliance review rows) + <code>pnbd-85r6</code> (~1.9k complaint reviews), joinable on license_number.</li>
+    <li><a href="montana/data_report.html">Montana</a> — SansWrite JSON API reverse-engineered; full state coverage.</li>
+    <li><a href="georgia/data_report.html">Georgia</a> — DECAL Enforcement Actions page has a CSV export.</li>
+    <li><a href="illinois/data_report.html">Illinois</a> — DCFS Sunshine portal has a CSV export button.</li>
+    <li><a href="nebraska/data_report.html">Nebraska</a> — monthly negative-action PDFs at predictable URL pattern <code>{MM}-{YY}ccnegactions.pdf</code>.</li>
+    <li><a href="idaho/data_report.html">Idaho</a> — <code>idahochildcarecheck.org/provider/{id}</code> HTML, no auth/captcha.</li>
+    <li><a href="wisconsin/data_report.html">Wisconsin</a> — Angular JSON API + daily-refresh XLSX.</li>
+    <li><a href="washington/data_report.html">Washington</a> — DCYF Apex Remoting JSON endpoint.</li>
+    <li><a href="new_jersey/data_report.html">New Jersey</a> — NJCCIS JSON backing API for per-provider detail pages.</li>
+    <li>Anchorage, AK — Socrata <code>abmr-hyh6</code> (2008-present, full inspection dataset).</li>
+  </ul>
+
+  <h3>Tier 2 — Deterministic URL scrape (ASP.NET/legacy CGI)</h3>
+  <ul>
+    <li><a href="ohio/data_report.html">Ohio</a> — deterministic PDF URL pattern <code>/pdf/{programId}_{YYYY-MM-DD}_{TYPE}.pdf</code>.</li>
+    <li><a href="virginia/data_report.html">Virginia</a> — legacy <code>dss.virginia.gov/facility/search/cc2.cgi?ID={fac}&amp;Inspection={insp}</code>.</li>
+    <li><a href="west_virginia/data_report.html">West Virginia</a> — classic ASP <code>get_details.asp?q={provider_number}</code>.</li>
+    <li><a href="utah/data_report.html">Utah</a> — <code>ccl.utah.gov/ccl/public/checklist/{ID}</code>.</li>
+    <li><a href="louisiana/data_report.html">Louisiana</a> — <code>louisianaschools.com/schools/{FACILITY_CODE}/Inspections</code>.</li>
+    <li><a href="oklahoma/data_report.html">Oklahoma</a> — sequential license-ID sweep on OKDHS Locator.</li>
+    <li><a href="maine/data_report.html">Maine</a> — ASP.NET WebForms with ViewState on <code>search.childcarechoices.me</code>.</li>
+    <li><a href="iowa/data_report.html">Iowa</a> — Titan ComplianceReport ASP.NET.</li>
+    <li><a href="connecticut/data_report.html">Connecticut</a> — eLicense ASP.NET with PDF <code>DocumentIdnt</code> attachments.</li>
+    <li><a href="indiana/data_report.html">Indiana</a> — FSSA Carefinder ASP.NET with viewstate.</li>
+    <li><a href="maryland/data_report.html">Maryland</a> — CheckCCMD dynamic PDF + <code>ProviderInformation.aspx?ProvNum=</code>.</li>
+    <li><a href="south_carolina/data_report.html">South Carolina</a> — <code>scchildcare.org/provider/{id}/{slug}/</code>.</li>
+    <li><a href="oregon/data_report.html">Oregon</a> — Find Child Care OR per-provider + CCLD-0093 Contact Report PDFs.</li>
+    <li><a href="minnesota/data_report.html">Minnesota</a> — DHS Licensing Information Lookup per-facility.</li>
+    <li><a href="mississippi/data_report.html">Mississippi</a> — MSDH provider search.</li>
+    <li><a href="new_york/data_report.html">New York</a> — OCFS CCFS profile pages + NYC DOHMH Socrata.</li>
+    <li><a href="pennsylvania/data_report.html">Pennsylvania</a> — COMPASS provider search + DHS Quarterly Licensing PDFs.</li>
+    <li><a href="wyoming/data_report.html">Wyoming</a> — Find Child Care WY (2019+ substantiated complaints only).</li>
+    <li><a href="tennessee/data_report.html">Tennessee</a> — ServiceNow CSP + SWORPS.</li>
+    <li><a href="new_mexico/data_report.html">New Mexico</a> — ECECD inspection survey PDFs (3-yr window).</li>
+  </ul>
+
+  <h3>Tier 3 — Salesforce / modern SPA (Playwright required)</h3>
+  <ul>
+    <li><a href="arizona/data_report.html">Arizona</a> — AZ Care Check Lightning (daily refresh, primary-source verified).</li>
+    <li><a href="michigan/data_report.html">Michigan</a> — CCHIRP Salesforce + 5-yr rolling disciplinary HTML list.</li>
+    <li><a href="colorado/data_report.html">Colorado</a> — Colorado Shines detail pages.</li>
+    <li><a href="massachusetts/data_report.html">Massachusetts</a> — EEC LEAD Salesforce Exp. Cloud.</li>
+    <li><a href="kentucky/data_report.html">Kentucky</a> — kynect Provider Details Salesforce Lightning.</li>
+    <li><a href="new_hampshire/data_report.html">New Hampshire</a> — NH Child Care Search Salesforce.</li>
+    <li><a href="rhode_island/data_report.html">Rhode Island</a> — RISES Salesforce LWC.</li>
+    <li><a href="arkansas/data_report.html">Arkansas</a> — DCCECE eLicensing Salesforce (returns 403 to non-JS).</li>
+    <li><a href="vermont/data_report.html">Vermont</a> — BFIS session-protected app.</li>
+    <li><a href="north_dakota/data_report.html">North Dakota</a> — ND DHHS CCL System (2023 launch).</li>
+    <li><a href="south_dakota/data_report.html">South Dakota</a> — SD OLA Constituent Portal.</li>
+    <li><a href="nevada/data_report.html">Nevada</a> — Aithent ALiS portal (post-2024 reorg).</li>
+    <li><a href="kansas/data_report.html">Kansas</a> — KDHE OIDS (captcha-locked).</li>
+    <li><a href="north_carolina/data_report.html">North Carolina</a> — DCDEE Telerik-based search.</li>
+  </ul>
+
+  <h3>Tier 4 — Records request only</h3>
+  <ul>
+    <li><a href="hawaii/data_report.html">Hawaii</a> — DHS BESSD has not posted serious-incident data online since 2016; UIPA request (HRS Ch. 92F) is the only path.</li>
+    <li><a href="alabama/data_report.html">Alabama</a> — deficiency reports posted at the facility, not online; AL Open Records Act 30-60 day response.</li>
+    <li><a href="missouri/data_report.html">Missouri</a> — DHSS legacy app blocks POST; Sunshine Law request is the fastest path.</li>
+    <li><a href="florida/data_report.html">Florida</a> — CARES is per-facility only; FL Sunshine Law (F.S. Ch. 119) is unusually liberal and is the strongest records-request lever in the country.</li>
+    <li><a href="california/data_report.html">California</a> — CCLD Facility Search has PDFs April 2015+; LIS bulk = CPRA (months-long).</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Strategy: finding daycares with recent violations or failed inspections</h2>
+  <p class="lede">The GTM play is an automated "recently cited" signal that feeds sales triggers. Every state has a path; the engineering cost varies from a nightly cron job (Tier 1) to a quarterly records request (Tier 4).</p>
+
+  <h3>Recommended build order (by ROI)</h3>
+  <ol style="margin-left: 22px; color: var(--text-secondary);">
+    <li style="margin-bottom: 8px;"><strong>Phase 1 — API states (weeks 1-3).</strong> Build connectors for TX, DE, MT, GA, IL, WI, WA, NJ, NE, ID + Anchorage, AK. These yield the richest structured violation data for the lowest engineering cost. Daily cron pulling any facility with a new violation logged in the prior 7 days feeds the CRM immediately.</li>
+    <li style="margin-bottom: 8px;"><strong>Phase 2 — Deterministic URL scrapes (weeks 4-8).</strong> OH, VA, WV, UT, LA, OK, ME, IA, CT, IN, MD, SC, OR, MN, MS, NY, PA, WY, TN, NM. Same cadence + daily, but each state is ~200 lines of Python/Playwright. Adds ~20 states of coverage.</li>
+    <li style="margin-bottom: 8px;"><strong>Phase 3 — Salesforce SPAs (weeks 8-14).</strong> AZ, MI, CO, MA, KY, NH, RI, AR, VT, ND, SD, NV, KS, NC. Each needs Playwright with session cookies, CAPTCHA/rate-limit handling. Run weekly not daily.</li>
+    <li><strong>Phase 4 — FOIA automation (ongoing).</strong> HI, AL, MO, FL, CA. Template requests per state, track response SLA (AR 3 business days, FL rolling, AL 30-60 days, HI weeks). FL's Sunshine Law is the single highest-leverage records regime in the country; CA's CPRA is worth the wait for LIS extract.</li>
+  </ol>
+
+  <h3>Signals worth tracking on each facility</h3>
+  <ul>
+    <li><strong>Recent violation</strong> — any non-compliance finding in last 30/60/90 days. Highest-intent signal.</li>
+    <li><strong>Repeat violation</strong> — same regulation cited twice in 12 months. Indicates systemic issue; high conversion.</li>
+    <li><strong>Enforcement action</strong> — probationary status, consent decree, civil penalty, license suspension/revocation pending. Highest urgency.</li>
+    <li><strong>Failed reinspection</strong> — CAP not accepted. Indicates operator is struggling with paperwork — ICP for ComplianceKit.</li>
+    <li><strong>New license</strong> — first 90 days is onboarding-pain window; convert before they buy a competitor.</li>
+    <li><strong>Renewal-due</strong> — 90/60/30 days to license expiration. Leverage-with-urgency.</li>
+    <li><strong>Complaint investigation pending</strong> — public-record signal (some states publish) that operator is under pressure.</li>
+    <li><strong>Star-rating drop</strong> — for QRIS states (TN, KY, GA, OK, WI, CO, TX Rising Star, etc.) a rating downgrade precedes a subsidy hit.</li>
+  </ul>
+
+  <h3>Journalism-derived "catalyst markets"</h3>
+  <ul>
+    <li><a href="rhode_island/data_report.html">Rhode Island</a> — Aug 2025 Auditor General audit found H&amp;S violations at <strong>all 50 audited facilities</strong>, 60% in significant non-compliance. DHS has pledged to visit every provider. Urgency is real.</li>
+    <li><a href="maine/data_report.html">Maine</a> — Maine Monitor + Bangor Daily News: 16,000+ citations since 2021, 1,481 facilities, zero revocations, zero fines. Operator reputation pressure is mounting.</li>
+    <li><a href="massachusetts/data_report.html">Massachusetts</a> — 2024 state audit + Boston 25 "25 Investigates" series documented systemic oversight gaps.</li>
+    <li><a href="vermont/data_report.html">Vermont</a> — March 2026 State Auditor report flagged serious vs. standard classification inconsistencies. Active policy lens.</li>
+    <li><a href="new_mexico/data_report.html">New Mexico</a> — Universal Child Care rollout (Oct 2025) + new Wonderschool portal (Feb 2026) = immediate paperwork burden.</li>
+    <li><a href="kansas/data_report.html">Kansas</a> — KDHE → Office of Early Childhood transition July 1 2026 = URL churn + regulatory confusion.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Known limits &amp; next steps</h2>
+  <ul>
+    <li><strong>Email/website enrichment</strong> — most Gold-tier states publish phones but not emails. Run Hunter/Apollo/Clearout against <code>business_name + phone + state</code> to fill ~80% of the email column across the 120k rows.</li>
+    <li><strong>Bronze-tier scale-up</strong> — 22 states have portal-only data and the provided CSVs are samples from major cities. Upgrade to full coverage requires Playwright harness (Tier 3 list) or records request (Tier 4).</li>
+    <li><strong>CA LIS extract</strong> — file CPRA request now; typical response 3-6 months. Would yield every CA facility's inspection history in one shipment.</li>
+    <li><strong>FL bulk download</strong> — test <code>myflorida.com</code> Sunshine Law channel; the state's liberal interpretation has previously yielded full databases.</li>
+    <li><strong>NC Telerik automation</strong> — Playwright scripted form submission is the fastest path to 5,000+ NC facilities with full data (current CSV only has 1,152 from aggregator).</li>
+    <li><strong>Data freshness</strong> — everything stamped 2026-04-18. Rebuild quarterly for provider CSVs; daily for Tier 1 violation feeds.</li>
+  </ul>
+</section>
+
+<footer class="page">
+  Compiled 2026-04-18 · No data fabricated · Every source URL documented per state in <code>all-states/{state}/SOURCES.md</code> and <code>violations.md</code> · Leads CSVs live at project root (gitignored) · This index is the top of the tree — open any state row for the full stakeholder-ready report.
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Hawaii Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --bg-2: #151528;
+    --bg-3: #1d1d33;
+    --fg: #f0f0f5;
+    --fg-dim: #b0b0c0;
+    --accent: #00d4aa;
+    --accent-dim: #008c70;
+    --border: #2a2a44;
+    --warn: #ffb86c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 32px 80px; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 48px;
+    margin: 0 0 12px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .meta-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--fg-dim);
+  }
+  .meta-row strong { color: var(--fg); font-weight: 600; }
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  h3 { font-size: 16px; margin: 20px 0 8px; font-weight: 600; color: var(--accent); }
+  p { margin: 0 0 12px; }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-dim);
+  }
+  a:hover { color: var(--fg); border-bottom-color: var(--fg); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 20px;
+    font-size: 14px;
+    background: var(--bg-2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg-3);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 22px; margin: 10px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout {
+    background: var(--bg-2);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+  .callout.warn { border-left-color: var(--warn); }
+  .rank-badge {
+    display: inline-block;
+    background: var(--bg-3);
+    border: 1px solid var(--accent-dim);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--bg-3);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    color: var(--fg-dim);
+    margin-right: 6px;
+  }
+  code {
+    background: var(--bg-3);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+  }
+  .link-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    font-size: 13px;
+  }
+  @media (max-width: 700px) {
+    .link-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 36px; }
+    .wrap { padding: 24px 18px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Hawaii</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Wave 8 (Island / low-density market)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>hawaii</code></span>
+    <span class="rank-badge">TIER: SPECIAL-CASE</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Hawaii Department of Human Services (DHS)</strong>, Benefit, Employment &amp; Support Services Division (BESSD),
+  Child Care Program — Child Care Licensing Units. DHS contracts with
+  <a href="https://www.patchhawaii.org/">PATCH (People Attentive to Children) Hawaii</a> as the statewide Child Care Resource &amp; Referral agency and administers
+  the DHS Early Childhood Registry through PATCH.
+</p>
+<ul>
+  <li>Oahu Unit 1 (Downtown Honolulu): (808) 587-5266</li>
+  <li>Oahu Unit 2 (Waipahu / West Oahu): (808) 675-0470</li>
+  <li>East Hawaii (Hilo): (808) 981-7290</li>
+  <li>West Hawaii, Maui, Kauai units each report to BESSD</li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>HAR 17-891.2</strong> — Registration of Family Child Care Homes</li>
+  <li><strong>HAR 17-892.1</strong> — Group Child Care Centers &amp; Group Child Care Homes — <a href="https://humanservices.hawaii.gov/bessd/files/2013/01/HAR_17-892.1-Group-Child-Care-Center-and-Group-Child-Care-Home-Rules.pdf">full text PDF</a></li>
+  <li><strong>HAR 17-895.1</strong> — Infant &amp; Toddler Child Care Centers — <a href="https://humanservices.hawaii.gov/wp-content/uploads/2013/11/HAR_17-895-Infant-and-Toddler-Child-Care-Center-Rules.pdf">full text PDF</a></li>
+  <li><strong>Enabling statute:</strong> <a href="https://www.capitol.hawaii.gov/hrscurrent/Vol07_Ch0346-0398/HRS0346/">HRS Chapter 346, Part V (§346-151 et seq.)</a></li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead>
+    <tr><th>Attribute</th><th>Value / Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td>469 (filtered to type starting with "Licensed")</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://opendata.hawaii.gov/dataset/preschools">Hawaii Statewide GIS — Preschools (ArcGIS Hub)</a></td></tr>
+    <tr><td>Direct CSV endpoint</td><td><code><a href="https://prod-histategis.opendata.arcgis.com/api/download/v1/items/9c29d1a0e812454980ff133cac944611/csv?layers=6">prod-histategis.opendata.arcgis.com/api/download/v1/items/9c29d1a0e812454980ff133cac944611/csv?layers=6</a></code></td></tr>
+    <tr><td>Dataset freshness</td><td>2021-12 (PATCH Hawaii attribution) — ~4 years stale</td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state (HI)</td></tr>
+    <tr><td>Phone numbers</td><td><span class="pill">NONE</span> — source CSV does not include phones</td></tr>
+    <tr><td>Emails</td><td><span class="pill">NONE</span> — enrichment required</td></tr>
+    <tr><td>Family Child Care Homes</td><td>Under-represented; ~650 FCCHs not in file</td></tr>
+    <tr><td>Live portal (not bulk-exportable)</td><td><a href="https://childcareprovidersearch.dhs.hawaii.gov/">childcareprovidersearch.dhs.hawaii.gov</a></td></tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://humanservices.hawaii.gov/bessd/child-care-program/child-care-licensing/">DHS Child Care Licensing landing</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/hawaii/Haw-Code-R-SS-17-892-1-18">HAR 17-892.1-18 (Ratios) via Cornell LII</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/hawaii">National Database of Child Care Licensing Regulations (ACF — HI)</a></li>
+  <li><a href="https://www.patchhawaii.org/programs/dhs-hawaii-early-childhood-registry/">PATCH — DHS Early Childhood Registry</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><strong>DHS 1300 / 1301 series</strong> — Child Care Center License Application</li>
+  <li><strong>DHS 1305</strong> — Family Child Care Home Registration Application</li>
+  <li><strong>DHS 1306</strong> — Group Child Care Home License Application</li>
+  <li><strong>Form 314-C</strong> — Criminal History Check / CANIS clearance</li>
+  <li><strong>HRS Chapter 321-22 Physician's Statement</strong> — TB clearance (staff + children; unusual among U.S. states)</li>
+  <li><strong>PATCH Registry Application</strong> — prerequisite for any staff to count toward ratio</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout warn">
+  <strong>Transparency gap.</strong> Hawaii is an outlier: the DHS consumer portal publishes
+  <em>license status only</em> — not inspection findings, deficiencies, or complaint outcomes.
+  Per Honolulu Civil Beat's 2024 reporting, Hawaii is the only state out of compliance on three
+  CCDBG transparency categories and has posted no serious-incident data online since 2016.
+</div>
+<h3>Data source</h3>
+<ul>
+  <li><strong>Primary (consumer-facing, license status only):</strong> <a href="https://childcareprovidersearch.dhs.hawaii.gov/">DHS Child Care Provider Search</a></li>
+  <li><strong>Statutory basis:</strong> <a href="https://www.capitol.hawaii.gov/hrscurrent/Vol07_Ch0346-0398/HRS0346/HRS_0346-0153.htm">HRS §346-153</a> (requires DHS to retain current + 2 prior years of inspection, deficiency, and complaint records, and make them available for public review).</li>
+  <li><strong>Open-records path:</strong> Hawaii UIPA (<a href="https://www.capitol.hawaii.gov/hrscurrent/Vol02_Ch0046-0115/HRS0092F/">HRS Chapter 92F</a>); appeals via <a href="https://oip.hawaii.gov/">Office of Information Practices</a>.</li>
+  <li><strong>Federal oversight backdrop:</strong> <a href="https://oig.hhs.gov/reports/all/2020/hawaiis-monitoring-generally-ensured-child-care-provider-compliance-with-state-criminal-background-check-requirements/">HHS-OIG A-09-19-02006 (2020)</a>.</li>
+</ul>
+<h3>Access strategy</h3>
+<ul>
+  <li>No bulk API or CSV for inspection findings — file a UIPA request to DHS BESSD for CSV/PDF export of inspection reports + deficiencies + CAPs + complaint findings for the last 3 years.</li>
+  <li>For single-facility enrichment before a sales call, contact the appropriate island licensing unit directly (see phone numbers above).</li>
+  <li>Do not scrape the consumer portal for violation analytics — it doesn't publish them.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>Infant/toddler specialty license (HAR 17-895.1)</strong> — a center cannot legally serve &lt;24-month-old children under a Group Center license. Providers who pitch expansion into infant/toddler must secure a separate license.</li>
+  <li><strong>PATCH Registry gatekeeping</strong> — staff cannot count toward ratio until PATCH evaluates and listings are current. A center with expiring registry entries hits an operational cliff. High-urgency sales hook.</li>
+  <li><strong>TB clearance</strong> (staff + children) — recurring annual/biennial workflow unique to Hawaii.</li>
+  <li><strong>Annual renewal</strong> for first 4 years, biennial thereafter — a predictable annual trigger for compliance-product outreach.</li>
+  <li><strong>Island logistics</strong> — DHS inspection response times vary by island; neighbor-island operators over-index on self-serve readiness tools.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Enrichment pipeline</strong> — for each ArcGIS lead, run <code>"&lt;name&gt;" "&lt;city&gt;" Hawaii</code> Google + LinkedIn search to recover phone, website, director name.</li>
+  <li><strong>DHS Provider Search scrape</strong> — targeted, low-volume: recover current license status (active/expired/conditional) for each lead to cull closed facilities.</li>
+  <li><strong>UIPA request</strong> to DHS BESSD (cite HRS §92F-11) for: (a) provider directory w/ phone + license type; (b) inspection results for current + 2 prior years; (c) complaint outcomes. 10-day statutory response.</li>
+  <li><strong>PATCH partnership</strong> — their referral team has current phone + email data they use for family referrals; explore data-sharing or co-marketing.</li>
+  <li><strong>Refresh quarterly</strong> — Hawaii churn + stale dataset means quarterly re-pull is table-stakes.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://humanservices.hawaii.gov/bessd/child-care-program/child-care-licensing/">DHS Child Care Licensing</a></div>
+  <div><a href="https://childcareprovidersearch.dhs.hawaii.gov/">Hawaii Child Care Provider Search</a></div>
+  <div><a href="https://opendata.hawaii.gov/dataset/preschools">Preschools dataset (ArcGIS Hub)</a></div>
+  <div><a href="https://prod-histategis.opendata.arcgis.com/api/download/v1/items/9c29d1a0e812454980ff133cac944611/csv?layers=6">Direct CSV endpoint</a></div>
+  <div><a href="https://humanservices.hawaii.gov/bessd/files/2013/01/HAR_17-892.1-Group-Child-Care-Center-and-Group-Child-Care-Home-Rules.pdf">HAR 17-892.1 PDF</a></div>
+  <div><a href="https://humanservices.hawaii.gov/wp-content/uploads/2013/11/HAR_17-895-Infant-and-Toddler-Child-Care-Center-Rules.pdf">HAR 17-895.1 PDF</a></div>
+  <div><a href="https://www.law.cornell.edu/regulations/hawaii/Haw-Code-R-SS-17-892-1-18">HAR 17-892.1-18 (Ratios)</a></div>
+  <div><a href="https://www.patchhawaii.org/">PATCH Hawaii</a></div>
+  <div><a href="https://www.patchhawaii.org/programs/dhs-hawaii-early-childhood-registry/">PATCH Early Childhood Registry</a></div>
+  <div><a href="https://humanservices.hawaii.gov/bessd/child-care-program/child-care-licensing/reporting-child-care-complaints-and-investigations/">DHS Reporting Complaints &amp; Investigations</a></div>
+  <div><a href="https://www.capitol.hawaii.gov/hrscurrent/Vol07_Ch0346-0398/HRS0346/HRS_0346-0153.htm">HRS §346-153</a></div>
+  <div><a href="https://www.capitol.hawaii.gov/hrscurrent/Vol02_Ch0046-0115/HRS0092F/">HRS Chapter 92F (UIPA)</a></div>
+  <div><a href="https://oip.hawaii.gov/">Office of Information Practices</a></div>
+  <div><a href="https://oig.hhs.gov/reports/all/2020/hawaiis-monitoring-generally-ensured-child-care-provider-compliance-with-state-criminal-background-check-requirements/">HHS-OIG Hawaii Audit (2020)</a></div>
+  <div><a href="https://www.civilbeat.org/2017/03/why-werent-other-parents-told-about-day-care-toddler-abuse/">Civil Beat — Toddler Abuse (2017)</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/hawaii">National Database (ACF — HI)</a></div>
+</div>
+
+</div>
+</body>
+</html>

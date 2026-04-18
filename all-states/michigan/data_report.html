@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Michigan — Child Care Compliance Data Report (2026-04-18)</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #15162a;
+    --panel-2: #1c1d33;
+    --text: #f0f0f5;
+    --muted: #a3a6b8;
+    --accent: #00d4aa;
+    --accent-dim: #0a7561;
+    --border: #2a2c44;
+    --warn: #ffb84d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
+  body { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 14px; color: var(--accent); letter-spacing: 0.02em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text); }
+  p { margin: 0 0 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); }
+  a:hover { border-bottom-style: solid; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 0; }
+  .subhead { color: var(--muted); font-size: 14px; }
+  code { background: var(--panel-2); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 18px; font-size: 13.5px; background: var(--panel); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; background: var(--panel-2); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 20px; margin: 6px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 18px; margin: 14px 0; border-radius: 3px; }
+  .links-list { columns: 2; column-gap: 32px; font-size: 13px; }
+  .links-list li { break-inside: avoid; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .badge { display: inline-block; background: var(--accent-dim); color: var(--bg); font-weight: 600; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; letter-spacing: 0.03em; }
+</style>
+</head>
+<body>
+
+<h1>Michigan — Child Care Compliance Data Report</h1>
+<p class="meta">Population rank: <strong>10</strong> &middot; ~10.1M residents &middot; Prepared 2026-04-18 for ComplianceKit</p>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Michigan Department of Lifelong Education, Advancement, and Potential (MiLEAP)</strong> — Child Care Licensing Bureau (CCLB). CCLB transferred from LARA/BCHS to MiLEAP in December 2023.
+</p>
+<ul>
+  <li>Agency: <a href="https://www.michigan.gov/mileap/early-childhood-education/cclb">https://www.michigan.gov/mileap/early-childhood-education/cclb</a></li>
+  <li>Public search (new): <a href="https://cclb.my.site.com/micchirp/s/statewide-facility-search">CCHIRP Statewide Facility Search</a></li>
+  <li>Public search (legacy, still live): <a href="https://childcaresearch.apps.lara.state.mi.us/">LARA childcaresearch.apps.lara.state.mi.us</a></li>
+  <li>Main line: 517-284-9730 &middot; <a href="mailto:MiLEAP-CCLB-Help@michigan.gov">MiLEAP-CCLB-Help@michigan.gov</a></li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>Statute:</strong> Child Care Organizations Act, 1973 PA 116, <a href="https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-116-of-1973.pdf">MCL 722.111–722.128</a></li>
+  <li><strong>Rules — Centers:</strong> <a href="https://www.michigan.gov/mileap/-/media/Project/Websites/mileap/Documents/Early-Childhood-Education/CCLB/Licensing-Rules-and-Statutes/Center-Rules/R-4008101-to-4008840-1Rules-2025.pdf">R 400.8101 – R 400.8840</a> (2025 revision)</li>
+  <li><strong>Rules — Family/Group Homes:</strong> <a href="https://ars.apps.lara.state.mi.us/AdminCode/DownloadAdminCodeFile?FileName=R+400.1901++to+400.1963.pdf">R 400.1901 – R 400.1963</a></li>
+</ul>
+
+<h2>3. Contact / Provider Data Inventory</h2>
+<table>
+  <thead>
+    <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Row Count</th><th>Tier</th><th>Limits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Licensed Child Care Providers (statewide roster)</td>
+      <td><a href="https://gis-michigan.opendata.arcgis.com/datasets/child-care/about">gis-michigan.opendata.arcgis.com &middot; child-care</a> <code>a79c3b0caedf412599085941e2af91d4</code></td>
+      <td>ArcGIS FeatureServer JSON (paginated)</td>
+      <td><strong>7,908</strong></td>
+      <td>Primary</td>
+      <td>No phone/email/website; license number + address + capacity + type (DC/DG/DF)</td>
+    </tr>
+    <tr>
+      <td>CCHIRP Statewide Facility Search</td>
+      <td><a href="https://cclb.my.site.com/micchirp/s/statewide-facility-search">cclb.my.site.com</a></td>
+      <td>Salesforce Experience Cloud site (HTML, no API)</td>
+      <td>~10,000 active</td>
+      <td>Verification</td>
+      <td>Per-facility only; inspection PDFs embedded</td>
+    </tr>
+    <tr>
+      <td>Legacy LARA public search (pre-CCHIRP archive)</td>
+      <td><a href="https://childcaresearch.apps.lara.state.mi.us/">childcaresearch.apps.lara.state.mi.us</a></td>
+      <td>ASP.NET pages; PDF inspection reports (≥ July 1, 2002)</td>
+      <td>~10,000+ historical</td>
+      <td>Historical</td>
+      <td>Enumerable <code>FacilityId</code>; scrape-friendly</td>
+    </tr>
+    <tr>
+      <td>Disciplinary-Action list (revoked/suspended)</td>
+      <td><a href="https://www.michigan.gov/en/mileap/Early-Childhood-Education/cclb/parents/panel-collapse/provider-choose/child-care-providers-closed-or-suspended-due-to-disciplinary-action">MiLEAP Disciplinary Action</a></td>
+      <td>HTML table</td>
+      <td>Rolling 5-year window</td>
+      <td>Supplemental</td>
+      <td>Single-page scrape; no API</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li>MCL 722.111 et seq. (Act 116 of 1973): <a href="https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-116-of-1973.pdf">full text</a></li>
+  <li>R 400.8101–8840 Center Rules (2025): <a href="https://www.michigan.gov/mileap/-/media/Project/Websites/mileap/Documents/Early-Childhood-Education/CCLB/Licensing-Rules-and-Statutes/Center-Rules/R-4008101-to-4008840-1Rules-2025.pdf">PDF</a></li>
+  <li>R 400.1901–1963 Family/Group Home Rules: <a href="https://ars.apps.lara.state.mi.us/AdminCode/DownloadAdminCodeFile?FileName=R+400.1901++to+400.1963.pdf">PDF</a></li>
+  <li>R 400.8182 Ratios (Cornell LII): <a href="https://www.law.cornell.edu/regulations/michigan/Mich-Admin-Code-R-400-8182">link</a></li>
+  <li>Inspections policy: <a href="https://www.michigan.gov/mileap/early-childhood-education/cclb/providers/insp">MiLEAP inspection page</a></li>
+  <li>Great Start to Quality (QRIS): <a href="https://www.greatstarttoquality.org">greatstarttoquality.org</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><code>BCAL-3730</code> — Child Information Record</li>
+  <li><code>BCAL-4616</code> — Child Care Application (initial license)</li>
+  <li><code>BCAL-4617</code> — Request for Renewal of Child Care License</li>
+  <li><code>BCAL-4584</code> — Minimum Immunization Record</li>
+  <li><code>BCAL-1326</code> — Medication Authorization</li>
+  <li><code>BCAL-3300</code> — Incident/Accident Report</li>
+  <li><code>BCAL-1248</code> — Notice of Serious Incident/Injury (24-hour trigger)</li>
+  <li><code>BCAL-5245</code> — Licensing Study Report (consultant-completed)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data <span class="badge">new</span></h2>
+<p>
+  Michigan publishes inspection reports, special investigation reports, and disciplinary actions for every licensed provider through the MiLEAP-operated Salesforce portal and a legacy LARA archive that remains live.
+</p>
+<h3>Sources</h3>
+<ul>
+  <li><strong>CCHIRP Statewide Facility Search</strong> — <a href="https://cclb.my.site.com/micchirp/s/statewide-facility-search">link</a>. Salesforce Experience Cloud; inspection reports render as PDFs inside the facility detail pane.</li>
+  <li><strong>Legacy LARA search</strong> — <a href="https://childcaresearch.apps.lara.state.mi.us/">link</a>. ASP.NET. PDFs available for every inspection since July 1, 2002 via <code>GetDocument.aspx?DocID=&lt;int&gt;</code>.</li>
+  <li><strong>Disciplinary-action list</strong> — <a href="https://www.michigan.gov/en/mileap/Early-Childhood-Education/cclb/parents/panel-collapse/provider-choose/child-care-providers-closed-or-suspended-due-to-disciplinary-action">revoked / suspended / non-renewed (5-year rolling)</a>.</li>
+  <li><strong>MiLEAP press feed</strong> — summary-suspension announcements (e.g. <a href="https://www.michigan.gov/mileap/press-releases/2025/02/12/mileap-summarily-suspends-a-family-child-care-home-license-in-washtenaw-county">Washtenaw County 2025-02-12</a>, <a href="https://www.michigan.gov/mileap/press-releases/2026/04/08/mileap-summarily-suspends-a-family-child-care-home-license-in-calhoun-county">Calhoun County 2026-04-08</a>).</li>
+</ul>
+
+<h3>Report Fields</h3>
+<table>
+  <thead><tr><th>Field</th><th>Typical Values</th></tr></thead>
+  <tbody>
+    <tr><td>Inspection type</td><td>Licensing Study / Renewal / Complaint-Triggered Special Investigation / Technical Assistance</td></tr>
+    <tr><td>Rule citation</td><td>R 400.8xxx (centers) &middot; R 400.1xxx (homes)</td></tr>
+    <tr><td>Finding</td><td>Violation Established &middot; Not Established &middot; Repeat Violation</td></tr>
+    <tr><td>License code</td><td><code>DC</code> = center &middot; <code>DG</code> = group home (7–12) &middot; <code>DF</code> = family home (1–6)</td></tr>
+    <tr><td>Corrective Action Plan</td><td>Provider text + licensing-consultant verification date</td></tr>
+  </tbody>
+</table>
+
+<h3>Freshness</h3>
+<ul>
+  <li>CCHIRP: near-real-time; consultant uploads visible within 1–3 business days.</li>
+  <li>LARA legacy: mirrored daily from same back-end.</li>
+  <li>Disciplinary-action list: updated as adverse actions become final.</li>
+</ul>
+
+<h3>Access Strategy</h3>
+<ul>
+  <li><strong>Playwright</strong> (Chromium) against <code>cclb.my.site.com/micchirp/s/</code> — search, click through facilities, download PDFs rendered in the Licensing History component. Rate ≤ 1 req/sec per worker; 3–5 concurrent workers.</li>
+  <li><strong>Requests + BeautifulSoup</strong> for the legacy LARA search — facility pages at <code>Profile.aspx?FacilityId=&lt;int&gt;</code> and PDFs at <code>GetDocument.aspx?DocID=&lt;int&gt;</code>.</li>
+  <li><strong>Single-page scrape</strong> for the disciplinary list.</li>
+</ul>
+
+<div class="callout">
+  <strong>FOIA backup.</strong> Michigan FOIA (<a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Act-442-of-1976">MCL 15.231 et seq.</a>) — 5 business days initial response, 10-day extension. MiLEAP FOIA office: <a href="mailto:FOIA@michigan.gov">FOIA@michigan.gov</a>; CCLB: <a href="mailto:MiLEAP-CCLB-Help@michigan.gov">MiLEAP-CCLB-Help@michigan.gov</a>. Use for records older than the 3-year rolling public archive and for structured CSV exports.
+</div>
+
+<h2>7. Outreach Signals (Hot-Lead Detection)</h2>
+<ul>
+  <li><strong>Repeat violations on the CCHIRP page</strong> for the same R-number across two consecutive monitoring cycles — signals a compliance gap the owner knows about. Trigger a targeted outreach referencing the specific rule.</li>
+  <li><strong>License on provisional status</strong> (6 months, non-renewable) — owner has an active to-do list from CCLB and a hard countdown. High willingness to pay for compliance tooling.</li>
+  <li><strong>Recent appearance on the disciplinary-action list</strong> — any provider whose license was suspended/revoked and who is attempting a fresh application under a new entity (common pattern; searchable by address match).</li>
+  <li><strong>Great Start to Quality below "Empowered"</strong> — subsidy reimbursement gated at 3-star-equivalent; facilities below that line lose revenue and may invest in QRIS improvement tools.</li>
+  <li><strong>Press-release summary suspensions</strong> — every MiLEAP press release names a facility and gives enough detail to cold-call the owner or their successor within 24–48 hours.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ul>
+  <li><strong>Playwright target #1:</strong> <code>cclb.my.site.com/micchirp/s/statewide-facility-search</code> — enumerate facilities, download most-recent 3 inspection PDFs per facility. Estimated: 10,000 facilities × 3 PDFs = 30,000 PDFs over ~40 worker-hours at 3 concurrent browsers.</li>
+  <li><strong>Playwright target #2:</strong> <code>childcaresearch.apps.lara.state.mi.us/Profile.aspx?FacilityId=&lt;int&gt;</code> — historical backfill (pre-2022 reports). Enumerate IDs 1–12000. Estimated: 20 worker-hours at 5 concurrent browsers.</li>
+  <li><strong>FOIA:</strong> File bulk request for provisional / summarily-suspended facility list, scoped 2024-01-01 → current. 15 business-day turnaround typical.</li>
+  <li><strong>Email append:</strong> Use the roster's <code>LicenseNumber</code> + facility name to match against Hunter / Apollo / BriteVerify. Target owner/director title extraction from BCAL-4616 applicant-signature field (public per CCHIRP).</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="links-list">
+  <li><a href="https://www.michigan.gov/mileap/early-childhood-education/cclb">MiLEAP CCLB</a></li>
+  <li><a href="https://www.michigan.gov/mileap/early-childhood-education/cclb/cchirp">CCHIRP info page</a></li>
+  <li><a href="https://cclb.my.site.com/micchirp/s/statewide-facility-search">CCHIRP search</a></li>
+  <li><a href="https://cclb.my.site.com/micchirp/s/">CCHIRP portal root</a></li>
+  <li><a href="https://childcaresearch.apps.lara.state.mi.us/">Legacy LARA search</a></li>
+  <li><a href="https://www.michigan.gov/mileap/early-childhood-education/cclb/providers/insp">Inspection policy</a></li>
+  <li><a href="https://www.michigan.gov/en/mileap/Early-Childhood-Education/cclb/parents/panel-collapse/provider-choose/child-care-providers-closed-or-suspended-due-to-disciplinary-action">Disciplinary-action list</a></li>
+  <li><a href="https://scprod.michigan.gov/lara/bureau-list/cscl/complaints/disciplinary">LARA Disciplinary Action index</a></li>
+  <li><a href="https://gis-michigan.opendata.arcgis.com/datasets/child-care/about">GIS Open Data — Child Care</a></li>
+  <li><a href="https://www.greatstarttoquality.org">Great Start to Quality</a></li>
+  <li><a href="https://www.legislature.mi.gov/documents/mcl/pdf/mcl-Act-116-of-1973.pdf">MCL Act 116 of 1973</a></li>
+  <li><a href="https://www.michigan.gov/mileap/-/media/Project/Websites/mileap/Documents/Early-Childhood-Education/CCLB/Licensing-Rules-and-Statutes/Center-Rules/R-4008101-to-4008840-1Rules-2025.pdf">Center Rules PDF</a></li>
+  <li><a href="https://ars.apps.lara.state.mi.us/AdminCode/DownloadAdminCodeFile?FileName=R+400.1901++to+400.1963.pdf">Family/Group Home Rules</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/michigan/Mich-Admin-Code-R-400-8182">R 400.8182 Ratios</a></li>
+  <li><a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Act-442-of-1976">Michigan FOIA statute</a></li>
+  <li><a href="https://www.nascio.org/wp-content/uploads/2024/08/MI_Digital-Services-Government-to-Business.pdf">NASCIO CCHIRP 2023 write-up</a></li>
+</ul>
+
+<div class="footer">
+  ComplianceKit state intelligence &middot; Michigan &middot; 2026-04-18. All URLs verified at prep time. &copy; 2026.
+</div>
+
+</body>
+</html>

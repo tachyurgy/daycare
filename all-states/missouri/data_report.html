@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Missouri — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --panel:#14142b; --panel-hi:#1b1b3a; --border:#2a2a4a; --text:#f0f0f5; --muted:#9a9ab0; --accent:#00d4aa; --warn:#ffb347; --link:#7cf5d8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1040px; margin:0 auto; padding:48px 32px 96px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:40px; }
+  header .tag { display:inline-block; background:rgba(0,212,170,0.12); color:var(--accent); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  header h1 { font-size:42px; font-weight:700; margin:16px 0 8px; letter-spacing:-.01em; }
+  header .meta { color:var(--muted); font-size:14px; }
+  header .meta span { margin-right:24px; }
+  header .meta strong { color:var(--text); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h2 .num { display:inline-block; color:var(--accent); font-family:ui-monospace,Menlo,monospace; font-size:14px; margin-right:10px; vertical-align:2px; }
+  a { color:var(--link); text-decoration:none; border-bottom:1px dotted var(--link); }
+  a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  p,li { font-size:15px; } ul { padding-left:20px; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--panel-hi); color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; } tr:hover td { background:rgba(0,212,170,0.03); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-family:ui-monospace,Menlo,monospace; background:rgba(0,212,170,0.1); color:var(--accent); border:1px solid rgba(0,212,170,0.3); }
+  .pill.warn { background:rgba(255,179,71,0.1); color:var(--warn); border-color:rgba(255,179,71,0.3); }
+  code { font-family:ui-monospace,Menlo,monospace; background:var(--panel); color:var(--accent); padding:2px 6px; border-radius:3px; font-size:13px; }
+  .callout { background:var(--panel); border-left:3px solid var(--accent); padding:16px 20px; margin:16px 0; border-radius:0 6px 6px 0; color:var(--muted); font-size:14px; }
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; }
+  .link-grid { columns:2; column-gap:32px; font-size:13px; } .link-grid a { display:block; padding:2px 0; word-break:break-all; }
+  @media (max-width:720px){ .link-grid{columns:1;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Missouri</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 19th–20th (~6.2M)</span>
+    <span><strong>Licensed providers:</strong> ~2,700 statewide</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Missouri Department of Elementary and Secondary Education (DESE)</strong> — Office of Childhood (created 2021) — Section for Child Care Regulation (SCCR). Licensing authority was <strong>transferred from DHSS to DESE in 2021</strong>; citations migrated from <strong>19 CSR 30-62</strong> → <strong>5 CSR 25-500</strong>. Consumer directory still lives on DHSS infrastructure at <a href="https://healthapps.dhss.mo.gov/childcaresearch/">Show Me Child Care Provider Search</a>.</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>5 CSR 25-500</strong> — Licensing Rules for Centers, Group Homes, Family Homes (effective 2022)</li>
+  <li><strong>5 CSR 25-400</strong> — Definitions &amp; General Provisions</li>
+  <li><strong>5 CSR 25-600</strong> — Child Care Subsidy</li>
+  <li><strong>Enabling statute:</strong> RSMo Chapter 210 (§§ 210.201–.257)</li>
+  <li>Ratios (5 CSR 25-500.112): <a href="https://www.law.cornell.edu/regulations/missouri/5-CSR-25-500-112">Cornell LII</a></li>
+  <li>Historical 19 CSR 30-62 (archive): <a href="https://www.sos.mo.gov/cmsimages/adrules/csr/current/19csr/19c30-62.pdf">SOS archive</a></li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead><tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr><td>Show Me Provider Search</td><td>Official per-facility</td><td>ASP.NET HTML (unusable programmatically)</td><td>Live</td><td><a href="https://healthapps.dhss.mo.gov/childcaresearch/">healthapps.dhss.mo.gov/childcaresearch</a></td></tr>
+    <tr><td>DESE Find Care landing</td><td>Redirect to DHSS</td><td>HTML</td><td>Live</td><td><a href="https://dese.mo.gov/childhood/child-care/find-care">DESE Find Care</a></td></tr>
+    <tr><td>childcarecenter.us (3rd-party)</td><td>Aggregator fallback</td><td>HTML scrape</td><td>Quarterly</td><td><a href="https://childcarecenter.us/state/missouri">childcarecenter.us/state/missouri</a></td></tr>
+    <tr><td>data.mo.gov</td><td>No CC dataset</td><td>—</td><td>—</td><td><a href="https://data.mo.gov/">data.mo.gov</a></td></tr>
+    <tr><td>DESE Compliance Dashboard</td><td>Aggregate</td><td>PDF (quarterly)</td><td>Quarterly</td><td><a href="https://dese.mo.gov/childhood/child-care/child-care-data-dashboards">DESE dashboards</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 1,000 rows of Missouri centers (name, city, state) sourced from the third-party aggregator childcarecenter.us, which aggregates DESE's public directory. Missouri publishes no bulk CSV/JSON export; the official DHSS search rejects automated POSTs due to ASP.NET viewstate session dependency. Contact <code>Childcare@dese.mo.gov</code> / 573-751-2450 for a records-law bulk extract.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>DESE Child Care home</td><td><a href="https://dese.mo.gov/childhood/child-care">dese.mo.gov/childhood/child-care</a></td></tr>
+    <tr><td>Inspection process</td><td><a href="https://dese.mo.gov/childhood/child-care/inspection-process">Inspection process</a></td></tr>
+    <tr><td>Child Care Compliance</td><td><a href="https://dese.mo.gov/child-care-compliance">dese.mo.gov/child-care-compliance</a></td></tr>
+    <tr><td>Child Care Licensing Indicator System (2026)</td><td><a href="https://dese.mo.gov/childhood/child-care-licensing-indicator-system">CCLIS page</a></td></tr>
+    <tr><td>Complaint / concern</td><td><a href="https://dese.mo.gov/childhood/child-care/concerns">Report a Complaint</a></td></tr>
+    <tr><td>Missouri Child Care Aware</td><td><a href="https://mochildcareaware.org/">mochildcareaware.org</a></td></tr>
+    <tr><td>ACF national licensing</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/missouri-department-elementary-and-secondary-education-office-childhood">ACF MO state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li><strong>CCFS-1</strong> — Application for Child Care License</li>
+  <li><strong>CCFS-100</strong> — Staff Member Record</li>
+  <li><strong>CCFS-101</strong> — Individual Medical Examination Report (Staff)</li>
+  <li><strong>CCFS-200</strong> — Child's Health &amp; Emergency Form</li>
+  <li><strong>CCFS-201</strong> — Immunization Record</li>
+  <li><strong>CCFS-202</strong> — Medication Authorization</li>
+  <li><strong>CCFS-300</strong> — Incident / Injury Report</li>
+  <li><strong>Family Care Safety Registry (FCSR)</strong> — background registration (MO-specific pre-screening)</li>
+  <li>State Fire Marshal + local environmental/health inspection forms</li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://healthapps.dhss.mo.gov/childcaresearch/">Show Me Provider Search</a></td><td>Per-facility: inspection history, CSR citations, substantiated complaint summaries, enforcement actions</td><td>HTML + PDF</td><td><span class="pill warn">No bulk — viewstate blocked</span></td></tr>
+    <tr><td><a href="https://dese.mo.gov/childhood/child-care/child-care-data-dashboards">Quarterly dashboards</a></td><td>Aggregate facility counts, inspection volume, time-to-license</td><td>PDF</td><td>Aggregate only</td></tr>
+    <tr><td>Sunshine Law request</td><td>Statewide violation extract</td><td>Excel (on request)</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+    <tr><td>CCLIS rollout (June 2026)</td><td>New abbreviated-inspection pilot — schema change</td><td>TBD</td><td>—</td></tr>
+  </tbody>
+</table>
+<p>Missouri is the <strong>hardest state in our target set for programmatic violation harvest</strong> because the DHSS search app blocks automation. Fastest path: Sunshine Law request (RSMo §§ 610.010–610.035) to <a href="mailto:Childcare@dese.mo.gov">Childcare@dese.mo.gov</a> or via <a href="https://dese.mo.gov/sunshine-law-requests">DESE Sunshine portal</a> — 3 business-day acknowledgement, copy fees only.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>2021 agency transition pain.</strong> Providers are still confused about DHSS → DESE migration and citation updates (19 CSR → 5 CSR). ComplianceKit can frame itself as a "stay-current" answer.</li>
+  <li><strong>CCLIS rollout June 2026</strong> brings new abbreviated inspections — unfamiliar terrain for directors; content-led SEO around "what to expect under Missouri CCLIS" will rank early.</li>
+  <li><strong>Tornado drill requirement</strong> (plus quarterly fire/intruder drills) is a multi-event drill tracker wedge.</li>
+  <li><strong>Family Care Safety Registry</strong> is MO-unique — staff onboarding workflow should auto-queue FCSR registration.</li>
+  <li><strong>Religious exemption providers</strong> (~700 statewide) must still register with DESE; an underserved segment for minimum-standards compliance tooling.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>File a Sunshine Law request</strong> to DESE for a 2022-present statewide licensed-provider roster (Excel with phone + email + license number + city) — routine release, fees capped at actual-cost copying.</li>
+  <li><strong>Run a Playwright pipeline</strong> against <code>healthapps.dhss.mo.gov/childcaresearch</code> to enrich per-provider inspection history. Full session warm-up required (GET → parse <code>__VIEWSTATE</code> → POST).</li>
+  <li><strong>Scrape per-provider detail</strong> on childcarecenter.us to fill phone/email for the existing 1,000 leads.</li>
+  <li><strong>Monitor CCLIS rollout</strong> — schema changes will break any existing scraper in June 2026; build in schema-detection.</li>
+  <li><strong>Cross-reference FCSR</strong> (if released) to identify staff-heavy operators (higher-value accounts).</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://dese.mo.gov/childhood/child-care">DESE Child Care</a>
+  <a href="https://dese.mo.gov/childhood/child-care/find-care">DESE Find Care</a>
+  <a href="https://dese.mo.gov/childhood/child-care/inspection-process">Inspection process</a>
+  <a href="https://dese.mo.gov/childhood/child-care/concerns">Report a complaint</a>
+  <a href="https://dese.mo.gov/childhood/child-care/child-care-data-dashboards">Data dashboards</a>
+  <a href="https://dese.mo.gov/media/pdf/2024-q4-child-care-compliance-and-regulation-dashboard">Q4 2024 dashboard</a>
+  <a href="https://dese.mo.gov/child-care-compliance">child-care-compliance</a>
+  <a href="https://dese.mo.gov/childhood/child-care-licensing-indicator-system">CCLIS</a>
+  <a href="https://dese.mo.gov/sunshine-law-requests">Sunshine Law portal</a>
+  <a href="https://healthapps.dhss.mo.gov/childcaresearch/">Show Me Provider Search</a>
+  <a href="https://www.sos.mo.gov/cmsimages/adrules/csr/current/19csr/19c30-62.pdf">Historical 19 CSR 30-62</a>
+  <a href="https://www.law.cornell.edu/regulations/missouri/5-CSR-25-500-112">5 CSR 25-500.112 (ratios)</a>
+  <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/MO_CENTER_GCCH_APR_2022.pdf">ACF MO center regs</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/missouri-department-elementary-and-secondary-education-office-childhood">ACF MO state page</a>
+  <a href="https://mochildcareaware.org/">Missouri Child Care Aware</a>
+  <a href="https://mochildcareaware.org/wp-content/uploads/2024/09/Understanding-Child-Care-Licensing-Reports-9.26.24.pdf">Understanding Licensing Reports (2024)</a>
+  <a href="https://mochildcareaware.org/data-and-reports/">MoCCA data &amp; reports</a>
+  <a href="https://childcarecenter.us/state/missouri">childcarecenter.us (aggregator)</a>
+  <a href="https://data.mo.gov/">data.mo.gov</a>
+  <a href="https://www.finneyinjurylaw.com/library/daycare-safety-regulations-childcare-injury.cfm">Finney Injury Law overview</a>
+  <a href="https://jettlegal.com/blog/missouri-daycare-licensing-requirements/">Jett Legal — MO licensing</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Missouri · Generated 2026-04-18 · 2021 DHSS → DESE transition still reflected in legacy citations; watch CCLIS rollout June 2026.
+</footer>
+
+</div>
+</body>
+</html>

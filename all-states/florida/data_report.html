@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florida — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a; --bg-elev: #15152a; --bg-card: #1a1a30;
+    --text: #f0f0f5; --text-dim: #a0a0b5;
+    --accent: #00d4aa; --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45; --warn: #ffb347; --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 24px; margin-bottom: 40px; }
+  header .tag { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.3rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-elev); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.5px; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0 6px 18px; position: relative; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  code { background: var(--bg-elev); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+  .highlight { background: linear-gradient(90deg, rgba(0, 212, 170, 0.1), transparent); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Florida</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 3</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated providers:</strong> ~11,000-12,000+</span>
+    <span><strong>Inspection cadence:</strong> <span class="pill pill-ok">2+ unannounced / yr</span></span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>Florida Department of Children and Families (DCF), Office of Child Care Regulation.</strong> DCF Licensing Counselors conduct all inspections. Five counties (Hillsborough, Broward, Palm Beach, Pinellas, Sarasota) operate delegated <strong>local licensing agencies</strong> enforcing DCF standards plus county enhancements.</p>
+    <div class="kv"><strong>DCF address</strong> 2415 N. Monroe Street, Suite 400, Tallahassee, FL 32303-4190</div>
+    <div class="kv"><strong>Helpline</strong> (855) 776-2729</div>
+    <div class="kv"><strong>Public search</strong> <a href="https://caressearch.myflfamilies.com/PublicSearch">CARES Public Search</a></div>
+    <div class="kv"><strong>DCF landing</strong> <a href="https://www.myflfamilies.com/services/licensing/child-care-licensure">myflfamilies.com/services/licensing/child-care-licensure</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> Florida Statutes <strong>Chapter 402</strong> (§ 402.301 - § 402.319).</p>
+    <p><strong>Administrative Code:</strong> Florida Administrative Code <strong>Chapter 65C-22</strong>.</p>
+    <p><strong>Handbook (incorporated by reference):</strong> <strong>Child Care Facility Handbook (October 2021)</strong> — legally binding via 65C-22.</p>
+    <p><strong>Inspection form:</strong> <strong>CF-FSP 5316</strong> Standards Classification Summary — the binary compliant/non-compliant form inspectors fill out during the visit (32 categories for facilities).</p>
+    <p><strong>Violation classification:</strong> Class 1 (immediate risk) / Class 2 (serious, e.g., ratios) / Class 3 (less serious administrative).</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows</td><td>7,648 (incl. header)</td><td><code>florida_leads.csv</code> (project root)</td></tr>
+        <tr><td>Data rows</td><td>~7,647 providers</td><td>Name / city / zip / phone schema</td></tr>
+        <tr><td>Est. state market</td><td>~11,000-12,000+</td><td>Facilities + FDCH + LFCCH + Registered + School-Age</td></tr>
+        <tr><td>Coverage</td><td>~64-70%</td><td>Major FL metros well represented</td></tr>
+        <tr><td>Pre-existing product spec</td><td>2,233-line HTML</td><td><code>planning-docs/state-docs/florida/florida-compliancekit-product-spec.html</code></td></tr>
+        <tr><td>Inspection registry</td><td>CARES Public Search</td><td>Per-facility, no Socrata API</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://www.myflfamilies.com/services/licensing/child-care-licensure">DCF Child Care Licensure</a></li>
+      <li><a href="https://www.myflfamilies.com/services/child-family/child-care-resources">DCF Child Care Resources</a></li>
+      <li><a href="https://caressearch.myflfamilies.com/PublicSearch">CARES Public Search</a></li>
+      <li><a href="https://www.myflfamilies.com/sites/default/files/2023-07/Child-Care-Programs-and-Inspections-Guide.pdf">Child Care Programs &amp; Inspections Guide (2023)</a></li>
+      <li><a href="https://www.flrules.org/gateway/ChapterHome.asp?Chapter=65c-22">65C-22 rule</a></li>
+      <li><a href="http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&amp;URL=0400-0499/0402/0402.html">F.S. Chapter 402</a></li>
+      <li><a href="https://oppaga.fl.gov/ProgramSummary/ProgramDetail?programNumber=5011">OPPAGA CCR program summary</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/florida-department-children-and-families">ACF Licensing DB — FL</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms (CF-FSP series)</h2>
+  <div class="card">
+    <ul>
+      <li><code>CF-FSP 5081</code> — Application for License to Operate a Child Care Facility</li>
+      <li><code>CF-FSP 5131</code> — Application for Family Day Care Home</li>
+      <li><code>CF-FSP 5131A</code> — Child Care Application for Enrollment</li>
+      <li><code>CF-FSP 5075</code> — Physician's Statement</li>
+      <li><code>CF-FSP 5274</code> — Health &amp; Safety Checklist</li>
+      <li><code>CF-FSP 5316</code> — Standards Classification Summary (the inspection form)</li>
+      <li><code>CF-FSP 5337</code> — Background Screening &amp; Personnel File Requirements</li>
+      <li><code>CF-FSP 5025</code> — Notice of Deficiency</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="highlight">
+      <strong>Florida's inspection cadence is the most aggressive of any major state</strong> — minimum 2 unannounced inspections per year per licensed facility. Per-facility public data is available through CARES; bulk structured extract requires scraping or a Sunshine Law (F.S. Ch. 119) request — which Florida grants uncommonly liberally.
+    </div>
+    <div class="grid2">
+      <div>
+        <h3>CARES Public Search</h3>
+        <p>Per-facility HTML profile + inspection history + attached PDF reports. Not API-accessible. Dynamic rendering.</p>
+      </div>
+      <div>
+        <h3>CF-FSP 5316 (32 inspection categories)</h3>
+        <p>Every facility inspection scored on 32 binary compliant/non-compliant items keyed to the Handbook.</p>
+      </div>
+      <div>
+        <h3>Class 1 / 2 / 3 severity</h3>
+        <p>Immediate risk / serious / less serious. Ratio violations are Class 2 — inspectors count heads on-the-spot.</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p><strong>Florida Sunshine Law</strong> (F.S. Ch. 119 + Art. I § 24 Fla. Const.) — one of the strongest in the US. DCF Office of Public Records; ~5-10 business days.</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>2+ unannounced inspections per year</strong> — highest routine cadence among launch states. Urgency for inspection-readiness tools is correspondingly high.</li>
+      <li><strong>Annual license renewal</strong> — 12-month cycle; every provider is a hot prospect every year.</li>
+      <li><strong>40-hour DCF introductory training</strong> — strictest intro training among CA/TX/FL. Credential-tracking pain is acute; Staff File module fits perfectly.</li>
+      <li><strong>Florida Child Care Staff Credential + Director Credential</strong> — formal credentialing required for lead teachers and directors. Credential-lifecycle tracking is a must-have.</li>
+      <li><strong>Clearinghouse background checks</strong> — statewide Clearinghouse portal requires ongoing roster maintenance; ComplianceKit can automate audit evidence.</li>
+      <li><strong>Dual DCF + VPK paperwork</strong> — many providers also operate VPK under DOE oversight. Dual reporting is a natural wedge for a consolidated compliance tool.</li>
+      <li><strong>Five-MSA concentration:</strong> Miami/Fort Lauderdale, Orlando, Tampa/St. Pete, Jacksonville, Cape Coral/Fort Myers — geographic targeting is straightforward.</li>
+      <li><strong>High parent scrutiny</strong> — FL parents routinely check CARES profiles; clean-compliance is a marketable differentiator providers will pay for.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px;">
+      <li style="margin-bottom:8px;"><strong>Scrape CARES Public Search</strong> incrementally by zip code (FL has ~1,000 unique zips active for child care). Priority counties: Miami-Dade, Broward, Orange, Hillsborough, Duval, Palm Beach, Pinellas, Lee, Polk, Seminole.</li>
+      <li style="margin-bottom:8px;"><strong>Join with `florida_leads.csv`</strong> — anchor by license number; fill missing fields (type, capacity, address).</li>
+      <li style="margin-bottom:8px;"><strong>Download + OCR inspection PDFs</strong> — normalize to <code>(license_number, visit_date, visit_type, class_1_2_3, handbook_section, narrative, corrective_action, status, sanctions)</code>.</li>
+      <li style="margin-bottom:8px;"><strong>File Sunshine Law request</strong> to DCF for full database extract per phrasing in violations.md (inspection records, violations, enforcement actions, 2019-present, in CSV/Excel). FL's records regime is favorable.</li>
+      <li style="margin-bottom:8px;"><strong>Supplementary requests to local licensing agencies</strong> in Hillsborough / Broward / Palm Beach / Pinellas / Sarasota for any county enhancements.</li>
+      <li style="margin-bottom:8px;"><strong>Cross-reference Early Learning Coalition</strong> network (subsidy + VPK) for enrichment on provider types and federal participation.</li>
+      <li><strong>DCF child fatality dataset</strong> (5-year rolling) is a public-facing data source for high-severity narrative content and SEO authority.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://caressearch.myflfamilies.com/PublicSearch">CARES Public Search</a></li>
+      <li><a href="https://cares.myflfamilies.com/PublicSearch">CARES alternate entry</a></li>
+      <li><a href="https://caressearch.myflfamilies.com/">CARES landing</a></li>
+      <li><a href="https://caressearch.myflfamilies.com/PublicSearch/Search">CARES search form</a></li>
+      <li><a href="https://www.myflfamilies.com/services/licensing/child-care-licensure">DCF Child Care Licensure</a></li>
+      <li><a href="https://www.myflfamilies.com/services/child-family/child-care-resources">DCF Child Care Resources</a></li>
+      <li><a href="https://www.myflfamilies.com/sites/default/files/2023-07/Child-Care-Programs-and-Inspections-Guide.pdf">Child Care Programs &amp; Inspections Guide (2023)</a></li>
+      <li><a href="https://www.myflfamilies.com/public-records">DCF Public Records request</a></li>
+      <li><a href="https://www.flrules.org/gateway/ChapterHome.asp?Chapter=65c-22">65C-22 rule</a></li>
+      <li><a href="http://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&amp;URL=0400-0499/0402/0402.html">F.S. Chapter 402</a></li>
+      <li><a href="https://oppaga.fl.gov/ProgramSummary/ProgramDetail?programNumber=5011">OPPAGA Child Care Regulation program summary</a></li>
+      <li><a href="https://www.elcgateway.org/families/134-dcf-myflfamilies-provider-search/">Early Learning Coalition explainer</a></li>
+      <li><a href="https://www.fldoe.org/schools/early-learning/parents/ccr-r.stml">FL DOE Early Learning / CCR&amp;R</a></li>
+      <li><a href="https://www.childcare.gov/state-resources/florida">Childcare.gov FL resources</a></li>
+      <li><a href="https://projects.tampabay.com/projects/2018/investigations/heartbroken/all-childrens-heart-institute/">Tampa Bay Times — Heartbroken series</a></li>
+      <li><a href="https://www.tampabay.com/news/politics/stateroundup/transparency-lost-in-reviews-of-florida-child-abuse-deaths/">Tampa Bay Times — transparency in child abuse deaths</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/florida-department-children-and-families">ACF Licensing DB — FL</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Florida · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

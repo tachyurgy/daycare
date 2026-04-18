@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Delaware Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-2:#151528; --bg-3:#1d1d33; --fg:#f0f0f5; --fg-dim:#b0b0c0; --accent:#00d4aa; --accent-dim:#008c70; --border:#2a2a44; --warn:#ffb86c; --gold:#ffd166; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 32px 80px; }
+  header { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:40px; }
+  .eyebrow { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  h1 { font-size:48px; margin:0 0 12px; font-weight:700; letter-spacing:-0.02em; }
+  .meta-row { display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--fg-dim); }
+  .meta-row strong { color:var(--fg); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); font-weight:600; }
+  h3 { font-size:16px; margin:20px 0 8px; font-weight:600; color:var(--accent); }
+  p { margin:0 0 12px; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px dotted var(--accent-dim); }
+  a:hover { color:var(--fg); border-bottom-color:var(--fg); }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; background:var(--bg-2); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--bg-3); color:var(--accent); font-weight:600; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul { padding-left:22px; margin:10px 0 16px; }
+  li { margin-bottom:6px; }
+  .callout { background:var(--bg-2); border-left:3px solid var(--accent); padding:14px 18px; margin:16px 0; border-radius:0 6px 6px 0; font-size:14px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .callout.gold { border-left-color:var(--gold); }
+  .rank-badge { display:inline-block; background:var(--bg-3); border:1px solid var(--gold); color:var(--gold); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.5px; }
+  .pill { display:inline-block; background:var(--bg-3); padding:2px 8px; border-radius:3px; font-size:11px; color:var(--fg-dim); margin-right:6px; }
+  code { background:var(--bg-3); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; font-family:'SF Mono',Monaco,Consolas,monospace; }
+  pre { background:var(--bg-2); border:1px solid var(--border); padding:14px; border-radius:6px; overflow-x:auto; font-size:12px; font-family:'SF Mono',Monaco,Consolas,monospace; color:var(--fg-dim); }
+  .link-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:13px; }
+  @media (max-width:700px){ .link-grid{grid-template-columns:1fr;} h1{font-size:36px;} .wrap{padding:24px 18px 60px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Delaware</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Open-data exemplar (4 Socrata datasets)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>delaware</code></span>
+    <span class="rank-badge">TIER: GOLD</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Delaware Department of Education (DOE), Office of Child Care Licensing (OCCL)</strong>. Unique nationally —
+  OCCL moved from DSCYF to DOE in 2015 consolidation. Division of Public Health issues supplementary health/safety requirements.
+</p>
+<ul>
+  <li>New Castle County office: (302) 892-5800</li>
+  <li>Kent &amp; Sussex Counties: Barratt Building, 821 Silver Lake Blvd., Suite 103, Dover, DE 19904 — (302) 739-5487</li>
+  <li>OCCL landing: <a href="https://education.delaware.gov/families/birth-age-5/occl/">education.delaware.gov/…/occl</a></li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>14 DE Admin. Code 101</strong> — DELACARE: Regulations for Early Care and Education and School-Age Centers. <a href="https://regulations.delaware.gov/AdminCode/title9/Division%20of%20Family%20Services%20Office%20of%20Child%20Care%20Licensing/100/101.shtml">State Regs</a></li>
+  <li>DELACARE Centers (2020 PDF) — <a href="https://education.delaware.gov/wp-content/uploads/2020/11/occl_delacare-regulations-center_2020.pdf">PDF</a></li>
+  <li>DELACARE FCCH/LFCCH (2022 PDF) — <a href="https://education.delaware.gov/wp-content/uploads/2022/08/DELACARE-FCCH-LFCCH-Regulations-August-2022.pdf">PDF</a></li>
+  <li>Residential Child Care (Nov 2024 PDF) — <a href="https://education.delaware.gov/wp-content/uploads/2024/11/DELACARE-Requirements-Residential-Child-Care-Facilities-and-Day-Treatment-Programs.pdf">PDF</a></li>
+  <li>Enabling statute: 31 Del. C., Ch. 3, Subch. IV + 14 Del. C. §122</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value / Source</th></tr></thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td><strong>1,250</strong> (complete state — every licensed provider)</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://data.delaware.gov/Human-Services/Licensed-Child-Care-Providers-and-Facilities-sorte/jxu7-wnw2">Licensed Providers &amp; Facilities (Socrata)</a></td></tr>
+    <tr><td>Direct CSV endpoint</td><td><code>https://data.delaware.gov/resource/jxu7-wnw2.csv?$limit=50000</code></td></tr>
+    <tr><td>Phone numbers</td><td>✓ Full — included in source</td></tr>
+    <tr><td>Address</td><td>✓ Full — street, city, ZIP</td></tr>
+    <tr><td>Capacity, age range, hours</td><td>✓ Included in source</td></tr>
+    <tr><td>Enforcement action flags</td><td>✓ <code>enforcement_action</code> + <code>intent_to_revoke</code> fields</td></tr>
+    <tr><td>Emails</td><td><span class="pill">NONE</span> — enrichment required</td></tr>
+    <tr><td>Breakdown</td><td>~540 centers, ~630 family, ~80 large family</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://education.delaware.gov/families/birth-age-5/occl/">OCCL Landing</a></li>
+  <li><a href="https://education.delaware.gov/families/birth-age-5/occl/regulations_and_exemptions/">Regulations &amp; Exemptions</a></li>
+  <li><a href="https://education.delaware.gov/families/birth-age-5/occl/search_for_licensed_child_care/">Search for Licensed Child Care (UI)</a></li>
+  <li><a href="https://education.delaware.gov/families/birth-age-5/occl/about_the_search_for_child_care/">About the Search for Child Care</a></li>
+  <li><a href="https://mychildde.org/">My Child DE (family portal)</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/delaware">National Database (ACF — DE)</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/de">Public Health Law Center — DE</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li>DELACARE Center License Application (OCCL)</li>
+  <li>Family Child Care Home License Application</li>
+  <li>Large Family Child Care Home License Application</li>
+  <li>Background Check Authorization — DE SBI, FBI fingerprint, DE Child Protection Registry, sex offender registry</li>
+  <li>Child Health Appraisal (immunizations + physical)</li>
+  <li>State Fire Marshal Approval Letter</li>
+  <li>Division of Public Health Approval (food service permit, if meals prepared)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout gold">
+  <strong>Two complete, machine-readable datasets</strong> available via Delaware's Socrata Open Data Portal. No scraping needed.
+  Delaware is the clearest bulk-compliance-data win in the entire research set.
+</div>
+<h3>Dataset 1 — Child Care Licensing Compliance Review Information</h3>
+<ul>
+  <li>ID: <code>wb83-pkcv</code> · Rows (2026-04-18): <strong>~12,428</strong></li>
+  <li>Landing: <a href="https://data.delaware.gov/Human-Services/Child-Care-Licensing-Compliance-Review-Information/wb83-pkcv">data.delaware.gov/…/wb83-pkcv</a></li>
+  <li>CSV: <code>https://data.delaware.gov/resource/wb83-pkcv.csv?$limit=50000</code></li>
+  <li>JSON: <code>https://data.delaware.gov/resource/wb83-pkcv.json?$limit=50000</code></li>
+  <li>Fields: license_number, provider_name, facility_regulation_status (Compliant / Non-Compliance), provider_action_type_of_action, provider_action_date_of_visit, facility_visit_type, regulation_code, regulation_short_desc, regulation_correction_due, regulation_correction_status, regulation_corrected_date, regulation_how_corrected, regulation_corrective_action</li>
+</ul>
+<h3>Dataset 2 — Child Care Licensing Complaint Reviews</h3>
+<ul>
+  <li>ID: <code>pnbd-85r6</code> · Rows (2026-04-18): <strong>~1,942</strong></li>
+  <li>Landing: <a href="https://data.delaware.gov/Human-Services/Child-Care-Licensing-Complaint-Reviews/pnbd-85r6">data.delaware.gov/…/pnbd-85r6</a></li>
+  <li>CSV: <code>https://data.delaware.gov/resource/pnbd-85r6.csv?$limit=50000</code></li>
+  <li>Fields: resource_id (= license_number), investigation_type, investigation_completed, investigation_result (Substantiated / No Evidence to Substantiate / Unsubstantiated), investigation_conclusion (narrative)</li>
+</ul>
+<h3>Sample narrative (from pnbd-85r6)</h3>
+<pre>On August 17, 2022, OCCL received a complaint regarding allegations of not
+feeding an infant appropriately. An investigation was conducted on August 19,
+2022. Based on the results of this investigation, this complaint is substantiated
+because infant daily logs from August 10, 2022, and August 11, 2022, show
+Child #1 was not fed according to his monthly infant feeding schedule.</pre>
+<h3>Open-records backstop</h3>
+<ul>
+  <li><a href="https://delcode.delaware.gov/title29/c100/index.html">29 Del. C. §10002 (DE FOIA)</a> — 15 business day response. Useful for raw inspection PDFs and records older than the 5-year window.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>Radical transparency</strong> — 5 years of non-compliance + complaints are public, including complaints that <em>did not</em> rise to regulation violations. Parents see everything. Every compliance slip is a permanent reputational fact. Core pitch.</li>
+  <li><strong>Annual renewal + annual inspection</strong> — predictable yearly buying cycle.</li>
+  <li><strong>DOE oversight (not HHS)</strong> — unusual nationally; compliance culture looks more like K-12 than like typical daycare licensing. Different buyer mental model; educators over-index on documentation.</li>
+  <li><strong>Small state, concentrated geography</strong> — 60% New Castle, 20% Kent, 20% Sussex. Inspection logistics are simple; OCCL visits rapidly. A minor slip becomes a findings list fast.</li>
+  <li><strong>STARS QRIS</strong> correlates with subsidy rate. Top-tier STARS operators are sophisticated buyers (close to ICP); lower-STARS operators are in active improvement mode (also high-intent).</li>
+  <li><strong>Health &amp; Safety Reviews mandatory for ALL staff</strong> (not just leads). Documentation burden scales with staff count.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Monthly re-pull</strong> of all four Socrata datasets; maintain join keys (<code>license_number</code>).</li>
+  <li><strong>Segmentation pipeline:</strong>
+    <ul>
+      <li>High-intent: any substantiated complaint in last 12 months OR any non-compliance finding not yet corrected.</li>
+      <li>Chronic: ≥3 findings in last 24 months.</li>
+      <li>Pristine exclude: zero findings in last 36 months.</li>
+    </ul>
+  </li>
+  <li><strong>Exclude</strong> rows where provider roster shows <code>enforcement_action != null</code> or <code>intent_to_revoke = true</code> — active-crisis; not a clean sales fit.</li>
+  <li><strong>Enrichment</strong> for email via Hunter.io / Apollo using name + address.</li>
+  <li><strong>Segment by STARS level</strong> (<a href="https://data.delaware.gov/Human-Services/Child-Care-Providers-by-STARS-Level/ggpn-vz9t">ggpn-vz9t</a>) — 3+ star operators are core ICP.</li>
+  <li><strong>DE FOIA backstop</strong> for inspection PDFs + historical enforcement actions.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://education.delaware.gov/families/birth-age-5/occl/">OCCL Landing</a></div>
+  <div><a href="https://education.delaware.gov/families/birth-age-5/occl/regulations_and_exemptions/">Regulations &amp; Exemptions</a></div>
+  <div><a href="https://education.delaware.gov/families/birth-age-5/occl/search_for_licensed_child_care/">Search for Licensed Child Care</a></div>
+  <div><a href="https://education.delaware.gov/families/birth-age-5/occl/make_a_complaint/">Make a Complaint</a></div>
+  <div><a href="https://education.delaware.gov/families/birth-age-5/occl/occl-forms/make_a_complaint_online">Make a Complaint Online</a></div>
+  <div><a href="https://education.delaware.gov/wp-content/uploads/2020/11/occl_delacare-regulations-center_2020.pdf">DELACARE Centers 2020 PDF</a></div>
+  <div><a href="https://education.delaware.gov/wp-content/uploads/2022/08/DELACARE-FCCH-LFCCH-Regulations-August-2022.pdf">DELACARE FCCH/LFCCH 2022 PDF</a></div>
+  <div><a href="https://education.delaware.gov/wp-content/uploads/2024/11/DELACARE-Requirements-Residential-Child-Care-Facilities-and-Day-Treatment-Programs.pdf">DELACARE Residential 2024 PDF</a></div>
+  <div><a href="https://regulations.delaware.gov/AdminCode/title9/Division%20of%20Family%20Services%20Office%20of%20Child%20Care%20Licensing/100/101.shtml">14 DE Admin. Code 101</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Licensed-Child-Care-Providers-and-Facilities/iuzd-3dbt">Licensed Providers (iuzd-3dbt)</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Licensed-Child-Care-Providers-and-Facilities-sorte/jxu7-wnw2">Licensed Providers (jxu7-wnw2)</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Child-Care-Licensing-Compliance-Review-Information/wb83-pkcv">Compliance Reviews (wb83-pkcv)</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Child-Care-Licensing-Complaint-Reviews/pnbd-85r6">Complaint Reviews (pnbd-85r6)</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Child-Care-Providers-by-STARS-Level/ggpn-vz9t">STARS Level (ggpn-vz9t)</a></div>
+  <div><a href="https://data.delaware.gov/Human-Services/Licensed-Child-Care-Provider-Facility-by-Age-Group/b2xx-x2v9">By Age Group (b2xx-x2v9)</a></div>
+  <div><a href="https://stateofdelaware.data.socrata.com/browse?tags=childcare">Socrata — childcare tag</a></div>
+  <div><a href="https://delcode.delaware.gov/title29/c100/index.html">29 Del. C. §10002 (FOIA)</a></div>
+  <div><a href="https://dev.socrata.com/docs/endpoints.html">Socrata SODA 2.1 docs</a></div>
+  <div><a href="https://mychildde.org/">My Child DE</a></div>
+  <div><a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/de">Public Health Law Center — DE</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/delaware">National Database (ACF — DE)</a></div>
+</div>
+
+</div>
+</body>
+</html>

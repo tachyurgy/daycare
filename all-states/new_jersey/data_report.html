@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>New Jersey — Child Care Compliance Data Report (2026-04-18)</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #15162a;
+    --panel-2: #1c1d33;
+    --text: #f0f0f5;
+    --muted: #a3a6b8;
+    --accent: #00d4aa;
+    --accent-dim: #0a7561;
+    --border: #2a2c44;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
+  body { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 14px; color: var(--accent); letter-spacing: 0.02em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); }
+  a:hover { border-bottom-style: solid; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 0; }
+  code { background: var(--panel-2); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 18px; font-size: 13.5px; background: var(--panel); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; background: var(--panel-2); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 20px; margin: 6px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 18px; margin: 14px 0; border-radius: 3px; }
+  .links-list { columns: 2; column-gap: 32px; font-size: 13px; }
+  .links-list li { break-inside: avoid; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .badge { display: inline-block; background: var(--accent-dim); color: var(--bg); font-weight: 600; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; letter-spacing: 0.03em; }
+</style>
+</head>
+<body>
+
+<h1>New Jersey — Child Care Compliance Data Report</h1>
+<p class="meta">Population rank: <strong>11</strong> &middot; ~9.3M residents &middot; Prepared 2026-04-18 for ComplianceKit</p>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>New Jersey Department of Children and Families (DCF), Office of Licensing (OOL).</strong>
+</p>
+<ul>
+  <li>Agency: <a href="https://www.nj.gov/dcf/about/divisions/ol/licensing.html">https://www.nj.gov/dcf/about/divisions/ol/licensing.html</a></li>
+  <li>Child Care Centers (program page): <a href="https://www.nj.gov/dcf/about/divisions/ol/centers.html">centers.html</a></li>
+  <li>Consumer portal: <a href="https://childcareexplorer.njccis.com/portal/">Child Care Explorer (NJCCIS)</a> &middot; <a href="https://www.childcarenj.gov/Provider-Search">ChildCareNJ.gov Provider Search</a></li>
+  <li>Complaint hotline: 1-877-667-9845</li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>Statute:</strong> Child Care Center Licensing Act, <a href="https://www.njleg.state.nj.us/">N.J.S.A. 30:5B-1 et seq.</a>; Family Day Care Provider Registration Act, N.J.S.A. 30:5B-16 et seq.</li>
+  <li><strong>Manual of Requirements — Centers:</strong> <a href="https://www.nj.gov/dcf/providers/licensing/laws/CCCmanual.pdf">N.J.A.C. 3A:52</a></li>
+  <li><strong>Manual of Requirements — Family Child Care:</strong> N.J.A.C. 3A:51</li>
+  <li><strong>Background Checks:</strong> N.J.A.C. 3A:54</li>
+</ul>
+
+<h2>3. Contact / Provider Data Inventory</h2>
+<table>
+  <thead>
+    <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Row Count</th><th>Tier</th><th>Limits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Child Care Centers of NJ (statewide roster, NJDCF via NJDEP pipeline)</td>
+      <td><a href="https://njogis-newjersey.opendata.arcgis.com/datasets/njdep::child-care-centers-of-new-jersey/about">ArcGIS Hub</a> <code>0bc9fe070d4c49e1a6555c3fdea15b8a</code></td>
+      <td>CSV via ArcGIS Hub download API</td>
+      <td><strong>4,287</strong> (<strong>4,093</strong> in leads CSV)</td>
+      <td>Primary</td>
+      <td>Has phone + email; <strong>does not include</strong> registered family child care homes</td>
+    </tr>
+    <tr>
+      <td>Child Care Explorer</td>
+      <td><a href="https://childcareexplorer.njccis.com/portal/">childcareexplorer.njccis.com</a></td>
+      <td>React SPA over JSON API; inspection PDFs per facility</td>
+      <td>~4,000 centers + registered family homes</td>
+      <td>Verification</td>
+      <td>Per-facility pages at <code>/provider-details/&lt;facility_id&gt;</code></td>
+    </tr>
+    <tr>
+      <td>data.nj.gov Licensed Child Care Centers (Socrata legacy)</td>
+      <td><a href="https://data.nj.gov/Public-Safety/Licensed-Child-Care-Centers/cru5-4rmm">cru5-4rmm</a></td>
+      <td>CSV / JSON / XML via SODA</td>
+      <td>~4,163</td>
+      <td>Legacy (do not use)</td>
+      <td>Frozen May 2019; retained for historical context</td>
+    </tr>
+    <tr>
+      <td>data.nj.gov Licensed Child Care Centers Explorer</td>
+      <td><a href="https://data.nj.gov/">data.nj.gov</a> <code>pdn3-t238</code></td>
+      <td>Socrata API</td>
+      <td>—</td>
+      <td>Gated</td>
+      <td>Returns 403 externally</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li>Manual of Requirements (N.J.A.C. 3A:52 PDF): <a href="https://www.nj.gov/dcf/providers/licensing/laws/CCCmanual.pdf">link</a></li>
+  <li>Title 3A Chapter 52 (Cornell LII): <a href="https://www.law.cornell.edu/regulations/new-jersey/title-3A/chapter-52">link</a></li>
+  <li>Staff:child ratios (3A:52-4.3): <a href="https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-3A-52-4-3">link</a></li>
+  <li>Staffing Requirements (3A:52-4.2): <a href="https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-3A-52-4-2">link</a></li>
+  <li>NJCCIS professional development: <a href="https://www.nj.gov/dcf/families/childcare/">NJCCIS info</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><code>CCC-21</code> — Application for a License to Operate a Child Care Center</li>
+  <li><code>CCC-2</code> — Application for Child Care Center License (paper fallback)</li>
+  <li><code>DCF CC-1</code> — Universal Child Health Record</li>
+  <li><code>DCF CC-2</code> — Immunization Record</li>
+  <li><code>CCC-108</code> — Inspection / Violation Report</li>
+  <li><code>CCC-64</code> — Criminal History Record Information (CHRI) Request</li>
+  <li><code>CP&amp;P 1-3</code> — Child abuse clearance</li>
+  <li><code>DCF-Form 701</code> — Statement of Intent (Fire Safety)</li>
+  <li><a href="https://www.nj.gov/dcf/providers/licensing/ULR.Forms%20Packet.2021.pdf">OOL universal licensing forms packet (PDF)</a></li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data <span class="badge">new</span></h2>
+<p>
+  Every licensed center and registered family home has a detail page on Child Care Explorer that includes every inspection report (<code>CCC-108</code>) and every OOL Complaint Investigation Summary Report produced since the center was licensed (DCF maintains at minimum a 3-year rolling archive; older reports are usually still accessible).
+</p>
+<h3>Sources</h3>
+<ul>
+  <li><strong>Child Care Explorer portal:</strong> <a href="https://childcareexplorer.njccis.com/portal/">root</a> &middot; per-facility URL pattern <code>/portal/provider-details/&lt;facility_id&gt;</code> (examples: <a href="https://childcareexplorer.njccis.com/portal/provider-details/700361">700361</a>, <a href="https://childcareexplorer.njccis.com/portal/provider-details/702715">702715</a>).</li>
+  <li><strong>ChildCareNJ.gov Provider Search:</strong> <a href="https://www.childcarenj.gov/Provider-Search">parent-facing front door</a> — same data model, different skin.</li>
+  <li><strong>OOL program page:</strong> <a href="https://www.nj.gov/dcf/about/divisions/ol/centers.html">centers.html</a> — describes publication policy.</li>
+  <li><strong>Complaint intake:</strong> <a href="https://njccis.com/njccis/public-complaint">public complaint form</a>.</li>
+</ul>
+
+<h3>Report Fields (CCC-108 Inspection / Violation Report)</h3>
+<table>
+  <thead><tr><th>Field</th><th>Typical Values</th></tr></thead>
+  <tbody>
+    <tr><td>Inspection type</td><td>Initial / Renewal / Annual Monitoring / Complaint Investigation / Follow-up</td></tr>
+    <tr><td>Citation</td><td>N.J.A.C. 3A:52-X.X (centers) &middot; 3A:51-X.X (family homes)</td></tr>
+    <tr><td>Risk classification</td><td>Critical / Significant / Minor (imminent-hazard standard)</td></tr>
+    <tr><td>Plan of Correction</td><td>Due date + provider signature; verification note</td></tr>
+    <tr><td>Outcome</td><td>Full / Provisional / Denial / Suspension / Revocation</td></tr>
+  </tbody>
+</table>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Inspection reports post ~10 business days after onsite visit.</li>
+  <li>Complaint investigation summaries post at investigation close (~45–60 day median).</li>
+  <li>Roster (ArcGIS Hub) refreshes monthly (2026-04-08 snapshot reflected in leads CSV).</li>
+</ul>
+
+<h3>Access Strategy</h3>
+<ul>
+  <li><strong>Playwright</strong> against <code>childcareexplorer.njccis.com/portal/provider-details/&lt;id&gt;</code>. Enumerate integer IDs in the observed <code>700000–900000</code> window.</li>
+  <li>Intercept the page's XHR calls to capture the NJCCIS JSON API response (contains a <code>documents[]</code> array with signed PDF URLs for each inspection). This turns the scrape into a JSON harvest instead of DOM parsing.</li>
+  <li>Cloudflare is present but tolerant of normal headers; use standard UA + referer.</li>
+</ul>
+
+<div class="callout">
+  <strong>OPRA backup.</strong> <a href="https://www.nj.gov/opra/">Open Public Records Act, N.J.S.A. 47:1A-1 et seq.</a> — 7-business-day initial response. DCF OPRA hub: <a href="https://www.nj.gov/dcf/about/divisions/opra/">link</a>. Check <a href="https://opramachine.com/">OPRAmachine</a> for prior request precedents before filing. Reasonable ask: "all inspection reports and complaint investigation summaries issued by DCF OOL between &lt;start&gt; and &lt;end&gt;, in electronic format."
+</div>
+
+<h2>7. Outreach Signals (Hot-Lead Detection)</h2>
+<ul>
+  <li><strong>Provisional license on Explorer page</strong> — provider has up to 6 months to achieve substantial compliance. High-intent buyer.</li>
+  <li><strong>Repeat citation at 3A:52-4.3 (ratios)</strong> across two inspections — chronic ratio violations mean the provider is understaffed or miscoding ages; ComplianceKit's ratio calculator is a direct fix.</li>
+  <li><strong>NJDEP environmental-site proximity</strong> — centers at or near listed contaminated sites (the NJDEP SRWMP pipeline is why the roster lives in the NJDEP portal) have mandatory periodic re-testing (N.J.A.C. 3A:52-7.11) — compliance overhead creates pull.</li>
+  <li><strong>FOIPS flag = true</strong> — these are programs in public schools; generally lower priority (not private operators).</li>
+  <li><strong>Recent license change (renewal date in last 90 days)</strong> — the 3-year cycle renewal is the highest intent purchase window.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ul>
+  <li><strong>Playwright target:</strong> Enumerate Explorer IDs 700000–900000 (sparse; est. 6,000–8,000 active centers + family homes). Harvest JSON + PDFs. Budget ~15 worker-hours at 3 concurrent browsers.</li>
+  <li><strong>Sockrata probe:</strong> Monitor <code>pdn3-t238</code> for public release; if opened, bulk-pull supersedes the ArcGIS CSV for freshness.</li>
+  <li><strong>County CCR&amp;R:</strong> Registered family child care providers (5 children max) are registered through 22 county CCR&amp;R agencies, not DCF directly. For a full family-home list, scrape the <code>childcareexplorer.njccis.com</code> FCC filter rather than the ArcGIS centers-only feed.</li>
+  <li><strong>OPRA for aggregate enforcement:</strong> File scoped requests for adverse-action orders (revocation, denial, non-renewal) per fiscal year to build a timeline.</li>
+  <li><strong>Email append:</strong> Leads CSV already has phone + email for most centers; enrich owner/director titles via CCC-21 application data (in PDFs on Explorer).</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="links-list">
+  <li><a href="https://www.nj.gov/dcf/about/divisions/ol/licensing.html">DCF Office of Licensing</a></li>
+  <li><a href="https://www.nj.gov/dcf/about/divisions/ol/centers.html">DCF Centers &amp; Licensing</a></li>
+  <li><a href="https://childcareexplorer.njccis.com/portal/">Child Care Explorer</a></li>
+  <li><a href="https://childcareexplorer.njccis.com/portal/provider-details/700361">Explorer provider example 700361</a></li>
+  <li><a href="https://childcareexplorer.njccis.com/portal/provider-details/702715">Explorer provider example 702715</a></li>
+  <li><a href="https://www.childcarenj.gov/Provider-Search">ChildCareNJ.gov Provider Search</a></li>
+  <li><a href="https://njccis.com/njccis/public-complaint">Public complaint form</a></li>
+  <li><a href="https://www.nj.gov/dcf/providers/licensing/laws/CCCmanual.pdf">Manual of Requirements 3A:52 PDF</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/new-jersey/title-3A/chapter-52">3A:52 Cornell LII</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-3A-52-4-3">3A:52-4.3 Ratios</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-3A-52-4-2">3A:52-4.2 Staffing</a></li>
+  <li><a href="https://njogis-newjersey.opendata.arcgis.com/datasets/njdep::child-care-centers-of-new-jersey/about">ArcGIS Hub roster</a></li>
+  <li><a href="https://data.nj.gov/Public-Safety/Licensed-Child-Care-Centers/cru5-4rmm">Socrata (legacy, frozen)</a></li>
+  <li><a href="https://www.nj.gov/opra/">OPRA Central</a></li>
+  <li><a href="https://www.nj.gov/dcf/about/divisions/opra/">DCF OPRA</a></li>
+  <li><a href="https://opramachine.com/">OPRAmachine</a></li>
+  <li><a href="https://www.nj.gov/dcf/providers/licensing/ULR.Forms%20Packet.2021.pdf">OOL forms packet</a></li>
+  <li><a href="https://www.nj.gov/dcf/providers/licensing/CCL.Information.to.Parents.Statement.pdf">Information to Parents statement</a></li>
+  <li><a href="https://childcareconnection-nj.org/families/child-care-referrals/child-care-inspection-reports/">Child Care Connection NJ — inspection-reports how-to</a></li>
+</ul>
+
+<div class="footer">
+  ComplianceKit state intelligence &middot; New Jersey &middot; 2026-04-18. All URLs verified at prep time. &copy; 2026.
+</div>
+
+</body>
+</html>

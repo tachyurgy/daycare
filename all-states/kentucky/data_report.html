@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kentucky — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #151528;
+    --panel-2: #1c1c33;
+    --text: #f0f0f5;
+    --muted: #8a8aa8;
+    --accent: #00d4aa;
+    --accent-dim: #00a888;
+    --border: #26264a;
+    --warn: #ffc266;
+    --bad: #ff6b8a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  header.top { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; }
+  h1 { margin: 0.4rem 0 0.3rem; font-size: 2.6rem; letter-spacing: -0.02em; font-weight: 700; }
+  h1 .rank { color: var(--accent); font-size: 1.2rem; margin-left: 0.6rem; vertical-align: middle; font-weight: 500; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  h2 { margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  h2 .n { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.95rem; margin-right: 0.6rem; font-weight: 400; }
+  h3 { margin-top: 2rem; margin-bottom: 0.6rem; font-size: 1.05rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); word-break: break-word; }
+  a:hover { color: #6affd4; border-bottom-style: solid; }
+  p { margin: 0.5rem 0 1rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; background: var(--panel); font-size: 0.92rem; }
+  thead th { background: var(--panel-2); text-align: left; padding: 0.7rem 0.9rem; color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--panel-2); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem 1.5rem; margin: 1rem 0; }
+  .pill { display: inline-block; padding: 0.15rem 0.55rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; font-size: 0.78rem; color: var(--muted); margin-right: 0.4rem; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .pill.good { color: var(--accent); border-color: var(--accent-dim); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.bad { color: var(--bad); border-color: var(--bad); }
+  code { background: var(--panel-2); color: var(--accent); padding: 0.1rem 0.35rem; border-radius: 3px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 720px) { h1 { font-size: 2rem; } .two-col { grid-template-columns: 1fr; } }
+  .footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ComplianceKit Research Pack</div>
+  <h1>Kentucky <span class="rank">Rank #26 by population</span></h1>
+  <div class="meta">Compiled 2026-04-18 &middot; Ohio Valley expansion corridor &middot; ~1,783 licensed centers &amp; certified homes</div>
+</header>
+
+<h2><span class="n">1.</span>Licensing Authority</h2>
+<div class="card">
+  <p>Split between two agencies of the <strong>Cabinet for Health and Family Services (CHFS)</strong>:</p>
+  <ul>
+    <li><strong>Office of Inspector General (OIG), Division of Regulated Child Care (DRCC)</strong> — licensing &amp; inspections. <a href="https://www.chfs.ky.gov/agencies/os/oig/drcc/Pages/default.aspx">chfs.ky.gov/agencies/os/oig/drcc</a></li>
+    <li><strong>Department for Community Based Services (DCBS), Division of Child Care (DCC)</strong> — subsidy (CCAP), Kentucky All STARS QRIS, training registry. <a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Pages/find-care.aspx">chfs.ky.gov/agencies/dcbs/dcc</a></li>
+    <li>kynect public search (inspections + ratings) — <a href="https://kynect.ky.gov/benefits/s/child-care-provider">kynect.ky.gov/benefits/s/child-care-provider</a></li>
+    <li>Email: <a href="mailto:chfsoigrccportal@ky.gov">chfsoigrccportal@ky.gov</a> &middot; Fax: (502) 564-9350</li>
+  </ul>
+  <p><span class="pill">Type I (non-residential, 4+ children)</span><span class="pill">Type II (home, 7-12 children)</span><span class="pill">Certified Family Home (≤6 children)</span><span class="pill">Subsidy-Registered</span><span class="pill">License-Exempt</span></p>
+</div>
+
+<h2><span class="n">2.</span>Primary Regulatory Citation</h2>
+<table>
+  <thead><tr><th>Authority</th><th>Citation</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>Licensing statute</td><td>KRS Ch. 199; KRS 199.898 – 199.899</td><td><a href="https://apps.legislature.ky.gov/law/statutes/chapter.aspx?chapter=199">apps.legislature.ky.gov</a></td></tr>
+    <tr><td>Licensure regulation</td><td>922 KAR 2:090</td><td><a href="https://apps.legislature.ky.gov/law/kar/titles/922/002/090/">KAR 922/002/090</a></td></tr>
+    <tr><td>Provider requirements</td><td>922 KAR 2:110</td><td><a href="https://www.publichealthlawcenter.org/sites/default/files/KY_922%20KAR%202.110%20Child%20Care%20Facility%20Provider%20Requirements_H_FINAL.pdf">PHLC — 922 KAR 2:110</a></td></tr>
+    <tr><td>Health &amp; safety standards (ratios)</td><td>922 KAR 2:120</td><td><a href="https://apps.legislature.ky.gov/law/kar/titles/922/002/120/">KAR 922/002/120</a></td></tr>
+    <tr><td>Family home certification</td><td>922 KAR 2:100</td><td><a href="https://regulations.justia.com/states/kentucky/title-922/chapter-2/100/">Justia — 922 KAR 2:100</a></td></tr>
+    <tr><td>Background checks (CCBC)</td><td>922 KAR 2:280</td><td>KY CHFS</td></tr>
+    <tr><td>Kentucky All STARS QRIS</td><td>922 KAR 2:270</td><td><a href="https://www.law.cornell.edu/regulations/kentucky/922-KAR-2-270">Cornell LII</a></td></tr>
+    <tr><td>Open Records Act</td><td>KRS 61.870 – 61.884</td><td><a href="https://apps.legislature.ky.gov/law/statutes/chapter.aspx?chapter=61">KRS Ch. 61</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">3.</span>Contact / Provider Data Pull</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Data source type</td><td><span class="pill bad">Bronze — aggregator (CHFS portal is Salesforce LWC, not directly scrape-friendly)</span></td></tr>
+    <tr><td>Aggregator used</td><td>childcarecenter.us (CHFS licensee roster upstream)</td></tr>
+    <tr><td>Cities captured</td><td>Louisville (20), Lexington (20), Bowling Green (20), Owensboro (8)</td></tr>
+    <tr><td>Leads CSV rows in repo</td><td>68 rows — <code>/Users/magnusfremont/Desktop/daycare/kentucky_leads.csv</code></td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state, phone</td></tr>
+    <tr><td>Email / website</td><td><span class="pill warn">Blank — per-record enrichment required</span></td></tr>
+    <tr><td>Authoritative portal</td><td><a href="https://kynect.ky.gov/benefits/s/child-care-provider">kynect Child Care Provider Search</a> (Salesforce Lightning; requires headless browser)</td></tr>
+    <tr><td>Provider detail entry</td><td><a href="https://kynect.ky.gov/benefits/s/child-care-provider-details">Child Care Provider Details</a> (requires record ID)</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">4.</span>Compliance Framework Links</h2>
+<ul>
+  <li>KY Child Care Providers Resource Guide (12/10/2025) — <a href="https://www.chfs.ky.gov/agencies/os/oig/drcc/Documents/KY%20Child%20Care%20Providers%20Resource%20Guide%2012.10.25.pdf">chfs.ky.gov — Resource Guide</a></li>
+  <li>Initial License Application (OIG-DRCC-01) — <a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/oigdrcc01.pdf">chfs.ky.gov — OIG-DRCC-01</a></li>
+  <li>Looking for Quality Child Care (DCC-112) — <a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/dcc112.pdf">DCC-112 PDF</a></li>
+  <li>Division of Child Care Consumer Education Statement — <a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/consumereducationstatement.pdf">Consumer Ed Statement</a></li>
+  <li>Staff-to-Child Ratio Posting (Child Care Aware KY) — <a href="https://www.childcareawareky.org/wp-content/uploads/2019/09/Section-12-Forms-and-Postings-4-Licensed-Child-Care-Staff-to-Child-Ratio.pdf">ccaky ratio posting</a></li>
+  <li>Public Health Law Center — KY Child Care Laws — <a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/ky">PHLC — KY</a></li>
+  <li>ACF Licensing Regulations Database — KY Centers (June 2021) — <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/KY_CENTER_JUNE_2021_508.pdf">ACF — KY Centers June 2021</a></li>
+  <li>kynect Child Care Provider Search FAQ — <a href="https://www.chfs.ky.gov/agencies/dms/kynect/kbFAQChildCareSearch.pdf">kynect FAQ PDF</a></li>
+</ul>
+
+<h2><span class="n">5.</span>Licensing Forms</h2>
+<table>
+  <thead><tr><th>Form #</th><th>Title</th></tr></thead>
+  <tbody>
+    <tr><td>OIG-DRCC-01</td><td>Initial Child-Care Center License Application</td></tr>
+    <tr><td>OIG-DRCC-02</td><td>Licensed Provider Request for Appeal</td></tr>
+    <tr><td>OIG-DRCC-03</td><td>License Change Application (location, capacity, service, hours)</td></tr>
+    <tr><td>OIG-DRCC-06</td><td>Child-Care Center License Renewal Form</td></tr>
+    <tr><td>OIG-DRCC-09</td><td>Serious Incident Report</td></tr>
+    <tr><td>DPP-156 / CA-N Request</td><td>Child Abuse/Neglect Registry Check</td></tr>
+    <tr><td>KSP + FBI fingerprint packet</td><td>Background-check submission</td></tr>
+    <tr><td>Kentucky All STARS forms</td><td>QRIS enrollment / rating review</td></tr>
+  </tbody>
+</table>
+<p>Forms and portal: <a href="https://www.chfs.ky.gov/agencies/os/oig/drcc/Pages/default.aspx">chfs.ky.gov/agencies/os/oig/drcc</a></p>
+
+<h2><span class="n">6.</span>Violations &amp; Inspection Data</h2>
+<div class="card">
+<p>Kentucky publishes inspection reports and "non-compliance" citations per facility on the <strong>kynect Child Care Provider Details</strong> page. Reports include plans of correction and All STARS rating history. The kynect front-end is a Salesforce Lightning Web Component — full bulk access requires a headless browser or a KRS 61 open-records request.</p>
+<p><strong>Full details:</strong> <a href="./violations.md">violations.md</a></p>
+<ul>
+  <li>CHFS Inspection &amp; Abuse/Injury Data landing — <a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Pages/abuseinjurydataandinspection.aspx">chfs.ky.gov — inspection &amp; abuse/injury</a></li>
+  <li>Annual aggregate Injury/Abuse Report (PDF, refreshed each year) linked on the CHFS page.</li>
+  <li>KRS 61.872 requires response to open-records requests within 5 business days.</li>
+</ul>
+<p><span class="pill good">Per-provider inspection history</span><span class="pill good">Plans of correction published</span><span class="pill warn">Salesforce LWC — JS required</span><span class="pill">"Non-compliances" terminology</span></p>
+</div>
+
+<h2><span class="n">7.</span>Outreach Signals</h2>
+<div class="two-col">
+<div class="card">
+  <h3>Regulatory pain points</h3>
+  <ul>
+    <li>CCBC 5-component background check must clear before any new hire starts.</li>
+    <li>15 hours annual in-service training per staff; 6 hours for CFCCH.</li>
+    <li>Transportation log retention is <strong>5 years</strong> — unusually long; a software advantage.</li>
+    <li>TB screening every 2 years for all staff.</li>
+    <li>Serious Incident Reports within 24 hours.</li>
+    <li>Quarterly inspections during 2-year probation after a cited violation.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Market heat &amp; channel</h3>
+  <ul>
+    <li>Kentucky All STARS mandatory for all licensed centers — Level 3-5 upgrades drive software budget.</li>
+    <li>Louisville, Lexington, N. Kentucky metro, Bowling Green, Owensboro = priority MSAs.</li>
+    <li>Child Care Aware of Kentucky referrals ((877) 316-3552) — high-intent directory for parents.</li>
+    <li>CHFS publishes a Consumer Education Statement highlighting the kynect portal — parents reference it, driving director compliance urgency.</li>
+  </ul>
+</div>
+</div>
+
+<h2><span class="n">8.</span>Next-Step Data Acquisition</h2>
+<ol>
+  <li>File a Kentucky Open Records request (<a href="mailto:chfsoigrccportal@ky.gov">chfsoigrccportal@ky.gov</a>) for the full licensee roster + 24-month non-compliance history in CSV/Excel. 5-day response requirement per KRS 61.872.</li>
+  <li>Build Playwright-based scraper against the kynect Salesforce portal to harvest provider record IDs; use residential proxies and rate-limit aggressively.</li>
+  <li>Once record IDs are seeded, fetch <code>/benefits/s/child-care-provider-details?id={id}</code> and parse inspection + citation table; download plan-of-correction PDFs.</li>
+  <li>Enrich phones / emails via commercial enrichment against matched Type I / II centers.</li>
+  <li>Cross-reference Kentucky All STARS rating levels for lead scoring — recent "non-compliance" citations + non-5-star rating = highest-intent target.</li>
+</ol>
+
+<h2><span class="n">9.</span>All Links</h2>
+<div class="card">
+<h3>Licensing &amp; Rules</h3>
+<ul>
+  <li><a href="https://www.chfs.ky.gov/agencies/os/oig/drcc/Pages/default.aspx">CHFS OIG — Division of Regulated Child Care</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Pages/find-care.aspx">CHFS DCBS — Division of Child Care</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Pages/abuseinjurydataandinspection.aspx">CHFS — Child Care Inspection &amp; Abuse/Injury Data</a></li>
+  <li><a href="https://apps.legislature.ky.gov/law/kar/titles/922/002/090/">922 KAR 2:090 (licensure)</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/kentucky/922-KAR-2-090_v2">922 KAR 2:090 (2025 update, Cornell LII)</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/sites/default/files/KY_922%20KAR%202.110%20Child%20Care%20Facility%20Provider%20Requirements_H_FINAL.pdf">922 KAR 2:110 (provider requirements)</a></li>
+  <li><a href="https://apps.legislature.ky.gov/law/kar/titles/922/002/120/">922 KAR 2:120 (health &amp; safety)</a></li>
+  <li><a href="https://regulations.justia.com/states/kentucky/title-922/chapter-2/100/">922 KAR 2:100 (family home certification)</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/kentucky/922-KAR-2-270">922 KAR 2:270 (All STARS)</a></li>
+  <li><a href="https://apps.legislature.ky.gov/law/statutes/chapter.aspx?chapter=199">KRS Ch. 199</a></li>
+  <li><a href="https://apps.legislature.ky.gov/law/statutes/chapter.aspx?chapter=61">KRS Ch. 61 (Open Records)</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/KY_CENTER_JUNE_2021_508.pdf">ACF Licensing DB — KY Centers (2021)</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/kentucky-cabinet-health-and-family-services-division-child-care">ACF Licensing DB — KY contact</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/resources/healthy-child-care/ky">PHLC — KY Child Care Laws</a></li>
+</ul>
+<h3>Provider search &amp; forms</h3>
+<ul>
+  <li><a href="https://kynect.ky.gov/benefits/s/child-care-provider">kynect Child Care Provider Search</a></li>
+  <li><a href="https://kynect.ky.gov/benefits/s/child-care-provider-details">kynect Provider Details entry</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dms/kynect/kbFAQChildCareSearch.pdf">kynect FAQ (PDF)</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/oigdrcc01.pdf">OIG-DRCC-01 (initial license application)</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/dcc112.pdf">DCC-112 Looking for Quality Child Care</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/dcbs/dcc/Documents/consumereducationstatement.pdf">Consumer Education Statement</a></li>
+  <li><a href="https://www.chfs.ky.gov/agencies/os/oig/drcc/Documents/KY%20Child%20Care%20Providers%20Resource%20Guide%2012.10.25.pdf">KY Child Care Providers Resource Guide (12/2025)</a></li>
+  <li><a href="https://www.childcareawareky.org/kynect-childcare-provider-locator/">ChildCare Aware KY — kynect Locator</a></li>
+  <li><a href="https://www.childcareawareky.org/health-and-safety-tips-and-tools/">ChildCare Aware KY — health &amp; safety</a></li>
+</ul>
+</div>
+
+<div class="footer">
+  ComplianceKit research pack &middot; Kentucky data report &middot; 2026-04-18. Internal use — no public distribution.
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Indiana — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #14142b;
+    --panel-hi: #1b1b3a;
+    --border: #2a2a4a;
+    --text: #f0f0f5;
+    --muted: #9a9ab0;
+    --accent: #00d4aa;
+    --warn: #ffb347;
+    --link: #7cf5d8;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1040px; margin:0 auto; padding:48px 32px 96px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:40px; }
+  header .tag { display:inline-block; background:rgba(0,212,170,0.12); color:var(--accent); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  header h1 { font-size:42px; font-weight:700; margin:16px 0 8px; letter-spacing:-.01em; }
+  header .meta { color:var(--muted); font-size:14px; }
+  header .meta span { margin-right:24px; }
+  header .meta strong { color:var(--text); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h2 .num { display:inline-block; color:var(--accent); font-family:ui-monospace,Menlo,monospace; font-size:14px; margin-right:10px; vertical-align:2px; }
+  a { color:var(--link); text-decoration:none; border-bottom:1px dotted var(--link); }
+  a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  p,li { font-size:15px; }
+  ul { padding-left:20px; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--panel-hi); color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(0,212,170,0.03); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-family:ui-monospace,Menlo,monospace; background:rgba(0,212,170,0.1); color:var(--accent); border:1px solid rgba(0,212,170,0.3); }
+  .pill.warn { background:rgba(255,179,71,0.1); color:var(--warn); border-color:rgba(255,179,71,0.3); }
+  code { font-family:ui-monospace,Menlo,monospace; background:var(--panel); color:var(--accent); padding:2px 6px; border-radius:3px; font-size:13px; }
+  .callout { background:var(--panel); border-left:3px solid var(--accent); padding:16px 20px; margin:16px 0; border-radius:0 6px 6px 0; color:var(--muted); font-size:14px; }
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; }
+  .link-grid { columns:2; column-gap:32px; font-size:13px; } .link-grid a { display:block; padding:2px 0; word-break:break-all; }
+  @media (max-width:720px){ .link-grid{columns:1;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Indiana</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 17th (~6.8M)</span>
+    <span><strong>Licensed centers:</strong> ~748 (in our extract)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Indiana Family and Social Services Administration (FSSA)</strong> — Office of Early Childhood and Out-of-School Learning (OECOSL) / Bureau of Child Care. Consumer portal: <a href="https://www.in.gov/fssa/carefinder/">in.gov/fssa/carefinder</a>. Search: <a href="https://secure.in.gov/apps/fssa/providersearch/home/category/ch">Provider Search</a>. Contact: 877-511-1144, carefinder@fssa.in.gov.</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>470 IAC 3-4.7</strong> — Child Care Centers Licensing — <a href="https://www.law.cornell.edu/regulations/indiana/title-470/article-3/rule-470-IAC-3-4.7">Cornell LII</a></li>
+  <li><strong>470 IAC 3-1.1</strong> — Licensed Child Care Homes</li>
+  <li><strong>470 IAC 3-4.5</strong> — Unlicensed Registered Child Care Ministries</li>
+  <li><strong>Enabling statute:</strong> Indiana Code 12-17.2</li>
+  <li><strong>IC 12-17.2-2-1(9):</strong> prohibits publication of physical addresses of licensed child care <em>homes</em> — important scraping constraint</li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead><tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr><td>Licensed Child Care Center Listing</td><td>Primary bulk (centers)</td><td>PDF (90 pages)</td><td>Quarterly</td><td><a href="https://www.in.gov/fssa/carefinder/files/Indiana_Licensed_Child_Care_Center_Listing.pdf">Center Listing PDF</a></td></tr>
+    <tr><td>Licensed Child Care Home Listing</td><td>Homes (addresses redacted)</td><td>PDF</td><td>Quarterly</td><td><a href="https://secure.in.gov/fssa/carefinder/files/Indiana_Licensed_Child_Care_Home_Listing.pdf">Home Listing PDF</a></td></tr>
+    <tr><td>FSSA Child Care Finder</td><td>Consumer search</td><td>HTML (ASP.NET)</td><td>Live</td><td><a href="https://secure.in.gov/apps/fssa/providersearch/home/category/ch">Provider Search</a></td></tr>
+    <tr><td>Provider listings index</td><td>Index page</td><td>HTML</td><td>Live</td><td><a href="https://www.in.gov/fssa/carefinder/family-resources/forms/child-care-provider-listings/">carefinder provider listings</a></td></tr>
+    <tr><td>Indiana Data Hub</td><td>Open data</td><td>No CC dataset</td><td>—</td><td><a href="https://hub.mph.in.gov/">hub.mph.in.gov</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 752 licensed center rows (name, city, state, phone) extracted via pdftotext column-parsing. Indiana does NOT publish a CSV/JSON feed — PDF is the only bulk channel. Homes are in a separate PDF but addresses are redacted by statute.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>Laws, rules, policies</td><td><a href="https://www.in.gov/fssa/carefinder/laws-rules-and-related-policies/">carefinder laws &amp; rules</a></td></tr>
+    <tr><td>Center Interpretive Guide</td><td><a href="https://www.in.gov/fssa/carefinder/files/Centers_Interpretive_Guide.pdf">Centers Interpretive Guide PDF</a></td></tr>
+    <tr><td>Paths to QUALITY™ (PTQ / QRIS)</td><td><a href="https://brighterfuturesindiana.org/quality-care">Brighter Futures Indiana</a></td></tr>
+    <tr><td>On My Way Pre-K</td><td><a href="https://www.in.gov/fssa/childcarefinder/">childcarefinder</a></td></tr>
+    <tr><td>Critical Health &amp; Safety Violation Q&amp;A</td><td><a href="https://www.in.gov/fssa/carefinder/critical-health-and-safety-violations-qa/">Critical Violations Q&amp;A</a></td></tr>
+    <tr><td>ACF national licensing</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/indiana-family-and-social-services-administration-office-early-childhood-and-out">ACF IN state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li><strong>Form 50076</strong> — Initial Center Licensing Application (via I-LEAD / ProviderConnect)</li>
+  <li><strong>Form 49467</strong> — Child Care Provider Background Check Authorization</li>
+  <li><strong>Form 44129</strong> — Caregiver Qualifications Verification</li>
+  <li><strong>Form 55090</strong> — Incident / Injury Report</li>
+  <li><strong>Form 53466</strong> — Child's Health Record</li>
+  <li><strong>Form 53455</strong> — Medication Administration Consent</li>
+  <li>Fire Marshal (IDHS) and local health department inspection forms</li>
+  <li>Full list: <a href="https://www.in.gov/fssa/carefinder/family-resources/forms/">carefinder forms page</a></li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://secure.in.gov/apps/fssa/providersearch/home/category/ch">FSSA Provider Search</a></td><td>Per-facility: inspection history, rule citations, red "critical" flag</td><td>HTML + PDF</td><td><span class="pill warn">No</span></td></tr>
+    <tr><td><a href="https://www.in.gov/fssa/carefinder/critical-health-and-safety-violations-qa/">Critical Violations Q&amp;A</a></td><td>Categorization/definition of "red notification"</td><td>HTML</td><td>—</td></tr>
+    <tr><td>APRA (IC 5-14-3) request</td><td>Statewide violation extract</td><td>Excel (on request)</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+  </tbody>
+</table>
+<p>Indiana flags "<strong>critical health &amp; safety violations</strong>" with a red notification on each provider's search page. <strong>No CSV, Socrata, ArcGIS, or API feed of violations exists.</strong> Bulk harvest path requires a headless browser against the ASP.NET app (session-cookie + viewstate dependency). APRA path: request statewide extract from FSSA via <a href="https://www.in.gov/fssa/5417.htm">FSSA public records</a>; 7 calendar days to acknowledge, fees capped at actual-cost copying.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>Federal CCDBG compliance pain.</strong> Every licensed provider must document 10-topic pre-service training; ComplianceKit's training-hours tracker is a direct fit.</li>
+  <li><strong>PTQ level progression is revenue-linked.</strong> Moving from PTQ 1 → 3 unlocks On My Way Pre-K eligibility and higher CCDF reimbursement — a quantifiable ROI story.</li>
+  <li><strong>Tornado drill logging</strong> (required Mar–Jun monthly) is a MO/IN-specific need that paper-based calendars routinely miss; digital drill logger is a wedge.</li>
+  <li><strong>Home provider privacy constraint</strong> (IC 12-17.2-2-1(9)) means marketing can't use home addresses — but phone-based outbound works; ~2,500 licensed homes are hard to reach via mail.</li>
+  <li><strong>Registered Child Care Ministries</strong> (~1,000) are statutorily exempt from full licensing but must still register &amp; meet minimum health/safety rules — underserved segment with low competition.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Scrape inspection detail pages</strong> with Playwright — target the 748 center rows already in our CSV; persist inspection dates, critical-violation flag, and corrected/open status.</li>
+  <li><strong>File an APRA request</strong> to FSSA OECOSL for a statewide violation extract FY2024–FY2026 (date, facility ID, rule citation, correction status) — Excel preferred. Cite IC 5-14-3.</li>
+  <li><strong>Add licensed Homes (~2,500)</strong> via the Home Listing PDF — scrape respecting the address redaction (keep name + city + phone only).</li>
+  <li><strong>Add Registered Child Care Ministries</strong> via their separate PDF — this unlocks a second product tier (minimum-standards compliance) for faith-based operators.</li>
+  <li><strong>Enrich with PTQ level</strong> by joining against Brighter Futures Indiana's published ratings — filters lead list to PTQ 1–2 "level-up prospects".</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://www.in.gov/fssa/carefinder/">in.gov/fssa/carefinder</a>
+  <a href="https://www.in.gov/fssa/childcarefinder/">in.gov/fssa/childcarefinder</a>
+  <a href="https://secure.in.gov/apps/fssa/providersearch/home/category/ch">Provider Search</a>
+  <a href="https://www.in.gov/fssa/carefinder/laws-rules-and-related-policies/">laws, rules, policies</a>
+  <a href="https://www.in.gov/fssa/carefinder/critical-health-and-safety-violations-qa/">critical violations Q&amp;A</a>
+  <a href="https://www.in.gov/fssa/carefinder/files/Indiana_Licensed_Child_Care_Center_Listing.pdf">Center Listing PDF</a>
+  <a href="https://secure.in.gov/fssa/carefinder/files/Indiana_Licensed_Child_Care_Home_Listing.pdf">Home Listing PDF</a>
+  <a href="https://www.in.gov/fssa/carefinder/files/Centers_Interpretive_Guide.pdf">Centers Interpretive Guide</a>
+  <a href="https://www.in.gov/fssa/carefinder/family-resources/forms/">Carefinder Forms</a>
+  <a href="https://www.in.gov/fssa/carefinder/family-resources/forms/child-care-provider-listings/">Provider listings index</a>
+  <a href="https://www.in.gov/fssa/carefinder/contact-us/">Contact FSSA Carefinder</a>
+  <a href="https://www.in.gov/fssa/5417.htm">FSSA public records request</a>
+  <a href="https://www.in.gov/oig/">IN Office of Inspector General</a>
+  <a href="https://brighterfuturesindiana.org/quality-care">Brighter Futures Indiana</a>
+  <a href="https://www.law.cornell.edu/regulations/indiana/title-470/article-3/rule-470-IAC-3-4.7">470 IAC 3-4.7 (Cornell)</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/indiana-family-and-social-services-administration-office-early-childhood-and-out">ACF IN state page</a>
+  <a href="https://childcare.gov/state-resources/indiana">Childcare.gov IN</a>
+  <a href="https://oureverydaylife.com/daycare-inspection-reports-indiana-8322560.html">Parent guide to inspection reports</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Indiana · Generated 2026-04-18 · Home addresses omitted per IC 12-17.2-2-1(9).
+</footer>
+
+</div>
+</body>
+</html>

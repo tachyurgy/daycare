@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Texas — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a; --bg-elev: #15152a; --bg-card: #1a1a30;
+    --text: #f0f0f5; --text-dim: #a0a0b5;
+    --accent: #00d4aa; --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45; --warn: #ffb347; --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 24px; margin-bottom: 40px; }
+  header .tag { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.3rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-elev); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.5px; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0 6px 18px; position: relative; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  code { background: var(--bg-elev); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+  .highlight { background: linear-gradient(90deg, rgba(0, 212, 170, 0.1), transparent); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Texas</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 2</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated operations:</strong> ~16,000-18,000</span>
+    <span><strong>Inspection data:</strong> <span class="pill pill-ok">Socrata + native public search</span></span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>Texas Health and Human Services Commission (HHSC), Child Care Regulation (CCR) Division.</strong> (Transferred from DFPS to HHSC on 2017-09-01.) HHSC state employees conduct all inspections using the CLASS case-management system.</p>
+    <div class="kv"><strong>HHSC address</strong> 4900 North Lamar Blvd., Austin, TX 78751</div>
+    <div class="kv"><strong>Public search</strong> <a href="https://childcare.hhs.texas.gov/">childcare.hhs.texas.gov</a></div>
+    <div class="kv"><strong>HHSC child care</strong> <a href="https://www.hhs.texas.gov/services/family-safety-resources/child-care">hhs.texas.gov/services/family-safety-resources/child-care</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> Texas Human Resources Code <strong>Chapter 42</strong>.</p>
+    <p><strong>Administrative Code:</strong> Texas Administrative Code Title 26, <strong>Chapters 744-749</strong>:</p>
+    <ul>
+      <li><strong>26 TAC Ch. 744</strong> — School-Age / Before-After School</li>
+      <li><strong>26 TAC Ch. 745</strong> — Licensing (procedural rules)</li>
+      <li><strong>26 TAC Ch. 746</strong> — Child-Care Centers (core)</li>
+      <li><strong>26 TAC Ch. 747</strong> — Child-Care Homes</li>
+      <li><strong>26 TAC Ch. 748</strong> — General Residential</li>
+      <li><strong>26 TAC Ch. 749</strong> — Child-Placing Agencies</li>
+    </ul>
+    <p><strong>Deficiency weight system:</strong> High / Medium-High / Medium / Medium-Low / Low — drives enforcement escalation.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows</td><td>9,686 (incl. header)</td><td><code>texas_leads.csv</code> (project root)</td></tr>
+        <tr><td>Data rows</td><td>~9,685 operations</td><td>Name / city / zip / phone schema</td></tr>
+        <tr><td>Est. state market</td><td>~16,000-18,000 operations</td><td>Centers + LCCH + RCCH + Listed + School-Age</td></tr>
+        <tr><td>Coverage</td><td>~54-60%</td><td>Major MSAs well represented</td></tr>
+        <tr><td>Pre-existing product spec</td><td>1,608-line HTML</td><td><code>planning-docs/state-docs/texas/texas-compliancekit-product-spec.html</code></td></tr>
+        <tr><td>Inspection bulk data</td><td><span class="pill pill-ok">Socrata API</span></td><td><a href="https://data.texas.gov/See-Category-Tile/HHSC-CCL-Daycare-and-Residential-Operations-Data/bc5r-88dy">data.texas.gov HHSC CCL</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://www.hhs.texas.gov/services/family-safety-resources/child-care">HHSC Child Care hub</a></li>
+      <li><a href="https://www.hhs.texas.gov/providers/child-care-regulation/minimum-standards">Minimum Standards index</a></li>
+      <li><a href="https://childcare.hhs.texas.gov/">Search Texas Child Care</a></li>
+      <li><a href="https://www.hhs.texas.gov/about/records-statistics/data-statistics/child-care-regulation-statistics">CCR Statistics</a></li>
+      <li><a href="https://www.hhs.texas.gov/services/safety/child-care/frequently-asked-questions-about-texas-child-care/what-are-ccr-reports-inspections-enforcement-actions">CCR reports / enforcement FAQ</a></li>
+      <li><a href="https://texreg.sos.state.tx.us/public/readtac$ext.ViewTAC?tac_view=4&amp;ti=26&amp;pt=1&amp;ch=746">26 TAC Ch. 746 (Centers)</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/texas-health-and-human-services-child-care-regulation">ACF Licensing DB — TX</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms (CCR Form series)</h2>
+  <div class="card">
+    <ul>
+      <li><code>Form 2936</code> — Application for License / Certification</li>
+      <li><code>Form 2935</code> — Admission Information</li>
+      <li><code>Form 2941</code> — Sign-In / Sign-Out Log</li>
+      <li><code>Form 2948</code> — Plan of Operation</li>
+      <li><code>Form 1100</code> — Daily Building &amp; Grounds Checklist (24 items)</li>
+      <li><code>Form 7239</code> — Incident / Illness Report</li>
+      <li><code>Form 7259</code> — Personnel Records Evaluation (inspector)</li>
+      <li><code>Form 7260</code> — Children's Records Evaluation (inspector)</li>
+      <li><code>Form 7261</code> — Center Records Evaluation (inspector)</li>
+      <li><code>Form 7263</code> — Emergency Practices</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="highlight">
+      <strong>Texas is the gold standard for public child-care inspection data in the United States.</strong> Every deficiency at every licensed operation is posted within 14 days of the visit with full Minimum Standard citation, narrative, weight, corrective action, and resolution. Bulk access is available via the Socrata-backed Texas Open Data Portal.
+    </div>
+    <div class="grid2">
+      <div>
+        <h3>Search Texas Child Care</h3>
+        <p>Per-operation HTML with inline deficiency table. Deep-linkable operation pages. No scraping gymnastics required.</p>
+      </div>
+      <div>
+        <h3>Texas Open Data Portal</h3>
+        <p>Socrata-backed datasets. SODA REST API. CSV / JSON / XML / RDF / RSS export. Production-grade ingestion path.</p>
+      </div>
+      <div>
+        <h3>Deficiency weight system</h3>
+        <p>High / Medium-High / Medium / Medium-Low / Low — drives administrative penalty amount and enforcement escalation (evaluation → probation → suspension → revocation).</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p>Texas Public Information Act (Gov. Code Ch. 552). 10-business-day initial determination. Useful for internal data dictionaries / narratives not already in Socrata.</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Public deficiency postings = public reputation pressure</strong> — every operator's compliance history is google-able by parents. Reputation-management value prop resonates strongly.</li>
+      <li><strong>Ratio-violation pain:</strong> 640 cited ratio violations/year in TX (Medium-High weight) — real-time ratio monitor is a direct hit.</li>
+      <li><strong>Daily Building &amp; Grounds Checklist (Form 1100)</strong> — 24 items, Monday-Friday — the single most operationally intensive recurring compliance task; digitizing it saves hours/week per director.</li>
+      <li><strong>Plan of Operation (Form 2948)</strong> — operational blueprint, updated annually; maps to Policy Library module.</li>
+      <li><strong>24+24 training structure</strong> — 24 hrs pre-service (8 before child contact) + 24 hrs annual in-service. Staff training tracker is a natural Staff File sub-product.</li>
+      <li><strong>Administrative penalty threat</strong> — 30-day hearing window creates urgency; providers with active citations have the highest buying intent.</li>
+      <li><strong>Five MSA dominance:</strong> Houston, DFW, San Antonio, Austin, El Paso cover majority of centers. Geographic focus = efficient GTM.</li>
+      <li><strong>Chapter 745 Subchapter F background-check rigor</strong> — ongoing re-check schedule = ongoing credential-tracking pain.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px;">
+      <li style="margin-bottom:8px;"><strong>Pull HHSC CCL operations data</strong> from Socrata (`bc5r-88dy` and related sub-datasets). Full operations roster + deficiency table joined — the foundation of the Texas compliance knowledge graph.</li>
+      <li style="margin-bottom:8px;"><strong>Cross-reference CACFP site-level datasets</strong> (`y9zm-iygj` centers, `ub2y-4i6h` homes, `x9ve-x3iy` meal reimbursement) for federal-participation flag — CACFP operators have higher paperwork tolerance and higher willingness to pay.</li>
+      <li style="margin-bottom:8px;"><strong>Enrich `texas_leads.csv`</strong> with Socrata-derived license number, operation type, current deficiency count, current enforcement status, ages served, capacity.</li>
+      <li style="margin-bottom:8px;"><strong>Scrape per-operation pages</strong> on childcare.hhs.texas.gov where Socrata fields lack narrative detail (typically newer visits).</li>
+      <li style="margin-bottom:8px;"><strong>File TPIA request</strong> to HHSC for data dictionaries, Minimum Standard weight tables, and any enforcement decision memos used by CCR regional supervisors.</li>
+      <li><strong>Monthly Child Care Services Data Report</strong> (`c7ep-cuy6`) for workload / churn sizing; county-level (`xge9-adrm`) for geographic planning.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://childcare.hhs.texas.gov/">Search Texas Child Care</a></li>
+      <li><a href="https://childcare.hhs.texas.gov/Child_Care/">Texas Child Care Licensing portal</a></li>
+      <li><a href="https://www.hhs.texas.gov/services/family-safety-resources/child-care">HHSC Child Care hub</a></li>
+      <li><a href="https://www.hhs.texas.gov/providers/child-care-regulation/minimum-standards">Minimum Standards index</a></li>
+      <li><a href="https://www.hhs.texas.gov/about/records-statistics/data-statistics/child-care-regulation-statistics">CCR Statistics</a></li>
+      <li><a href="https://www.hhs.texas.gov/services/safety/child-care/frequently-asked-questions-about-texas-child-care/what-are-ccr-reports-inspections-enforcement-actions">CCR reports / enforcement FAQ</a></li>
+      <li><a href="https://www.dfps.texas.gov/child_care/">DFPS legacy child care page</a></li>
+      <li><a href="https://data.texas.gov/">Texas Open Data Portal</a></li>
+      <li><a href="https://data.texas.gov/See-Category-Tile/HHSC-CCL-Daycare-and-Residential-Operations-Data/bc5r-88dy">HHSC CCL Daycare &amp; Residential Operations Data</a></li>
+      <li><a href="https://data.texas.gov/dataset/Monthly-Child-Care-Services-Data-Report-Child-Care/c7ep-cuy6">Monthly services report</a></li>
+      <li><a href="https://data.texas.gov/See-Category-Tile/Monthly-Child-Care-Services-Data-Report-Children-S/xge9-adrm">Children served by county</a></li>
+      <li><a href="https://data.texas.gov/dataset/Child-and-Adult-Care-Food-Programs-CACFP-Child-Cen/y9zm-iygj">CACFP Centers</a></li>
+      <li><a href="https://data.texas.gov/dataset/Child-and-Adult-Care-Food-Programs-CACFP-Day-Care-/ub2y-4i6h">CACFP Day Care Homes (site-level)</a></li>
+      <li><a href="https://data.texas.gov/dataset/Child-and-Adult-Care-Food-Programs-CACFP-Day-Care-/x9ve-x3iy">CACFP Day Care Homes meal reimbursement</a></li>
+      <li><a href="https://www.twc.texas.gov/programs/child-care/data-reports-plans">TWC child care data</a></li>
+      <li><a href="https://www.buttonlawfirm.com/faqs/how-do-i-look-up-daycare-violations-in-texas-.cfm">How to look up deficiencies</a></li>
+      <li><a href="https://texreg.sos.state.tx.us/public/readtac$ext.ViewTAC?tac_view=4&amp;ti=26&amp;pt=1&amp;ch=746">26 TAC Ch. 746</a></li>
+      <li><a href="https://statutes.capitol.texas.gov/Docs/GV/htm/GV.552.htm">Gov. Code Ch. 552 (TPIA)</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/texas-health-and-human-services-child-care-regulation">ACF Licensing DB — TX</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Texas · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

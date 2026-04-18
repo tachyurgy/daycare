@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mississippi — ComplianceKit Data Report</title>
+<style>
+:root{
+  --bg:#0d0d1a;
+  --panel:#15162a;
+  --panel-2:#1c1d34;
+  --border:#2a2b45;
+  --text:#f0f0f5;
+  --muted:#a0a3c0;
+  --accent:#00d4aa;
+  --accent-dim:#0a8068;
+  --warn:#ffb86b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;line-height:1.55}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent-dim)}
+a:hover{color:#33e7c3;border-bottom-color:var(--accent)}
+header{padding:48px 40px 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#15162a 0%,#0d0d1a 100%)}
+header .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;font-weight:600}
+header h1{margin:8px 0 4px;font-size:40px;font-weight:700;letter-spacing:-0.02em}
+header .meta{color:var(--muted);font-size:14px}
+main{max-width:1120px;margin:0 auto;padding:32px 40px 80px}
+section{margin:36px 0;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:28px 32px}
+section h2{margin:0 0 16px;font-size:20px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:12px}
+section h2 .num{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;background:var(--accent);color:#0d0d1a;border-radius:50%;font-size:13px;font-weight:700}
+section h3{margin:20px 0 8px;font-size:15px;font-weight:600;color:var(--accent)}
+p,li{color:var(--text);font-size:14px}
+.muted{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+tr:last-child td{border-bottom:none}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.pill.ok{background:rgba(0,212,170,.12);color:var(--accent)}
+.pill.warn{background:rgba(255,184,107,.12);color:var(--warn)}
+.pill.info{background:rgba(160,163,192,.14);color:var(--muted)}
+.kv{display:grid;grid-template-columns:180px 1fr;gap:8px 18px;margin:6px 0 0}
+.kv dt{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding-top:2px}
+.kv dd{margin:0;font-size:14px}
+ul{padding-left:20px;margin:6px 0}
+ul li{margin:4px 0}
+.linklist a{display:block;padding:4px 0;border:none;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.grid2{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+footer{padding:32px 40px;color:var(--muted);font-size:12px;text-align:center;border-top:1px solid var(--border)}
+code{background:var(--panel-2);padding:2px 6px;border-radius:4px;font-size:12px;color:#c6c8e0}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Mississippi</h1>
+  <div class="meta">State rank #34 &middot; Compiled 2026-04-18 &middot; 1,414 real provider rows in <code>mississippi_leads.csv</code></div>
+</header>
+<main>
+
+<section id="authority">
+  <h2><span class="num">2</span>Licensing Authority</h2>
+  <dl class="kv">
+    <dt>Agency</dt><dd>Mississippi State Department of Health (MSDH) &mdash; Child Care Facilities Licensure Branch</dd>
+    <dt>Address</dt><dd>143 Lefleur&rsquo;s Square, Jackson, MS 39216</dd>
+    <dt>Phone</dt><dd>1-800-227-7308 &middot; 601-364-2827</dd>
+    <dt>Complaints</dt><dd>1-866-489-8734 &middot; <a href="mailto:CC.ComplaintUnit@msdh.ms.gov">CC.ComplaintUnit@msdh.ms.gov</a></dd>
+    <dt>Program page</dt><dd><a href="https://msdh.ms.gov/page/30,0,183.html">msdh.ms.gov/page/30,0,183.html</a></dd>
+  </dl>
+</section>
+
+<section id="citation">
+  <h2><span class="num">3</span>Primary Regulatory Citation</h2>
+  <ul>
+    <li><strong>Statute:</strong> Miss. Code Ann. &sect;43-20-1 <em>et seq.</em> &mdash; Mississippi Child Care Licensing Law.</li>
+    <li><strong>Regulations:</strong> <a href="https://msdh.ms.gov/msdhsite/_static/resources/78.pdf">15 Miss. Admin. Code Part 11, Subpart 55</a> &mdash; Chapter 1 (Centers &ge; 13 children), Chapter 2 (&le; 12 in operator&rsquo;s home).</li>
+    <li><strong>Rulemaking authority:</strong> Miss. Code Ann. &sect;43-20-8.</li>
+    <li><strong>Class I violation penalty:</strong> $500 first occurrence / $1,000 subsequent.</li>
+  </ul>
+</section>
+
+<section id="contacts">
+  <h2><span class="num">4</span>Contact / Provider Data</h2>
+  <p class="muted">Leads file: <code>/Users/magnusfremont/Desktop/daycare/mississippi_leads.csv</code> &mdash; 1,414 OPEN-status licensed child care facilities (centers + homes). Gold-tier: authoritative MARIS / HIFLD shapefile with phone coverage.</p>
+  <table>
+    <thead><tr><th>Source</th><th>Format</th><th>Records</th><th>Fields Populated</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>MARIS Licensed Child Care Facilities (2023)</td>
+        <td>ESRI Shapefile (.shp/.dbf)</td>
+        <td>1,414 (filtered STATE=MS, STATUS=OPEN)</td>
+        <td>name 100% &middot; phone ~95% &middot; email 0% &middot; website 0%</td>
+        <td><a href="https://maris.mississippi.edu/HTML/DATA/data_Education/LicensedChildCareFacilities.html">landing</a> &middot; <a href="https://maris.mississippi.edu/MARISdata/Education/MS_LicensedChildcareFacilities_2023.zip">zip</a></td>
+      </tr>
+      <tr>
+        <td>MARIS REST Endpoint</td>
+        <td>ArcGIS MapServer</td>
+        <td>Same records, live query</td>
+        <td>lat/lon, NAICS, ZIP</td>
+        <td><a href="https://gis.mississippi.edu/server/rest/services/Education/MS_LicensedChildcareFacilities_2023/MapServer">REST</a></td>
+      </tr>
+      <tr>
+        <td>MSDH Child Care Facility Search</td>
+        <td>ASP.NET WebForms (per-facility lookup)</td>
+        <td>Live &mdash; cannot be bulk-enumerated</td>
+        <td>inspection history, violation codes, penalties</td>
+        <td><a href="https://www.msdh.provider.webapps.ms.gov/">msdh.provider.webapps.ms.gov</a></td>
+      </tr>
+      <tr>
+        <td>MDHS ECCD Find-a-Provider</td>
+        <td>Directory web app</td>
+        <td>Live (subsidy-accepting providers)</td>
+        <td>name, city, capacity, hours</td>
+        <td><a href="https://www.mdhs.ms.gov/eccd/parents/find/">mdhs.ms.gov</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="framework">
+  <h2><span class="num">5</span>Compliance Framework Links</h2>
+  <div class="linklist">
+    <a href="https://msdh.ms.gov/msdhsite/_static/resources/78.pdf">15 Miss. Admin. Code Part 11 Subpart 55 Chapter 1 &mdash; Center Regulations (PDF)</a>
+    <a href="https://www.publichealthlawcenter.org/sites/default/files/Mississippi_45%20Regulations_Title%2015_Part%2011.pdf">15 Miss. Admin. Code Part 11 Subpart 55 Chapter 2 &mdash; Home-Based (&le; 12) Regs (PDF)</a>
+    <a href="https://msdh.ms.gov/page/resources/20485.pdf">MSDH Child Care Regulations Resource Packet</a>
+    <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/mississippi-state-department-health-child-care-facilities-licensure-branch">ACF National Child Care Licensing Database &mdash; Mississippi</a>
+    <a href="https://regulations.justia.com/states/mississippi/title-18/part-17/chapter-9/rule-18-17-9-2/">Mississippi Admin. Code Ch. 9 Rule 18-17-9.2 &mdash; Complaint Process</a>
+  </div>
+</section>
+
+<section id="forms">
+  <h2><span class="num">6</span>Licensing Forms</h2>
+  <ul>
+    <li>MSDH Child Care Facility Inspection Report &mdash; <strong>Form #281</strong></li>
+    <li>MSDH Food Service Inspection &mdash; <strong>Forms #301 / #302</strong></li>
+    <li>MSDH Fire Inspection &mdash; <strong>Form #333</strong> (signed by local fire authority)</li>
+    <li>Letter of Suitability for Employment (issued by MSDH Records Check Unit)</li>
+    <li>Initial / Renewal License Application (submitted via MSDH portal)</li>
+    <li>FBI/MCIC fingerprint background check request + child abuse registry + sex offender registry</li>
+    <li>Annual Immunization / TB documentation</li>
+  </ul>
+</section>
+
+<section id="violations">
+  <h2><span class="num">7</span>Violations &amp; Inspection Data</h2>
+  <div class="grid2">
+    <div>
+      <h3>Access mode</h3>
+      <p><span class="pill info">Per-facility lookup</span> &nbsp; <span class="pill warn">No bulk export</span></p>
+      <p>MSDH publishes inspection history and cited violations on the per-facility page inside the <a href="https://www.msdh.provider.webapps.ms.gov/">Child Care Facility Search</a>. There is no statewide violations CSV.</p>
+    </div>
+    <div>
+      <h3>Class I penalty schedule</h3>
+      <p>Monetary penalties assessed automatically on significant findings:</p>
+      <ul><li>First Class I occurrence: <strong>$500</strong></li><li>Subsequent Class I occurrences: <strong>$1,000</strong></li></ul>
+    </div>
+  </div>
+
+  <h3>Key fields exposed per facility</h3>
+  <ul>
+    <li>Facility name, license number, license status</li>
+    <li>Inspection date &amp; type (routine / complaint / follow-up / renewal)</li>
+    <li>Violation rule section (mapped to Subpart 55 Chapter 1 &amp; 2)</li>
+    <li>Severity class + corrective action + resolution date</li>
+    <li>Monetary penalty amount (when assessed)</li>
+  </ul>
+
+  <h3>Scraping strategy</h3>
+  <ol>
+    <li>Enumerate facility list from existing <code>mississippi_leads.csv</code> (1,414 rows).</li>
+    <li>Playwright or <code>requests</code>-with-ViewState session against <code>ccsearch.aspx</code>.</li>
+    <li>Parse per-facility detail HTML table; normalize violation codes to Subpart 55 section IDs.</li>
+    <li>Optional: cross-key against MARIS <code>ID</code> field for lat/lon to build violation heatmap.</li>
+  </ol>
+
+  <h3>FOIA path</h3>
+  <p>Mississippi Public Records Act (<strong>Miss. Code &sect;25-61-1</strong> et seq.). MSDH is the custodian for child care violation records. Request via the MSDH public records request form, citing Miss. Code &sect;43-20-8 and asking for "all inspection reports and violation histories for [license #s] in [date range]." Typical statutory response: 7 working days.</p>
+
+  <h3>Violations / inspection data sources</h3>
+  <div class="linklist">
+    <a href="https://msdh.ms.gov/page/30,0,183,707.html">MSDH Child Care Facility Regulatory Violations page</a>
+    <a href="https://www.msdh.provider.webapps.ms.gov/">MSDH Child Care Facility Search (per-facility inspection history)</a>
+    <a href="https://msdh.ms.gov/page/30,0,183,787.html">MSDH Complaints page (public records request instructions)</a>
+    <a href="https://msdh.ms.gov/page/30,0,183,438.html">Alternate Facility Search URL</a>
+  </div>
+</section>
+
+<section id="signals">
+  <h2><span class="num">8</span>Outreach Signals</h2>
+  <ul>
+    <li><span class="pill warn">Low email coverage</span> &mdash; MARIS shapefile had <strong>0%</strong> email population. Enrichment via Hunter / Apollo / Clearout is required for email campaigns.</li>
+    <li><span class="pill ok">Strong phone coverage</span> &mdash; ~95% phone fill, normalized <code>(XXX) XXX-XXXX</code>. Ready for outbound dialer.</li>
+    <li>Inspection cadence (at least twice/year) creates two annual pain-points per facility &mdash; prime triggers for ComplianceKit's inspection-readiness messaging.</li>
+    <li>Class I penalties start at $500 &mdash; a provider's first citation is a high-intent sales moment. Scrape the per-facility violation page weekly, identify new Class I assessments, trigger personalized outreach.</li>
+    <li>MDHS subsidy-receiving providers (via ECCD find-a-provider) are a subsegment more tolerant of compliance software subscription costs.</li>
+  </ul>
+</section>
+
+<section id="nextsteps">
+  <h2><span class="num">9</span>Next-Step Data Acquisition</h2>
+  <ol>
+    <li>Build a Playwright scraper of <code>msdh.provider.webapps.ms.gov/ccsearch.aspx</code> keyed on the 1,414 facility names. Record violation history + penalties to Postgres.</li>
+    <li>Re-run MARIS shapefile quarterly to catch newly-opened facilities; diff against our dataset.</li>
+    <li>File a public-records request for <em>all</em> violation records 2023-2026 in machine-readable format to back-fill the facility database.</li>
+    <li>Email enrichment pass: Hunter/Apollo against <code>business_name + city + phone</code> to surface director emails (~40-60% recovery expected based on peer states).</li>
+    <li>Subscribe to MSDH newsroom / RSS (if available) for enforcement announcements; flag immediate-danger closures as sales triggers.</li>
+  </ol>
+</section>
+
+<section id="links">
+  <h2><span class="num">10</span>All Links</h2>
+  <h3>Licensing &amp; regulations</h3>
+  <div class="linklist">
+    <a href="https://msdh.ms.gov/page/30,0,183.html">MSDH Child Care Facilities Licensure (program home)</a>
+    <a href="https://msdh.ms.gov/msdhsite/_static/resources/78.pdf">15 Miss. Admin. Code Part 11 Subpart 55 Ch. 1 (PDF)</a>
+    <a href="https://www.publichealthlawcenter.org/sites/default/files/Mississippi_45%20Regulations_Title%2015_Part%2011.pdf">15 Miss. Admin. Code Part 11 Subpart 55 Ch. 2 (PDF)</a>
+    <a href="https://msdh.ms.gov/page/resources/20485.pdf">MSDH Child Care Regs Resource Packet</a>
+    <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/mississippi-state-department-health-child-care-facilities-licensure-branch">ACF Licensing DB &mdash; MS</a>
+  </div>
+  <h3>Facility search / directories</h3>
+  <div class="linklist">
+    <a href="https://www.msdh.provider.webapps.ms.gov/">MSDH Provider Search (primary)</a>
+    <a href="https://msdh.ms.gov/page/30,332,183,438.html">MSDH Provider Search (alt)</a>
+    <a href="https://www.mdhs.ms.gov/eccd/parents/find/">MDHS ECCD Find-a-Provider</a>
+  </div>
+  <h3>Violation / complaint data</h3>
+  <div class="linklist">
+    <a href="https://msdh.ms.gov/page/30,0,183,707.html">MSDH Regulatory Violations</a>
+    <a href="https://msdh.ms.gov/page/30,0,183,787.html">MSDH Complaints</a>
+    <a href="https://regulations.justia.com/states/mississippi/title-18/part-17/chapter-9/rule-18-17-9-2/">Complaint Process Rule 18-17-9.2</a>
+  </div>
+  <h3>Bulk roster / geospatial</h3>
+  <div class="linklist">
+    <a href="https://maris.mississippi.edu/HTML/DATA/data_Education/LicensedChildCareFacilities.html">MARIS Licensed Child Care Facilities (landing)</a>
+    <a href="https://maris.mississippi.edu/MARISdata/Education/MS_LicensedChildcareFacilities_2023.zip">MARIS shapefile (zip)</a>
+    <a href="https://gis.mississippi.edu/server/rest/services/Education/MS_LicensedChildcareFacilities_2023/MapServer">MARIS REST endpoint</a>
+  </div>
+</section>
+
+</main>
+<footer>ComplianceKit state research &mdash; Mississippi &mdash; 2026-04-18</footer>
+</body>
+</html>

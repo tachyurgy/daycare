@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tennessee — Child Care Compliance Data Report (2026-04-18)</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #15162a;
+    --panel-2: #1c1d33;
+    --text: #f0f0f5;
+    --muted: #a3a6b8;
+    --accent: #00d4aa;
+    --accent-dim: #0a7561;
+    --border: #2a2c44;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
+  body { padding: 40px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  h2 { font-size: 18px; font-weight: 600; margin: 36px 0 14px; color: var(--accent); letter-spacing: 0.02em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); }
+  a:hover { border-bottom-style: solid; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 0; }
+  code { background: var(--panel-2); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 18px; font-size: 13.5px; background: var(--panel); }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--accent); font-weight: 600; background: var(--panel-2); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  ul { padding-left: 20px; margin: 6px 0 16px; }
+  li { margin-bottom: 6px; }
+  .callout { background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 18px; margin: 14px 0; border-radius: 3px; }
+  .links-list { columns: 2; column-gap: 32px; font-size: 13px; }
+  .links-list li { break-inside: avoid; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .badge { display: inline-block; background: var(--accent-dim); color: var(--bg); font-weight: 600; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 6px; letter-spacing: 0.03em; }
+</style>
+</head>
+<body>
+
+<h1>Tennessee — Child Care Compliance Data Report</h1>
+<p class="meta">Population rank: <strong>15</strong> &middot; ~7.2M residents &middot; Prepared 2026-04-18 for ComplianceKit</p>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Tennessee Department of Human Services (TDHS), Child Care Licensing.</strong> Public-school-run child care is licensed by Tennessee Department of Education (TDOE); TDHS covers private, nonprofit, and for-profit providers.
+</p>
+<ul>
+  <li>Agency: <a href="https://www.tn.gov/humanservices/for-families/child-care-services.html">tn.gov/humanservices</a></li>
+  <li>Provider portal (eLicensing): <a href="https://tdhs.service-now.com/tncc">tdhs.service-now.com/tncc</a></li>
+  <li>Consumer locator: <a href="https://www.tn.gov/humanservices/for-families/child-care-services/find-child-care.html">Find Child Care</a> → <a href="https://onedhs.tn.gov/csp?id=tn_cc_prv_maps">ServiceNow map</a></li>
+  <li>Complaint hotline: 1-800-462-8261 / 615-313-4820</li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>Statute:</strong> Tennessee Child Care Licensing Act of 2000 — <a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/">T.C.A. § 71-3-501 et seq.</a>; enforcement: <a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/section-71-3-509/">§ 71-3-509</a></li>
+  <li><strong>Rules:</strong> <a href="https://publications.tnsosfiles.com/rules/1240/1240-04/1240-04-01.20251120.pdf">Chapter 1240-04-01</a> — Licensure Rules for Child Care Agencies (effective Nov 20, 2025)</li>
+  <li><strong>Chapter 1240-04-07 Report Cards &amp; Rated Licensing:</strong> <a href="https://www.law.cornell.edu/regulations/tennessee/title-1240/subtitle-1240-04/chapter-1240-04-07">Cornell LII</a></li>
+</ul>
+
+<h2>3. Contact / Provider Data Inventory</h2>
+<table>
+  <thead>
+    <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Row Count</th><th>Tier</th><th>Limits</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Licensed Tennessee Child Care Providers List 2024 (SWORPS / TDHS)</td>
+      <td><a href="https://services6.arcgis.com/SmO2MQiJaDmO20rD/arcgis/rest/services/Licensed_Tennessee_Child_Care_Providers_List_2024/FeatureServer/0/query?where=1%3D1&outFields=*&f=json">ArcGIS FeatureServer</a> <code>dbaa58403dc042f8949a943c22b0f4f3</code></td>
+      <td>Esri FeatureServer JSON</td>
+      <td><strong>4,178</strong></td>
+      <td>Primary</td>
+      <td>Has phone (10-digit); no email / website; includes TDOE school-administered (filter by <code>Regulatory_Agency</code>)</td>
+    </tr>
+    <tr>
+      <td>TN Child Care Helpdesk (SWORPS portal)</td>
+      <td><a href="https://tnchildcarehelpdesk.sworpswebapp.sworps.utk.edu/child-care-desert-map/">helpdesk map</a></td>
+      <td>HTML + ArcGIS mapping</td>
+      <td>Same as primary</td>
+      <td>Mirror</td>
+      <td>Same feed as primary</td>
+    </tr>
+    <tr>
+      <td>TDHS Find Child Care (ServiceNow CSP)</td>
+      <td><a href="https://onedhs.tn.gov/csp?id=tn_cc_prv_maps">onedhs.tn.gov/csp</a></td>
+      <td>ServiceNow Customer Service Portal widget</td>
+      <td>Same feed</td>
+      <td>Verification</td>
+      <td>Links out to compliance history + Star Report Card PDF</td>
+    </tr>
+    <tr>
+      <td>Digital Tennessee Child Care Data (FFY rollups)</td>
+      <td><a href="https://digitaltennessee.tnsos.gov/child_care_data/">digitaltennessee</a></td>
+      <td>HTML tables; downloadable</td>
+      <td>Per FFY (aggregate)</td>
+      <td>Supplemental</td>
+      <td>Capacity, serious injuries, substantiated abuse, fatalities</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li>T.C.A. § 71-3-501 et seq.: <a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/">link</a></li>
+  <li>T.C.A. § 71-3-509 enforcement: <a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/section-71-3-509/">link</a></li>
+  <li>1240-04-01 rules (Nov 20, 2025): <a href="https://publications.tnsosfiles.com/rules/1240/1240-04/1240-04-01.20251120.pdf">PDF</a></li>
+  <li>1240-04-01-.22 Center Requirements: <a href="https://www.law.cornell.edu/regulations/tennessee/Tenn-Comp-R-Regs-1240-04-01-.22">Cornell LII</a></li>
+  <li>1240-04-07 Report Cards: <a href="https://www.law.cornell.edu/regulations/tennessee/title-1240/subtitle-1240-04/chapter-1240-04-07">Cornell LII</a></li>
+  <li>Licensing Summary Requirements: <a href="https://www.tn.gov/content/dam/tn/human-services/documents/Licensing%20Summary%20Requirements.pdf">PDF</a></li>
+  <li>Provider Monitoring &amp; Inspections (TDHS): <a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-resources-for-providers/child-care-provider-monitoring-and-inspections.html">link</a></li>
+  <li>Star-Quality Program: <a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-report-card.html">TDHS page</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li><code>HS-2660</code> — Application for Child Care Agency License</li>
+  <li><code>HS-3035</code> — Child's Record / Enrollment Form</li>
+  <li><code>HS-3041</code> — Immunization Certificate (official TN)</li>
+  <li><code>HS-0166</code> — Personnel Information Form</li>
+  <li><code>HS-2985</code> — Criminal Background Check Request</li>
+  <li><code>HS-0222</code> — Serious Incident / Injury Report (24 hrs)</li>
+  <li><code>HS-3033</code> — Medication Administration Log / Authorization</li>
+  <li><code>HS-3038</code> — Emergency Management Plan</li>
+  <li><code>HS-0270</code> — Parent Handbook Acknowledgment</li>
+  <li>Star-Quality Application (voluntary)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data <span class="badge">new</span></h2>
+<p>
+  Since July 2014, TDHS has published a per-facility compliance history alongside the Star-Quality Report Card. Every licensed provider receives <strong>four visits per year</strong> (three unannounced monitoring + one annual evaluation), so the compliance page refreshes ~quarterly.
+</p>
+
+<h3>Sources</h3>
+<ul>
+  <li><strong>TDHS Find Child Care (ServiceNow map):</strong> <a href="https://onedhs.tn.gov/csp?id=tn_cc_prv_maps">onedhs.tn.gov/csp?id=tn_cc_prv_maps</a> — each facility marker opens a drawer with "Compliance History" and "Report Card" buttons.</li>
+  <li><strong>Star-Quality Evaluation Report Cards:</strong> <a href="https://starquality.sworpswebapp.sworps.utk.edu/evaluation-report-cards/">SWORPS/UTK</a>.</li>
+  <li><strong>Star-Quality Program overview:</strong> <a href="https://starquality.sworpswebapp.sworps.utk.edu/star-quality-program/">link</a>.</li>
+  <li><strong>Digital Tennessee (FFY rollups):</strong> <a href="https://digitaltennessee.tnsos.gov/child_care_data/">index</a> &middot; <a href="https://digitaltennessee.tnsos.gov/child_care_data/10/">FFY 2024</a> &middot; <a href="https://digitaltennessee.tnsos.gov/child_care_data/8/">FFY 2023</a> &middot; <a href="https://digitaltennessee.tnsos.gov/child_care_data/9/">FFY 2022</a>.</li>
+  <li><strong>Provider Monitoring &amp; Inspections page:</strong> <a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-resources-for-providers/child-care-provider-monitoring-and-inspections.html">link</a>.</li>
+  <li><strong>Complaint intake explainer:</strong> <a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-report-child-care-violations-complaints.html">link</a>.</li>
+</ul>
+
+<h3>Report Fields</h3>
+<table>
+  <thead><tr><th>Field</th><th>Typical Values</th></tr></thead>
+  <tbody>
+    <tr><td>Visit type</td><td>Monitoring (unannounced) / Annual Evaluation / Complaint Investigation / Technical Assistance / Follow-up</td></tr>
+    <tr><td>Rule citation</td><td>1240-04-01-.XX (e.g., .22 center requirements, .10 personnel file, .05 director qualifications, .13 supervision)</td></tr>
+    <tr><td>Risk classification</td><td>Low / Medium / <strong>High Risk</strong> — high-risk requires 5-day follow-up revisit</td></tr>
+    <tr><td>Plan of Corrective Action</td><td>Provider signature + corrected-by date</td></tr>
+    <tr><td>Star rating</td><td>0 / 1 / 2 / 3 stars; drives subsidy reimbursement tiers</td></tr>
+  </tbody>
+</table>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Compliance history refreshes quarterly (4 visits/year mandatory).</li>
+  <li>Star-Quality Report Cards refresh annually after the evaluation closes.</li>
+  <li>Digital Tennessee FFY rollups refresh annually at fiscal-year boundary (Sep 30).</li>
+</ul>
+
+<h3>Access Strategy</h3>
+<ul>
+  <li><strong>SWORPS ArcGIS</strong> is the bulk-friendly primary; already used for roster. Provides identifiers + star ratings.</li>
+  <li><strong>Playwright</strong> against the ServiceNow CSP (<code>onedhs.tn.gov/csp?id=tn_cc_prv_maps</code>) for per-facility Compliance History + Star Report Card navigation. Agency code from ArcGIS feed = join key.</li>
+  <li><strong>Star Report Cards</strong> are PDFs hosted on the SWORPS webapp; two-step flow — browse index → click agency → fetch PDF.</li>
+  <li><strong>Digital Tennessee</strong> is simple static HTML; scrape per FFY URL.</li>
+</ul>
+
+<div class="callout">
+  <strong>Records-law backup.</strong> Tennessee Public Records Act (<a href="https://www.tn.gov/comptroller/office-functions/open-records-counsel/information-for-citizens/the-public-records-act.html">T.C.A. § 10-7-503 et seq.</a>) — 7 business days acknowledgment required. TDHS front: <a href="mailto:dhs.customerservice@tn.gov">dhs.customerservice@tn.gov</a>. Oversight / appeals: <a href="https://comptroller.tn.gov/office-functions/open-records-counsel.html">Office of Open Records Counsel</a>.
+</div>
+
+<h2>7. Outreach Signals (Hot-Lead Detection)</h2>
+<ul>
+  <li><strong>High-risk violation in past 90 days</strong> — 5-day follow-up revisit creates urgency; owner actively correcting.</li>
+  <li><strong>Star rating dropped</strong> year-over-year — subsidy revenue is at risk; ERS-related deficiencies are addressable with process tools.</li>
+  <li><strong>0-star agencies</strong> — bottom-of-market; often the most exposed operators but also most receptive to a low-cost fix.</li>
+  <li><strong>Annual license (12-month term)</strong> — every TN facility renews yearly, so 1/12 of the universe is in "renewal mode" in any given month.</li>
+  <li><strong>Digital Tennessee FFY rollup spikes</strong> — counties with higher injury/abuse counts year-over-year surface as likely high-risk markets for outreach.</li>
+  <li><strong>Nov 2025 rule rewrite</strong> — 1240-04-01 revised in November 2025; centers still operating under prior rule interpretations are a pre-qualified audience.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ul>
+  <li><strong>Playwright target:</strong> SWORPS Star-Quality report cards + ServiceNow CSP compliance histories. Budget ~10 worker-hours for the 4,178 TDHS entries (TDOE entries filter-out).</li>
+  <li><strong>Complaint hotline log:</strong> file a T.C.A. § 10-7 request for complaint-investigation disposition summaries by fiscal year.</li>
+  <li><strong>Digital Tennessee backfill:</strong> scrape FFY 2019–2024 rollups to build a 6-year trend on injuries / abuse / fatalities by agency type.</li>
+  <li><strong>Email append:</strong> leads CSV has phone; append owner/director emails via Apollo keyed on business name + address.</li>
+  <li><strong>TDOE cross-reference:</strong> filter ArcGIS <code>Regulatory_Agency == 'TDHS'</code> to drop ~2,178 school-administered programs from outreach.</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="links-list">
+  <li><a href="https://www.tn.gov/humanservices/for-families/child-care-services.html">TDHS Child Care Services</a></li>
+  <li><a href="https://www.tn.gov/humanservices/for-families/child-care-services/find-child-care.html">Find Child Care hub</a></li>
+  <li><a href="https://onedhs.tn.gov/csp?id=tn_cc_prv_maps">ServiceNow locator map</a></li>
+  <li><a href="https://tnchildcarehelpdesk.sworpswebapp.sworps.utk.edu/child-care-desert-map/">SWORPS child-care desert map</a></li>
+  <li><a href="https://starquality.sworpswebapp.sworps.utk.edu/evaluation-report-cards/">Star-Quality Report Cards</a></li>
+  <li><a href="https://starquality.sworpswebapp.sworps.utk.edu/star-quality-program/">Star-Quality Program</a></li>
+  <li><a href="https://tnchildcarehelpdesk.sworpswebapp.sworps.utk.edu/tdhs-provider-portal-elicensing/">TDHS Provider Portal eLicensing explainer</a></li>
+  <li><a href="https://tdhs.service-now.com/tncc">TDHS eLicensing (provider portal)</a></li>
+  <li><a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-report-child-care-violations-complaints.html">Report violations / complaints</a></li>
+  <li><a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-resources-for-providers/child-care-provider-monitoring-and-inspections.html">Provider monitoring / inspections</a></li>
+  <li><a href="https://www.tn.gov/humanservices/for-families/child-care-services/child-care-report-card.html">TDHS report card</a></li>
+  <li><a href="https://digitaltennessee.tnsos.gov/child_care_data/">Digital Tennessee index</a></li>
+  <li><a href="https://digitaltennessee.tnsos.gov/child_care_data/10/">Digital TN — FFY 2024</a></li>
+  <li><a href="https://digitaltennessee.tnsos.gov/child_care_data/8/">Digital TN — FFY 2023</a></li>
+  <li><a href="https://digitaltennessee.tnsos.gov/child_care_data/9/">Digital TN — FFY 2022</a></li>
+  <li><a href="https://publications.tnsosfiles.com/rules/1240/1240-04/1240-04-01.20251120.pdf">1240-04-01 rules (Nov 2025)</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/tennessee/Tenn-Comp-R-Regs-1240-04-01-.22">1240-04-01-.22 Center Requirements</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/tennessee/title-1240/subtitle-1240-04/chapter-1240-04-07">1240-04-07 Report Cards</a></li>
+  <li><a href="https://www.tn.gov/content/dam/tn/human-services/documents/Licensing%20Summary%20Requirements.pdf">Licensing Summary Requirements</a></li>
+  <li><a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/">T.C.A. § 71-3-501</a></li>
+  <li><a href="https://law.justia.com/codes/tennessee/title-71/chapter-3/part-5/section-71-3-509/">T.C.A. § 71-3-509 (enforcement)</a></li>
+  <li><a href="https://www.tn.gov/comptroller/office-functions/open-records-counsel/information-for-citizens/the-public-records-act.html">TN Public Records Act</a></li>
+  <li><a href="https://comptroller.tn.gov/office-functions/open-records-counsel.html">Office of Open Records Counsel</a></li>
+  <li><a href="https://tennesseelookout.com/2024/07/02/deaths-of-tennessee-children-from-suspected-abuse-or-neglect-rose-nearly-30-in-2023/">Tennessee Lookout coverage</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/tennessee-department-human-services-child-care-services">HHS Licensing Regulations — TDHS</a></li>
+</ul>
+
+<div class="footer">
+  ComplianceKit state intelligence &middot; Tennessee &middot; 2026-04-18. All URLs verified at prep time. &copy; 2026.
+</div>
+
+</body>
+</html>

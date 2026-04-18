@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oregon — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #151528;
+    --panel-2: #1c1c33;
+    --text: #f0f0f5;
+    --muted: #8a8aa8;
+    --accent: #00d4aa;
+    --accent-dim: #00a888;
+    --border: #26264a;
+    --warn: #ffc266;
+    --bad: #ff6b8a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  header.top { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; }
+  h1 { margin: 0.4rem 0 0.3rem; font-size: 2.6rem; letter-spacing: -0.02em; font-weight: 700; }
+  h1 .rank { color: var(--accent); font-size: 1.2rem; margin-left: 0.6rem; vertical-align: middle; font-weight: 500; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  h2 { margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  h2 .n { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.95rem; margin-right: 0.6rem; font-weight: 400; }
+  h3 { margin-top: 2rem; margin-bottom: 0.6rem; font-size: 1.05rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); word-break: break-word; }
+  a:hover { color: #6affd4; border-bottom-style: solid; }
+  p { margin: 0.5rem 0 1rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; background: var(--panel); font-size: 0.92rem; }
+  thead th { background: var(--panel-2); text-align: left; padding: 0.7rem 0.9rem; color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--panel-2); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem 1.5rem; margin: 1rem 0; }
+  .pill { display: inline-block; padding: 0.15rem 0.55rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; font-size: 0.78rem; color: var(--muted); margin-right: 0.4rem; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .pill.good { color: var(--accent); border-color: var(--accent-dim); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.bad { color: var(--bad); border-color: var(--bad); }
+  code { background: var(--panel-2); color: var(--accent); padding: 0.1rem 0.35rem; border-radius: 3px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 720px) { h1 { font-size: 2rem; } .two-col { grid-template-columns: 1fr; } }
+  .footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ComplianceKit Research Pack</div>
+  <h1>Oregon <span class="rank">Rank #27 by population</span></h1>
+  <div class="meta">Compiled 2026-04-18 &middot; Pacific NW expansion corridor &middot; ~4,000+ licensed child-care programs (CC, SC, CF, RF)</div>
+</header>
+
+<h2><span class="n">1.</span>Licensing Authority</h2>
+<div class="card">
+  <p><strong>Oregon Department of Early Learning and Care (DELC), Child Care Licensing Division (CCLD).</strong> DELC was established in 2023, succeeding the Early Learning Division (ELD) within the Oregon Department of Education.</p>
+  <ul>
+    <li>DELC — <a href="https://www.oregon.gov/delc/">oregon.gov/delc</a></li>
+    <li>DELC providers landing — <a href="https://www.oregon.gov/delc/providers/pages/licensed-childcare.aspx">oregon.gov/delc/providers/pages/licensed-childcare</a></li>
+    <li>Customer service — <a href="mailto:ccld.customerservice@delc.oregon.gov">ccld.customerservice@delc.oregon.gov</a> &middot; 1-800-556-6616</li>
+    <li>Public search — <a href="https://findchildcareoregon.org/">findchildcareoregon.org</a> (incorporates the former Child Care Safety Portal)</li>
+    <li>Legacy Child Care Safety Portal URL still live — <a href="https://childcaresafetyportal.ode.state.or.us/portal/">childcaresafetyportal.ode.state.or.us</a></li>
+  </ul>
+  <p><span class="pill">Certified Child Care Center (CC)</span><span class="pill">Certified School-Age (SC)</span><span class="pill">Certified Family Home (CF)</span><span class="pill">Registered Family Home (RF)</span><span class="pill">Recorded / License-Exempt</span></p>
+</div>
+
+<h2><span class="n">2.</span>Primary Regulatory Citation</h2>
+<table>
+  <thead><tr><th>Authority</th><th>Citation</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>Child Care Act (statute)</td><td>ORS 329A.250 – 329A.500</td><td><a href="https://oregon.public.law/statutes/ors_chapter_329a">oregon.public.law — ORS Ch. 329A</a></td></tr>
+    <tr><td>General rules (all facilities)</td><td>OAR Ch. 414, Div. 205 (CCLD-0731)</td><td><a href="https://www.oregon.gov/delc/providers/pages/child-care-rules.aspx">DELC — child care rules</a></td></tr>
+    <tr><td>Certified child care centers</td><td>OAR Ch. 414, Div. 300 + Div. 305 (414-305-0000 – 414-305-1620)</td><td><a href="https://oregon.public.law/rules/oar_414-305-0400">OAR 414-305-0400 (ratios)</a></td></tr>
+    <tr><td>Certified family child care homes</td><td>OAR Ch. 414, Div. 307</td><td><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0085-Rules-for-Certified-Family-Child-Care-Homes-EN.pdf">CCLD-0085 PDF</a></td></tr>
+    <tr><td>Registered family homes</td><td>OAR Ch. 414, Div. 350</td><td><a href="https://oregon.public.law/rules/oar_414-350-0120">OAR 414-350-0120</a></td></tr>
+    <tr><td>Central Background Registry</td><td>OAR Ch. 414, Div. 061</td><td>CCLD-0061 / CEN-0006</td></tr>
+    <tr><td>Public Records Law</td><td>ORS 192.311 – 192.478</td><td><a href="https://oregon.public.law/statutes/ors_chapter_192">ORS Ch. 192</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">3.</span>Contact / Provider Data Pull</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Data source type</td><td><span class="pill bad">Bronze — aggregator (no state bulk feed; Safety Portal is a SaaS web app)</span></td></tr>
+    <tr><td>Aggregator used</td><td>childcarecenter.us (CCLD licensee roster upstream)</td></tr>
+    <tr><td>Cities captured</td><td>Portland (20), Salem (20), Eugene (20), Beaverton (20), Hillsboro (18)</td></tr>
+    <tr><td>Leads CSV rows in repo</td><td>98 rows — <code>/Users/magnusfremont/Desktop/daycare/oregon_leads.csv</code></td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state, phone</td></tr>
+    <tr><td>Email / website</td><td><span class="pill warn">Blank — per-record enrichment required</span></td></tr>
+    <tr><td>Authoritative search portal</td><td><a href="https://findchildcareoregon.org/">Find Child Care Oregon</a> + <a href="https://stage.worklifesystems.com/Login/LoginGuest?AgencyId=34&activetab=SearchCompliances">WorkLife Systems compliance search</a></td></tr>
+    <tr><td>In-repo PDFs</td><td>Extensive — see <code>planning-docs/state-docs/oregon/</code> (CCLD-0084, 0085, 0090, 0093, 0105, 0108, 0109, 0515, 0542, 0615, 0731; CEN-0001/0005/0006; PR-0185; PTA-0732/0703/0948; UnL-0222-RS)</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">4.</span>Compliance Framework Links</h2>
+<ul>
+  <li>DELC — Child Care Rules — <a href="https://www.oregon.gov/delc/providers/pages/child-care-rules.aspx">oregon.gov/delc/providers/pages/child-care-rules</a></li>
+  <li>CCLD-0084 Rules for Certified Child Care Centers — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0084-Rules-for-Certified-Child-Care-Centers-EN.pdf">CCLD-0084 PDF</a></li>
+  <li>CCLD-0542 Rules for Certified School-Age Centers — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0542-Rules-for-Certified-School-Age-Child-Care-Centers-EN.pdf">CCLD-0542 PDF</a></li>
+  <li>CCLD-0085 Rules for Certified Family Child Care Homes — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0085-Rules-for-Certified-Family-Child-Care-Homes-EN.pdf">CCLD-0085 PDF</a></li>
+  <li>CCLD-0086 Rules for Registered Family Child Care Homes — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0086-Rules-for-Registered-Family-Child-Care-Homes-EN.pdf">CCLD-0086 PDF</a></li>
+  <li>PR-0203 Training Requirements for Early Educators — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/PR-0203-Training-Requirements-for-Early-Educators-in-Center-Settings-EN.pdf">PR-0203 PDF</a></li>
+  <li>PTA-0703 Summary of CC Rule Changes — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/PTA-0703-Summary-of-CC-Rule-Changes.pdf">PTA-0703 PDF</a></li>
+  <li>PTA-0732 Mixed-Age Ratio Table — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/PTA-0732-Mixed-Age-Ratio-Table-EN.pdf">PTA-0732 PDF</a></li>
+  <li>Public Health Law Center — OR Certified Centers — <a href="https://www.publichealthlawcenter.org/sites/default/files/OR_Rules%20For%20Certified%20Child%20Care%20Centers_H_FINAL.pdf">PHLC — OR</a></li>
+  <li>Oregon Secretary of State OAR portal — <a href="https://secure.sos.state.or.us/oard/viewSingleRule.action?ruleVrsnRsn=251292">secure.sos.state.or.us/oard</a></li>
+  <li>Oregon Spark (QRIS) — <a href="https://oregonspark.org/">oregonspark.org</a></li>
+</ul>
+
+<h2><span class="n">5.</span>Licensing Forms</h2>
+<table>
+  <thead><tr><th>Form / Pub #</th><th>Title</th></tr></thead>
+  <tbody>
+    <tr><td>CCLD-0084</td><td>Rules for Certified Child Care Centers</td></tr>
+    <tr><td>CCLD-0085</td><td>Rules for Certified Family Child Care Homes</td></tr>
+    <tr><td>CCLD-0086</td><td>Rules for Registered Family Child Care Homes</td></tr>
+    <tr><td>CCLD-0542</td><td>Rules for Certified School-Age Child Care Centers</td></tr>
+    <tr><td>CCLD-0731</td><td>General Rules for All Child Care Facilities</td></tr>
+    <tr><td>CCLD-0090 / 0615 / UnL-0222-RS</td><td>Health &amp; Safety Review Checklists (CC / SC / Center sample)</td></tr>
+    <tr><td>CCLD-0093</td><td>Contact Report (sample inspection report)</td></tr>
+    <tr><td>CCLD-0105</td><td>Guide to Certified Center Child Care</td></tr>
+    <tr><td>CCLD-0108</td><td>Planning and Zoning, Occupancy, and Building Codes</td></tr>
+    <tr><td>CCLD-0109</td><td>CC Sanitation Inspection Checklist (fillable)</td></tr>
+    <tr><td>CCLD-0515</td><td>Monitor Visit Checklist (sample)</td></tr>
+    <tr><td>CEN-0001 / 0005 / 0006</td><td>Central Background Registry — Application / FAQs / Rules</td></tr>
+    <tr><td>PR-0185</td><td>Child Enrollment Form</td></tr>
+    <tr><td>PR-0203</td><td>Training Requirements for Early Educators</td></tr>
+    <tr><td>PTA-0703</td><td>Summary of CC Rule Revisions and Changes</td></tr>
+    <tr><td>PTA-0732</td><td>Mixed-Age Ratio Table</td></tr>
+    <tr><td>PTA-0948</td><td>Documents Available on DELC Website</td></tr>
+  </tbody>
+</table>
+<p>Forms library: <a href="https://www.oregon.gov/delc/providers/Pages/child-care-rules.aspx">oregon.gov/delc/providers/pages/child-care-rules</a></p>
+
+<h2><span class="n">6.</span>Violations &amp; Inspection Data</h2>
+<div class="card">
+<p>Oregon has the <strong>strongest public-transparency regime in this batch</strong>. Find Child Care Oregon and the legacy Child Care Safety Portal expose, per provider: valid findings over the last 5 years, unable-to-substantiate complaints over the last 2 years, serious-injury / death / substantiated-abuse counts, and enforcement activity. Aggregate counts are refreshed quarterly; the annual state-level report is due March 15 each year under CCDBG federal rule.</p>
+<p><strong>Full details:</strong> <a href="./violations.md">violations.md</a></p>
+<ul>
+  <li>DELC Monitoring page — <a href="https://www.oregon.gov/delc/providers/pages/monitoring.aspx">oregon.gov/delc/providers/pages/monitoring</a></li>
+  <li>DELC Child Care Safety (families) — <a href="https://www.oregon.gov/delc/families/pages/child-care-safety.aspx">oregon.gov/delc/families/pages/child-care-safety</a></li>
+  <li>DELC Compliance (providers) — <a href="https://www.oregon.gov/delc/providers/pages/compliance.aspx">oregon.gov/delc/providers/pages/compliance</a></li>
+  <li>WorkLife Systems compliance search — <a href="https://stage.worklifesystems.com/Login/LoginGuest?AgencyId=34&activetab=SearchCompliances">guest-login entry</a></li>
+  <li>CCLD-0093 Contact Report sample PDF — <a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0093-Contact-Report-SAMPLE.pdf">CCLD-0093 SAMPLE</a></li>
+</ul>
+<p><span class="pill good">5-year valid findings</span><span class="pill good">Serious-injury / death / abuse counts per provider</span><span class="pill good">Annual aggregate report (Mar 15)</span><span class="pill warn">No CSV/JSON bulk</span></p>
+</div>
+
+<h2><span class="n">7.</span>Outreach Signals</h2>
+<div class="two-col">
+<div class="card">
+  <h3>Regulatory pain points</h3>
+  <ul>
+    <li>Central Background Registry (CBR) — staff can't start unsupervised contact without clearance; re-enrollment every 2 years.</li>
+    <li>15 annual clock hours of training (8 in ECE, 1 in health/safety).</li>
+    <li>Safe Sleep for Oregon Infants within 30 days of hire for infant-room staff.</li>
+    <li>Food Handler Card within 30 days for kitchen / bottle-prep staff.</li>
+    <li>Lead testing of drinking water required; radon testing where applicable.</li>
+    <li>Find Child Care Oregon makes violations visible to parents — directors face reputational pressure.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Market heat &amp; channel</h3>
+  <ul>
+    <li>Spark QRIS (3-5 star) participants are the highest-quality subset — tied to CCDBG payments.</li>
+    <li>Portland metro dominates volume (581 listed centers on aggregator) — Beaverton, Hillsboro, Gresham key suburbs.</li>
+    <li>Multi-Site Program structure (OAR 414-305-0100) creates natural upsell paths for multi-location owners.</li>
+    <li>DELC was established in 2023 — reorg wave creates friction for providers juggling old ELD forms and new DELC/CCLD forms. ComplianceKit can hide the drift.</li>
+  </ul>
+</div>
+</div>
+
+<h2><span class="n">8.</span>Next-Step Data Acquisition</h2>
+<ol>
+  <li>File an Oregon Public Records Law request with DELC CCLD (<a href="mailto:ccld.customerservice@delc.oregon.gov">ccld.customerservice@delc.oregon.gov</a>) for the full licensee roster + 24-month valid-finding history in CSV/Excel.</li>
+  <li>Harvest provider list from WorkLife Systems compliance search (<code>stage.worklifesystems.com</code>) via guest-login session; the URL accepts GET searches once a session cookie is set.</li>
+  <li>For each provider, scrape compliance detail, download CCLD-0093 Contact Report PDFs, and structure 5-year finding history.</li>
+  <li>Expand leads coverage beyond Portland metro: Gresham, Bend, Medford, Tigard, Lake Oswego — quick aggregator top-up.</li>
+  <li>Cross-reference Spark QRIS ratings and use "valid finding in last 24 months + Spark rating ≤ 3" as primary lead-score signal.</li>
+</ol>
+
+<h2><span class="n">9.</span>All Links</h2>
+<div class="card">
+<h3>Licensing &amp; Rules</h3>
+<ul>
+  <li><a href="https://www.oregon.gov/delc/">DELC landing</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/Pages/become-a-provider.aspx">DELC — become a provider</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/child-care-rules.aspx">DELC — child care rules</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/certified-center.aspx">DELC — Certified Child Care Center</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/certified-family.aspx">DELC — Certified Family</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/Pages/registered-family.aspx">DELC — Registered Family</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/licensed-childcare.aspx">DELC — Licensed Child Care (for providers)</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/monitoring.aspx">DELC — Monitoring</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/pages/compliance.aspx">DELC — Compliance</a></li>
+  <li><a href="https://www.oregon.gov/delc/families/pages/child-care-safety.aspx">DELC — Child Care Safety (families)</a></li>
+  <li><a href="https://www.oregon.gov/delc/pages/report-concern.aspx">DELC — Report a Concern</a></li>
+  <li><a href="https://oregon.public.law/statutes/ors_chapter_329a">ORS Chapter 329A</a></li>
+  <li><a href="https://oregon.public.law/rules/oar_414-305-0400">OAR 414-305-0400 (ratios)</a></li>
+  <li><a href="https://oregon.public.law/rules/oar_414-300-0130">OAR 414-300-0130</a></li>
+  <li><a href="https://oregon.public.law/rules/oar_414-350-0120">OAR 414-350-0120 (registered family ratios)</a></li>
+  <li><a href="https://oregon.public.law/rules/oar_414-300-0360">OAR 414-300-0360 (night care)</a></li>
+  <li><a href="https://regulations.justia.com/states/oregon/chapter-414/division-305/section-414-305-0400/">Justia — OAR 414-305-0400</a></li>
+  <li><a href="https://secure.sos.state.or.us/oard/viewSingleRule.action?ruleVrsnRsn=251292">Secretary of State OAR portal</a></li>
+  <li><a href="https://oregon.public.law/statutes/ors_chapter_192">ORS Ch. 192 (Public Records)</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/sites/default/files/OR_Rules%20For%20Certified%20Child%20Care%20Centers_H_FINAL.pdf">PHLC — OR Certified Centers</a></li>
+</ul>
+<h3>Forms library</h3>
+<ul>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0084-Rules-for-Certified-Child-Care-Centers-EN.pdf">CCLD-0084</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0085-Rules-for-Certified-Family-Child-Care-Homes-EN.pdf">CCLD-0085</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0086-Rules-for-Registered-Family-Child-Care-Homes-EN.pdf">CCLD-0086</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0542-Rules-for-Certified-School-Age-Child-Care-Centers-EN.pdf">CCLD-0542</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0093-Contact-Report-SAMPLE.pdf">CCLD-0093 Contact Report (sample)</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/CCLD-0090-CC-Health-and-Safety-Review-Checklist-SAMPLE.pdf">CCLD-0090 Health &amp; Safety Review</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/PR-0203-Training-Requirements-for-Early-Educators-in-Center-Settings-EN.pdf">PR-0203 Training Requirements</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/PTA-0703-Summary-of-CC-Rule-Changes.pdf">PTA-0703 Rule Changes Summary</a></li>
+  <li><a href="https://www.oregon.gov/delc/providers/CCLD_Library/PTA-0732-Mixed-Age-Ratio-Table-EN.pdf">PTA-0732 Mixed-Age Ratio</a></li>
+</ul>
+<h3>Provider search &amp; ancillary</h3>
+<ul>
+  <li><a href="https://findchildcareoregon.org/">Find Child Care Oregon</a></li>
+  <li><a href="https://childcaresafetyportal.ode.state.or.us/portal/">Child Care Safety Portal (legacy URL)</a></li>
+  <li><a href="https://stage.worklifesystems.com/Login/LoginGuest?AgencyId=34&activetab=SearchCompliances">WorkLife Systems compliance search</a></li>
+  <li><a href="https://findchildcareoregon.org/resources/">Find Child Care Oregon — resources</a></li>
+  <li><a href="https://oregonspark.org/">Oregon Spark (QRIS)</a></li>
+  <li><a href="https://oregonspark.org/find-child-care-oregon/">Oregon Spark — Find Child Care Oregon</a></li>
+  <li><a href="https://oregonearlylearning.com/parents-families/child-care-safety-portal-overview">Oregon Early Learning Safety Portal overview</a></li>
+  <li><a href="https://fhpdx.org/wp-content/uploads/2022/04/Child-Safety-Portal-2022.pdf">Family Forward — Safety Portal 2022 guide</a></li>
+  <li><a href="https://pdxparent.com/child-care-may16/">PDX Parent — Is your child care up to code?</a></li>
+</ul>
+</div>
+
+<div class="footer">
+  ComplianceKit research pack &middot; Oregon data report &middot; 2026-04-18. Internal use — no public distribution.
+</div>
+
+</div>
+</body>
+</html>

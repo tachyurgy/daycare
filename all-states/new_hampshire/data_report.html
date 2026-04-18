@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — New Hampshire Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-2:#151528; --bg-3:#1d1d33; --fg:#f0f0f5; --fg-dim:#b0b0c0; --accent:#00d4aa; --accent-dim:#008c70; --border:#2a2a44; --warn:#ffb86c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 32px 80px; }
+  header { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:40px; }
+  .eyebrow { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  h1 { font-size:48px; margin:0 0 12px; font-weight:700; letter-spacing:-0.02em; }
+  .meta-row { display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--fg-dim); }
+  .meta-row strong { color:var(--fg); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); font-weight:600; }
+  h3 { font-size:16px; margin:20px 0 8px; font-weight:600; color:var(--accent); }
+  p { margin:0 0 12px; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px dotted var(--accent-dim); }
+  a:hover { color:var(--fg); border-bottom-color:var(--fg); }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; background:var(--bg-2); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--bg-3); color:var(--accent); font-weight:600; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul { padding-left:22px; margin:10px 0 16px; }
+  li { margin-bottom:6px; }
+  .callout { background:var(--bg-2); border-left:3px solid var(--accent); padding:14px 18px; margin:16px 0; border-radius:0 6px 6px 0; font-size:14px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .rank-badge { display:inline-block; background:var(--bg-3); border:1px solid var(--accent-dim); color:var(--accent); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.5px; }
+  .pill { display:inline-block; background:var(--bg-3); padding:2px 8px; border-radius:3px; font-size:11px; color:var(--fg-dim); margin-right:6px; }
+  code { background:var(--bg-3); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; font-family:'SF Mono',Monaco,Consolas,monospace; }
+  .link-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:13px; }
+  @media (max-width:700px){ .link-grid{grid-template-columns:1fr;} h1{font-size:36px;} .wrap{padding:24px 18px 60px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>New Hampshire</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Wave 8 (Small NE, Salesforce-gated data)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>new_hampshire</code></span>
+    <span class="rank-badge">TIER: MEDIUM</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>New Hampshire Department of Health and Human Services (DHHS)</strong>, Office of Program Support,
+  <a href="https://www.dhhs.nh.gov/child-care-licensing-unit">Child Care Licensing Unit (CCLU)</a>.
+</p>
+<ul>
+  <li>Address: 129 Pleasant Street, Concord, NH 03301</li>
+  <li>Phone: (603) 271-9025 (main) / (603) 271-4624 (licensing)</li>
+  <li>Email: <a href="mailto:CCLUoffice@dhhs.nh.gov">CCLUoffice@dhhs.nh.gov</a></li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>He-C 4002</strong> — NH Child Care Program Licensing Rules (readopted 2025-08-26). <a href="https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents2/he-c-4002-formatted.pdf">Formatted PDF</a></li>
+  <li><strong>He-C 4002.02</strong> — Licensure &amp; Renewal (3-year license cycle). <a href="https://www.law.cornell.edu/regulations/new-hampshire/N-H-Admin-Code-SS-He-C-4002.02">Cornell LII</a></li>
+  <li><strong>He-C 4002.37</strong> — Infant/Toddler Program. <a href="https://www.law.cornell.edu/regulations/new-hampshire/N-H-Admin-Code-SS-He-C-4002.37">Cornell LII</a></li>
+  <li><strong>Enabling statute:</strong> <a href="https://www.gencourt.state.nh.us/rsa/html/NHTOC/NHTOC-XII-170-E.htm">RSA 170-E</a></li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value / Source</th></tr></thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td>114 (top-3-cities scrape: Manchester, Nashua, Concord)</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://childcarecenter.us/state/new_hampshire">childcarecenter.us — NH directory (third-party)</a></td></tr>
+    <tr><td>Phone numbers</td><td>All 114 rows</td></tr>
+    <tr><td>Emails</td><td><span class="pill">NONE</span></td></tr>
+    <tr><td>Websites</td><td>Minority — only rows with own consumer domain</td></tr>
+    <tr><td>Authoritative live portal</td><td><a href="https://new-hampshire.my.site.com/nhccis/NH_ChildCareSearch">NH Child Care Search</a> (Salesforce Experience Cloud — no bulk export)</td></tr>
+    <tr><td>Bulk DHHS CSV</td><td><span class="pill">NONE</span> — no open-data feed exists</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://www.dhhs.nh.gov/programs-services/childcare-parenting-childbirth/child-care-licensing">DHHS Child Care Licensing</a></li>
+  <li><a href="https://www.dhhs.nh.gov/child-care-licensing-unit">Child Care Licensing Unit</a></li>
+  <li><a href="https://nh.childcareaware.org/child-care-licensing/">Child Care Aware of NH — licensing summary</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/new-hampshire">National Database (ACF — NH)</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li>Child Care Licensing Application (DHHS-CCLU)</li>
+  <li>Personnel Information Form (per staff — background check, qualifications)</li>
+  <li>Child's Application for Enrollment / Emergency Information Form</li>
+  <li>Health Form per child (physician-signed; immunization record per RSA 141-C:20-a)</li>
+  <li>Criminal Background Check Release (state, federal fingerprint, child abuse &amp; neglect registry)</li>
+  <li>Fire Inspection Report (local fire marshal); building/zoning approvals (municipal)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout">
+  <strong>He-C 4002:</strong> Statements of Findings and CAPs become public on or after the CAP due date
+  (typically 30–45 days after issuance). The NH Child Care Search exposes the last 3 years of inspection
+  reports per facility but does not offer bulk export.
+</div>
+<h3>Sources</h3>
+<ul>
+  <li><strong>Consumer-facing (per-facility, Salesforce):</strong> <a href="https://new-hampshire.my.site.com/nhccis/NH_ChildCareSearch">NH Child Care Search</a></li>
+  <li><strong>CCLU News &amp; Updates (ad-hoc enforcement notices):</strong> <a href="https://www.dhhs.nh.gov/programs-services/childcare-parenting-childbirth/child-care-licensing/cclu-news-and-updates">CCLU News &amp; Updates</a></li>
+  <li><strong>Inspection process explainer:</strong> <a href="https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents/2021-11/holu-child-care-licensing-inspections.pdf">HoLu Child Care Licensing Inspections PDF</a></li>
+  <li><strong>Open-records path:</strong> <a href="https://www.gencourt.state.nh.us/rsa/html/VI/91-A/91-A-mrg.htm">RSA 91-A (Right-to-Know)</a> — 5 business-day response window.</li>
+</ul>
+<h3>Access strategy</h3>
+<ul>
+  <li>No anonymous bulk endpoint. Salesforce Visualforce remote actions (<code>fetchAccountList</code>, <code>fetchProviderList</code>) require session tokens.</li>
+  <li>High-volume option: Puppeteer/Playwright scraper with Salesforce session handling.</li>
+  <li>Clean option: RSA 91-A request to CCLU (CCLUoffice@dhhs.nh.gov) for provider roster + SoFs + CAPs + fines, last 36 months.</li>
+  <li>Ad-hoc: monitor CCLU News &amp; Updates for enforcement announcements.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>3-year license cycle</strong> — unusually long; creates windows where compliance drift can accumulate undetected. Strong pitch for continuous-compliance software.</li>
+  <li><strong>"Critical rules" trigger auto-CAP</strong> — He-C 4002 enumerates specific rules where <em>any</em> violation auto-triggers a Corrective Action Plan with firm deadlines. Miss the CAP deadline and administrative fines follow. Classic pain point.</li>
+  <li><strong>Background checks every 5 years</strong> including any state the staff member lived in during prior 5 years — operationally complex for small centers.</li>
+  <li><strong>Mixed-age ratios use average-age</strong> (unusual) — requires careful documentation; easy to get wrong.</li>
+  <li><strong>Publicly visible deficiency history</strong> — any critical-rule violation appears on the parent-facing NH Child Care Search. Reputational cost hook.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Expand childcarecenter.us scrape</strong> to Dover, Rochester, Portsmouth, Salem, Derry, Keene — projected +150 leads.</li>
+  <li><strong>File RSA 91-A request</strong> to DHHS CCLU for bulk provider roster + 3 years of SoFs/CAPs/fines; 5 business-day response window.</li>
+  <li><strong>Build Salesforce scraper</strong> for per-account detail pages (license status + latest SoF PDF) — reserve for high-intent accounts.</li>
+  <li><strong>Partner with NH-Connections.org</strong> (NH CCR&amp;R) for a warm referral list (no bulk download, but personal relationship yields segmented intel).</li>
+  <li><strong>Email enrichment</strong> via Hunter.io / Apollo using scraped name + site.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://www.dhhs.nh.gov/programs-services/childcare-parenting-childbirth/child-care-licensing">DHHS Child Care Licensing</a></div>
+  <div><a href="https://www.dhhs.nh.gov/child-care-licensing-unit">Child Care Licensing Unit</a></div>
+  <div><a href="https://new-hampshire.my.site.com/nhccis/NH_ChildCareSearch">NH Child Care Search</a></div>
+  <div><a href="https://www.dhhs.nh.gov/programs-services/childcare-parenting-childbirth/child-care-licensing/cclu-news-and-updates">CCLU News &amp; Updates</a></div>
+  <div><a href="https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents2/he-c-4002-formatted.pdf">He-C 4002 formatted PDF</a></div>
+  <div><a href="https://www.law.cornell.edu/regulations/new-hampshire/N-H-Admin-Code-SS-He-C-4002.02">He-C 4002.02 (Cornell LII)</a></div>
+  <div><a href="https://www.law.cornell.edu/regulations/new-hampshire/N-H-Admin-Code-SS-He-C-4002.37">He-C 4002.37 (Cornell LII)</a></div>
+  <div><a href="https://www.dhhs.nh.gov/sites/g/files/ehbemt476/files/documents/2021-11/holu-child-care-licensing-inspections.pdf">CCLU Inspections Explainer PDF</a></div>
+  <div><a href="https://www.gencourt.state.nh.us/rsa/html/NHTOC/NHTOC-XII-170-E.htm">RSA 170-E (statute)</a></div>
+  <div><a href="https://www.gencourt.state.nh.us/rsa/html/VI/91-A/91-A-mrg.htm">RSA 91-A (Right-to-Know)</a></div>
+  <div><a href="https://nh.childcareaware.org/child-care-licensing/">Child Care Aware of NH</a></div>
+  <div><a href="https://childcarecenter.us/state/new_hampshire">childcarecenter.us — NH</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/states-territories/new-hampshire">National Database (ACF — NH)</a></div>
+</div>
+
+</div>
+</body>
+</html>

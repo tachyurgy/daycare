@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a;
+    --panel: #151528;
+    --panel-2: #1c1c33;
+    --text: #f0f0f5;
+    --muted: #8a8aa8;
+    --accent: #00d4aa;
+    --accent-dim: #00a888;
+    --border: #26264a;
+    --warn: #ffc266;
+    --bad: #ff6b8a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  header.top { border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2.5rem; }
+  .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 600; }
+  h1 { margin: 0.4rem 0 0.3rem; font-size: 2.6rem; letter-spacing: -0.02em; font-weight: 700; }
+  h1 .rank { color: var(--accent); font-size: 1.2rem; margin-left: 0.6rem; vertical-align: middle; font-weight: 500; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  h2 { margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  h2 .n { color: var(--accent); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.95rem; margin-right: 0.6rem; font-weight: 400; }
+  h3 { margin-top: 2rem; margin-bottom: 0.6rem; font-size: 1.05rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent-dim); word-break: break-word; }
+  a:hover { color: #6affd4; border-bottom-style: solid; }
+  p { margin: 0.5rem 0 1rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; background: var(--panel); font-size: 0.92rem; }
+  thead th { background: var(--panel-2); text-align: left; padding: 0.7rem 0.9rem; color: var(--accent); font-weight: 600; border-bottom: 2px solid var(--border); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody td { padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--panel-2); }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem 1.5rem; margin: 1rem 0; }
+  .pill { display: inline-block; padding: 0.15rem 0.55rem; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; font-size: 0.78rem; color: var(--muted); margin-right: 0.4rem; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .pill.good { color: var(--accent); border-color: var(--accent-dim); }
+  .pill.warn { color: var(--warn); border-color: var(--warn); }
+  .pill.bad { color: var(--bad); border-color: var(--bad); }
+  code { background: var(--panel-2); color: var(--accent); padding: 0.1rem 0.35rem; border-radius: 3px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.88em; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 720px) { h1 { font-size: 2rem; } .two-col { grid-template-columns: 1fr; } }
+  .footer { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">ComplianceKit Research Pack</div>
+  <h1>Alabama <span class="rank">Rank #24 by population</span></h1>
+  <div class="meta">Compiled 2026-04-18 &middot; Southeastern expansion corridor &middot; ~2,031 licensed day-care centers</div>
+</header>
+
+<h2><span class="n">1.</span>Licensing Authority</h2>
+<div class="card">
+  <p><strong>Alabama Department of Human Resources (DHR), Child Care Services Division.</strong></p>
+  <ul>
+    <li>DHR Child Care — <a href="https://dhr.alabama.gov/child-care/">dhr.alabama.gov/child-care</a></li>
+    <li>Licensing Overview — <a href="https://dhr.alabama.gov/child-care/licensing-overview/">dhr.alabama.gov/child-care/licensing-overview</a></li>
+    <li>Phone: (334) 242-1425 &middot; toll-free (866) 528-1694 &middot; <a href="mailto:childcarelicensingintake@dhr.alabama.gov">childcarelicensingintake@dhr.alabama.gov</a></li>
+    <li>Day Care Directory (centers) — <a href="https://apps.dhr.alabama.gov/daycare/daycare_search">apps.dhr.alabama.gov/daycare/daycare_search</a></li>
+    <li>Day Care Homes directory — <a href="https://apps.dhr.alabama.gov/Child_Care_Services/Lic_Day_Care_Homes">apps.dhr.alabama.gov/Child_Care_Services/Lic_Day_Care_Homes</a></li>
+  </ul>
+  <p><span class="pill">Day Care Center</span><span class="pill">Nighttime Center</span><span class="pill">Family Day Care Home</span><span class="pill">Group Day Care Home</span><span class="pill">License-Exempt (church, no federal funds)</span></p>
+</div>
+
+<h2><span class="n">2.</span>Primary Regulatory Citation</h2>
+<table>
+  <thead><tr><th>Authority</th><th>Citation</th><th>Link</th></tr></thead>
+  <tbody>
+    <tr><td>Licensing statute</td><td>Ala. Code § 38-7-1 et seq. (Alabama Child Care Act of 1971)</td><td><a href="https://alisondb.legislature.state.al.us/alison/codeofalabama/1975/38-7-1.htm">alisondb.legislature.state.al.us</a></td></tr>
+    <tr><td>Center / nighttime standards</td><td>Ala. Admin. Code Ch. 660-5-26</td><td><a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/No-Highlighted-MS-for-CENTERS-revised.pdf">Centers MS PDF</a></td></tr>
+    <tr><td>Family / group day care homes</td><td>Ala. Admin. Code Ch. 660-5-27</td><td><a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/Sr-No-Highlighted-Home-Standards-10-3-19.pdf">Home MS PDF</a></td></tr>
+    <tr><td>Child Care Program rules</td><td>Ala. Admin. Code r. 660-5-20-.04</td><td><a href="https://www.law.cornell.edu/regulations/alabama/Ala-Admin-Code-r-660-5-20-.04">Cornell LII</a></td></tr>
+    <tr><td>Background checks (CA/N)</td><td>Ala. Code § 38-13</td><td><a href="https://alisondb.legislature.state.al.us/alison/codeofalabama/1975/38-7-1.htm">alisondb.legislature.state.al.us</a></td></tr>
+    <tr><td>Child Care Safety Act</td><td>AL Act 2018-390</td><td><a href="https://alison.legislature.state.al.us/files/pdf/search/alison_2018RS/PublicActs/2018-390.htm">Act 2018-390</a></td></tr>
+    <tr><td>Open Records Act</td><td>Ala. Code § 36-12-40</td><td>Cited via AL Legislature search</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">3.</span>Contact / Provider Data Pull</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Data source type</td><td><span class="pill bad">Bronze — aggregator (no state bulk feed; directory is PostBack form)</span></td></tr>
+    <tr><td>Aggregator used</td><td>childcarecenter.us (upstream from DHR licensee roster)</td></tr>
+    <tr><td>Cities captured</td><td>Birmingham (20), Huntsville (20), Montgomery (20), Mobile (20), Tuscaloosa (20)</td></tr>
+    <tr><td>Leads CSV rows in repo</td><td>99 unique rows — <code>/Users/magnusfremont/Desktop/daycare/alabama_leads.csv</code></td></tr>
+    <tr><td>Fields captured</td><td>business_name, city, state, phone</td></tr>
+    <tr><td>Email / website</td><td><span class="pill warn">Blank — per-record enrichment required</span></td></tr>
+    <tr><td>Authoritative directory</td><td><a href="https://apps.dhr.alabama.gov/daycare/daycare_search">daycare_search</a> (no violations, search-only)</td></tr>
+    <tr><td>Statewide map</td><td><a href="https://alabamafamilycentral.org/service/alabama-dhr-statewide-daycare-map/">Alabama Family Central</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">4.</span>Compliance Framework Links</h2>
+<ul>
+  <li>Minimum Standards — Day Care Centers (2020 PDF) — <a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/No-Highlighted-MS-for-CENTERS-revised.pdf">dhr.alabama.gov/.../No-Highlighted-MS-for-CENTERS-revised.pdf</a></li>
+  <li>Minimum Standards — Family Day Care Homes — <a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/Sr-No-Highlighted-Home-Standards-10-3-19.pdf">dhr.alabama.gov/.../Sr-No-Highlighted-Home-Standards-10-3-19.pdf</a></li>
+  <li>Proposed Center Performance Standards (2021 draft) — <a href="https://dhr.alabama.gov/wp-content/uploads/2021/06/PROPOSED-Centers-Child-Care-Licensing-and-Performance-Standards.pdf">PROPOSED-Centers-Child-Care-Licensing-and-Performance-Standards.pdf</a></li>
+  <li>License-Exempt Day Care Facilities — <a href="https://dhr.alabama.gov/child-care/license-exempt-day-care-facilities/">dhr.alabama.gov/child-care/license-exempt-day-care-facilities</a></li>
+  <li>Alabama Childcare Facts (advocacy summary) — <a href="https://alabamachildcarefacts.com/minimum-standards/">alabamachildcarefacts.com/minimum-standards</a></li>
+  <li>Public Health Law Center — AL Ch. 660-5-25 — <a href="https://www.publichealthlawcenter.org/sites/default/files/resources/X_Alabama%20Chapter%20660-5-25.pdf">PHLC — AL Ch 660-5-25</a></li>
+  <li>Minimum Day Care Staff Ratios summary — <a href="https://www.hellosubs.co/childcare-resources/minimum-day-care-staff-ratios-for-alabama">hellosubs.co/childcare-resources/alabama</a></li>
+</ul>
+
+<h2><span class="n">5.</span>Licensing Forms</h2>
+<table>
+  <thead><tr><th>Form</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>DHR-CCS-1100</td><td>Application for License to Conduct a Child Care Facility</td></tr>
+    <tr><td>DHR-CCS-1207</td><td>Information Form for Licensing Study</td></tr>
+    <tr><td>DHR-CCS-1207A</td><td>Personnel / Staff Information</td></tr>
+    <tr><td>DHR-CCS-1230</td><td>Child Care Facility License</td></tr>
+    <tr><td>DHR-CCS-1503</td><td>Emergency Preparedness and Evacuation Plan</td></tr>
+    <tr><td>DHR-CCS-1532</td><td>Discipline Policy Statement</td></tr>
+    <tr><td>DHR-CCS-1618</td><td>Child Application / Enrollment</td></tr>
+    <tr><td>DHR-DHS-1617</td><td>Consent for SCAN / CA-N Clearance</td></tr>
+    <tr><td>CA/N Clearance Request</td><td>Central Registry check via DHR Child Abuse &amp; Neglect Registry</td></tr>
+    <tr><td>ABI/FBI fingerprint packet</td><td>State + federal criminal background check</td></tr>
+  </tbody>
+</table>
+<p>Forms accessed via DHR Day Care Center License Requirements page: <a href="https://dhr.alabama.gov/child-care/day-care-center-license-requirements/">dhr.alabama.gov/child-care/day-care-center-license-requirements</a></p>
+
+<h2><span class="n">6.</span>Violations &amp; Inspection Data</h2>
+<div class="card">
+<p><strong>Weakest transparency of any state in this batch.</strong> DHR's directory returns only name + address + phone + license status. Deficiency reports are posted <em>at the facility</em>, not published online. Compliance history requires a formal Alabama Open Records Act request (Ala. Code § 36-12-40).</p>
+<p><strong>Full details:</strong> <a href="./violations.md">violations.md</a></p>
+<ul>
+  <li>FOIA turnaround 30-60 business days; electronic CSV extracts supported.</li>
+  <li>2018 Child Care Safety Act (Act 2018-390) closed the broad church-exempt loophole for facilities receiving federal/state funds — broader licensed population than pre-2018.</li>
+  <li>Enforcement-action press releases are the main public transparency mechanism in absence of online lookup.</li>
+</ul>
+<p><span class="pill bad">No online violation lookup</span><span class="pill warn">Reports posted at facility only</span><span class="pill">FOIA-driven compliance data</span></p>
+</div>
+
+<h2><span class="n">7.</span>Outreach Signals</h2>
+<div class="two-col">
+<div class="card">
+  <h3>Regulatory pain points</h3>
+  <ul>
+    <li>Annual license renewal with clean fire + health inspections required.</li>
+    <li>Corporal punishment prohibited; discipline policy must be written + signed by parents.</li>
+    <li>12 annual in-service training hours per staff.</li>
+    <li>Child-check ("left behind") protocols + annual vehicle inspection for transportation.</li>
+    <li>ABI + FBI fingerprint + CA/N clearance required <em>before</em> unsupervised child contact.</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>Market opportunity</h3>
+  <ul>
+    <li>No public compliance portal = facility directors have <strong>no visibility into their own record</strong>. ComplianceKit can fill this gap.</li>
+    <li>Act 2018-390 brought hundreds of previously-exempt church centers into the licensed universe — net-new market.</li>
+    <li>Alabama Quality STARS participation drives CCDBG bonus payments — SaaS can tie directly to star-level tracking.</li>
+    <li>Biggest metros: Birmingham, Huntsville, Montgomery, Mobile, Tuscaloosa — already in the leads CSV.</li>
+  </ul>
+</div>
+</div>
+
+<h2><span class="n">8.</span>Next-Step Data Acquisition</h2>
+<ol>
+  <li>File Alabama Open Records Act request with DHR Child Care Services for the full licensee roster + 24-month deficiency history (see FOIA scope template in <a href="./violations.md">violations.md</a>).</li>
+  <li>Automate the DHR directory county drop-down (67 counties) to harvest the full roster — build a RoboBrowser / Playwright script to iterate the PostBack form and export CSV.</li>
+  <li>Enrich phones / emails via commercial enrichment against matched records.</li>
+  <li>Watch DHR press releases for revocation / suspension actions as a sales-trigger feed.</li>
+  <li>Consider partnership with Alabama Partnership for Children / VOICES for Alabama's Children for reach to independent operators.</li>
+</ol>
+
+<h2><span class="n">9.</span>All Links</h2>
+<div class="card">
+<h3>Licensing &amp; Rules</h3>
+<ul>
+  <li><a href="https://dhr.alabama.gov/child-care/">DHR Child Care Services</a></li>
+  <li><a href="https://dhr.alabama.gov/child-care/licensing-overview/">DHR Licensing Overview</a></li>
+  <li><a href="https://dhr.alabama.gov/child-care/day-care-center-license-requirements/">DHR Day Care Center License Requirements</a></li>
+  <li><a href="https://dhr.alabama.gov/child-care/child-care-licensing/">DHR Child Care Licensing</a></li>
+  <li><a href="https://dhr.alabama.gov/child-care/child-day-care-frequently-asked-questions/">DHR Child Day Care FAQ</a></li>
+  <li><a href="https://dhr.alabama.gov/child-care/license-exempt-day-care-facilities/">License-Exempt Day Care Facilities</a></li>
+  <li><a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/No-Highlighted-MS-for-CENTERS-revised.pdf">Minimum Standards — Centers (2020)</a></li>
+  <li><a href="https://dhr.alabama.gov/wp-content/uploads/2020/01/Sr-No-Highlighted-Home-Standards-10-3-19.pdf">Minimum Standards — Family Homes</a></li>
+  <li><a href="https://dhr.alabama.gov/wp-content/uploads/2021/06/PROPOSED-Centers-Child-Care-Licensing-and-Performance-Standards.pdf">Proposed Center Performance Standards (2021 draft)</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/alabama/Ala-Admin-Code-r-660-5-20-.04">Ala. Admin. Code r. 660-5-20-.04 (Cornell LII)</a></li>
+  <li><a href="https://alabamachildcarefacts.com/minimum-standards/">Alabama Childcare Facts — MS summary</a></li>
+  <li><a href="https://alisondb.legislature.state.al.us/alison/codeofalabama/1975/38-7-1.htm">Ala. Code Title 38 Ch. 7 (Child Care Act)</a></li>
+  <li><a href="https://alison.legislature.state.al.us/files/pdf/search/alison_2018RS/PublicActs/2018-390.htm">Act 2018-390 (Child Care Safety Act)</a></li>
+  <li><a href="https://www.publichealthlawcenter.org/sites/default/files/resources/X_Alabama%20Chapter%20660-5-25.pdf">Public Health Law Center — AL Ch. 660-5-25</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/alabama-department-human-resources-child-care-services-division">ACF Licensing DB — AL contact</a></li>
+</ul>
+<h3>Provider search &amp; ancillary</h3>
+<ul>
+  <li><a href="https://apps.dhr.alabama.gov/daycare/daycare_search">DHR Day Care Directory (centers)</a></li>
+  <li><a href="https://apps.dhr.alabama.gov/Child_Care_Services/Lic_Day_Care_Homes">DHR Licensed Day Care Homes</a></li>
+  <li><a href="https://alabamafamilycentral.org/service/alabama-dhr-statewide-daycare-map/">Alabama Family Central — Statewide Daycare Map</a></li>
+  <li><a href="https://dhr.alabama.gov/faq/how-do-i-file-a-complaint-against-a-provider/">How to file a complaint</a></li>
+  <li><a href="https://dhr.alabama.gov/child-protective-services/child-abuse-neglect-reporting/">Child Abuse/Neglect Reporting</a></li>
+  <li><a href="https://dhr.alabama.gov/child-protective-services/child-abuse-neglect-administrative-reviews/">Child Abuse/Neglect Administrative Reviews</a></li>
+  <li><a href="https://www.hellosubs.co/childcare-resources/minimum-day-care-staff-ratios-for-alabama">Hello Subs — AL ratios summary</a></li>
+</ul>
+</div>
+
+<div class="footer">
+  ComplianceKit research pack &middot; Alabama data report &middot; 2026-04-18. Internal use — no public distribution.
+</div>
+
+</div>
+</body>
+</html>

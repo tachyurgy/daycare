@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Rhode Island Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-2:#151528; --bg-3:#1d1d33; --fg:#f0f0f5; --fg-dim:#b0b0c0; --accent:#00d4aa; --accent-dim:#008c70; --border:#2a2a44; --warn:#ffb86c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 32px 80px; }
+  header { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:40px; }
+  .eyebrow { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  h1 { font-size:48px; margin:0 0 12px; font-weight:700; letter-spacing:-0.02em; }
+  .meta-row { display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--fg-dim); }
+  .meta-row strong { color:var(--fg); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); font-weight:600; }
+  h3 { font-size:16px; margin:20px 0 8px; font-weight:600; color:var(--accent); }
+  p { margin:0 0 12px; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px dotted var(--accent-dim); }
+  a:hover { color:var(--fg); border-bottom-color:var(--fg); }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; background:var(--bg-2); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--bg-3); color:var(--accent); font-weight:600; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul { padding-left:22px; margin:10px 0 16px; }
+  li { margin-bottom:6px; }
+  .callout { background:var(--bg-2); border-left:3px solid var(--accent); padding:14px 18px; margin:16px 0; border-radius:0 6px 6px 0; font-size:14px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .rank-badge { display:inline-block; background:var(--bg-3); border:1px solid var(--accent-dim); color:var(--accent); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.5px; }
+  .pill { display:inline-block; background:var(--bg-3); padding:2px 8px; border-radius:3px; font-size:11px; color:var(--fg-dim); margin-right:6px; }
+  code { background:var(--bg-3); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; font-family:'SF Mono',Monaco,Consolas,monospace; }
+  .link-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:13px; }
+  @media (max-width:700px){ .link-grid{grid-template-columns:1fr;} h1{font-size:36px;} .wrap{padding:24px 18px 60px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Rhode Island</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Wave 8 (Small NE, Salesforce-gated, 2025 AG audit pressure)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>rhode_island</code></span>
+    <span class="rank-badge">TIER: MEDIUM (catalyst market)</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Rhode Island Department of Human Services (DHS), Office of Child Care</strong> — day care providers.
+  <strong>Rhode Island Department of Children, Youth &amp; Families (DCYF)</strong> — foster, child-placing, residential,
+  and enforcement referrals for unlicensed day-care operators (post-2019 reorganization).
+</p>
+<ul>
+  <li>DHS Office of Child Care: (855) 697-4347</li>
+  <li>DHS Child Care regulations page: <a href="https://dhs.ri.gov/regulations">dhs.ri.gov/regulations</a></li>
+  <li>DCYF licensing: <a href="https://dcyf.ri.gov/services/licensing">dcyf.ri.gov/services/licensing</a></li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>218-RICR-70-00-1</strong> — Child Care Center &amp; School-Age Program. <a href="https://rules.sos.ri.gov/Regulations/part/218-70-00-1">SOS text</a> · <a href="https://dhs.ri.gov/sites/g/files/xkgbur426/files/2022-02/218-ricr-70-00-1-child-care-center-and-school-age-program-regulations-for-licensure.pdf">PDF</a></li>
+  <li><strong>218-RICR-70-00-2</strong> — <a href="https://rules.sos.ri.gov/regulations/part/218-70-00-2">Family Child Care Home</a></li>
+  <li><strong>218-RICR-70-00-7</strong> — <a href="http://risos-apa-production-public.s3.amazonaws.com/DHS/REG_10927_20191206131704.pdf">Group Family Child Care Home PDF</a></li>
+  <li><strong>Enabling statutes:</strong> R.I. Gen. Laws §42-72.1 et seq. (DCYF) and §40-13.2 (DHS, post-2019). Also <a href="https://law.justia.com/codes/rhode-island/2022/title-42/chapter-42-12-5/">§42-12.5</a> (licensing &amp; monitoring).</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value / Source</th></tr></thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td>137 (top-3-cities scrape: Providence, Warwick, Cranston)</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://childcarecenter.us/state/rhode_island">childcarecenter.us — RI directory</a></td></tr>
+    <tr><td>Phone numbers</td><td>All 137 rows</td></tr>
+    <tr><td>Emails</td><td><span class="pill">NONE</span></td></tr>
+    <tr><td>Websites</td><td>1 of 137 rows</td></tr>
+    <tr><td>Authoritative live portal</td><td><a href="https://earlylearningprograms.dhs.ri.gov/">RISES Family portal</a> (Salesforce LWC — no bulk export)</td></tr>
+    <tr><td>State licensed universe</td><td>~426 centers + ~479 FCCH = ~905 total (2018 Market Rate Survey)</td></tr>
+    <tr><td>Coverage</td><td>~32% of centers, heavily Providence-metro-weighted</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://dhs.ri.gov/programs-and-services/child-care/child-care-providers">DHS Child Care Providers</a></li>
+  <li><a href="https://dhs.ri.gov/media/4571/download?language=en">Child Care Licensing Regulation Guidance PDF</a></li>
+  <li><a href="https://dcyf.ri.gov/services/licensing">DCYF Licensing</a></li>
+  <li><a href="https://brightstars.org/">BrightStars RI (QRIS)</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/rhode-island-department-human-services-office-child-care">National Database (ACF — RI)</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li>DHS Center / Program License Application</li>
+  <li>DHS Family Child Care Home / Group Family Application</li>
+  <li>BrightStars QRIS participation agreement (voluntary; subsidy-tied)</li>
+  <li>Comprehensive Background Check (state BCI, FBI fingerprint, child abuse &amp; neglect, sex offender; 5-year refresh)</li>
+  <li>RI Department of Health Immunization Record per R23-1-IMM</li>
+  <li>Fire Marshal Certificate of Inspection</li>
+  <li>Department of Health Food Service Permit (if meals prepared)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout warn">
+  <strong>RI Auditor General (Aug 2025):</strong> Audited 50 licensed facilities. Found <em>at least one</em> health/safety
+  violation at <strong>every</strong> facility. 60% in "significant noncompliance" (≥10% of H&amp;S requirements unmet).
+  26 of 50 facilities had background-check errors. 232 facility findings + 920 documentation findings. 59 cases of Level 2/3
+  sex offenders living within 300 feet. DHS has pledged to visit every provider in the state. This is an active-catalyst market.
+</div>
+<h3>Sources</h3>
+<ul>
+  <li><strong>Consumer-facing (RISES, Salesforce LWC):</strong> <a href="https://earlylearningprograms.dhs.ri.gov/">earlylearningprograms.dhs.ri.gov</a></li>
+  <li><strong>DHS plan to visit every provider:</strong> <a href="https://turnto10.com/news/local/dhs-to-visit-every-child-care-provider-in-ri">TurnTo10</a></li>
+  <li><strong>2025 AG audit coverage:</strong>
+    <a href="https://rhodeislandcurrent.com/2025/08/15/auditor-general-paints-a-picture-of-imperfect-safety-in-r-i-child-care-facilities/">RI Current</a> ·
+    <a href="https://www.wpri.com/target-12/new-audit-finds-widespread-health-and-safety-issues-in-ri-day-cares/">WPRI Target 12</a> ·
+    <a href="https://www.oceanstatemedia.org/education/auditor-general-paints-a-picture-of-imperfect-safety-in-r-i-child-care-facilities">Ocean State Media</a></li>
+  <li><strong>Open-records:</strong> <a href="http://webserver.rilegislature.gov/Statutes/TITLE38/38-2/INDEX.HTM">R.I. Gen. Laws §38-2 (APRA)</a> — 10 business day response.</li>
+  <li><strong>Cross-reference:</strong> <a href="https://ricair-data-rihealth.hub.arcgis.com/pages/child-care">RI AirCare (DOH immunization hub for licensed programs)</a></li>
+</ul>
+<h3>Access strategy</h3>
+<ul>
+  <li>No anonymous bulk endpoint. Salesforce LWC defeats curl/requests.</li>
+  <li>Playwright scraper for per-facility detail pages (license status, BrightStars rating, inspection PDFs).</li>
+  <li>APRA request to DHS Office of Child Care for provider roster + 3 yrs monitoring reports + CAPs + enforcement actions.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>2x unannounced monitoring visits per year</strong> — among the most aggressive inspection cadences in the country. Inspection-readiness tooling has obvious ROI.</li>
+  <li><strong>"No exceptions" infant ratio</strong> — no combining, no averaging. Hard-coded workflow; easy to fail during lunch/transitions.</li>
+  <li><strong>45 sq ft per child</strong> for infants/toddlers — explicit physical-plant check; renovations have to pass re-inspection.</li>
+  <li><strong>BrightStars ↔ CCAP</strong> — higher star rating = higher subsidy rate. Tight economic incentive to over-comply.</li>
+  <li><strong>2025 AG audit catalyst</strong> — DHS has committed to visiting every provider. Every facility's compliance exposure is about to surface publicly. Classic urgency play.</li>
+  <li><strong>Dual-authority confusion</strong> (DHS vs. DCYF) — providers often misunderstand reporting channels. Educational content is a lead-magnet opportunity.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Expand childcarecenter.us scrape</strong> to Pawtucket, Woonsocket, East Providence, North Providence, Newport, Coventry — projected +150-200 leads.</li>
+  <li><strong>APRA request</strong> to DHS Office of Child Care: provider roster + 3 yrs monitoring visits + CAPs + AG-audit follow-up status.</li>
+  <li><strong>Playwright/Puppeteer scraper</strong> against RISES for per-facility BrightStars rating + license status + latest monitoring PDF. Segment by star rating (3+ = ICP).</li>
+  <li><strong>Email enrichment</strong> via Hunter.io / Apollo.</li>
+  <li><strong>Timely outreach</strong> — lead with the AG audit coverage while the pressure is fresh.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://dhs.ri.gov/programs-and-services/child-care">DHS — Child Care</a></div>
+  <div><a href="https://dhs.ri.gov/programs-and-services/child-care/child-care-providers">DHS — Providers</a></div>
+  <div><a href="https://dhs.ri.gov/regulations">DHS Regulations</a></div>
+  <div><a href="https://dhs.ri.gov/media/4571/download?language=en">Child Care Licensing Guidance PDF</a></div>
+  <div><a href="https://earlylearningprograms.dhs.ri.gov/">RISES Early Learning Programs</a></div>
+  <div><a href="https://dcyf.ri.gov/services/licensing">DCYF Licensing</a></div>
+  <div><a href="https://brightstars.org/">BrightStars RI</a></div>
+  <div><a href="https://rules.sos.ri.gov/Regulations/part/218-70-00-1">218-RICR-70-00-1 (SOS)</a></div>
+  <div><a href="https://dhs.ri.gov/sites/g/files/xkgbur426/files/2022-02/218-ricr-70-00-1-child-care-center-and-school-age-program-regulations-for-licensure.pdf">218-70-00-1 PDF</a></div>
+  <div><a href="https://rules.sos.ri.gov/regulations/part/218-70-00-2">218-RICR-70-00-2 (FCCH)</a></div>
+  <div><a href="http://risos-apa-production-public.s3.amazonaws.com/DHS/REG_10927_20191206131704.pdf">218-RICR-70-00-7 (Group FCCH) PDF</a></div>
+  <div><a href="http://webserver.rilegislature.gov/Statutes/TITLE38/38-2/INDEX.HTM">R.I. Gen. Laws §38-2 (APRA)</a></div>
+  <div><a href="https://law.justia.com/codes/rhode-island/2022/title-42/chapter-42-12-5/">R.I. Gen. Laws §42-12.5</a></div>
+  <div><a href="https://rhodeislandcurrent.com/2025/08/15/auditor-general-paints-a-picture-of-imperfect-safety-in-r-i-child-care-facilities/">RI Current — AG Audit</a></div>
+  <div><a href="https://www.wpri.com/target-12/new-audit-finds-widespread-health-and-safety-issues-in-ri-day-cares/">WPRI Target 12 — AG Audit</a></div>
+  <div><a href="https://www.oceanstatemedia.org/education/auditor-general-paints-a-picture-of-imperfect-safety-in-r-i-child-care-facilities">Ocean State Media</a></div>
+  <div><a href="https://turnto10.com/news/local/dhs-to-visit-every-child-care-provider-in-ri">TurnTo10 — DHS visits</a></div>
+  <div><a href="https://ricair-data-rihealth.hub.arcgis.com/pages/child-care">RI AirCare Data Hub</a></div>
+  <div><a href="https://childcarecenter.us/state/rhode_island">childcarecenter.us — RI</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/rhode-island-department-human-services-office-child-care">National Database (ACF — RI)</a></div>
+</div>
+
+</div>
+</body>
+</html>

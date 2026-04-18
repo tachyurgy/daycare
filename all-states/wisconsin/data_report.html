@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wisconsin — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --panel:#14142b; --panel-hi:#1b1b3a; --border:#2a2a4a; --text:#f0f0f5; --muted:#9a9ab0; --accent:#00d4aa; --warn:#ffb347; --link:#7cf5d8; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+  .wrap { max-width:1040px; margin:0 auto; padding:48px 32px 96px; }
+  header.hero { border-bottom:1px solid var(--border); padding-bottom:24px; margin-bottom:40px; }
+  header .tag { display:inline-block; background:rgba(0,212,170,0.12); color:var(--accent); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+  header h1 { font-size:42px; font-weight:700; margin:16px 0 8px; letter-spacing:-.01em; }
+  header .meta { color:var(--muted); font-size:14px; }
+  header .meta span { margin-right:24px; }
+  header .meta strong { color:var(--text); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h2 .num { display:inline-block; color:var(--accent); font-family:ui-monospace,Menlo,monospace; font-size:14px; margin-right:10px; vertical-align:2px; }
+  a { color:var(--link); text-decoration:none; border-bottom:1px dotted var(--link); }
+  a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  p,li { font-size:15px; } ul { padding-left:20px; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--panel-hi); color:var(--accent); font-weight:600; font-size:13px; letter-spacing:.02em; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; } tr:hover td { background:rgba(0,212,170,0.03); }
+  .pill { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-family:ui-monospace,Menlo,monospace; background:rgba(0,212,170,0.1); color:var(--accent); border:1px solid rgba(0,212,170,0.3); }
+  .pill.warn { background:rgba(255,179,71,0.1); color:var(--warn); border-color:rgba(255,179,71,0.3); }
+  code { font-family:ui-monospace,Menlo,monospace; background:var(--panel); color:var(--accent); padding:2px 6px; border-radius:3px; font-size:13px; }
+  .callout { background:var(--panel); border-left:3px solid var(--accent); padding:16px 20px; margin:16px 0; border-radius:0 6px 6px 0; color:var(--muted); font-size:14px; }
+  footer { margin-top:72px; padding-top:24px; border-top:1px solid var(--border); color:var(--muted); font-size:12px; }
+  .link-grid { columns:2; column-gap:32px; font-size:13px; } .link-grid a { display:block; padding:2px 0; word-break:break-all; }
+  @media (max-width:720px){ .link-grid{columns:1;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Wisconsin</h1>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 20th (~5.9M)</span>
+    <span><strong>Licensed providers:</strong> 4,242</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+  </div>
+</header>
+
+<h2><span class="num">01</span> Licensing Authority</h2>
+<p><strong>Wisconsin Department of Children and Families (DCF)</strong> — Division of Early Care and Education — <strong>Bureau of Early Care Regulation (BECR)</strong>. Operates <strong>WISCCRS</strong> (internal regulatory system). Public search: <a href="https://childcarefinder.wisconsin.gov/">childcarefinder.wisconsin.gov</a>. Certified providers (≤ 3 children) are regulated separately via DCF 202 through county agencies.</p>
+
+<h2><span class="num">02</span> Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>DCF 250</strong> — Family Child Care Centers (4–8 children)</li>
+  <li><strong>DCF 251</strong> — Group Child Care Centers (9+ children) — <a href="https://docs.legis.wisconsin.gov/code/admin_code/dcf/201_252/251">Wis. Admin. Code DCF 251</a></li>
+  <li><strong>DCF 252</strong> — Day Camps</li>
+  <li><strong>DCF 202</strong> — Certified Child Care (county-certified, ≤ 3 children)</li>
+  <li><strong>Enabling statute:</strong> Wis. Stat. ch. 48.65</li>
+  <li><em>Infant/toddler rule revision scheduled effective summer 2026 — verify edition before publication.</em></li>
+</ul>
+
+<h2><span class="num">03</span> Contact &amp; Provider Data</h2>
+<table>
+  <thead><tr><th>Source</th><th>Type</th><th>Format</th><th>Freshness</th><th>URL</th></tr></thead>
+  <tbody>
+    <tr><td>LCC Directory (statewide)</td><td>Primary bulk</td><td>Excel (.xlsx, ~730 KB)</td><td><strong>Daily</strong></td><td><a href="https://dcf.wisconsin.gov/files/ccdir/lic/excel/LCC%20Directory.xlsx">LCC Directory.xlsx</a></td></tr>
+    <tr><td>LCC Directories page</td><td>Index</td><td>HTML + 72 per-county xlsx</td><td>Daily</td><td><a href="https://dcf.wisconsin.gov/cclicensing/lcc-directories">lcc-directories</a></td></tr>
+    <tr><td>Child Care Finder</td><td>Consumer search</td><td>HTML (Angular)</td><td>Live</td><td><a href="https://childcarefinder.wisconsin.gov/">childcarefinder.wisconsin.gov</a></td></tr>
+    <tr><td>DHS GIS Open Data</td><td>Spatial layer</td><td>ArcGIS REST / GeoJSON</td><td>Monthly</td><td><a href="https://data.dhsgis.wi.gov/datasets/wisconsin-licensed-and-certified-childcare/about">WI DHS GIS</a></td></tr>
+    <tr><td>The Registry (workforce)</td><td>Staff credentials</td><td>Auth-gated</td><td>Live</td><td><a href="https://wiregistry.org/">wiregistry.org</a></td></tr>
+  </tbody>
+</table>
+<p class="callout">
+<strong>In our lead file:</strong> 1,000 rows of licensed WI providers with name, city, state, and phone (normalized). Wisconsin's LCC Directory xlsx is the <strong>cleanest bulk source in the target set</strong> — daily refresh, 4,242 unique providers, includes YoungStar level, capacity, and contact name.
+</p>
+
+<h2><span class="num">04</span> Compliance Framework Links</h2>
+<table>
+  <thead><tr><th>Area</th><th>Resource</th></tr></thead>
+  <tbody>
+    <tr><td>Licensing home</td><td><a href="https://dcf.wisconsin.gov/cclicensing">dcf.wisconsin.gov/cclicensing</a></td></tr>
+    <tr><td>Rules &amp; manuals</td><td><a href="https://dcf.wisconsin.gov/cclicensing/rules">Licensing rules</a></td></tr>
+    <tr><td>Regulation hub</td><td><a href="https://dcf.wisconsin.gov/ccregulation">ccregulation</a></td></tr>
+    <tr><td>Most frequently cited violations</td><td><a href="https://dcf.wisconsin.gov/ccregulation/providers/most-freq-cited">Most cited</a></td></tr>
+    <tr><td>Serious Violations list</td><td><a href="https://dcf.wisconsin.gov/cclicensing/seriousviolations">Serious Violations</a></td></tr>
+    <tr><td>Illegal / Revoked providers</td><td><a href="https://dcf.wisconsin.gov/ccregulation/illegal-revoked">Illegal / Revoked list</a></td></tr>
+    <tr><td>YoungStar (QRIS)</td><td><a href="https://dcf.wisconsin.gov/youngstar/parents">YoungStar</a></td></tr>
+    <tr><td>Child care data hub</td><td><a href="https://dcf.wisconsin.gov/childcare/data">childcare/data</a></td></tr>
+    <tr><td>ACF national licensing</td><td><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/wisconsin-department-children-and-families">ACF WI state page</a></td></tr>
+  </tbody>
+</table>
+
+<h2><span class="num">05</span> Licensing Forms</h2>
+<ul>
+  <li><strong>DCF-F-CFS0003</strong> — Application for Child Care License</li>
+  <li><strong>DCF-F-CFS0062</strong> — Background Record Check Request</li>
+  <li><strong>DCF-F-CFS0055</strong> — Child's Health History &amp; Emergency Care Plan</li>
+  <li><strong>DCF-F-CFS0056</strong> — Child Medication Consent</li>
+  <li><strong>DCF-F-CFS0077</strong> — Staff Record</li>
+  <li><strong>DCF-F-0078</strong> — Staff-to-Child Ratio Worksheet — <a href="https://dcf.wisconsin.gov/files/forms/pdf/0078.pdf">PDF</a></li>
+  <li><strong>DCF-F-CFS0082</strong> — Injury / Incident Report</li>
+  <li>YoungStar enrollment forms &amp; Safe Sleep Policy template</li>
+</ul>
+
+<h2><span class="num">06</span> Violations &amp; Inspection Data</h2>
+<table>
+  <thead><tr><th>Data source</th><th>Scope</th><th>Format</th><th>Bulk?</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://childcarefinder.wisconsin.gov/">childcarefinder.wisconsin.gov</a></td><td>Per-facility: 3-year rolling inspection history, noncompliance statements, correction plans, YoungStar, enforcement actions</td><td>HTML (Angular) + PDF</td><td><span class="pill warn">No public bulk</span></td></tr>
+    <tr><td><a href="https://dcf.wisconsin.gov/ccregulation/providers/most-freq-cited">Most frequently cited list</a></td><td>DCF's published top-violations (background checks, physicals, abuse/neglect training, child tracking, CPR, supervision)</td><td>HTML</td><td>Aggregate</td></tr>
+    <tr><td><a href="https://dcf.wisconsin.gov/ccregulation/illegal-revoked">Illegal / Revoked list</a></td><td>Names of providers with lost licensure</td><td>HTML table</td><td><span class="pill">Yes</span></td></tr>
+    <tr><td><a href="https://dcf.wisconsin.gov/cps/incidents">Critical Incident reports (CPS)</a></td><td>Substantiated abuse incident summaries</td><td>HTML</td><td><span class="pill">Yes</span></td></tr>
+    <tr><td>Wisconsin Public Records Law request</td><td>WISCCRS violation/enforcement extract</td><td>Excel (on request)</td><td><span class="pill">Yes (FOIA)</span></td></tr>
+  </tbody>
+</table>
+<p>Violations visible for a <strong>3-year rolling window</strong>. The Child Care Finder Angular UI calls a JSON API at <code>childcarefinder.wisconsin.gov/api/</code> — no auth token required, but expect intermittent 502s (observed during this research). Wisconsin has a strong open-records culture under Wis. Stat. §§ 19.31–19.39; bulk WISCCRS extracts are routinely granted: <a href="mailto:DCFOpenRecords@wisconsin.gov">DCFOpenRecords@wisconsin.gov</a>.</p>
+
+<h2><span class="num">07</span> Outreach Signals</h2>
+<ul>
+  <li><strong>Continuous licensure = no renewal deadline pressure.</strong> Unlike most states, WI providers face no periodic renewal — so the "panic before inspection" pitch must emphasize the <strong>annual unannounced visit</strong> instead. ComplianceKit reframes the readiness story.</li>
+  <li><strong>Wisconsin Shares fraud fatigue.</strong> Post-MJS-Pulitzer reforms mean subsidy-accepting programs endure heavier documentation burden — a specific ICP with real admin pain.</li>
+  <li><strong>The Registry integration opportunity.</strong> All staff must be listed in Wisconsin Registry for credentials; ComplianceKit staff-file sync to Registry is a wedge feature.</li>
+  <li><strong>YoungStar 4–5 Star ambition.</strong> Higher-star programs receive better Wisconsin Shares reimbursement; evidence-binder workflow is a direct ROI story.</li>
+  <li><strong>Shaken Baby Syndrome training</strong> is statutory (Wis. Stat. § 48.982) — a WI-unique compliance item to track.</li>
+</ul>
+
+<h2><span class="num">08</span> Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Scale to full 4,242 licensees</strong> by removing the 1,000-row cap on the LCC Directory xlsx.</li>
+  <li><strong>Enrich with violation history</strong> via the Child Care Finder JSON API (<code>/api/provider/&lt;providerNumber&gt;</code>); wrap in retry-with-backoff to absorb 502s.</li>
+  <li><strong>Scrape Illegal/Revoked list</strong> to exclude suspended providers from outreach and to build a "don't-let-this-be-you" content angle.</li>
+  <li><strong>Harvest Critical Incident reports</strong> for a journalism-style data-journalism SEO page — high backlink potential.</li>
+  <li><strong>File a Wisconsin public-records request</strong> to DCF for WISCCRS violation extract FY2023–2026 (Excel) with rule citations + outcome.</li>
+</ol>
+
+<h2><span class="num">09</span> All Links</h2>
+<div class="link-grid">
+  <a href="https://dcf.wisconsin.gov/cclicensing">cclicensing</a>
+  <a href="https://dcf.wisconsin.gov/cclicensing/rules">Rules &amp; manuals</a>
+  <a href="https://dcf.wisconsin.gov/cclicensing/lcc-directories">LCC Directories page</a>
+  <a href="https://dcf.wisconsin.gov/files/ccdir/lic/excel/LCC%20Directory.xlsx">LCC Directory xlsx</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation">ccregulation</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation/faq">ccregulation FAQ</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation/providers/most-freq-cited">Most frequently cited</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation/providers">Regulation for providers</a>
+  <a href="https://dcf.wisconsin.gov/cclicensing/seriousviolations">Serious violations</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation/illegal-revoked">Illegal / revoked</a>
+  <a href="https://dcf.wisconsin.gov/ccregulation/complaint">File a complaint</a>
+  <a href="https://dcf.wisconsin.gov/cps/incidents">Critical Incident reports</a>
+  <a href="https://dcf.wisconsin.gov/childcare/data">Child care data</a>
+  <a href="https://dcf.wisconsin.gov/youngstar/parents">YoungStar for parents</a>
+  <a href="https://dcf.wisconsin.gov/manuals/cclicensing-manual/Monitoring/Monitoring-Noncompliance_Statement_Correction_Plan/9-licensee-correction-plan.htm">Licensee correction plan manual</a>
+  <a href="https://dcf.wisconsin.gov/files/forms/pdf/0078.pdf">Ratio worksheet (CFS0078)</a>
+  <a href="https://dcf.wisconsin.gov/files/publications/pdf/4024.pdf">DCF 251 commentary</a>
+  <a href="https://childcarefinder.wisconsin.gov/">Child Care Finder</a>
+  <a href="https://wiregistry.org/">Wisconsin Registry</a>
+  <a href="https://wilawlibrary.gov/topics/familylaw/childdaycare.php">State Law Library topic guide</a>
+  <a href="https://data.dhsgis.wi.gov/datasets/wisconsin-licensed-and-certified-childcare/about">WI DHS GIS</a>
+  <a href="https://docs.legis.wisconsin.gov/code/admin_code/dcf/201_252/251">DCF 251 (Wis. Admin. Code)</a>
+  <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/WI_Center_Dec_2020_508.pdf">ACF WI center regs</a>
+  <a href="https://licensingregulations.acf.hhs.gov/sites/default/files/licensing_regulation/WI_FCCH_DEC_2020_508.pdf">ACF WI FCCH regs</a>
+  <a href="https://licensingregulations.acf.hhs.gov/licensing/contact/wisconsin-department-children-and-families">ACF WI state page</a>
+  <a href="https://shepherdexpress.com/news/features/wisconsin-day-care-centers-fraud-honest-mistakes/">Shepherd Express — fraud coverage</a>
+  <a href="https://wisconsinexaminer.com/2026/01/15/wisconsin-children-and-families-secretary-says-hes-confident-in-child-care-accountability-measures/">WI Examiner (Jan 2026)</a>
+</div>
+
+<footer>
+  ComplianceKit · State Data Report · Wisconsin · Generated 2026-04-18 · Post-Pulitzer reforms make WI one of the most transparent states — LCC Directory refreshed daily.
+</footer>
+
+</div>
+</body>
+</html>

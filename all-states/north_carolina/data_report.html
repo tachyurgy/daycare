@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>North Carolina — ComplianceKit Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --fg:#f0f0f5; --accent:#00d4aa; --muted:#8a8aa0; --panel:#15152a; --border:#26263f; --warn:#ffb347; }
+  html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:48px 32px; }
+  header h1 { font-size:34px; margin:0 0 4px; letter-spacing:-0.5px; }
+  header .sub { color:var(--muted); margin:0; font-size:14px; }
+  .pill { display:inline-block; padding:3px 10px; border:1px solid var(--accent); color:var(--accent); border-radius:20px; font-size:12px; margin-right:6px; }
+  h2 { color:var(--accent); font-size:20px; margin-top:40px; border-bottom:1px solid var(--border); padding-bottom:6px; letter-spacing:-0.2px; }
+  h3 { font-size:16px; color:var(--fg); margin-top:20px; margin-bottom:6px; }
+  a { color:var(--accent); text-decoration:none; word-break:break-word; }
+  a:hover { text-decoration:underline; }
+  code { background:var(--panel); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+  th, td { padding:9px 10px; text-align:left; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { background:var(--panel); color:var(--accent); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+  tr:hover td { background:#12122a; }
+  .tier { padding:2px 8px; border-radius:3px; font-size:11px; font-weight:600; letter-spacing:0.5px; }
+  .gold { background:#3a3010; color:#ffd166; border:1px solid #5c4818; }
+  .silver { background:#2a2a33; color:#c8c8d2; border:1px solid #40404d; }
+  .bronze { background:#2a1a10; color:#d48a5e; border:1px solid #4d2e1e; }
+  ul { padding-left:20px; }
+  li { margin-bottom:6px; }
+  .panel { background:var(--panel); border:1px solid var(--border); padding:14px 18px; border-radius:6px; margin:12px 0; }
+  .link-list li { font-size:13.5px; }
+  .note { color:var(--warn); font-size:13px; }
+  .footer { color:var(--muted); font-size:12px; margin-top:60px; border-top:1px solid var(--border); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>North Carolina</h1>
+  <p class="sub">Population rank: #9 (≈10.9M) · Report compiled 2026-04-18 · <span class="pill">ComplianceKit</span></p>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<div class="panel">
+  <strong>North Carolina Department of Health and Human Services (NCDHHS)</strong> — Division of Child Development and Early Education (DCDEE) · <a href="https://ncchildcare.ncdhhs.gov/">https://ncchildcare.ncdhhs.gov/</a><br>
+  1915 Health Services Way, Raleigh, NC 27607 · (919) 814-6300 or (800) 859-0829. Background-check portal: <a href="https://ncabcms.nc.gov/DCDEE/Applicant/">NCABCMS</a>.
+</div>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li>N.C. Gen. Stat. Chapter 110, Article 7 — Child Care Facilities Act</li>
+  <li>10A N.C. Admin. Code, Chapter 09 — Child Care Rules</li>
+  <li><a href="https://www.law.cornell.edu/regulations/north-carolina/10A-N-C-Admin-Code-09-0713">10A NCAC 09 .0713 — Staff/Child Ratios</a></li>
+  <li>10A NCAC 09 .2818 — Enhanced Ratios (4-5 star)</li>
+  <li>10A NCAC 09 .2800 — Star Rated License System</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <tr><th>Dataset</th><th>Source URL</th><th>Format</th><th>Rows</th><th>Tier</th><th>Limitations</th></tr>
+  <tr>
+    <td>NC DCDEE Child Care Facility Search (authoritative)</td>
+    <td><a href="https://ncchildcare.ncdhhs.gov/childcaresearch">ncchildcare.ncdhhs.gov/childcaresearch</a></td>
+    <td>Telerik RadGrid / DotNetNuke</td>
+    <td>~4,500 (statewide)</td>
+    <td><span class="tier gold">GOLD</span></td>
+    <td>Encrypted ViewState; requires Playwright/Selenium</td>
+  </tr>
+  <tr>
+    <td>Legacy Visits.asp per-facility</td>
+    <td><a href="https://ncchildcaresearch.dhhs.state.nc.us/Visits.asp?Facility_ID=9255230">ncchildcaresearch.dhhs.state.nc.us</a></td>
+    <td>Classic ASP HTML</td>
+    <td>Per-facility visit rows</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Slow server (60s timeouts); URL uses <code>Facility_ID</code></td>
+  </tr>
+  <tr>
+    <td>Statistical Detail monthly PDF</td>
+    <td><a href="https://ncchildcare.ncdhhs.gov/County/Child-Care-Snapshot/Child-Care-Statistical-Report">Statistical Report landing</a></td>
+    <td>PDF (800+ pages, text-layered)</td>
+    <td>All licensed facilities</td>
+    <td><span class="tier silver">SILVER</span></td>
+    <td>Facility name + star + type only; no phone/address</td>
+  </tr>
+  <tr>
+    <td>childcarecenter.us aggregator (existing CSV source)</td>
+    <td><a href="https://childcarecenter.us/county">childcarecenter.us</a></td>
+    <td>HTML (scraped)</td>
+    <td>1,152 (~25% coverage)</td>
+    <td><span class="tier bronze">BRONZE</span></td>
+    <td>Third-party aggregator; top 15-20 per county only</td>
+  </tr>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul class="link-list">
+  <li><a href="https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/C/Chapter_9_Child_Care_Rules_effective_November_1_2024.pdf">Child Care Rules Chapter 9 (Nov 2024)</a></li>
+  <li><a href="http://reports.oah.state.nc.us/ncac/title%2010a%20-%20health%20and%20human%20services/chapter%2009%20-%20child%20care%20rules/chapter%2009%20rules.pdf">10A NCAC 09 full rulebook (OAH)</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/D/DCDEE_Rulebook.pdf">DCDEE Rulebook PDF</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/north-carolina/10A-N-C-Admin-Code-09-0713">10A NCAC 09 .0713 (Cornell)</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/Home/DCDEE-Sections/Regulatory-Services">Regulatory Services landing</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul class="link-list">
+  <li>DCDEE Child Care Facility License Application (online via eLicensing)</li>
+  <li><code>CJS 150</code> / <code>DCDEE-0280</code> — Qualifications Letter Application</li>
+  <li><code>DCDEE-0281</code> — Staff Application / Background Check Package</li>
+  <li>Criminal Background Check (CBC) — NC SBI / FBI via <a href="https://ncabcms.nc.gov/DCDEE/Applicant/">NCABCMS</a></li>
+  <li>Child Care Medical Action Plan</li>
+  <li>Emergency Information Form (per child)</li>
+  <li><code>DCDEE-3111</code> — Workforce Education Information</li>
+  <li><code>Form DEHNR 3987</code> — Food Service Sanitation</li>
+  <li>Local fire inspection certificate (annual)</li>
+  <li>Health Assessment for staff</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<h3>Primary sources</h3>
+<ul>
+  <li><strong>NC DCDEE Child Care Facility Search:</strong> <a href="https://ncchildcare.ncdhhs.gov/childcaresearch">ncchildcare.ncdhhs.gov/childcaresearch</a> — per-facility "DCDEE Visits" tab.</li>
+  <li><strong>Legacy Visits.asp:</strong> <code>ncchildcaresearch.dhhs.state.nc.us/Visits.asp?Facility_ID={id}</code> — direct URL pattern for per-facility visits (reachable without Telerik UI).</li>
+  <li><strong>Statistical Detail monthly PDF:</strong> <a href="https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/S/statistical_detail_report_january_2026.pdf">Jan 2026 edition (813 pages)</a> — full facility list + Administrative Actions section.</li>
+  <li><strong>Find Monitoring Reports how-to:</strong> <a href="https://ncchildcare.ncdhhs.gov/How-Do-I/Find-Monitoring-Reports">How-Do-I/Find-Monitoring-Reports</a>.</li>
+</ul>
+
+<h3>Data format</h3>
+<p>Two parallel portals: the modern Telerik-powered <code>childcaresearch</code> (encrypted ViewState; requires headless browser) and the legacy <code>Visits.asp</code> Classic ASP page (scrapable with requests+BeautifulSoup). <strong>No JSON/CSV API, no Socrata dataset.</strong> Administrative actions include Written Warning, Special Provisional, Summary Suspension, License Revocation, Abuse/Neglect findings.</p>
+
+<h3>Freshness</h3>
+<ul>
+  <li>Visits.asp: 14–30 day lag after inspection close</li>
+  <li>Statistical Detail: monthly (posted first week)</li>
+  <li>Administrative Actions: 60+ day lag for revocations pending legal review</li>
+</ul>
+
+<h3>Scraping / access strategy</h3>
+<ul>
+  <li><strong>Step 1 (Facility IDs):</strong> either OCR the Statistical Detail PDF (text-layered, ~4,500 IDs) or drive the Telerik search with Playwright county-by-county.</li>
+  <li><strong>Step 2 (violations):</strong> for each ID, GET <code>Visits.asp?Facility_ID={id}</code>; parse HTML rows of (visit_date, type, reason, violation_Y/N, detail_link). Rate-limit 1 req/sec.</li>
+  <li><strong>Step 3 (admin actions):</strong> parse the monthly Statistical Detail's Administrative Actions section.</li>
+  <li>Best ROI: a public-records request asking DCDEE for the full Facility ID list + Administrative Actions CSV — bypasses the Telerik portal entirely.</li>
+</ul>
+
+<h3>FOIA path</h3>
+<p>N.C. Gen. Stat. § 132 (Public Records Act; strong presumption of disclosure). Email <code>publicinfo@dhhs.nc.gov</code> or call 919-814-6300. No statutory deadline; practical turnaround 2–4 weeks. DCDEE has granted Administrative Actions CSVs and Facility ID lists on request.</p>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>Visits.asp row in last 90 days with Violations = Yes</strong> <em>(requires per-facility scrape; strongest intent)</em>.</li>
+  <li><strong>Facility listed in monthly Admin Actions section</strong> <em>(available via PDF OCR)</em>.</li>
+  <li><strong>Star Rating = 1 or 2</strong> <em>(available — visible on license)</em> — secondary signal.</li>
+  <li><strong>Temporary / Provisional license in effect</strong> <em>(available — visible in Facility Search; indicates non-compliance)</em>.</li>
+  <li><strong>License expiring within 90 days</strong> <em>(available — 3-year term for 3+ star licenses)</em>.</li>
+</ul>
+
+<h2>8. Next-step Data Acquisition</h2>
+<ul>
+  <li>File public-records request with DCDEE for (a) full Facility ID list in CSV and (b) 12-month Administrative Actions CSV — bypasses Telerik bottleneck.</li>
+  <li>Playwright harvester against <code>childcaresearch</code> UI as a fallback if FOIA is slow.</li>
+  <li>OCR pipeline for the monthly Statistical Detail Administrative Actions section (recurring feed).</li>
+  <li>Expand childcarecenter.us scrape to deeper county pages to lift coverage from ~25% to ~60%.</li>
+  <li>Hunter.io / Apollo email-append — no NC source publishes email.</li>
+</ul>
+
+<h2>9. All Links</h2>
+<ul class="link-list">
+  <li><a href="https://ncchildcare.ncdhhs.gov/">NC DCDEE home</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/childcaresearch">Child Care Facility Search (Telerik)</a></li>
+  <li><a href="https://ncchildcaresearch.dhhs.state.nc.us/Visits.asp?Facility_ID=9255230">Legacy Visits.asp sample</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/How-Do-I/Find-Monitoring-Reports">Find Monitoring Reports how-to</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/S/statistical_detail_report_january_2026.pdf">Statistical Detail (Jan 2026)</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/County/Child-Care-Snapshot/Child-Care-Statistical-Report">Statistical Report landing</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/Home/Data/Dashboards/Data-Behind-the-Dashboard">Data Behind the Dashboard</a></li>
+  <li><a href="https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/C/Chapter_9_Child_Care_Rules_effective_November_1_2024.pdf">Chapter 9 rules (Nov 2024)</a></li>
+  <li><a href="http://reports.oah.state.nc.us/ncac/title%2010a%20-%20health%20and%20human%20services/chapter%2009%20-%20child%20care%20rules/chapter%2009%20rules.pdf">10A NCAC 09 (OAH)</a></li>
+  <li><a href="https://ncabcms.nc.gov/DCDEE/Applicant/">NCABCMS background-check portal</a></li>
+  <li><a href="https://www.law.cornell.edu/regulations/north-carolina/10A-N-C-Admin-Code-09-0713">10A NCAC 09 .0713 (Cornell)</a></li>
+  <li><a href="https://www.ednc.org/a-guide-to-finding-the-best-child-care-for-you-using-dhhs-look-up-tool/">EdNC guide to using the DHHS look-up tool</a></li>
+  <li><a href="https://www.earlyyearsnc.org/families/child-care-quality/">Early Years NC</a></li>
+  <li><a href="https://www.northstatelawfirm.com/blog/penalties-for-childcare-facility-license-violations-in-north-carolina/">Penalty overview (NorthState Law, 2025)</a></li>
+</ul>
+
+<p class="footer">ComplianceKit internal data report · generated 2026-04-18 · state: North Carolina</p>
+
+</div>
+</body>
+</html>

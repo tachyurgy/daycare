@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wyoming — ComplianceKit Data Report</title>
+<style>
+  :root {
+    --bg: #0d0d1a; --bg-elev: #15152a; --bg-card: #1a1a30;
+    --text: #f0f0f5; --text-dim: #a0a0b5;
+    --accent: #00d4aa; --accent-dim: rgba(0, 212, 170, 0.18);
+    --border: #2a2a45; --warn: #ffb347; --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 24px; margin-bottom: 40px; }
+  header .tag { display: inline-block; background: var(--accent-dim); color: var(--accent); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  header h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+  header .sub { color: var(--text-dim); font-size: 1rem; }
+  header .meta { margin-top: 16px; display: flex; gap: 24px; flex-wrap: wrap; color: var(--text-dim); font-size: 0.88rem; }
+  header .meta strong { color: var(--text); }
+  section { margin-bottom: 40px; }
+  h2 { font-size: 1.3rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; word-break: break-word; }
+  a:hover { text-decoration: underline; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg-elev); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.5px; }
+  tr:hover td { background: rgba(0, 212, 170, 0.03); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0 6px 18px; position: relative; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); }
+  code { background: var(--bg-elev); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+  .pill-warn { background: rgba(255, 179, 71, 0.15); color: var(--warn); }
+  .pill-ok { background: var(--accent-dim); color: var(--accent); }
+  .pill-danger { background: rgba(255, 107, 107, 0.15); color: var(--danger); }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .kv { color: var(--text-dim); font-size: 0.88rem; }
+  .kv strong { color: var(--text); display: inline-block; min-width: 120px; }
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <span class="tag">ComplianceKit · State Data Report</span>
+  <h1>Wyoming</h1>
+  <div class="sub">Compliance, contact, and inspection-data acquisition plan</div>
+  <div class="meta">
+    <span><strong>Population rank:</strong> 50</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>Est. regulated programs:</strong> ~500-650</span>
+    <span><strong>Substantiated-complaint horizon:</strong> 2019-present</span>
+  </div>
+</header>
+
+<section>
+  <h2>1. Licensing Authority</h2>
+  <div class="card">
+    <p><strong>Wyoming Department of Family Services (DFS), Division of Early Care and Education</strong> — issues "certifications" (WY's term for licensing).</p>
+    <div class="kv"><strong>Address</strong> 2300 Capitol Avenue, Cheyenne, WY 82002</div>
+    <div class="kv"><strong>Phone</strong> (307) 777-7564 | Toll-free: 800-457-3659 | Licensing support: 307-777-3540</div>
+    <div class="kv"><strong>Finder</strong> <a href="https://childcare.dfs.wyo.gov/home/">childcare.dfs.wyo.gov</a> (legacy findchildcarewy.org redirects here)</div>
+    <div class="kv"><strong>DFS child care hub</strong> <a href="https://dfs.wyo.gov/providers/child-care-2/">dfs.wyo.gov/providers/child-care-2</a></div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Primary Regulatory Citation</h2>
+  <div class="card">
+    <p><strong>Statute:</strong> <strong>W.S. § 14-4-101 through § 14-4-116</strong> (Child Care Facilities). Rulemaking authority: § 14-4-107.</p>
+    <p><strong>DFS Rules (WY Rules &amp; Regs):</strong></p>
+    <ul>
+      <li><strong>Chapter 2</strong> — Licensing Child Care Facilities (general)</li>
+      <li><strong>Chapter 5</strong> — Family Child Care Home (FCCH, 3-10 children)</li>
+      <li><strong>Chapter 6</strong> — Family Child Care Center (FCCC, up to 15 children)</li>
+      <li><strong>Chapter 7</strong> — Child Care Center (CCC, 16+ children)</li>
+    </ul>
+    <p><strong>Unique terminology:</strong> WY uses "certification" (vs. licensing), and enforces both group size caps and ratios independently.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3. Contact / Provider Data</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads CSV rows (current)</td><td>101</td><td><code>wyoming_leads.csv</code> (project root)</td></tr>
+        <tr><td>Coverage of state market</td><td>~15-20%</td><td>Cheyenne, Casper, Laramie, Gillette, Rock Springs, Sheridan, Jackson</td></tr>
+        <tr><td>Email / website fields</td><td><span class="pill pill-warn">Blank</span></td><td>Secondary enrichment required</td></tr>
+        <tr><td>Primary lead source</td><td>childcarecenter.us mirror</td><td>Name / city / zip / phone</td></tr>
+        <tr><td>Authoritative registry</td><td>DFS CCX finder</td><td>JS-rendered, no bulk export</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>4. Compliance Framework Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/">WY DFS Child Care hub (providers)</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/licensing-rules/">Licensing rules</a></li>
+      <li><a href="https://dfs.wyo.gov/services/family-services/child-care/">DFS Child Care (parents)</a></li>
+      <li><a href="https://childcare.dfs.wyo.gov/home/">Find Child Care WY finder</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/resource-and-referral-providers/">Resource &amp; Referral (providers)</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/background-check-faqs/">Background check FAQs</a></li>
+      <li><a href="https://dfs.wyo.gov/about/policy-manuals/child-care-subsidy-policy-manual/">Child Care Subsidy Policy Manual</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/wyoming-department-family-services">ACF Licensing DB — WY</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5. Licensing Forms</h2>
+  <div class="card">
+    <ul>
+      <li>Certification Application (DFS child care)</li>
+      <li>Background check packet — WDCI fingerprint + FBI + Central Registry + Sex Offender</li>
+      <li>Health Certificate (operator / staff / household members)</li>
+      <li>Child Health Report &amp; Immunization (WY DOH schedule)</li>
+      <li>Fire inspection certificate (State Fire Marshal or local)</li>
+      <li>Environmental / sanitation inspection</li>
+      <li>Emergency Preparedness Plan</li>
+      <li>Policy set: discipline, illness exclusion, safe sleep, medication</li>
+      <li>Annual renewal application</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>6. Violations &amp; Inspection Data</h2>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <h3>Source</h3>
+        <p>Find Child Care WY finder. Substantiated complaints and certification history per facility, <strong>2019-present</strong>.</p>
+      </div>
+      <div>
+        <h3>Format</h3>
+        <p>Per-facility HTML + PDF. <span class="pill pill-danger">No bulk export</span> <span class="pill pill-warn">JS-rendered</span>. Closed facilities and pre-2019 complaints not displayed.</p>
+      </div>
+      <div>
+        <h3>Access strategy</h3>
+        <p>Playwright enumeration by county (23) / zip. Full statewide snapshot feasible in an afternoon given low facility count.</p>
+      </div>
+      <div>
+        <h3>Records-request path</h3>
+        <p>W.S. § 16-4-201-205 Public Records Act to DFS for certification history + all substantiated complaints + administrative enforcement actions.</p>
+      </div>
+    </div>
+    <p style="margin-top:12px;">Full analysis: <a href="./violations.md">violations.md</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>7. Outreach Signals</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Annual renewal cycle</strong> — every certification renews every 12 months. High-frequency buying trigger.</li>
+      <li><strong>Three parallel certification chapters</strong> (5 / 6 / 7) — WY has unusually granular rule differences by setting size; a "which-chapter-applies-to-you" wizard is a natural top-of-funnel asset.</li>
+      <li><strong>Lapsed certifications require re-application</strong> (not reinstatement) — late renewal is a costly mistake; renewal-reminder value prop is unusually strong.</li>
+      <li><strong>~500-650 total certified facilities</strong> — smallest state market in the US. Full-TAM outbound in a single quarter.</li>
+      <li><strong>Cheyenne, Casper, Gillette, Laramie, Rock Springs, Sheridan, Jackson</strong> — seven population centers cover the bulk of licensed facilities; frontier county providers are a long tail with high retention but lower expansion value.</li>
+      <li><strong>Voluntary STAR QRIS (1-4)</strong> — participation tied to subsidy enhancement; evidence-collection tools help providers move up tiers.</li>
+      <li><strong>Group size + ratio enforced independently</strong> — a room may meet ratio but fail group-size cap. Real-time dual-metric monitoring is the differentiator.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. Next-Step Data Acquisition</h2>
+  <div class="card">
+    <ol style="padding-left:20px;">
+      <li style="margin-bottom:8px;"><strong>Scrape CCX finder</strong> via Playwright across all 23 counties. Build comprehensive registry: certification number, type, capacity, ages, STAR level, substantiated complaints.</li>
+      <li style="margin-bottom:8px;"><strong>File W.S. § 16-4 records request</strong> to DFS for full certification-history extract, 10-year window, plus FFN (Family Friend or Neighbor) subsidy-eligible provider registry if maintained.</li>
+      <li style="margin-bottom:8px;"><strong>Wyoming Early Childhood Professional Learning system</strong> — cross-reference for staff-level PD signal; identifies training gaps.</li>
+      <li style="margin-bottom:8px;"><strong>Enrich leads</strong> via Wyoming CCR&amp;R network (regional R&amp;R agencies), CACFP sponsor listings, Head Start/EHS grantees.</li>
+      <li><strong>Expand leads</strong> to frontier counties: Campbell, Fremont, Park, Big Horn, Johnson, Platte, Uinta, Sublette, Teton, Washakie, Hot Springs, Converse, Crook, Goshen, Lincoln, Niobrara, Weston.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>9. All Links</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/">WY DFS Child Care hub</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/licensing-rules/">Licensing rules</a></li>
+      <li><a href="https://dfs.wyo.gov/services/family-services/child-care/">Parent-facing child care</a></li>
+      <li><a href="https://childcare.dfs.wyo.gov/home/">Find Child Care WY finder</a></li>
+      <li><a href="https://findchildcarewy.org/">Legacy finder URL</a></li>
+      <li><a href="https://findchildcarewy.org/maps/index.cfm">Legacy finder maps</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/report-a-concern-on-a-child-care-facility/">Report a Concern portal</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/resource-and-referral-providers/">Resource &amp; Referral (providers)</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-support/">Background check info</a></li>
+      <li><a href="https://dfs.wyo.gov/providers/child-care-2/background-check-faqs/">Background check FAQs</a></li>
+      <li><a href="https://dfs.wyo.gov/about/policy-manuals/child-care-subsidy-policy-manual/">Child Care Subsidy Policy Manual</a></li>
+      <li><a href="https://www.wyoleg.gov/ARules/2012/Rules/ARR16-058.pdf">Chapter 5 (FCCH) PDF</a></li>
+      <li><a href="https://www.publichealthlawcenter.org/sites/default/files/resources/Wyoming_Child%20Care%20Regulations.pdf">Consolidated regulations</a></li>
+      <li><a href="https://www.publichealthlawcenter.org/sites/default/files/WY%20Family%20Child%20Care%20Centers.pdf">FCCC rules</a></li>
+      <li><a href="https://wyoleg.gov/statutes/compress/title16.pdf">W.S. Title 16 (Public Records Act)</a></li>
+      <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/wyoming-department-family-services">ACF Licensing DB — WY</a></li>
+      <li><a href="https://www.law.cornell.edu/regulations/wyoming/W-S-1-14">W.S. cross-reference (eligibility/payment regs)</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Wyoming · ComplianceKit Data Report · 2026-04-18 · companion to <a href="./compliance.md">compliance.md</a>, <a href="./SOURCES.md">SOURCES.md</a>, <a href="./violations.md">violations.md</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceKit — Maine Data Report</title>
+<style>
+  :root { --bg:#0d0d1a; --bg-2:#151528; --bg-3:#1d1d33; --fg:#f0f0f5; --fg-dim:#b0b0c0; --accent:#00d4aa; --accent-dim:#008c70; --border:#2a2a44; --warn:#ffb86c; }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:40px 32px 80px; }
+  header { border-bottom:1px solid var(--border); padding-bottom:28px; margin-bottom:40px; }
+  .eyebrow { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  h1 { font-size:48px; margin:0 0 12px; font-weight:700; letter-spacing:-0.02em; }
+  .meta-row { display:flex; gap:28px; flex-wrap:wrap; font-size:13px; color:var(--fg-dim); }
+  .meta-row strong { color:var(--fg); font-weight:600; }
+  h2 { font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); font-weight:600; }
+  h3 { font-size:16px; margin:20px 0 8px; font-weight:600; color:var(--accent); }
+  p { margin:0 0 12px; }
+  a { color:var(--accent); text-decoration:none; border-bottom:1px dotted var(--accent-dim); }
+  a:hover { color:var(--fg); border-bottom-color:var(--fg); }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; background:var(--bg-2); border-radius:6px; overflow:hidden; }
+  th,td { padding:10px 14px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+  th { background:var(--bg-3); color:var(--accent); font-weight:600; font-size:12px; letter-spacing:0.5px; text-transform:uppercase; }
+  tr:last-child td { border-bottom:none; }
+  ul { padding-left:22px; margin:10px 0 16px; }
+  li { margin-bottom:6px; }
+  .callout { background:var(--bg-2); border-left:3px solid var(--accent); padding:14px 18px; margin:16px 0; border-radius:0 6px 6px 0; font-size:14px; }
+  .callout.warn { border-left-color:var(--warn); }
+  .rank-badge { display:inline-block; background:var(--bg-3); border:1px solid var(--accent-dim); color:var(--accent); padding:4px 10px; border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.5px; }
+  .pill { display:inline-block; background:var(--bg-3); padding:2px 8px; border-radius:3px; font-size:11px; color:var(--fg-dim); margin-right:6px; }
+  code { background:var(--bg-3); color:var(--accent); padding:1px 6px; border-radius:3px; font-size:13px; font-family:'SF Mono',Monaco,Consolas,monospace; }
+  .link-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:13px; }
+  @media (max-width:700px){ .link-grid{grid-template-columns:1fr;} h1{font-size:36px;} .wrap{padding:24px 18px 60px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">ComplianceKit Data Report</div>
+  <h1>Maine</h1>
+  <div class="meta-row">
+    <span><strong>Rank:</strong> Wave 8 (Low-density NE, investigative-journalism-documented enforcement gap)</span>
+    <span><strong>Report date:</strong> 2026-04-18</span>
+    <span><strong>State slug:</strong> <code>maine</code></span>
+    <span class="rank-badge">TIER: MEDIUM</span>
+  </div>
+</header>
+
+<h2>1. Licensing Authority</h2>
+<p>
+  <strong>Maine Department of Health &amp; Human Services (DHHS), Office of Child and Family Services (OCFS),
+  Children's Licensing and Investigation Services (CLIS)</strong>.
+</p>
+<ul>
+  <li>HQ: 109 Capitol Street, 11 State House Station, Augusta, ME 04333-0011</li>
+  <li>Main: (207) 287-3707</li>
+  <li>Child Care Licensing Unit: (207) 287-9300 / (800) 791-4080</li>
+  <li>Children's Licensing and Investigation: (207) 287-5020</li>
+</ul>
+
+<h2>2. Primary Regulatory Citation</h2>
+<ul>
+  <li><strong>10-148 CMR Ch. 32</strong> — Child Care Facility Licensing Rule (eff. 2021-09-27). <a href="https://www.maine.gov/dhhs/sites/maine.gov.dhhs/files/inline-files/Rules-for-the-Licensing-of-Child-Care-Facilities-10-148-Ch-32.pdf">Full PDF</a></li>
+  <li><strong>10-148 CMR Ch. 33</strong> — Family Child Care Provider Licensing Rule</li>
+  <li><strong>10-148 CMR Ch. 32 §7</strong> — Ratios. <a href="https://www.law.cornell.edu/regulations/maine/10-148-C-M-R-ch-32-SS-7">Cornell LII</a></li>
+  <li><strong>Enabling statute:</strong> <a href="https://www.mainelegislature.org/legis/statutes/22/title22sec8301-a.html">22 M.R.S. §8301-A</a> et seq.</li>
+</ul>
+
+<h2>3. Contact / Provider Data</h2>
+<table>
+  <thead><tr><th>Attribute</th><th>Value / Source</th></tr></thead>
+  <tbody>
+    <tr><td>Leads CSV rows</td><td>96 (top-3-cities scrape: Portland, Bangor, Lewiston)</td></tr>
+    <tr><td>Primary dataset</td><td><a href="https://childcarecenter.us/state/maine">childcarecenter.us — ME directory (third-party)</a></td></tr>
+    <tr><td>Phone numbers</td><td>All 96 rows</td></tr>
+    <tr><td>Emails</td><td><span class="pill">NONE</span></td></tr>
+    <tr><td>Websites</td><td>2 of 96 rows (supplementary search)</td></tr>
+    <tr><td>Authoritative live portal</td><td><a href="https://search.childcarechoices.me/">search.childcarechoices.me</a> (ASP.NET WebForms — no bulk export, scrapeable with ViewState handling)</td></tr>
+    <tr><td>Bulk OCFS CSV</td><td><span class="pill">NONE</span> — available on FOAA request</td></tr>
+    <tr><td>State total licensed universe</td><td>~952 centers + larger FCCP pool (~1,500 total per Maine Monitor)</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Compliance Framework Links</h2>
+<ul>
+  <li><a href="https://www.maine.gov/dhhs/ocfs/provider-resources/child-care-licensing">OCFS Child Care Licensing</a></li>
+  <li><a href="https://www.maine.gov/dhhs/ocfs">OCFS Home</a></li>
+  <li><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/maine-department-health-and-human-services-office-child-and-family-services">National Database (ACF — ME)</a></li>
+  <li><a href="https://childcarechoices.me/wp-content/uploads/2022/05/Consumer-Education-Statement-5-22.pdf">Consumer Education Statement PDF</a></li>
+</ul>
+
+<h2>5. Licensing Forms</h2>
+<ul>
+  <li>Child Care Licensing Application (OCFS-CLIS)</li>
+  <li>Background Check Authorization — state BCI + FBI fingerprint + Maine child abuse registry</li>
+  <li>Child Health Information Form — immunization + physical</li>
+  <li>Emergency Contact &amp; Authorized Pick-up Form</li>
+  <li>Fire Marshal's Inspection Report</li>
+  <li>Life Safety Code compliance form (children under 2.5)</li>
+</ul>
+
+<h2>6. Violations &amp; Inspection Data</h2>
+<div class="callout warn">
+  <strong>Maine Monitor / Bangor Daily News / Center for Public Integrity (2024):</strong> 1,481 facilities, 16,000+
+  citations since 2021. <strong>Zero licenses revoked, zero fines assessed</strong> despite $50–$500 per-incident statutory
+  authority. 64 conditional licenses issued. Enforcement posture is monitoring-and-correction only.
+</div>
+<h3>Sources</h3>
+<ul>
+  <li><strong>Consumer-facing (3-yr rolling window):</strong> <a href="https://search.childcarechoices.me/">search.childcarechoices.me</a> — ASP.NET WebForms; scrapeable with ViewState.</li>
+  <li><strong>License-exempt list:</strong> <a href="https://search.childcarechoices.me/searchLECCSP.aspx">searchLECCSP.aspx</a></li>
+  <li><strong>License-exempt monitoring reports:</strong> <a href="https://childcarechoices.me/index.php/license-exempt-monitoring/">childcarechoices.me/license-exempt-monitoring</a></li>
+  <li><strong>Investigative coverage:</strong>
+    <a href="https://themainemonitor.org/childcare-providers-violations/">Maine Monitor</a> ·
+    <a href="https://www.bangordailynews.com/2024/10/14/state/child-care-providers-maine-numerous-safety-violations/">BDN 2024-10-14</a> ·
+    <a href="https://www.bangordailynews.com/2025/10/13/state/state-health/maine-day-cares-child-abuse-neglect-reporting/">BDN 2025-10-13</a></li>
+  <li><strong>Open-records:</strong> <a href="https://www.mainelegislature.org/legis/statutes/1/title1sec408-A.html">1 M.R.S. §408-A (FOAA)</a>.</li>
+</ul>
+<h3>Access strategy</h3>
+<ul>
+  <li>Build ASP.NET ViewState scraper against childcarechoices.me; iterate ZIPs with large radius + dedupe.</li>
+  <li>File FOAA request to OCFS CLIS for provider roster + 3 yrs of inspection reports + CAPs + conditional licenses.</li>
+  <li>Maine Monitor's 6,000-report dataset is template — their FOAA language is a model.</li>
+</ul>
+
+<h2>7. Outreach Signals</h2>
+<ul>
+  <li><strong>2-year license cycle with 6–18-month mandatory inspection window</strong> — predictable inspection triggers.</li>
+  <li><strong>Mandatory 60-min daily outdoor play</strong> (even in winter) — Maine-specific documentation burden.</li>
+  <li><strong>30 hrs/yr training for center lead staff</strong> — above federal floor; certification-tracking pain.</li>
+  <li><strong>Rising Stars QRIS</strong> is voluntary but linked to CCAP subsidy tiers; publicly rated.</li>
+  <li><strong>Widely-reported enforcement gap</strong> creates headline risk every time a facility's inspection history goes public — parents-as-auditors dynamic.</li>
+  <li><strong>Failure-to-report enforcement wave (2024-2025)</strong> — 60 providers cited for failing to notify state or parents of incidents. Incident-logging discipline is a current buying trigger.</li>
+</ul>
+
+<h2>8. Next-Step Data Acquisition</h2>
+<ol>
+  <li><strong>Expand childcarecenter.us scrape</strong> to 10 more cities (Auburn, Augusta, Brunswick, South Portland, Biddeford, Saco, Waterville, Gorham, Scarborough, Westbrook) — +250-400 leads.</li>
+  <li><strong>FOAA request</strong> to OCFS CLIS for bulk provider export + inspection report index (3 years).</li>
+  <li><strong>childcarechoices.me ViewState scraper</strong> for current license status + latest inspection PDF per lead.</li>
+  <li><strong>Email enrichment</strong> via Hunter.io / Apollo.</li>
+  <li><strong>Re-pull quarterly</strong> to catch openings/closures.</li>
+</ol>
+
+<h2>9. All Links</h2>
+<div class="link-grid">
+  <div><a href="https://www.maine.gov/dhhs/ocfs/provider-resources/child-care-licensing">OCFS Child Care Licensing</a></div>
+  <div><a href="https://www.maine.gov/dhhs/ocfs">OCFS Home</a></div>
+  <div><a href="https://search.childcarechoices.me/">Maine Licensed Child Care Search</a></div>
+  <div><a href="https://search.childcarechoices.me/searchLECCSP.aspx">Search — LE-CCSP</a></div>
+  <div><a href="https://childcarechoices.me/index.php/license-exempt-monitoring/">License-Exempt Monitoring Reports</a></div>
+  <div><a href="https://www.maine.gov/dhhs/ocfs/support-for-families/child-care/reporting-child-care-concerns">Reporting Child Care Concerns</a></div>
+  <div><a href="https://www.maine.gov/dhhs/sites/maine.gov.dhhs/files/inline-files/Rules-for-the-Licensing-of-Child-Care-Facilities-10-148-Ch-32.pdf">10-148 CMR Ch. 32 PDF</a></div>
+  <div><a href="https://www.law.cornell.edu/regulations/maine/10-148-C-M-R-ch-32-SS-7">Ch. 32 §7 (Ratios — Cornell LII)</a></div>
+  <div><a href="https://regulations.justia.com/states/maine/10/148/chapter-32/section-148-32-4/">Ch. 32 §4 (Inspections — Justia)</a></div>
+  <div><a href="https://regulations.justia.com/states/maine/10/148/chapter-32/section-148-32-5/">Ch. 32 §5 (Records — Justia)</a></div>
+  <div><a href="https://www.mainelegislature.org/legis/statutes/22/title22sec8301-a.html">22 M.R.S. §8301-A (statute)</a></div>
+  <div><a href="https://www.mainelegislature.org/legis/statutes/1/title1sec408-A.html">1 M.R.S. §408-A (FOAA)</a></div>
+  <div><a href="https://themainemonitor.org/childcare-providers-violations/">Maine Monitor — Investigation</a></div>
+  <div><a href="https://www.bangordailynews.com/2024/10/14/state/child-care-providers-maine-numerous-safety-violations/">Bangor Daily News 2024</a></div>
+  <div><a href="https://www.bangordailynews.com/2025/10/13/state/state-health/maine-day-cares-child-abuse-neglect-reporting/">Bangor Daily News 2025</a></div>
+  <div><a href="https://www.pressherald.com/2015/01/05/state-data-on-day-care-inspections-goes-online-for-first-time/">Press Herald 2015</a></div>
+  <div><a href="https://childcarechoices.me/wp-content/uploads/2022/05/Consumer-Education-Statement-5-22.pdf">Consumer Education Statement PDF</a></div>
+  <div><a href="https://childcarecenter.us/state/maine">childcarecenter.us — ME</a></div>
+  <div><a href="https://licensingregulations.acf.hhs.gov/licensing/contact/maine-department-health-and-human-services-office-child-and-family-services">National Database (ACF — ME)</a></div>
+</div>
+
+</div>
+</body>
+</html>
