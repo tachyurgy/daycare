@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 #
-# backup-db.sh — nightly logical backup of the managed Postgres to S3.
+# backup-db.sh — nightly online backup of the SQLite DB to S3.
 #
 # Runs on the droplet out of cron:
 #     15 7 * * *  /opt/compliancekit/deploy/backup-db.sh   # 07:15 UTC = 02:15 CT
 #
 # Steps:
-#   1. pg_dump (custom format, compressed) into a tmpfile on the droplet.
-#   2. Stream-upload to s3://ck-backups/postgres/YYYY/MM/DD/HHMMSS.dump
-#   3. Smoke-test the local file with `pg_restore --list` before deletion.
-#   4. Emit a size/duration heartbeat line to syslog for alerting.
+#   1. `sqlite3 $DB '.backup /tmp/snap.db'` (online, consistent; readers not blocked).
+#   2. gzip the snapshot.
+#   3. Integrity probe: `sqlite3 snap.db 'pragma integrity_check;'` must return "ok".
+#   4. Upload to s3://ck-backups/sqlite/YYYY/MM/DD/HHMMSS.db.gz
+#   5. Emit a size/duration heartbeat line to syslog for alerting.
 #
 # S3 retention (30 days) is enforced by the bucket's lifecycle rule rather
 # than this script — see infra/s3-bucket-policies/ck-backups.json and
@@ -17,6 +18,8 @@
 #
 # Env reads `/etc/compliancekit/env` to get DATABASE_URL and
 # CK_BUCKET_BACKUPS + AWS credentials.
+#
+# See ADR-017 for why SQLite.
 
 set -euo pipefail
 
@@ -31,49 +34,59 @@ set -a; source "$ENV_FILE"; set +a
 : "${AWS_ACCESS_KEY_ID:?AWS_ACCESS_KEY_ID not set}"
 : "${AWS_SECRET_ACCESS_KEY:?AWS_SECRET_ACCESS_KEY not set}"
 
+# DATABASE_URL may be a bare path or `file:/path?opts`. Strip the scheme + query.
+DB_PATH="${DATABASE_URL#file:}"
+DB_PATH="${DB_PATH%%\?*}"
+[[ -r "$DB_PATH" ]] || { echo "cannot read SQLite DB at $DB_PATH" >&2; exit 1; }
+
 STAMP="$(date -u +%Y/%m/%d/%H%M%S)"
 HOSTNAME_SHORT="$(hostname -s)"
-TMPFILE="$(mktemp /tmp/ck-pgdump.XXXXXX.dump)"
-trap 'rm -f "$TMPFILE"' EXIT
+SNAPSHOT="$(mktemp /tmp/ck-snap.XXXXXX.db)"
+ARCHIVE="${SNAPSHOT}.gz"
+trap 'rm -f "$SNAPSHOT" "$ARCHIVE"' EXIT
 
 log() { logger -t ck-backup -- "$*"; printf "%s\n" "$*"; }
 
 start=$(date +%s)
 
 # ---------------------------------------------------------------------------
-# 1. pg_dump — custom format (-Fc) gives us compression + pg_restore flexibility.
+# 1. Online backup via the sqlite3 CLI. This is safe under WAL — readers and
+#    writers keep going against the live DB while the snapshot is copied.
 # ---------------------------------------------------------------------------
-log "starting pg_dump"
-pg_dump --format=custom --no-owner --no-privileges --compress=9 \
-    --file="$TMPFILE" \
-    "$DATABASE_URL"
-
-size_bytes=$(stat -c%s "$TMPFILE")
-log "pg_dump complete (${size_bytes} bytes)"
+log "starting sqlite3 .backup from $DB_PATH"
+sqlite3 "$DB_PATH" ".backup '$SNAPSHOT'"
 
 # ---------------------------------------------------------------------------
-# 2. Integrity probe — if pg_restore can't list the TOC the dump is corrupt.
+# 2. Integrity probe on the snapshot itself.
 # ---------------------------------------------------------------------------
-if ! pg_restore --list "$TMPFILE" > /dev/null; then
-    log "FATAL: pg_restore --list failed on dump; aborting upload"
+integrity="$(sqlite3 "$SNAPSHOT" 'pragma integrity_check;')"
+if [[ "$integrity" != "ok" ]]; then
+    log "FATAL: integrity_check returned '$integrity'; aborting upload"
     exit 2
 fi
-log "pg_restore --list OK"
+log "integrity_check OK"
 
 # ---------------------------------------------------------------------------
-# 3. Upload to S3 (server-side encryption; storage class = STANDARD_IA via
+# 3. Compress. gzip -9 is cheap for our DB sizes (GB range even at scale).
+# ---------------------------------------------------------------------------
+gzip -9 "$SNAPSHOT"
+size_bytes=$(stat -c%s "$ARCHIVE")
+log "compressed snapshot (${size_bytes} bytes)"
+
+# ---------------------------------------------------------------------------
+# 4. Upload to S3 (server-side encryption; storage class = STANDARD_IA via
 #    lifecycle rule after 1 day — see bucket policy).
 # ---------------------------------------------------------------------------
-S3_KEY="postgres/${STAMP}_${HOSTNAME_SHORT}.dump"
+S3_KEY="sqlite/${STAMP}_${HOSTNAME_SHORT}.db.gz"
 log "uploading to s3://${CK_BUCKET_BACKUPS}/${S3_KEY}"
 
-aws s3 cp "$TMPFILE" "s3://${CK_BUCKET_BACKUPS}/${S3_KEY}" \
+aws s3 cp "$ARCHIVE" "s3://${CK_BUCKET_BACKUPS}/${S3_KEY}" \
     --region "$AWS_REGION" \
     --only-show-errors \
     --sse AES256
 
 # ---------------------------------------------------------------------------
-# 4. Heartbeat.
+# 5. Heartbeat.
 # ---------------------------------------------------------------------------
 elapsed=$(( $(date +%s) - start ))
 log "backup OK size=${size_bytes}B duration=${elapsed}s key=${S3_KEY}"

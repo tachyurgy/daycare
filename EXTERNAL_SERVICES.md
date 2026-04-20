@@ -10,10 +10,7 @@ Account owner email is a placeholder pending production account provisioning. Cr
 
 | Service | Purpose | PII Flow | Cost @ 100 customers/mo | Subprocessor | Account Owner | Credentials (env var) |
 |---------|---------|----------|------------------------|--------------|---------------|----------------------|
-| AWS S3 (`ck-documents`) | Approved document originals | Yes — child/staff PII, immunization records | $3 (storage) + $1 (requests) | Yes | ops@compliancekit.app | `CK_S3_DOCS_ACCESS_KEY`, `CK_S3_DOCS_SECRET_KEY` |
-| AWS S3 (`ck-signed-pdfs`) | Completed signed PDFs | Yes — staff signatures + document content | $1 + $0.50 | Yes | ops@compliancekit.app | `CK_S3_SIGNED_ACCESS_KEY`, `CK_S3_SIGNED_SECRET_KEY` |
-| AWS S3 (`ck-audit-trail`) | Signature audit JSON (IP, UA, tokens) | Yes — IP address, magic link token hashes | $0.20 + $0.50 | Yes | ops@compliancekit.app | `CK_S3_AUDIT_ACCESS_KEY`, `CK_S3_AUDIT_SECRET_KEY` |
-| AWS S3 (`ck-raw-uploads`) | Ephemeral inbox for parent/staff uploads (7-day TTL) | Yes — same as `ck-documents` | $1 + $1 | Yes | ops@compliancekit.app | `CK_S3_RAW_ACCESS_KEY`, `CK_S3_RAW_SECRET_KEY` |
+| AWS S3 (`ck-files`) | All uploaded documents, signed PDFs, and signature audit JSON (prefixes: `docs/`, `templates/`, `signed/`, `audit/`) | Yes — child/staff PII, immunization records, signatures, IP + UA | $5 (storage) + $3 (requests) | Yes | ops@compliancekit.app | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` |
 | AWS SES | Transactional email — magic links, chase messages, digests | Yes — parent/staff email addresses, child first name in body | $3 (est. 30k emails) | Yes | ops@compliancekit.app | `CK_SES_ACCESS_KEY`, `CK_SES_SECRET_KEY`, `CK_SES_REGION` |
 | Twilio | Transactional SMS — magic links, chase messages | Yes — parent/staff phone numbers, child first name | $83 (est. 10k SMS @ $0.0083) | Yes | ops@compliancekit.app | `CK_TWILIO_ACCOUNT_SID`, `CK_TWILIO_AUTH_TOKEN`, `CK_TWILIO_FROM_NUMBER` |
 | Stripe | Subscription billing, payment processing | Yes — owner email, billing address, card tokens (card data never touches our servers) | $317 (processing fees on $9,900 MRR) | Yes | ops@compliancekit.app | `CK_STRIPE_SECRET_KEY`, `CK_STRIPE_WEBHOOK_SECRET`, `CK_STRIPE_PRICE_STARTER`, `CK_STRIPE_PRICE_PRO`, `CK_STRIPE_PRICE_ENTERPRISE` |

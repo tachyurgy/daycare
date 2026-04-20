@@ -275,10 +275,7 @@ DATABASE_URL=postgres://USER:PASS@HOST:25060/compliancekit?sslmode=require
 AWS_REGION=us-east-1
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
-CK_BUCKET_DOCUMENTS=ck-documents
-CK_BUCKET_SIGNED_PDFS=ck-signed-pdfs
-CK_BUCKET_AUDIT_TRAIL=ck-audit-trail
-CK_BUCKET_RAW_UPLOADS=ck-raw-uploads
+CK_BUCKET=ck-files
 CK_BUCKET_BACKUPS=ck-backups
 
 # --- Stripe ---

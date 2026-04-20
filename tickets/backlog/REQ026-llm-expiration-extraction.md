@@ -26,7 +26,7 @@ As a director, I want ComplianceKit to auto-detect the expiration date on my sta
 - [ ] Confidence: low (<0.6) → document routes to `status='human_review'`; 0.6–0.85 → flagged with banner in UI; >0.85 → auto-activate.
 - [ ] `documents.extracted`, `documents.expiration_date`, `documents.expiration_confidence`, `documents.document_type_id` all populated.
 - [ ] Cost/latency budget: p95 ≤ 3s, average ≤ $0.005 per doc.
-- [ ] Input/output of every call logged to `ck-audit-trail` S3 bucket for later retraining/debug.
+- [ ] Input/output of every call logged to `ck-files` under `llm-logs/` for later retraining/debug.
 
 ## Technical Notes
 - Gemini SDK via HTTP directly; don't depend on a Google SDK we don't need.

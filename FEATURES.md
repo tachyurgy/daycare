@@ -174,7 +174,7 @@ table, and (when unassigned) in an "Unassigned photo inbox."
 **Under the hood.** A proper pipeline:
 
 ```
-client → presigned PUT → S3 (ck-documents) → document row written
+client → presigned PUT → S3 (ck-files) → document row written
        ↓
    OCR worker: Mistral primary → Gemini fallback → raw_text + confidence
        ↓
@@ -191,7 +191,7 @@ searchable.
 - Frontend: `pages/Documents.tsx`, `pages/DocumentDetail.tsx`, `api/documents.ts`
 - Backend: `handlers/documents.go`, `internal/ocr/ocr.go`, `internal/ocr/expiration.go`, `internal/storage/s3.go`
 - Tables: `documents`, `document_ocr_results`, `document_unassigned_photos`
-- Buckets: `ck-documents` (originals), `ck-raw-uploads` (phone inbox)
+- Bucket: `ck-files` (all objects under key prefixes: `docs/`, `templates/`, `signed/`, `audit/`)
 - Tickets: REQ022–REQ030
 - **State: S** (presign, OCR chain, and Gemini expiration call are all
   implemented; unassigned-photo assignment UI is stub)
@@ -219,9 +219,9 @@ signed).
   coordinates, then appends the audit page.
 - Client computes SHA-256 and posts to `POST /api/pdfsign/sessions/:token/finalize`.
   The server **recomputes SHA-256** (never trusts the client hash), verifies
-  the PDF is well-formed, stores the signed file in `ck-signed-pdfs`, writes
-  audit JSON to the separate `ck-audit-trail` bucket (Object Lock enabled,
-  7-year retention), and inserts the `signatures` row.
+  the PDF is well-formed, stores the signed file in `ck-files` under
+  `signed/`, writes audit JSON alongside it under `audit/`, and inserts the
+  `signatures` row.
 - Fields are frozen onto the *session* at invitation time, so edits to the
   template after a link is sent can't retroactively move fields.
 
@@ -258,8 +258,7 @@ portal" page, keyed to the child's name plus guardian email.
   `staff_certifications_required` to `status != compliant` and shows exactly
   those slots.
 - Photo uploads preserve EXIF timestamps but strip location (privacy).
-- Uploaded files first hit `ck-raw-uploads`; on OCR success they migrate
-  into `ck-documents` with a proper `documents` row.
+- Uploaded files go straight to `ck-files` under `docs/{provider_id}/{doc_id}.{ext}` and get a `documents` row; OCR runs against the same key.
 
 - Frontend: `pages/PortalParent.tsx`, `pages/PortalStaff.tsx`, `api/portal.ts`
 - Backend: `handlers/portal.go`, `internal/magiclink`
@@ -508,12 +507,10 @@ compliance).
 **Under the hood.**
 - Soft-delete flags (`deleted_at`) flipped immediately on cancellation.
 - A `churn_purges` job queue (new, TODO) runs on day 90:
-  - deletes all S3 objects with `provider_id` prefix from `ck-documents`,
-    `ck-signed-pdfs`, `ck-raw-uploads`.
-  - **keeps** `ck-audit-trail` entries (7yr legal hold).
+  - deletes all S3 objects under `docs/{provider_id}/`, `templates/{provider_id}/`, and `signed/{provider_id}/` in `ck-files`.
+  - **keeps** `audit/{provider_id}/` entries (7yr legal hold — app-enforced, not bucket policy).
   - deletes rows via `ON DELETE CASCADE`.
-- A deletion manifest is written to `ck-audit-trail` with the list of
-  deleted object keys and a timestamp.
+- A deletion manifest is written to `ck-files` under `audit/{provider_id}/deletion-{ts}.json` with the list of deleted object keys and a timestamp.
 
 - Backend: `internal/storage/s3.go` has `DeleteAllForProvider`; the cron
   wrapper and queue are TODO.
@@ -531,8 +528,8 @@ CSV of all data, served via time-limited S3 URL), "Cancel subscription"
 button (triggers §17 flow).
 
 **Under the hood.** Standard CRUD endpoints; data export is a backgrounded
-job that zips S3 objects, drops the ZIP in `ck-raw-uploads` (temporary
-workspace), and emails a pre-signed GET URL.
+job that zips S3 objects, drops the ZIP in `ck-files` under
+`exports/{provider_id}/{ts}.zip`, and emails a pre-signed GET URL.
 
 - Frontend: `pages/Settings.tsx`, `pages/SettingsBilling.tsx`
 - Backend: extends `handlers/providers.go`
@@ -636,7 +633,7 @@ Marketing HTML (GitHub Pages)
               Compliance engine          PDF Signer
                    │                         │
                    ▼                         ▼
-              Chase service              ck-audit-trail
+              Chase service              ck-files (audit/)
               (email + SMS)
                    │
                    ▼

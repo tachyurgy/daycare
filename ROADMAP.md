@@ -17,7 +17,7 @@ The working principle: every day ends with something deployable. No multi-day PR
 **Goal:** Dev environment, deployable skeleton, auth.
 
 - [ ] Provision DigitalOcean droplet + managed Postgres (tickets: REQ-INFRA-001, INFRA-002)
-- [ ] Create four S3 buckets with IAM users (`ck-raw-uploads`, `ck-documents`, `ck-signed-pdfs`, `ck-audit-trail`) — REQ-INFRA-003
+- [ ] Create S3 bucket `ck-files` with IAM user `ck-deploy` — REQ-INFRA-003
 - [ ] Register domains, point `api.compliancekit.app` A-record to droplet, `app.compliancekit.app` CNAME to GitHub Pages
 - [ ] Go repo scaffold: `backend/` with `cmd/api`, `cmd/worker`, `cmd/migrate`, `internal/{config,db,httpx,auth,middleware,handlers,models,base62,compliance,magiclink,storage,notify,billing,ocr,pdfsign,immunization}` — REQ-INFRA-004
 - [ ] React repo scaffold: Vite + TS + Tailwind + Zustand, deployed to GitHub Pages via GitHub Actions — REQ-INFRA-005
@@ -45,7 +45,7 @@ The working principle: every day ends with something deployable. No multi-day PR
 - [ ] Magic link issuance for per-child and per-staff upload portals — REQ015, REQ024
 - [ ] Parent upload portal frontend (`/p/:token`) — REQ015
 - [ ] Staff upload portal frontend (`/s/:token`) — REQ024
-- [ ] Raw upload → `ck-raw-uploads` bucket working end-to-end — REQ016
+- [ ] Document upload → `ck-files` (`docs/` prefix) working end-to-end — REQ016
 
 **EOD deliverable:** Owner can add a child, copy the upload link, open it on their phone, take a photo of a fake immunization record, see it appear in the dashboard as "pending OCR".
 
@@ -91,7 +91,7 @@ The working principle: every day ends with something deployable. No multi-day PR
 - [ ] 14-day free trial enforcement — REQ-BILL-004
 - [ ] Promo code support — REQ-BILL-005
 - [ ] Self-built PDF signing flow (pdf-lib in browser → hash + audit on backend) — REQ046
-- [ ] Signature audit trail writes to `ck-audit-trail` — REQ046
+- [ ] Signature audit trail writes to `ck-files` under `audit/` — REQ046
 - [ ] Error tracking wired up (Sentry or Grafana Cloud)
 - [ ] End-to-end smoke test: signup → onboard → add child → parent uploads immunization → OCR completes → dashboard updates → chase message sends → owner upgrades to paid
 - [ ] Marketing landing page points "Start free trial" button at live app

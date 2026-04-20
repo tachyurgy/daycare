@@ -25,7 +25,7 @@ As a director, I want to batch-upload photos from my phone and sort them later i
 - [ ] Presigned GET URLs for thumbnails cached 10 minutes (`?X-Amz-Expires=600`).
 
 ## Technical Notes
-- Thumbnail generation is deferred — for MVP, serve the original via presigned GET with `response-content-disposition=inline`. Post-MVP, generate 400px thumbs into `ck-documents` on upload.
+- Thumbnail generation is deferred — for MVP, serve the original via presigned GET with `response-content-disposition=inline`. Post-MVP, generate 400px thumbs into `ck-files` under `thumbs/` on upload.
 - Grid component: CSS grid, `@tanstack/react-query` for list pagination.
 - HEIC in `<img>` doesn't render on Chrome; server-side convert on ingestion or use `heic-to` client-side library.
 

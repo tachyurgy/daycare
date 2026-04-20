@@ -146,9 +146,9 @@ The automation layer. Multi-channel (email via SES, SMS via Twilio, in-app).
 1. Parent receives SMS or email: "Lil' Sprouts Academy needs three documents for Ava: immunization record, physical exam, enrollment form. Tap here to upload."
 2. Link opens a mobile-first page, no login. Link is a per-child magic link with a 30-day expiration.
 3. Parent sees three empty slots. Taps each, takes photo with phone camera or picks from files.
-4. Upload lands in S3 bucket `ck-raw-uploads`, mirrored event to backend, OCR job enqueued.
+4. Upload lands in S3 bucket `ck-files` under `docs/{provider_id}/{doc_id}.{ext}`, mirrored event to backend, OCR job enqueued.
 5. OCR extracts: vaccine type, date administered, next-dose-due date (immunizations); child name, physician name, exam date, cleared-for-care date (physicals).
-6. Document moves to `ck-documents` (originals) and metadata lands in Postgres.
+6. Metadata lands in Postgres. The file stays where it is.
 7. Owner gets an in-app review queue: "3 documents ready to approve. Verify the extracted data is correct."
 8. On approval, document is locked, included in compliance score.
 
@@ -183,7 +183,7 @@ Identical to parent flow, keyed on staff instead of child. Accepts: CPR card, Fi
 4. Staff draws signature on canvas, hits "Sign"
 5. Signature PNG is stamped onto PDF in browser via pdf-lib
 6. Signed PDF + signature PNG + page coordinates + timestamp + staff magic-link token + request IP + user agent POST'd to backend
-7. Backend hashes signed PDF (SHA-256), stores hash in `signatures` table, stores PDF in `ck-signed-pdfs`, stores audit blob (JSON of all metadata + IP + UA + magic-link-token) in `ck-audit-trail`
+7. Backend hashes signed PDF (SHA-256), stores hash in `signatures` table, stores PDF in `ck-files` under `signed/`, and writes an audit blob (JSON of all metadata + IP + UA + magic-link-token) alongside it under `audit/`
 8. Owner sees signing status; completed signed PDFs available for download and attached to staff file
 
 ---
@@ -210,7 +210,7 @@ Each ticket specifies: user story, acceptance criteria, state-specific variants,
 ### 7.1 Security
 
 - **Data in transit:** TLS 1.3 on all endpoints. HSTS. No HTTP fallback.
-- **Data at rest:** Postgres encrypted at rest (managed DO default). S3 buckets encrypted with SSE-S3. Signature audit bucket uses SSE-KMS with a dedicated key.
+- **Data at rest:** Postgres encrypted at rest (managed DO default). `ck-files` bucket encrypted with SSE-S3 (AES256).
 - **Authentication:** Magic links only. No passwords. Token = base62(32 random bytes). TTL = 15 minutes for owner login, 30 days for parent/staff upload links.
 - **Authorization:** Row-level scoping on every query by `facility_id`. Every handler asserts the authenticated principal's facility matches the resource's facility.
 - **Audit log:** Every mutation writes to `audit_log` table with `actor_id`, `action`, `resource_id`, `ip`, `user_agent`, `ts`. Retained forever for MVP.
@@ -228,7 +228,7 @@ Each ticket specifies: user story, acceptance criteria, state-specific variants,
 
 - **Target:** 99.5% uptime at MVP. ~3.6 hours/month allowed downtime.
 - **Deployment:** Zero-downtime not required at MVP. Systemd restart is acceptable.
-- **Backup:** Managed Postgres daily snapshot, 7-day retention. S3 versioning enabled on `ck-documents` and `ck-signed-pdfs`.
+- **Backup:** Managed Postgres daily snapshot, 7-day retention. S3 versioning enabled on `ck-files`.
 - **DR:** Acceptable RTO = 4 hours, RPO = 24 hours at MVP.
 
 ### 7.4 Compliance Posture

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ComplianceKit Backend — Plain-English Tour</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root{
+    --bg:#fbfaf7; --ink:#1a1a1a; --muted:#5a5a5a; --rule:#e6e1d6;
+    --accent:#b8440d; --accent-soft:#f6ede2; --code-bg:#f2ede2; --ok:#2a6a3a;
+  }
+  html,body{background:var(--bg); color:var(--ink); margin:0;}
+  body{font:17px/1.65 Georgia,"Source Serif Pro",serif; max-width:760px; margin:0 auto; padding:3rem 1.5rem 6rem;}
+  h1{font-size:2.2rem; line-height:1.15; letter-spacing:-.01em; margin:0 0 .25rem;}
+  h2{font-size:1.45rem; margin:3rem 0 .5rem; padding-top:1.25rem; border-top:1px solid var(--rule);}
+  h3{font-size:1.1rem; margin:1.75rem 0 .3rem;}
+  p{margin:.6rem 0;}
+  .sub{color:var(--muted); font-style:italic; margin-bottom:2rem;}
+  code, pre{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:14.5px;}
+  code{background:var(--code-bg); padding:.05em .35em; border-radius:3px;}
+  pre{background:var(--code-bg); padding:1rem 1.2rem; overflow-x:auto; border-radius:6px; line-height:1.5;}
+  pre code{background:none; padding:0;}
+  .callout{background:var(--accent-soft); border-left:3px solid var(--accent); padding:.8rem 1rem; margin:1.25rem 0; border-radius:0 4px 4px 0;}
+  .callout strong{color:var(--accent);}
+  .tldr{background:#fffdf4; border:1px solid var(--rule); padding:1rem 1.25rem; border-radius:6px; margin:1.5rem 0 2rem;}
+  .tldr h3{margin-top:0;}
+  table{border-collapse:collapse; width:100%; margin:1rem 0; font-size:15px;}
+  th,td{text-align:left; padding:.5rem .75rem; border-bottom:1px solid var(--rule); vertical-align:top;}
+  th{background:#f5f0e4;}
+  .flow{background:#fff; border:1px dashed var(--rule); padding:1rem 1.2rem; border-radius:6px; margin:1rem 0;}
+  .flow ol{margin:0; padding-left:1.1rem;}
+  .flow li{margin:.35rem 0;}
+  .mini{color:var(--muted); font-size:14px;}
+  hr{border:none; border-top:1px solid var(--rule); margin:3rem 0;}
+  a{color:var(--accent);}
+  nav.toc{background:#fff; border:1px solid var(--rule); padding:1rem 1.25rem; border-radius:6px; margin:1rem 0 2.5rem; font-size:15px;}
+  nav.toc ol{margin:.25rem 0; padding-left:1.25rem;}
+  .pill{display:inline-block; font-size:12px; padding:.1rem .5rem; background:var(--code-bg); border-radius:999px; color:var(--muted); margin-left:.4rem; vertical-align:middle;}
+</style>
+</head>
+<body>
+
+<h1>ComplianceKit Backend — a plain-English tour</h1>
+<p class="sub">Everything the Go service does, why each piece exists, and what you need to know to run and reason about it.</p>
+
+<nav class="toc">
+<strong>Contents</strong>
+<ol>
+  <li><a href="#bigpic">The big picture</a></li>
+  <li><a href="#shape">Shape of a Go project (quick orientation)</a></li>
+  <li><a href="#startup">Startup: what happens when the server boots</a></li>
+  <li><a href="#http">The HTTP server &amp; router</a></li>
+  <li><a href="#auth">Authentication (two separate systems)</a></li>
+  <li><a href="#db">Database &amp; migrations</a></li>
+  <li><a href="#logs">Logging &amp; observability</a></li>
+  <li><a href="#rate">Rate limiting</a></li>
+  <li><a href="#ext">External services (S3, SES, Stripe, Twilio, OCR)</a></li>
+  <li><a href="#bg">Background work (the chase service)</a></li>
+  <li><a href="#config">Configuration &amp; secrets</a></li>
+  <li><a href="#deploy">Running it locally &amp; deploying</a></li>
+  <li><a href="#checklist">What you actually need to do</a></li>
+</ol>
+</nav>
+
+<div class="tldr">
+<h3>TL;DR in one paragraph</h3>
+<p>The backend is a single Go binary that listens on one HTTP port. On startup it reads env vars, opens a SQLite database, connects to S3/SES/Stripe/Twilio, wires all feature handlers into a <em>router</em>, and starts serving. Requests flow through a chain of <em>middleware</em> (logging, recovery, CORS, auth, rate limiting) before reaching a handler. There are two auth systems: a cookie-based session for providers who log in, and signed magic-link tokens for parents/staff/signers who click email links. Schema changes live in numbered SQL files under <code>migrations/</code> and are applied by the <code>migrate</code> CLI.</p>
+</div>
+
+<h2 id="bigpic">1. The big picture</h2>
+
+<p>Your backend is a monolith — one program, one binary, one process. That's a good choice for a bootstrapped SaaS: everything is in one place, deployment is one <code>scp</code> or <code>docker push</code>, and you can reason about the whole system at once. When you're bigger, you split it. Not before.</p>
+
+<p>Here is what the process looks like from the outside:</p>
+
+<div class="flow">
+<pre><code>                 ┌────────────── Browser / mobile / webhook ─────────────┐
+                 ▼                                                       ▼
+            HTTPS (80/443)                                        HTTPS (Stripe)
+                 │                                                       │
+                 ▼                                                       ▼
+        ┌─────────────────────────────────────────────────────────────────┐
+        │                  compliancekit-api  (one Go binary)            │
+        │                                                                 │
+        │   router → middleware chain → handler → db / S3 / Stripe / …   │
+        └─────────────────────────────────────────────────────────────────┘
+              │           │             │             │           │
+              ▼           ▼             ▼             ▼           ▼
+           SQLite        AWS S3       AWS SES      Stripe       Twilio
+         (local file)  (docs)       (email)    (subscriptions)  (SMS)
+</code></pre>
+</div>
+
+<p>Requests come in on one port. The binary talks to one local SQLite file for state, and to a handful of external APIs (S3 for document storage, SES for email, Stripe for billing, Twilio for SMS, Mistral/Gemini for OCR). That's it. There are no microservices, no queues, no Kubernetes, no message bus. Keep it that way as long as you can.</p>
+
+<h2 id="shape">2. Shape of a Go project (quick orientation)</h2>
+
+<p>If you're new to Go, the layout looks weird at first. Here's the translation:</p>
+
+<table>
+<tr><th>Folder</th><th>What it means</th></tr>
+<tr><td><code>cmd/server/main.go</code></td><td>The <strong>entry point</strong>. Everything starts here. Think <code>if __name__ == "__main__"</code>. A Go project can have multiple commands under <code>cmd/</code>; yours has one.</td></tr>
+<tr><td><code>internal/</code></td><td>Private packages. The Go toolchain literally refuses to let anyone outside this module import from <code>internal/</code>. It's the equivalent of marking everything "not a public API."</td></tr>
+<tr><td><code>internal/api</code></td><td>The router — maps URLs to handlers.</td></tr>
+<tr><td><code>internal/handlers</code></td><td>The HTTP handlers — one file per feature area (children, staff, documents, dashboard…).</td></tr>
+<tr><td><code>internal/middleware</code></td><td>Code that runs <em>around</em> handlers (auth check, rate limit, logging).</td></tr>
+<tr><td><code>internal/db</code></td><td>Database connection setup and transaction helper.</td></tr>
+<tr><td><code>internal/config</code></td><td>Reads env vars into a typed struct. Fails fast if required vars are missing.</td></tr>
+<tr><td><code>internal/{billing, storage, notify, magiclink, ocr, pdfsign, compliance, immunization}</code></td><td>Business logic for each subsystem. Each is a Go <em>package</em>.</td></tr>
+<tr><td><code>migrations/</code></td><td>Versioned SQL files. <code>000001_init…up.sql</code> is the <em>forward</em> migration, <code>…down.sql</code> is the rollback.</td></tr>
+<tr><td><code>go.mod</code>, <code>go.sum</code></td><td>Dependency manifest &amp; lockfile. Like <code>package.json</code> + <code>package-lock.json</code>.</td></tr>
+<tr><td><code>Makefile</code></td><td>Shortcuts: <code>make run</code>, <code>make build</code>, <code>make migrate-up</code>, etc.</td></tr>
+<tr><td><code>Dockerfile</code>, <code>docker-compose.yml</code></td><td>Container image + local dev stack.</td></tr>
+</table>
+
+<div class="callout">
+<strong>Go mental model:</strong> a <em>package</em> is a folder. A <em>module</em> (declared in <code>go.mod</code>) is the whole project. Imports are by URL-ish path, e.g. <code>github.com/markdonahue100/compliancekit/backend/internal/db</code>. The compiler refuses to compile unused imports or unused variables — that's a feature, not a bug.
+</div>
+
+<h2 id="startup">3. Startup: what happens when the server boots</h2>
+
+<p>All of this lives in <code>cmd/server/main.go</code>. When you run <code>make run</code> or the compiled binary, the sequence is:</p>
+
+<div class="flow">
+<ol>
+  <li><strong>Load config</strong> — <code>config.Load()</code> reads every env var into a typed struct. If anything <code>,required</code> is missing, the process exits immediately with an error. You never get a half-configured server.</li>
+  <li><strong>Build the logger</strong> — <code>slog</code> (the Go standard library structured logger) emits JSON. Every log line has <code>app=compliancekit-api env=production level=info …</code>. Made the default so every package logs the same way.</li>
+  <li><strong>Set up signal handling</strong> — <code>signal.NotifyContext</code> makes a context that cancels on <code>Ctrl-C</code> (SIGINT) or <code>docker stop</code> (SIGTERM). That context is passed to everything — when it cancels, the whole app shuts down cleanly.</li>
+  <li><strong>Open the database</strong> — <code>db.Open</code> opens SQLite with the right pragmas (WAL mode, foreign keys on, 5s busy timeout). It pings to confirm it works, then returns a pool.</li>
+  <li><strong>Build the external clients</strong> — one AWS S3 client (documents), one SES client (email), one Twilio SMS sender, one Stripe billing service. If SES fails to init, we log a warning and keep running without email (graceful degradation).</li>
+  <li><strong>Instantiate the magic-link service</strong> with the HMAC signing key from config.</li>
+  <li><strong>Pick an OCR engine</strong> — Mistral primary, Gemini fallback. If neither key is set, OCR is disabled but uploads still work.</li>
+  <li><strong>Create handler structs</strong> — each handler (<code>ProviderHandler</code>, <code>ChildHandler</code>, etc.) is a plain struct with pointers to the db pool, storage, logger, etc. This is Go's version of dependency injection: no framework, just fields on a struct.</li>
+  <li><strong>Start background workers</strong> — <code>go chase.RunDaily(rootCtx)</code> launches the daily notification chase in a <em>goroutine</em> (a lightweight thread). It stops when <code>rootCtx</code> cancels.</li>
+  <li><strong>Build the router</strong> — <code>api.NewRouter</code> wires every URL to a handler method. More on this below.</li>
+  <li><strong>Start listening</strong> — <code>http.Server</code> starts accepting connections on the configured port. Timeouts are set so a slow client can't hog a goroutine forever.</li>
+  <li><strong>Block until signal</strong> — main waits on either a server error or the shutdown signal. On shutdown it calls <code>srv.Shutdown(ctx)</code> which stops accepting new connections and drains in-flight ones (up to 20s), then exits.</li>
+</ol>
+</div>
+
+<p>The important thing: <strong>there is no magic lifecycle</strong>. <code>main()</code> is ~150 lines that do every step in order. When something breaks at startup, you can read top-to-bottom and find it.</p>
+
+<h2 id="http">4. The HTTP server &amp; router</h2>
+
+<p>Go's standard library ships with <code>net/http</code>, which already knows how to listen on a port and dispatch requests. We add one small dependency — <a href="https://github.com/go-chi/chi"><code>chi</code></a> — for routing because the standard library's router is intentionally minimal (no path params, no sub-routers).</p>
+
+<h3>What's a router?</h3>
+
+<p>A router maps <code>(method, path)</code> pairs to functions. <code>r.Get("/api/children", children.List)</code> says: "when a GET request arrives at <code>/api/children</code>, call <code>children.List</code>." That's it.</p>
+
+<h3>What's middleware?</h3>
+
+<p>Middleware is a function that wraps a handler. It runs before (or after) the handler, sees the same request, can modify it, short-circuit it, or let it pass. You stack middleware like onion layers: request enters from the outside, flows through each layer, hits the handler, flows back out.</p>
+
+<p>In <code>internal/api/router.go</code> the top-level chain is:</p>
+
+<pre><code>r.Use(chimw.RequestID)      // attach a unique ID to every request
+r.Use(chimw.RealIP)         // normalize client IP from X-Forwarded-For
+r.Use(chimw.Recoverer)      // catch panics, return 500 instead of crashing
+r.Use(slogRequestLogger)    // log method, path, status, duration, request ID
+r.Use(chimw.Timeout(30s))   // kill any request taking more than 30s
+r.Use(cors.Handler(...))    // allow the frontend origin to call us</code></pre>
+
+<p>That chain runs on <strong>every</strong> request. Then groups of routes add their own middleware on top:</p>
+
+<ul>
+  <li><strong>Public auth routes</strong> (<code>/api/auth/*</code>): add rate-limit middleware with scope "auth".</li>
+  <li><strong>Session-protected routes</strong> (<code>/api/*</code> except auth): add <code>RequireProviderSession</code> which enforces the login cookie.</li>
+  <li><strong>Paywalled routes</strong> (a subset of <code>/api/*</code>): additionally require an active Stripe subscription.</li>
+  <li><strong>Portal routes</strong> (<code>/portal/*</code>): require a valid magic-link token in the URL, not a cookie.</li>
+  <li><strong>Stripe webhook</strong> (<code>/webhooks/stripe</code>): bypasses auth entirely because Stripe signs the payload itself.</li>
+</ul>
+
+<h3>The route map</h3>
+<table>
+<tr><th>Path</th><th>Who can call it</th><th>What it does</th></tr>
+<tr><td><code>POST /api/auth/signup</code></td><td>public, rate-limited</td><td>Start signup: emails a magic link.</td></tr>
+<tr><td><code>POST /api/auth/signin</code></td><td>public, rate-limited</td><td>Same but for existing accounts.</td></tr>
+<tr><td><code>GET /api/auth/callback</code></td><td>public</td><td>Consume a signup/signin magic link, set session cookie.</td></tr>
+<tr><td><code>POST /api/auth/logout</code></td><td>public</td><td>Clear the session cookie.</td></tr>
+<tr><td><code>GET /api/me</code>, <code>PATCH /api/me</code></td><td>logged-in provider</td><td>Read or update the provider profile.</td></tr>
+<tr><td><code>GET /api/dashboard</code></td><td>logged-in provider</td><td>Compliance score, alerts, timeline.</td></tr>
+<tr><td><code>GET/POST/PATCH/DELETE /api/children</code></td><td>logged-in provider</td><td>Child records CRUD.</td></tr>
+<tr><td><code>GET/POST/PATCH/DELETE /api/staff</code></td><td>logged-in provider</td><td>Staff records CRUD.</td></tr>
+<tr><td><code>POST /api/documents/presign</code></td><td>logged-in provider</td><td>Get a pre-signed S3 URL to upload directly.</td></tr>
+<tr><td><code>POST /api/documents/{id}/finalize</code></td><td>logged-in provider</td><td>After S3 upload, tell us the upload is done; triggers OCR.</td></tr>
+<tr><td><code>POST /api/billing/checkout</code></td><td>logged-in provider</td><td>Start a Stripe Checkout session.</td></tr>
+<tr><td><code>POST /webhooks/stripe</code></td><td>Stripe only</td><td>Receive subscription events; raw body verified by signature.</td></tr>
+<tr><td><code>GET /portal/parent</code>, <code>/portal/staff</code></td><td>magic-link holder</td><td>Upload portal pages for parents and staff.</td></tr>
+<tr><td><code>POST /portal/upload</code></td><td>magic-link holder</td><td>File upload from outside the provider account.</td></tr>
+<tr><td><code>GET /healthz</code></td><td>anyone</td><td>Returns <code>ok</code>. For load balancer / uptime checks.</td></tr>
+</table>
+
+<div class="callout">
+<strong>Why no frameworks?</strong> Go discourages Rails-style "here's your whole app in a box." The stdlib's <code>net/http</code> is production-ready, and <code>chi</code> just fills in URL params and sub-routers. If you've used Express.js, <code>chi</code> will feel instantly familiar.
+</div>
+
+<h2 id="auth">5. Authentication (two separate systems)</h2>
+
+<p>This is the part most backends get wrong, so it's worth understanding clearly. There are two completely separate auth systems, used for different people:</p>
+
+<h3>5a. Session cookies (for providers who log in)</h3>
+
+<p>The daycare owner who runs the center logs in and comes back daily. For them we use a classic session cookie:</p>
+
+<div class="flow">
+<ol>
+  <li>User enters email → <code>POST /api/auth/signin</code>.</li>
+  <li>Backend generates a magic-link token, emails them a link like <code>https://app.example.com/auth/callback?t=abc123</code>.</li>
+  <li>User clicks link → <code>GET /api/auth/callback</code> consumes the token, creates a row in the <code>sessions</code> table, and sets an <code>HttpOnly Secure</code> cookie named <code>ck_sess</code> with the session token.</li>
+  <li>Every subsequent request includes that cookie automatically. The <code>RequireProviderSession</code> middleware reads the cookie, looks up the session, and puts <code>provider_id</code> and <code>user_id</code> on the request context.</li>
+  <li>Handlers read those IDs with <code>middleware.ProviderIDFrom(ctx)</code>.</li>
+</ol>
+</div>
+
+<p>The cookie is <code>HttpOnly</code> (JavaScript can't read it — protects against XSS) and <code>Secure</code> in production (only sent over HTTPS). There are no passwords anywhere — we never have to hash, rotate, or reset them.</p>
+
+<h3>5b. Magic links (for parents, staff, signers)</h3>
+
+<p>A parent uploading their child's immunization record doesn't have an account. A staff member submitting their CPR certificate doesn't either. Neither does someone asked to sign a policy document. For all of them we use <em>signed, single-purpose, time-bound links</em>.</p>
+
+<p>Look at <code>internal/magiclink/magiclink.go</code>. Key properties:</p>
+
+<ul>
+  <li><strong>Tokens are random</strong> (base62 IDs) — not guessable.</li>
+  <li><strong>Only a hash is stored</strong> in the DB (HMAC-SHA256 with a 32+ byte server secret). If someone dumps the database, the links themselves are not recoverable.</li>
+  <li><strong>Every token has a <code>Kind</code></strong> — signup, signin, parent-upload, staff-upload, document-sign. Middleware checks that the kind matches the route, so a signup link can't be used to upload a file.</li>
+  <li><strong>Every token has an expiry.</strong> Signup/signin: 15 minutes. Parent/staff upload: 7 days (sliding — extends on each use). Document sign: 72 hours.</li>
+  <li><strong>Single-use kinds are stamped <code>consumed_at</code></strong> on first use. Reusing the link returns "already consumed."</li>
+</ul>
+
+<p>The <code>RequireIndividualMagicLink</code> middleware reads the token from <code>?t=…</code> or <code>Authorization: Bearer …</code>, calls <code>magic.Consume</code>, and attaches the resulting <code>Claim</code> (token kind, provider ID, subject ID) to the request context.</p>
+
+<h3>5c. The billing gate</h3>
+
+<p>A third middleware, <code>RequireStripeCustomer</code>, runs <em>after</em> <code>RequireProviderSession</code> on paywalled routes. It asks the billing service "does this provider have an active subscription?" and returns <code>402 Payment Required</code> if not. This is how PDF signing and (eventually) other premium features are gated.</p>
+
+<div class="callout">
+<strong>Why this split matters:</strong> the provider's session never goes near a parent's browser, and a parent's upload link never gives them access to the provider's data. Each identity is scoped to exactly what it needs.
+</div>
+
+<h2 id="db">6. Database &amp; migrations</h2>
+
+<h3>The database itself</h3>
+
+<p>You're on <strong>SQLite</strong>. That surprises people. Here's why it's the right choice for ComplianceKit MVP:</p>
+
+<ul>
+  <li><strong>Zero operational burden.</strong> No separate DB server to provision, patch, back up, or restart. It's a file.</li>
+  <li><strong>Stupidly fast for read-heavy workloads.</strong> Dashboards and reports fly.</li>
+  <li><strong>WAL mode + <code>busy_timeout</code></strong> (set in <code>db.Open</code>) gives you concurrent readers and a single writer with automatic retry — enough for thousands of providers.</li>
+  <li><strong>Backups are <code>cp ck.db ck.db.bak</code></strong> (or S3 sync, or Litestream).</li>
+</ul>
+
+<p>The pragmas set on every connection:</p>
+<pre><code>journal_mode = WAL         # write-ahead log; readers don't block writers
+synchronous  = NORMAL      # fast and still safe under WAL
+foreign_keys = ON          # SQLite leaves FK enforcement OFF by default (!)
+busy_timeout = 5000        # wait up to 5s on writer contention
+temp_store   = MEMORY      # keep temp btrees out of the filesystem</code></pre>
+
+<p>The pool is tuned for SQLite's single-writer model — 8 open, 4 idle. Beyond that you'd just manufacture <code>SQLITE_BUSY</code> errors.</p>
+
+<p>There's a <code>db.Tx(ctx, pool, func(tx) error {...})</code> helper: if your callback returns an error (or panics), the transaction rolls back. Otherwise it commits. Use this whenever you do more than one write.</p>
+
+<div class="callout">
+<strong>Heads up — driver mismatch:</strong> the <code>db</code> package uses <code>modernc.org/sqlite</code> (pure Go, no cgo) and returns <code>*sql.DB</code>. Some older code (like <code>internal/magiclink</code>) still references <code>pgxpool.Pool</code> from the Postgres days. That's a known inconsistency from the SQLite migration — either the magiclink package needs porting to <code>database/sql</code>, or the project needs to settle on one driver across all packages. Worth a grep for <code>pgxpool</code> before your next deploy.
+</div>
+
+<h3>Migrations</h3>
+
+<p>Schema changes live in <code>backend/migrations/</code> as numbered SQL files. Today you have 9:</p>
+
+<pre><code>000001_init_providers_and_users
+000002_children
+000003_staff
+000004_documents
+000005_pdfsign
+000006_compliance_and_notifications
+000007_billing_and_legal
+000008_audit_and_activity
+000009_sessions_chase_drills</code></pre>
+
+<p>Each migration has two files: <code>NNNNNN_name.up.sql</code> (apply) and <code>NNNNNN_name.down.sql</code> (roll back). The tool that runs them is <a href="https://github.com/golang-migrate/migrate"><code>golang-migrate/migrate</code></a>.</p>
+
+<h3>Commands you'll actually use</h3>
+<pre><code>make migrate-up                    # apply all pending migrations
+make migrate-down                  # roll back one migration (dev only!)
+make migrate-new name=add_foo_bar  # create a new pair of empty .up/.down files
+make migrate-version               # show current schema version</code></pre>
+
+<h3>The rules (from <code>migrations/README.md</code>)</h3>
+<ol>
+  <li><strong>Sequential integers, never timestamps.</strong> Merge conflicts are visible in PR review.</li>
+  <li><strong>Both up and down are mandatory.</strong> A migration with an untested rollback is rejected.</li>
+  <li><strong>One logical change per file.</strong> If "and" appears in the filename, split it.</li>
+  <li><strong>In production we roll <em>forward</em>, not back.</strong> Bad migration? Write a new migration that undoes it. Running <code>migrate down</code> against prod is a paging event.</li>
+  <li><strong>For live schema changes:</strong> add columns as NULL, backfill in a separate script, create indexes with <code>CONCURRENTLY</code> (Postgres), rename in three steps (add-new → dual-write → drop-old).</li>
+</ol>
+
+<h2 id="logs">7. Logging &amp; observability</h2>
+
+<p>Logging uses Go's built-in <code>log/slog</code> — structured logging, JSON output, levels (debug/info/warn/error).</p>
+
+<p>Every log line carries a set of <em>attributes</em>. The defaults (set in <code>config.NewLogger</code>) are <code>app</code> and <code>env</code>. Each subsystem adds its own <code>component</code> attribute — look at how handlers are built:</p>
+
+<pre><code>children := &amp;handlers.ChildHandler{Pool: pool, Log: log.With("component", "children")}</code></pre>
+
+<p>Now every log from the children handler includes <code>component=children</code>. You can filter logs by component in whatever log viewer you end up using (CloudWatch, Datadog, <code>jq</code>).</p>
+
+<h3>The request logger</h3>
+
+<p><code>slogRequestLogger</code> in <code>router.go</code> emits one line per HTTP request with:</p>
+<pre><code>method   path      status  bytes  took       request_id   remote
+GET      /api/me   200     412    2.1ms      abc123xyz    73.12.x.x</code></pre>
+
+<p><code>request_id</code> is the one set by <code>chimw.RequestID</code> — it's also visible in response headers, so if a user reports a bad request you can ask for the request ID and grep your logs.</p>
+
+<h3>What you get for free</h3>
+<ul>
+  <li><code>chimw.Recoverer</code> turns panics into 500 responses and logs a stack trace instead of crashing the whole process.</li>
+  <li>All log output goes to stdout as JSON — the right shape for any modern log collector.</li>
+  <li>Log level is env-driven: <code>LOG_LEVEL=debug</code> for local, <code>info</code> for prod.</li>
+</ul>
+
+<div class="callout">
+<strong>You don't have metrics or tracing yet.</strong> That's fine for now. If you need them later, the wiring is easy: add Prometheus <code>/metrics</code> with <code>promhttp.Handler</code>, or add OpenTelemetry middleware. Don't bother until you have a real performance question.
+</div>
+
+<h2 id="rate">8. Rate limiting</h2>
+
+<p>Simple in-memory token bucket in <code>internal/middleware/ratelimit.go</code>. Each (scope + client IP) gets a bucket with capacity 10 and a refill rate of 0.5 tokens/sec — so in burst you can make 10 quick requests, but sustained you're at ~1 every 2 seconds. When the bucket is empty the middleware returns <code>429 Too Many Requests</code> with a <code>Retry-After</code> header.</p>
+
+<p>Scopes currently in use: <code>"auth"</code> on signup/signin (stops brute force email enumeration), <code>"portal"</code> on the parent/staff upload endpoints.</p>
+
+<p>It's in-memory — if you ever horizontally scale to multiple instances you'll want Redis-backed rate limiting instead. Not an MVP concern.</p>
+
+<h2 id="ext">9. External services</h2>
+
+<table>
+<tr><th>Service</th><th>Package</th><th>What it's for</th></tr>
+<tr><td>AWS S3</td><td><code>internal/storage</code></td><td>Four buckets: <code>documents</code> (user files), <code>signed-pdfs</code> (finished signed docs), <code>audit-trail</code> (immutable audit logs), <code>raw-uploads</code> (temp holding for unprocessed files).</td></tr>
+<tr><td>AWS SES</td><td><code>internal/notify</code></td><td>Transactional email: magic links, deadline alerts.</td></tr>
+<tr><td>Stripe</td><td><code>internal/billing</code></td><td>Subscriptions, checkout, customer portal, webhooks.</td></tr>
+<tr><td>Twilio</td><td><code>internal/notify</code></td><td>SMS for deadline nudges.</td></tr>
+<tr><td>Mistral + Gemini</td><td><code>internal/ocr</code></td><td>OCR with a fallback chain: Mistral first, Gemini if Mistral's confidence is below 0.6. Gemini also runs an "expiration date extractor" on processed text.</td></tr>
+</table>
+
+<p>All external clients are constructed <strong>once</strong> at startup and passed into handlers as struct fields. They're safe for concurrent use. Handlers never construct their own clients — this makes testing and mocking easy later.</p>
+
+<h3>The S3 upload flow (worth understanding)</h3>
+<div class="flow">
+<ol>
+  <li>Provider hits <code>POST /api/documents/presign</code> with file name and type.</li>
+  <li>Backend generates a <strong>pre-signed URL</strong> — a time-limited signed URL the browser can <code>PUT</code> directly to.</li>
+  <li>Browser uploads the file straight to S3. <strong>The bytes never touch your server.</strong> This keeps your backend cheap and fast.</li>
+  <li>Once uploaded, the browser calls <code>POST /api/documents/{id}/finalize</code>.</li>
+  <li>The finalize handler records the document row, kicks off OCR, and extracts expiration dates.</li>
+</ol>
+</div>
+
+<h3>The Stripe webhook (special case)</h3>
+<p><code>POST /webhooks/stripe</code> bypasses all auth middleware — Stripe doesn't have your session cookie. Instead, Stripe signs the raw request body with a secret you share, and the handler verifies that signature. <strong>You must use the raw body</strong> — any JSON parsing before signature verification breaks the signature. That's why the webhook is mounted at the top level, outside the <code>/api</code> group.</p>
+
+<h2 id="bg">10. Background work (the chase service)</h2>
+
+<p>One daily background job runs inside the same process:</p>
+
+<pre><code>chase := notify.NewChaseService(...)
+go chase.RunDaily(rootCtx)</code></pre>
+
+<p><code>go X()</code> launches <code>X</code> in a goroutine — a lightweight thread the Go runtime schedules. <code>RunDaily</code> loops forever sleeping until the next run time, then queries the DB for items that need chasing (expiring documents, overdue uploads, missed drills), and sends emails/SMS via SES and Twilio.</p>
+
+<p>It stops when <code>rootCtx</code> is cancelled (i.e. on <code>Ctrl-C</code> or SIGTERM), which is the same mechanism that stops the HTTP server.</p>
+
+<div class="callout">
+<strong>When to break this out:</strong> in-process background work is fine until you need retries, schedules from admins, or redundancy across machines. Then you move to something like <a href="https://github.com/riverqueue/river">River</a>, <a href="https://github.com/hibiken/asynq">Asynq</a>, or a cron + dedicated worker binary. Not today.
+</div>
+
+<h2 id="config">11. Configuration &amp; secrets</h2>
+
+<p>Everything is env-var driven. The full list is in <code>internal/config/config.go</code>. Required ones have <code>,required</code> — missing them makes the process fail at startup with a clear error.</p>
+
+<h3>Required for any environment</h3>
+<pre><code>APP_BASE_URL               https://api.yourdomain.com
+FRONTEND_BASE_URL          https://app.yourdomain.com
+DATABASE_URL               file:/var/lib/compliancekit/ck.db  (SQLite path)
+
+S3_BUCKET_DOCUMENTS        compliancekit-documents-prod
+S3_BUCKET_SIGNED_PDFS      compliancekit-signed-prod
+S3_BUCKET_AUDIT_TRAIL      compliancekit-audit-prod
+S3_BUCKET_RAW_UPLOADS      compliancekit-raw-prod
+SES_FROM_EMAIL             no-reply@yourdomain.com
+
+STRIPE_SECRET_KEY          sk_live_...
+STRIPE_WEBHOOK_SECRET      whsec_...
+STRIPE_PRICE_PRO           price_...
+
+MAGIC_LINK_SIGNING_KEY     &lt;random 32+ bytes, base64 or hex&gt;</code></pre>
+
+<h3>Optional / defaults</h3>
+<pre><code>APP_ENV=development | production      default: development
+PORT=8080                              default: 8080
+LOG_LEVEL=debug | info | warn | error  default: info
+SESSION_COOKIE_DOMAIN=yourdomain.com   default: localhost
+AWS_REGION=us-east-1                   default: us-east-1
+AWS_ENDPOINT_URL_S3                    (set only for local MinIO)
+TWILIO_ACCOUNT_SID / AUTH_TOKEN / FROM_NUMBER   (SMS is optional)
+MISTRAL_API_KEY / GEMINI_API_KEY       (OCR is optional)</code></pre>
+
+<div class="callout">
+<strong>Generating the signing key:</strong>
+<pre><code>openssl rand -base64 48</code></pre>
+Put that in <code>MAGIC_LINK_SIGNING_KEY</code>. The validator refuses anything shorter than 32 bytes.
+</div>
+
+<h2 id="deploy">12. Running it locally &amp; deploying</h2>
+
+<h3>Local</h3>
+<pre><code># 1. install the migrate CLI once
+brew install golang-migrate
+
+# 2. copy .env.example → .env (if you don't have one, see config.go for the full list)
+
+# 3. apply migrations
+make migrate-up
+
+# 4. run the server
+make run
+
+# 5. confirm it's alive
+curl http://localhost:8080/healthz
+# → ok</code></pre>
+
+<h3>Build the binary</h3>
+<pre><code>make build       # produces ./bin/compliancekit-api (static, no CGO)</code></pre>
+
+<p>The binary is fully static. You can <code>scp</code> it to any Linux box and run it — no runtime to install.</p>
+
+<h3>Docker</h3>
+<pre><code>make docker-build         # build the image
+docker compose up         # start server + any bundled deps locally</code></pre>
+
+<h3>Production shape (suggested)</h3>
+<ul>
+  <li>One VM (or Fly.io machine, or Render service) running the binary.</li>
+  <li>SQLite file on an attached persistent volume.</li>
+  <li><a href="https://litestream.io/">Litestream</a> replicating the SQLite file to S3 every few seconds (cheap, bulletproof backups).</li>
+  <li>Caddy or an upstream load balancer terminating HTTPS in front.</li>
+  <li>Env vars supplied by the host (never checked in).</li>
+</ul>
+
+<h2 id="checklist">13. What you actually need to do</h2>
+
+<div class="tldr">
+<h3>Your mental checklist when touching the backend</h3>
+<ol>
+  <li><strong>Adding a feature?</strong> Create or pick a package under <code>internal/</code>, write a handler struct with dependencies as fields, add routes in <code>internal/api/router.go</code>, and pick the right middleware group (public / session / paywalled / magic-link).</li>
+  <li><strong>Adding a DB column or table?</strong> Run <code>make migrate-new name=add_thing</code>, edit both <code>.up.sql</code> and <code>.down.sql</code>, test locally with <code>migrate-up</code> and <code>migrate-down</code>, commit both files together.</li>
+  <li><strong>Adding config?</strong> Add the field to <code>internal/config/config.go</code>. Mark it <code>,required</code> only if the server cannot function without it.</li>
+  <li><strong>Adding a log line?</strong> Use the handler's <code>h.Log</code>, not <code>slog.Default()</code> — you'll get the <code>component</code> attribute automatically.</li>
+  <li><strong>Calling an external API?</strong> Wire the client in <code>main.go</code> once at startup and pass it into the handler struct. Never construct clients per-request.</li>
+  <li><strong>Before shipping:</strong> <code>make fmt</code>, <code>make test</code>, <code>make build</code>. If all three pass, you're clear. Commit and push — that's the house rule.</li>
+</ol>
+</div>
+
+<p class="mini">Last updated: 2026-04-17. Corresponds to commit on <code>master</code>.</p>
+
+</body>
+</html>

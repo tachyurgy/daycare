@@ -29,7 +29,7 @@ As an operator, I want one script plus one secrets file to spin a fresh droplet 
   - Obtains TLS cert via Certbot + configures nginx HTTPS with HSTS.
 - [ ] Script is idempotent (safe to re-run).
 - [ ] DigitalOcean-managed Postgres cluster connection configured via `DATABASE_URL` with SSL mode `require`.
-- [ ] S3 buckets `ck-documents`, `ck-signed-pdfs` (Object Lock on), `ck-audit-trail` (Object Lock on), `ck-raw-uploads` (lifecycle 30d) created via a separate one-shot `deploy/scripts/create-s3-buckets.sh`.
+- [ ] S3 buckets `ck-files` (versioning on) and `ck-backups` (30-day lifecycle) created via `infra/README.md` §3 runbook.
 - [ ] Terraform deferred (post-MVP); bash is fine for MVP.
 - [ ] Runbook in `deploy/RUNBOOK.md` documents: create droplet in DO UI → attach SSH key → run provision script → copy env file → `systemctl start ck-api`.
 

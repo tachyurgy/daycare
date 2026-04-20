@@ -10,20 +10,20 @@ depends_on: [REQ001, REQ002]
 ---
 
 ## Problem
-Local dev needs Postgres and the API running together, reproducibly. A single `docker-compose up` should stand the stack up.
+Local dev needs the API running reproducibly. A single `docker-compose up` should stand the stack up. SQLite is a single file, so there's no DB service to operate alongside (ADR-017).
 
 ## User Story
-As a new contributor, I want `docker-compose up` to start Postgres and the API, so that I can develop without installing Postgres locally.
+As a new contributor, I want `docker-compose up` to start the API (and a MinIO stand-in for S3), so that I can develop without installing anything except Docker.
 
 ## Acceptance Criteria
 - [ ] `backend/Dockerfile` is a multi-stage build: `golang:1.22-alpine` builder → `gcr.io/distroless/static-debian12` runtime.
 - [ ] Final image is ≤ 30 MB and runs as non-root uid `65532`.
 - [ ] Image exposes port `8080`, runs `/ck-api`.
-- [ ] `docker-compose.yml` at repo root defines services: `db` (`postgres:16-alpine`, volume `pgdata`, port `5432`), `api` (built from `backend/Dockerfile`, depends on `db`, reads `.env`).
-- [ ] `docker-compose.yml` forwards `8080:8080` and mounts `./backend/migrations:/migrations:ro` for migrate-on-start.
-- [ ] A `migrate` one-shot service runs `migrate -path /migrations -database $DATABASE_URL up` before `api` starts.
+- [ ] `docker-compose.yml` defines services: `api` (built from `backend/Dockerfile`, reads `.env`, mounts a named `ckdata` volume at `/var/lib/compliancekit` for the SQLite file) and `minio` (S3 stand-in).
+- [ ] `docker-compose.yml` forwards `8080:8080`.
+- [ ] Migrations run at startup via the in-binary migrate path, or via `docker compose run --rm api /ck-api migrate up`.
 - [ ] `docker compose up` (v2) works without errors; API responds to `GET /healthz` with 200.
-- [ ] Healthcheck in compose for both `db` (pg_isready) and `api` (`GET /healthz`).
+- [ ] Healthcheck in compose for `api` (`GET /healthz`) — no separate DB healthcheck needed.
 
 ## Technical Notes
 - Use `CGO_ENABLED=0 GOOS=linux go build -ldflags='-s -w' -o /ck-api ./cmd/api`.

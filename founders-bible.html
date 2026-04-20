@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ComplianceKit Founder's Bible</title>
+<style>
+  :root {
+    --ink: #0f172a;
+    --ink-2: #334155;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --line-light: #f1f5f9;
+    --paper: #ffffff;
+    --bg: #f8fafc;
+    --accent: #1e40af;
+    --accent-soft: #eff6ff;
+    --accent-border: #93c5fd;
+    --green: #15803d;
+    --green-soft: #f0fdf4;
+    --green-border: #86efac;
+    --red: #b91c1c;
+    --red-soft: #fef2f2;
+    --amber: #b45309;
+    --amber-soft: #fffbeb;
+    --purple: #7c3aed;
+    --purple-soft: #f5f3ff;
+    --teal: #0f766e;
+    --teal-soft: #f0fdfa;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 56px 32px 140px; }
+
+  /* ── Hero ── */
+  header.hero {
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 36px;
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 52px;
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+    margin-bottom: 16px;
+    font-weight: 800;
+  }
+
+  .subtitle {
+    font-size: 19px;
+    color: var(--ink-2);
+    max-width: 780px;
+    line-height: 1.5;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero-meta strong { color: var(--ink-2); font-weight: 600; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 64px;
+  }
+
+  .toc-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    columns: 2;
+    column-gap: 48px;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    break-inside: avoid;
+    margin-bottom: 8px;
+  }
+
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 10px;
+    font-family: var(--mono);
+  }
+
+  .toc a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+  }
+
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  /* ── Sections ── */
+  h2 {
+    font-size: 30px;
+    letter-spacing: -0.018em;
+    margin: 72px 0 6px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 30px;
+    padding: 0 8px;
+    font-size: 13px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-right: 12px;
+    vertical-align: 3px;
+    font-family: var(--mono);
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 24px;
+    max-width: 760px;
+  }
+
+  h3 {
+    font-size: 21px;
+    margin: 36px 0 12px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin: 28px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  p { margin: 0 0 16px; color: var(--ink-2); font-size: 15.5px; line-height: 1.7; }
+  p strong { color: var(--ink); }
+  p em { color: var(--ink); font-style: italic; }
+
+  ul, ol { margin: 0 0 18px; padding-left: 22px; }
+  li { margin-bottom: 8px; color: var(--ink-2); font-size: 15.5px; line-height: 1.6; }
+  li strong { color: var(--ink); }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--line-light);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  /* ── Callouts ── */
+  .callout {
+    padding: 20px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin: 24px 0;
+    border-left: 4px solid;
+    line-height: 1.65;
+  }
+
+  .callout p { font-size: 15px; margin-bottom: 10px; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout ul, .callout ol { margin-bottom: 0; }
+
+  .callout.accent { background: var(--accent-soft); border-color: var(--accent); }
+  .callout.green  { background: var(--green-soft);  border-color: var(--green); }
+  .callout.red    { background: var(--red-soft);    border-color: var(--red); }
+  .callout.amber  { background: var(--amber-soft);  border-color: var(--amber); }
+  .callout.purple { background: var(--purple-soft); border-color: var(--purple); }
+  .callout.teal   { background: var(--teal-soft);   border-color: var(--teal); }
+
+  .callout .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .callout.accent .label { color: var(--accent); }
+  .callout.green  .label { color: var(--green); }
+  .callout.red    .label { color: var(--red); }
+  .callout.amber  .label { color: var(--amber); }
+  .callout.purple .label { color: var(--purple); }
+  .callout.teal   .label { color: var(--teal); }
+
+  /* ── Tables ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0 28px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+  th {
+    text-align: left;
+    padding: 13px 16px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: var(--line-light);
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--line-light);
+    color: var(--ink-2);
+    vertical-align: top;
+    font-size: 14.5px;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fafbfc; }
+  td strong { color: var(--ink); }
+
+  /* ── Stat Grid ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .stat-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-card .num {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-card .label {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── Two column ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 20px 0 28px;
+  }
+
+  .col-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+  }
+
+  .col-card h4 { margin-top: 0; }
+
+  /* ── Pull quote ── */
+  .pull-quote {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    padding: 24px 32px;
+    border-left: 4px solid var(--accent);
+    background: var(--paper);
+    margin: 28px 0;
+  }
+
+  .pull-quote .attr {
+    display: block;
+    margin-top: 14px;
+    font-family: ui-sans-serif, system-ui;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Day plan ── */
+  .phase {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .phase:last-child { border-bottom: none; }
+
+  .phase-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 2px;
+  }
+
+  .phase-content h4 { margin-top: 0; color: var(--ink); font-size: 16px; text-transform: none; letter-spacing: 0; }
+  .phase-content p { font-size: 14.5px; margin-bottom: 10px; }
+
+  /* ── Script box ── */
+  .script {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 22px 26px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin: 18px 0 24px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .script .speaker {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .script p { color: #e2e8f0; font-size: 14.5px; margin-bottom: 14px; line-height: 1.65; }
+  .script p:last-child { margin-bottom: 0; }
+  .script em { color: #fbbf24; font-style: normal; }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 96px;
+    padding-top: 36px;
+    border-top: 3px solid var(--ink);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  footer p { color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 20px 80px; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 24px; }
+    .toc ol { columns: 1; }
+    .two-col { grid-template-columns: 1fr; }
+    .phase { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">The ComplianceKit Founder's Bible</div>
+  <h1>How to run this company, steer it up, and not quit.</h1>
+  <p class="subtitle">
+    A one-document operating manual for a solo founder building a child-care compliance SaaS.
+    Strategy, product, UX, UI, engineering, marketing, sales, enterprise, pricing, operations,
+    finance, and the mental game — in one place. Written to be re-read on bad days.
+  </p>
+  <div class="hero-meta">
+    <span><strong>For:</strong> Magnus, Solo Founder</span>
+    <span><strong>Product:</strong> ComplianceKit</span>
+    <span><strong>Drafted:</strong> 2026-04-19</span>
+    <span><strong>MVP target:</strong> 2026-04-23</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#vision">The Vision and Why It Works</a></li>
+    <li><a href="#prize">The Prize (What Winning Looks Like)</a></li>
+    <li><a href="#customer">Know Your Customer Cold</a></li>
+    <li><a href="#product">Product Philosophy</a></li>
+    <li><a href="#ux">UX Principles</a></li>
+    <li><a href="#ui">UI &amp; Visual Language</a></li>
+    <li><a href="#engineering">Engineering &amp; Technical</a></li>
+    <li><a href="#data">Data, Compliance Engine, Moat</a></li>
+    <li><a href="#pricing">Pricing and Packaging</a></li>
+    <li><a href="#marketing">Marketing (SEO-Led Growth)</a></li>
+    <li><a href="#sales">Sales — Founder as First Rep</a></li>
+    <li><a href="#enterprise">Enterprise &amp; Multi-Location Deals</a></li>
+    <li><a href="#csm">Onboarding, CSM, Retention</a></li>
+    <li><a href="#ops">Operations &amp; Your Week</a></li>
+    <li><a href="#finance">Finance, Runway, Funding</a></li>
+    <li><a href="#hiring">Hiring — The First Five</a></li>
+    <li><a href="#legal">Legal, Trust, Risk</a></li>
+    <li><a href="#mental">The Mental Game</a></li>
+    <li><a href="#90day">The 90-Day Plan</a></li>
+    <li><a href="#close">A Closing Word</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────────────────────────── VISION ─────────────────────────────── -->
+<section id="vision">
+<h2><span class="num">01</span>The Vision and Why It Works</h2>
+<p class="section-sub">Start here. Re-read this when you get tired.</p>
+
+<p>
+  You are building software for the most under-served operator in America: the owner-director
+  of a child care center. She runs a facility that the state regulates like a hospital,
+  with the margins of a coffee shop, using paper binders and a spreadsheet her brother-in-law
+  made her ten years ago. When an inspector shows up, she has a panic attack in the parking lot.
+  Nobody has built her the right tool. That is the opening.
+</p>
+
+<p>
+  The child care industry has ~200,000 licensed facilities in the US. Florida, Texas, and
+  California alone account for ~80,000 of them. Every single one of those facilities needs
+  to track hundreds of regulatory artifacts — immunization records, background checks,
+  training hours, fire drills, med administration logs, ratio calculations, wall postings.
+  The failure mode is not a bug report. It is a <strong>citation</strong>, a fine, a suspended
+  license, or in the worst case a closed facility and a news story. The cost of being wrong
+  is catastrophic. The cost of your software is $99/month.
+</p>
+
+<div class="callout accent">
+  <span class="label">The thesis in one sentence</span>
+  <p>
+    <strong>Compliance is the highest-stakes, lowest-software-penetration operational workflow
+    in a $60B industry.</strong> It is ignored by horizontal SaaS, un-touched by incumbents
+    (who bolt "compliance" onto billing tools as a checkbox), and loved by no one. You are
+    going to make it the reason they stay in business.
+  </p>
+</div>
+
+<h3>Why you, specifically</h3>
+<p>
+  You are a developer first. That is a structural advantage, not a liability. Every week
+  your competitors (Procare, brightwheel, ChildCareCRM) spend in meetings, you spend shipping.
+  You are a one-person company with a four-year head start because AI tooling has collapsed
+  the cost of building the ugly middle of a SaaS. The hard parts of this business are not
+  the code; they are:
+</p>
+<ol>
+  <li><strong>Knowing the regulations</strong> — which you have been collecting state by state.</li>
+  <li><strong>Getting trust from a skeptical, non-technical buyer</strong> — which is a sales and design problem.</li>
+  <li><strong>Staying alive long enough</strong> — which is a psychological problem.</li>
+</ol>
+<p>
+  You are going to solve all three. Not because you are a genius, but because you are going
+  to show up every day for 24 months and your competitors are going to be in meetings.
+</p>
+
+<div class="pull-quote">
+  Every incumbent in this category is slower than you. Every potential customer has already
+  been burned by someone who took their $99 and disappeared. You win by shipping, by listening,
+  and by being the one person in the industry who actually picks up the phone.
+  <span class="attr">— The uncomfortable, correct truth about your competition</span>
+</div>
+
+<h3>Why this is not a "lifestyle business"</h3>
+<p>
+  Some people will look at "daycare compliance" and think niche. They are wrong, and the
+  math tells you why:
+</p>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="num">~80k</div><div class="label">Facilities in CA/TX/FL alone</div></div>
+  <div class="stat-card"><div class="num">~200k</div><div class="label">Licensed US facilities</div></div>
+  <div class="stat-card"><div class="num">$99</div><div class="label">Professional plan / month</div></div>
+  <div class="stat-card"><div class="num">$17k</div><div class="label">Expected LTV at 7% churn</div></div>
+  <div class="stat-card"><div class="num">$238M</div><div class="label">TAM at $99/mo, US only</div></div>
+  <div class="stat-card"><div class="num">1%</div><div class="label">Share = $24M ARR</div></div>
+</div>
+
+<p>
+  You do not need to win the category to build a life-changing company. You need 2,000 customers.
+  That is a number a solo founder can reach on inbound SEO alone — you already have the content.
+</p>
+</section>
+
+<!-- ─────────────────────────────── PRIZE ─────────────────────────────── -->
+<section id="prize">
+<h2><span class="num">02</span>The Prize — What Winning Looks Like</h2>
+<p class="section-sub">Set the target, then reverse-engineer the year.</p>
+
+<p>
+  Vague goals produce vague execution. Here is what to aim at, broken by year. These are not
+  projections; they are benchmarks for a focused solo founder with product-market fit in
+  three states.
+</p>
+
+<div class="table-wrap"><table>
+  <thead><tr>
+    <th>End of Year</th><th>Customers</th><th>ARR</th><th>Team</th><th>State of the business</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><strong>Year 1 (2026)</strong></td><td>100–200</td><td>$120k–240k</td><td>You + 1 VA</td><td>MVP live in FL/TX/CA. First 10 customers are hand-carried. Content engine producing 8 articles/mo. Breakeven on personal expenses.</td></tr>
+    <tr><td><strong>Year 2 (2027)</strong></td><td>600–900</td><td>$700k–1M</td><td>You + 2 (CSM, marketer)</td><td>Clear PMF. Organic traffic passing 30k/mo. First multi-site customer. Start NPS tracking. Expand to NY, IL.</td></tr>
+    <tr><td><strong>Year 3 (2028)</strong></td><td>1,800–2,400</td><td>$2–3M</td><td>5–8</td><td>First enterprise (10+ sites) contracts. Inbound from franchises. You stop selling, start recruiting.</td></tr>
+    <tr><td><strong>Year 4 (2029)</strong></td><td>4,000+</td><td>$5–7M</td><td>15–25</td><td>Default-alive, profitable, 10 states covered. Strategic choice point: raise and accelerate, or stay bootstrapped and print money.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="callout green">
+  <span class="label">The quiet exit</span>
+  <p>
+    A $5M ARR bootstrapped vertical SaaS with 80% gross margin and low churn trades for 6–10x ARR.
+    That is a $30–50M outcome to one owner, untaxed by dilution, reached on your own schedule.
+    This is not a "swing for the fences" bet. This is a "ship every week for four years" bet.
+    You are built for the second one.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── CUSTOMER ─────────────────────────────── -->
+<section id="customer">
+<h2><span class="num">03</span>Know Your Customer Cold</h2>
+<p class="section-sub">If you cannot describe her day in 90 seconds, you cannot sell her.</p>
+
+<h3>The ICP: "Diana the Director"</h3>
+<p>
+  Internalize this person so thoroughly that every product decision, every landing page,
+  every cold email is written for her:
+</p>
+
+<ul>
+  <li><strong>Name:</strong> Diana. Age 42–58.</li>
+  <li><strong>Title:</strong> Owner/Director of a single-site child care center, 40–90 kids, 8–14 staff.</li>
+  <li><strong>Background:</strong> Former teacher or director who bought or opened this facility 5–20 years ago. No MBA. No IT department. No compliance officer — <em>she is the compliance officer</em>.</li>
+  <li><strong>Tools:</strong> Paper folders in a filing cabinet. A binder labeled "INSPECTION." QuickBooks, Gmail, maybe brightwheel for parent communication. Excel on a Dell laptop from 2019.</li>
+  <li><strong>Income:</strong> She pays herself $60–110k. Her facility nets 6–12% margin. She knows to the dollar what $99/month means.</li>
+  <li><strong>Decision authority:</strong> Total. She signs up in one sitting if she trusts you.</li>
+  <li><strong>Trust pattern:</strong> Deeply suspicious of anything that looks like a tech bro pitch. Warm to other operators, consultants, and her state licensing specialist.</li>
+  <li><strong>Biggest fear:</strong> A surprise inspection finds a missing record, she gets a citation, a parent hears about it, enrollment drops 20%, she cannot make payroll. This is not paranoia — it has happened to people she knows.</li>
+  <li><strong>Trigger events:</strong> Failed inspection at her center or a nearby one. Staff turnover. New state rule. A horror story in a Facebook director group.</li>
+  <li><strong>Where she hangs out:</strong> State director associations, Facebook groups ("FL Child Care Directors," "TX Daycare Owners"), annual state conferences, licensing workshops, her licensing specialist's emails.</li>
+</ul>
+
+<h3>The second persona: "Robert, the multi-site owner"</h3>
+<p>
+  Shows up around year 2. 3–25 sites. Often a small regional chain or a franchise holder.
+  Has an office manager or "director of operations" who spends 30 hours/week consolidating
+  compliance across sites in spreadsheets. Robert has money, urgency, and will pay
+  $199–399/site. You go from a $1,200/year customer to a $40,000/year customer in the same
+  sales cycle. This is the lever that makes your business interesting. See
+  <a href="#enterprise">Section 11</a>.
+</p>
+
+<h3>The third persona (avoid for now): Franchise HQ</h3>
+<p>
+  KinderCare, The Learning Experience, Primrose, Goddard. Great logos, 18-month sales cycles,
+  will destroy you if you chase them before you have a product team. <strong>Route all inbound
+  from franchise HQs to a waitlist until year 3.</strong> When they are ready, they pay like
+  an enterprise SaaS deal: $100k–500k/year with security reviews and SSO requirements.
+</p>
+
+<div class="callout amber">
+  <span class="label">Rule: the one-sentence test</span>
+  <p>
+    If any feature, headline, or pricing page section does not make sense to Diana
+    as she reads it one-handed at 9:47pm after putting her kids to bed, cut it. You are
+    not selling to a VP of IT.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── PRODUCT ─────────────────────────────── -->
+<section id="product">
+<h2><span class="num">04</span>Product Philosophy</h2>
+<p class="section-sub">What to build. What not to build. How to decide.</p>
+
+<h3>The product in one sentence</h3>
+<p>
+  <strong>ComplianceKit turns "I hope we're ready for inspection" into "We're inspection-ready
+  every day, and I can prove it."</strong>
+</p>
+
+<h3>The three-circle product rule</h3>
+<p>
+  Every feature must sit in at least two of these circles, or it gets cut:
+</p>
+
+<div class="two-col">
+  <div class="col-card">
+    <h4>1. State-specific</h4>
+    <p>It does something a horizontal tool cannot. Florida's CF-FSP 5274 is not just a PDF — it is your moat. If brightwheel could add this feature in a sprint, it is not a moat.</p>
+  </div>
+  <div class="col-card">
+    <h4>2. Consequence-bearing</h4>
+    <p>It prevents a citation, a fine, or a license issue. Features that only save time are nice. Features that prevent consequences are sold.</p>
+  </div>
+  <div class="col-card">
+    <h4>3. Recurring</h4>
+    <p>It generates value every week, not just at onboarding. One-shot tools ("generate your handbook once") have zero retention. Staff certifications expire every year. Children turn 2 and need new forms.</p>
+  </div>
+  <div class="col-card">
+    <h4>The cutting floor</h4>
+    <p>Parent messaging, billing, CRM, curriculum, lesson planning, time clock. All of these are real needs. All of them have better tools. Do not build them. Integrate (or ignore).</p>
+  </div>
+</div>
+
+<h3>The MVP you ship by April 23</h3>
+<p>
+  If something is not on this list, it does not ship this month:
+</p>
+
+<ol>
+  <li><strong>Compliance dashboard</strong> — a single score (0–100) and a 90-day deadline timeline. This is the screen they screenshot and text to their partner.</li>
+  <li><strong>Child file tracker</strong> — state-specific checklist per child. Immunization records, emergency forms, enrollment paperwork. Red/yellow/green status.</li>
+  <li><strong>Staff file tracker</strong> — certifications with expiration dates (CPR, First Aid, state training hours, background check renewal). Automatic 90/60/30-day alerts.</li>
+  <li><strong>Document upload + storage</strong> — parents upload immunization records via a magic-link portal. No account creation required on their end.</li>
+  <li><strong>Email notifications</strong> — 90/60/30/7-day alerts for every expiring item, per state rules.</li>
+  <li><strong>Billing</strong> — Stripe, three plans (see <a href="#pricing">Pricing</a>).</li>
+</ol>
+
+<div class="callout red">
+  <span class="label">Not in MVP — resist the urge</span>
+  <p>
+    SMS alerts. Mobile app. Drill scheduler. Wall posting tracker. Ratio calculator.
+    Inspection simulator. Multi-site support. SSO. API. Custom branding. Parent messaging.
+    Billing-for-parents. Staff time clock. Payroll. Curriculum. Learning domains.
+    All of these are <em>your roadmap</em> — not your MVP. Ship the six things above,
+    then <strong>talk to ten customers</strong> before you touch anything else.
+  </p>
+</div>
+
+<h3>Feature prioritization: the scoring rubric</h3>
+<p>For everything beyond MVP, score each candidate feature 1–5 on three axes:</p>
+<ul>
+  <li><strong>Lose deal?</strong> Will a prospect walk without it? (5 = yes, common objection)</li>
+  <li><strong>Retention impact?</strong> Does it create weekly/monthly usage? (5 = daily habit)</li>
+  <li><strong>Moat?</strong> Does it deepen state-specific data or integration? (5 = hard to copy)</li>
+</ul>
+<p>
+  Build the highest scorers. Kill or defer anything that sums below 9. Track this in a
+  single Airtable base. Re-score it every month. This is the first "process" you allow
+  yourself to adopt; everything else stays on a napkin until year 2.
+</p>
+
+<h3>The build vs. buy vs. wait matrix</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Capability</th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Auth / magic-link</strong></td><td>Build (it is 200 lines of Go)</td><td>Keep</td><td>Keep</td></tr>
+    <tr><td><strong>Email</strong></td><td>Buy (Postmark/Resend)</td><td>Buy</td><td>Buy</td></tr>
+    <tr><td><strong>SMS</strong></td><td>Wait</td><td>Buy (Twilio)</td><td>Buy</td></tr>
+    <tr><td><strong>E-sign</strong></td><td>Build the basics (you already did)</td><td>Keep in-house</td><td>Differentiator</td></tr>
+    <tr><td><strong>File storage</strong></td><td>Buy (S3/R2)</td><td>Buy</td><td>Buy</td></tr>
+    <tr><td><strong>Billing</strong></td><td>Buy (Stripe)</td><td>Buy</td><td>Buy</td></tr>
+    <tr><td><strong>Analytics</strong></td><td>Build (SQL + a notebook)</td><td>Buy (PostHog)</td><td>Buy</td></tr>
+    <tr><td><strong>Support desk</strong></td><td>Gmail + a Loom library</td><td>Buy (Plain or Help Scout)</td><td>Buy</td></tr>
+    <tr><td><strong>CRM</strong></td><td>Airtable or a Google Sheet</td><td>Buy (Attio, not HubSpot)</td><td>Buy</td></tr>
+    <tr><td><strong>Mobile app</strong></td><td>Wait — PWA is enough</td><td>Wait</td><td>Build if enterprise demands it</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<!-- ─────────────────────────────── UX ─────────────────────────────── -->
+<section id="ux">
+<h2><span class="num">05</span>UX Principles</h2>
+<p class="section-sub">Designing for a director at 9:47pm with three browser tabs and no patience.</p>
+
+<h3>The five UX laws of ComplianceKit</h3>
+
+<h4>Law 1: Always answer "Am I OK?" in under 3 seconds</h4>
+<p>
+  The dashboard is the app. Everything else supports it. When Diana opens ComplianceKit,
+  the first thing she must see, above the fold, without scrolling, is a single answer:
+  <strong>"You are 94/100. Three items need attention this week."</strong> Not a table.
+  Not a chart library. A sentence, a score, and a short list. If the dashboard ever makes
+  her work to figure out whether she's OK, you have failed at the one job.
+</p>
+
+<h4>Law 2: Every red item links to the exact fix</h4>
+<p>
+  Status without remediation is cruelty. If a record is missing, the row says "Missing
+  Form CF-FSP 5274" and clicking it jumps to a page that says <em>here is the blank form,
+  here is who needs to sign it, send it to them with one click</em>. Not a help article.
+  Not a modal with instructions. The fix, inline.
+</p>
+
+<h4>Law 3: Never ask for data you can infer</h4>
+<p>
+  If Diana tells you her state is Florida and her facility type is "child care center,"
+  you already know which forms apply. Do not ask. Pre-fill relentlessly. When her parent
+  uploads an immunization record, run OCR and pre-fill the dates. She confirms with one
+  tap. The product should feel like it is doing her work, not asking her to feed it.
+</p>
+
+<h4>Law 4: Destructive actions require a receipt</h4>
+<p>
+  "Delete child record" should be hard, not clever. Use a typed confirmation ("type DELETE")
+  or a two-step modal. Every destructive action generates an audit log entry that is visible
+  and immutable. Compliance users are trained to distrust software; you earn trust by making
+  your software visibly careful.
+</p>
+
+<h4>Law 5: Write like a human, error like a guide</h4>
+<p>
+  No "Error 400 Bad Request." No "Something went wrong." Errors say: <em>"We couldn't save
+  that — it looks like Sarah's CPR date is before her hire date. Click here to edit."</em>
+  Every error has a cause, a fix, and a link. Your error copy is a retention feature.
+</p>
+
+<h3>The six screens that do 90% of the work</h3>
+<ol>
+  <li><strong>Dashboard</strong> (score + 90-day timeline + critical alerts)</li>
+  <li><strong>Children list</strong> (all kids, status chip, overdue count)</li>
+  <li><strong>Child detail</strong> (checklist of state-required docs, upload, parent portal link)</li>
+  <li><strong>Staff list</strong> (all staff, expiration chips, training hour progress)</li>
+  <li><strong>Staff detail</strong> (certifications, uploads, background check)</li>
+  <li><strong>Inspection-ready report</strong> (one-click PDF to print and hand to inspector)</li>
+</ol>
+<p>
+  If a screen is not one of these six, it is a settings screen or a side feature.
+  Spend 80% of your design energy on these six.
+</p>
+
+<h3>Onboarding: the first 10 minutes</h3>
+<p>
+  This is where most compliance SaaS fails. Don't ask for 45 fields. Ask for <strong>three</strong>:
+</p>
+<ol>
+  <li>State (dropdown: FL, TX, CA for now)</li>
+  <li>Facility type (center vs. family home)</li>
+  <li>Facility name</li>
+</ol>
+<p>
+  Then generate a pre-populated compliance framework based on state rules. Show the dashboard
+  immediately — even if it is empty, it is <em>theirs</em>. Every additional field moves to a
+  "complete your profile" prompt that lives as a progressive reveal. The magic moment is when
+  she sees her state's specific forms listed in the first 60 seconds. She'll think:
+  <em>"Finally, someone who actually knows what I need."</em>
+</p>
+
+<div class="callout teal">
+  <span class="label">The 10-minute activation goal</span>
+  <p>
+    By minute 10, Diana should have: (1) added one child, (2) added one staff member,
+    (3) uploaded one document, (4) seen her compliance score change, (5) invited one parent
+    to the portal. If she does all five, her 90-day retention triples. Measure this.
+    Optimize for this. This single funnel is more important than your pricing page.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── UI ─────────────────────────────── -->
+<section id="ui">
+<h2><span class="num">06</span>UI &amp; Visual Language</h2>
+<p class="section-sub">How the software should look. And why Diana should feel safe.</p>
+
+<h3>The aesthetic: institutional calm</h3>
+<p>
+  This is not a consumer app. This is not a crypto dashboard. This is not a developer tool.
+  Your visual language is closer to <strong>a bank, a law firm website, or a high-end
+  electronic health record</strong>. Serious. Clean. Not flashy. Absolutely not playful.
+  No emoji, no illustrations of cartoon babies, no rainbow gradients. Diana is trusting
+  you with records that protect her license. The UI must look like it knows that.
+</p>
+
+<h3>The type system</h3>
+<ul>
+  <li><strong>One typeface.</strong> Inter, system-ui, or (if you pay the license) Söhne. Not multiple display fonts.</li>
+  <li><strong>Four sizes.</strong> 12/14/16/24 px. Keep it boring. Hierarchy comes from weight and spacing, not from exotic sizes.</li>
+  <li><strong>Two weights.</strong> Regular (450) and semibold (650). Avoid thin weights — they read as tech-bro.</li>
+</ul>
+
+<h3>The color system</h3>
+<ul>
+  <li><strong>Neutral-first.</strong> Slate/zinc grays, off-white background, dark ink for text.</li>
+  <li><strong>One accent.</strong> A deep, slightly desaturated blue (#1e40af works). This is your brand.</li>
+  <li><strong>Semantic colors.</strong> Red for alerts, amber for warnings, green for healthy. Use these <em>only</em> for status — never for decoration.</li>
+  <li><strong>No gradients, no shadows deeper than a 2px soft drop.</strong> Flat, calm, readable.</li>
+</ul>
+
+<h3>The component vocabulary</h3>
+<p>
+  Build a small, disciplined set and use it everywhere. Reusing eight components across
+  the app is better than designing twenty bespoke ones:
+</p>
+<ol>
+  <li>Status chip (red / amber / green + text)</li>
+  <li>Card (paper background, 1px border, 10px radius)</li>
+  <li>Table row (hover state, status chip inline, no zebra stripes)</li>
+  <li>Button (primary, secondary, destructive — no ghost buttons)</li>
+  <li>Input (label above, helper text below, error red + message)</li>
+  <li>Modal (for confirmations and short forms only — avoid as navigation)</li>
+  <li>Toast (success/error, auto-dismiss 4s)</li>
+  <li>Timeline row (for the 90-day view)</li>
+</ol>
+
+<h3>Three UI moves that build trust</h3>
+<ol>
+  <li><strong>Receipt language.</strong> After every save: "Saved. Last edited by you, 2 minutes ago." Show the user their own actions back to them.</li>
+  <li><strong>State-specific citations.</strong> When a field is required, show <em>why</em>: "Required by FL CFOP 170-20, §5.2.1." This is the unfakeable detail that signals to Diana that you did the work.</li>
+  <li><strong>Empty states that teach.</strong> An empty "Staff" screen doesn't say "No staff yet." It says "Add your first staff member. You'll need a copy of their CPR card, Level 2 background check, and at least 10 hours of completed training." This turns dead screens into onboarding.</li>
+</ol>
+
+<div class="callout accent">
+  <span class="label">The print test</span>
+  <p>
+    Every "inspection-ready report" in the product must be designed as if it will be
+    <em>printed and handed to a state inspector</em>. Because it will be. That means:
+    letterhead with facility name, date, facility license number. Legible tables.
+    Page numbers. No hyperlinks, no chips, no tooltips. Your print CSS is a P0 feature,
+    not an afterthought.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── ENGINEERING ─────────────────────────────── -->
+<section id="engineering">
+<h2><span class="num">07</span>Engineering &amp; Technical</h2>
+<p class="section-sub">A dev's operating manual for the next 18 months.</p>
+
+<h3>Architectural principles (the short list)</h3>
+<ol>
+  <li><strong>Boring stack.</strong> Go + Postgres + a single-page React frontend. No microservices. No Kubernetes. One binary, one database, one Cloudflare/Fly region, one CDN. You can serve 10,000 customers from this before you need anything fancier.</li>
+  <li><strong>Monolith until painful.</strong> Extract services only when a specific team (that does not exist) needs to own one. Solo devs who "prepare for scale" with microservices are punishing themselves for a problem they don't have.</li>
+  <li><strong>Multi-tenant with a hard tenant_id.</strong> Every query, every row. No exceptions. Set up Postgres row-level security or enforce at the repository layer, and write a test that scans every table to ensure it has <code>provider_id</code>.</li>
+  <li><strong>Migrations are the product's memory.</strong> Numbered, reviewed, never edited after merge. Your migrations are your real schema doc.</li>
+  <li><strong>Logs &gt; metrics &gt; traces.</strong> Structured JSON logs from day one. Add metrics when you get paged. Add tracing when a request touches three services (never).</li>
+  <li><strong>Everything derives from state.</strong> A compliance score is a pure function of the documents on file. Treat derived state as a view, not a stored value. This saves you a category of bugs.</li>
+</ol>
+
+<h3>The directory structure (sketch)</h3>
+<div class="callout">
+  <pre style="font-family: var(--mono); font-size: 13px; white-space: pre; color: var(--ink); margin: 0;">backend/
+  cmd/api/           # single binary entrypoint
+  internal/
+    handlers/        # HTTP layer — thin, no business logic
+    domain/          # pure business logic — no DB, no HTTP
+    db/              # repositories — SQL lives here
+    compliance/      # the rules engine — state-specific requirements
+    notify/          # email/SMS dispatch
+    billing/         # stripe
+    pdfsign/         # your e-sign module
+  migrations/
+frontend/
+  src/
+    routes/          # one file per page
+    components/      # shared UI
+    lib/             # api client, auth helpers</pre>
+</div>
+<p>
+  Your existing repo looks close to this. Keep it. Resist over-abstraction.
+  A handler that is 120 lines of SQL-calling code is fine — do not extract it into a
+  "service" until a second handler needs the same logic.
+</p>
+
+<h3>The compliance rules engine</h3>
+<p>
+  This is the heart of the product. Design it as <strong>declarative rules</strong>, not
+  imperative code. Each state becomes a directory of YAML or JSON files that describe:
+</p>
+<ul>
+  <li>What documents a child needs at what age</li>
+  <li>What certifications a staff role needs and their renewal windows</li>
+  <li>What drills run at what frequency</li>
+  <li>What postings must be on walls</li>
+  <li>What ratios apply at what age bands</li>
+</ul>
+<p>
+  Your Go code is a single evaluator that reads these rules and emits status. When a new
+  state is added, you write rules and state-specific forms — <em>no application code changes</em>.
+  This is the architecture that lets a solo founder add a state in a week.
+</p>
+
+<div class="callout green">
+  <span class="label">The moat you're building</span>
+  <p>
+    Every rule you encode is a capital expenditure that your competitors must also make
+    to enter the market. By year 2 you will have encoded 10 states' rules; a new entrant
+    needs to spend 6–12 months just to catch up. This is your defensibility. Take rule-encoding
+    seriously — have each ruleset reviewed by a licensing specialist in that state (you
+    can pay one $500 for a one-hour review).
+  </p>
+</div>
+
+<h3>Non-negotiable security basics (year 1)</h3>
+<ol>
+  <li><strong>All traffic over HTTPS.</strong> Redirect HTTP to HTTPS at the edge.</li>
+  <li><strong>Hashed passwords (argon2id)</strong> OR magic-link only (preferred — fewer support tickets).</li>
+  <li><strong>Tenant isolation.</strong> Every SELECT/UPDATE/DELETE includes <code>provider_id = $1</code>. Write a linter that catches the one you'll forget at 2am.</li>
+  <li><strong>Encrypted at rest</strong> (Postgres + S3 defaults are fine).</li>
+  <li><strong>Daily backups</strong> to a separate region. Test the restore quarterly.</li>
+  <li><strong>Audit log.</strong> Every write to a compliance record is logged (who, what, when, from IP).</li>
+  <li><strong>Rate limit the API.</strong> Especially auth and upload endpoints.</li>
+  <li><strong>Secret management.</strong> 1Password or SOPS — not .env files in git. Ever.</li>
+</ol>
+
+<h3>What to skip in year 1 (and add on demand)</h3>
+<ul>
+  <li>SOC 2. Needed for enterprise deals, not for Diana. When your first enterprise prospect asks, you have ~90 days; start the audit <em>then</em>, not now.</li>
+  <li>SSO / SAML. Same. Implement when an enterprise customer makes it a blocker.</li>
+  <li>HIPAA. You are not a health provider. Immunization records are sensitive but not PHI under the HIPAA scope. Talk to a lawyer for your state, but default to "no, don't claim HIPAA."</li>
+  <li>A mobile app. A PWA with an "Add to Home Screen" prompt solves 95% of this. Real mobile apps are an ongoing tax you can't afford solo.</li>
+  <li>Real-time anything. Compliance is not a chat app. Stale-while-revalidate is fine.</li>
+</ul>
+
+<h3>How to spend your engineering time</h3>
+<div class="phase">
+  <div class="phase-label">60%</div>
+  <div class="phase-content">
+    <h4>Customer-visible features</h4>
+    <p>New screens, new integrations, new state support. If Diana cannot see it, it is not customer-visible.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">20%</div>
+  <div class="phase-content">
+    <h4>Bug fixes and polish</h4>
+    <p>Real customer pain, not theoretical concerns. Fix what comes through support tickets that week.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">15%</div>
+  <div class="phase-content">
+    <h4>Tooling and infra</h4>
+    <p>Deploys, testing, observability. Enough to be fast, not enough to be beautiful. If you spend Saturday on Kubernetes, this is wrong.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">5%</div>
+  <div class="phase-content">
+    <h4>Refactor</h4>
+    <p>Only when the code is actively blocking you from shipping a feature. Do not "clean up" — you'll rewrite it anyway.</p>
+  </div>
+</div>
+</section>
+
+<!-- ─────────────────────────────── DATA ─────────────────────────────── -->
+<section id="data">
+<h2><span class="num">08</span>Data, Compliance Engine, Moat</h2>
+<p class="section-sub">What makes you hard to copy.</p>
+
+<h3>Four layers of defensibility</h3>
+
+<div class="two-col">
+  <div class="col-card">
+    <h4>Layer 1 — Regulation encoding</h4>
+    <p>Thousands of state-specific rules, maintained as they change. The labor to produce this is real. Competitors cannot shortcut it with AI — the penalty for being wrong is a customer's license.</p>
+  </div>
+  <div class="col-card">
+    <h4>Layer 2 — Customer data</h4>
+    <p>Once a center has a year of records in ComplianceKit, switching costs are high — not because of lock-in tricks, but because re-entry is painful. Design for export, but switching still hurts. This is a healthy moat.</p>
+  </div>
+  <div class="col-card">
+    <h4>Layer 3 — Integrations</h4>
+    <p>Once you integrate with state licensing portals (FL Child Care Licensing, TX CCL, CA CCLD), competitors must repeat the integration, which can take months. Start this in year 2.</p>
+  </div>
+  <div class="col-card">
+    <h4>Layer 4 — Brand + distribution</h4>
+    <p>When Diana's licensing specialist says "I've seen ComplianceKit and it's good," you've won. Invest in the specialists, the consultants, the state associations — they are your distribution.</p>
+  </div>
+</div>
+
+<h3>Data you should be collecting (privately, for yourself)</h3>
+<ul>
+  <li><strong>Activation funnel.</strong> Signup → first child added → first staff added → first document uploaded → 7-day retention.</li>
+  <li><strong>Score movement.</strong> How does compliance score change in the first 30 days? This predicts churn more reliably than any survey.</li>
+  <li><strong>Feature touch frequency.</strong> Which screens get opened weekly? Those are your core loops. Screens no one opens are candidates to cut.</li>
+  <li><strong>Churn cause.</strong> Every cancellation asks one question: "What happened?" Categorize with <strong>your own eyes</strong> for the first 100 churns. Do not outsource this.</li>
+</ul>
+
+<div class="callout purple">
+  <span class="label">The sleeping data product</span>
+  <p>
+    By year 3, you will have aggregate data about compliance health across thousands of
+    facilities. <strong>This data is valuable to states themselves</strong> — licensing
+    agencies would love to know that centers using ComplianceKit have 40% fewer citations.
+    It is also valuable to insurance carriers (lower premiums for demonstrably compliant
+    facilities) and funders (child care subsidy compliance reporting). Do not pursue this
+    before year 3 — but build the data hygiene now so it's possible later.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── PRICING ─────────────────────────────── -->
+<section id="pricing">
+<h2><span class="num">09</span>Pricing and Packaging</h2>
+<p class="section-sub">Most founders under-price. Do not be one of them.</p>
+
+<h3>The three-tier launch</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr>
+    <th>Plan</th><th>Price</th><th>Who it's for</th><th>Included</th><th>Gate</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><strong>Starter</strong></td><td>$49/mo</td><td>Family child care home, &lt;12 kids</td><td>Core compliance, 1 user, email support</td><td>Soft cap at 15 kids</td></tr>
+    <tr><td><strong>Professional</strong></td><td>$99/mo</td><td>Single-site center</td><td>Everything + multi-user + parent portal + drill scheduler</td><td>1 location, up to 150 kids</td></tr>
+    <tr><td><strong>Enterprise</strong></td><td>$199/site/mo</td><td>Multi-site operators, 3+ sites</td><td>Everything + consolidated dashboard + SSO + SLA + CSM</td><td>Annual contract, $10k min</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Pricing principles</h3>
+<ol>
+  <li><strong>Charge monthly by default, offer 2 months free for annual.</strong> Monthly lowers the commitment barrier for SMBs. Annual is a retention mechanism, not a discount.</li>
+  <li><strong>Do not offer a free tier.</strong> A free tier attracts the wrong users and increases support load. Offer a 14-day free trial instead, no credit card required.</li>
+  <li><strong>Do not offer per-child pricing.</strong> It punishes growing centers and invites comparison shopping. Per-site is the right unit.</li>
+  <li><strong>Raise prices every 12 months</strong> for new customers. Grandfather existing ones for a year, then migrate them with 60-day notice and a letter.</li>
+  <li><strong>Publish prices.</strong> "Contact us for pricing" signals you are afraid of the number. You are not.</li>
+</ol>
+
+<h3>When to raise prices</h3>
+<p>
+  You are too cheap when:
+</p>
+<ul>
+  <li>Customers sign up in under 5 minutes with zero objections. A small amount of price pushback is healthy.</li>
+  <li>Your win rate exceeds 60% in discovery calls.</li>
+  <li>Your LTV/CAC ratio is above 8 (anything &gt;5 is fine, &gt;8 means you can reinvest more).</li>
+  <li>You have raised your average invoice 0 times in 18 months.</li>
+</ul>
+<p>
+  Default cadence: raise 15–20% in year 2, another 15% in year 3. By year 4, Professional
+  should be $149–179/mo. Almost no one churns over a price change if the product still works.
+</p>
+
+<h3>Discounts: the discipline</h3>
+<p>
+  Give up to 20% for annual. Give up to 10% for a published referral. <strong>Never discount
+  ad hoc.</strong> Discounts should be a list Diana can point at, not a negotiation. Exception:
+  enterprise contracts can be negotiated, but only against <em>volume and commitment length</em>,
+  not against your base rate. "You can get 15% off for 5+ sites annual prepaid" is a policy.
+  "I'll give you 15% because you pushed back" is a leak.
+</p>
+</section>
+
+<!-- ─────────────────────────────── MARKETING ─────────────────────────────── -->
+<section id="marketing">
+<h2><span class="num">10</span>Marketing — SEO-Led Growth</h2>
+<p class="section-sub">You cannot out-spend anyone. You can out-content them.</p>
+
+<h3>The strategy in one paragraph</h3>
+<p>
+  Your entire marketing plan is: <strong>own every query a daycare operator types when she
+  is worried about compliance</strong>. These queries are high-intent, low-volume, and
+  under-served — exactly the opposite of what a VC-backed horizontal would chase. You already
+  have the head start: state-specific inspection guides, immunization guides, and startup
+  guides. Keep going. By year 2 you should own 2,000+ long-tail queries.
+</p>
+
+<h3>The content engine</h3>
+<div class="phase">
+  <div class="phase-label">Weekly</div>
+  <div class="phase-content">
+    <h4>2 long-form articles (~2,500 words each)</h4>
+    <p>State-specific. Answer a specific licensing question or walk through a specific form. Internal link to related guides. End with a product CTA that is <em>subtle</em>, not a banner ad.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Monthly</div>
+  <div class="phase-content">
+    <h4>1 "pillar page" per state</h4>
+    <p>A comprehensive, updated-quarterly resource. Ex: "Florida Daycare Compliance: Everything You Need to Know in 2026." This is the page that ranks for head terms and funnels into the rest.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Quarterly</div>
+  <div class="phase-content">
+    <h4>1 benchmark or report</h4>
+    <p>"The 2026 State of Child Care Compliance" — pulled from your own (aggregated, anonymized) customer data once you have enough. These are link magnets.</p>
+  </div>
+</div>
+
+<h3>The four content formats that actually convert</h3>
+<ol>
+  <li><strong>"How to pass inspection in [state]"</strong> — you have this. Keep updating annually.</li>
+  <li><strong>"How to start a daycare in [state]"</strong> — reaches pre-launch operators who will become customers on day one of their license.</li>
+  <li><strong>"[State] form [number] explained"</strong> — ultra-long-tail, low competition, high intent (they are filling it out right now).</li>
+  <li><strong>"Checklist / printable / template"</strong> — email-gated downloads. Your primary top-of-funnel.</li>
+</ol>
+
+<h3>Distribution: beyond SEO</h3>
+<ul>
+  <li><strong>Facebook groups.</strong> Join every state director group. Answer questions. <em>Never</em> link your product unsolicited. Occasionally reference ComplianceKit when directly asked. The community will do the rest.</li>
+  <li><strong>Licensing specialists.</strong> Identify the state-employed specialists who visit centers. Meet one per state. Offer a free account. They become evangelists — not formally, but in conversation.</li>
+  <li><strong>Consultants.</strong> Child care compliance consultants exist in every state. Build a referral program: 30% of year-one revenue on referrals they close. Some will love you; one will quietly send you 10 customers a quarter.</li>
+  <li><strong>State associations.</strong> FCCDAA, TLA, CCDAA, etc. Sponsor a modest booth at the annual conference in your top state. Do one per year. Meet 50 directors in person. Close 5. That's $6,000/year in new ARR from one weekend, plus ten relationships that feed referrals.</li>
+  <li><strong>Podcast appearances.</strong> There are ~12 child care operator podcasts. Be on all of them in year 2.</li>
+</ul>
+
+<h3>What not to spend money on (year 1)</h3>
+<ul>
+  <li><strong>Paid ads.</strong> Your CAC blows up and you learn nothing about your customer. Earn the right to pay for distribution; don't shortcut to it.</li>
+  <li><strong>A rebrand.</strong> Your logo is fine. Your website is fine. Nobody has ever churned because of a logo.</li>
+  <li><strong>Billboards, trade show sponsorships at $20k+.</strong> Save these for year 3.</li>
+  <li><strong>"Thought leadership" on LinkedIn.</strong> Your customers aren't there.</li>
+  <li><strong>A podcast of your own.</strong> Don't start one in year 1. Content machine you cannot feed.</li>
+</ul>
+
+<div class="callout accent">
+  <span class="label">The one marketing metric that matters</span>
+  <p>
+    <strong>Qualified trial starts per week.</strong> Not traffic. Not impressions. Not
+    email opens. A qualified trial is someone who signed up from your site, entered a
+    real facility name, and added at least one child. Everything upstream is a means to
+    grow this one number. If the number is flat for three weeks, the question isn't
+    "how do I make more content"; it's "why did the last 40 trials not convert."
+    Watch session replays. Talk to them. Fix the funnel.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── SALES ─────────────────────────────── -->
+<section id="sales">
+<h2><span class="num">11</span>Sales — Founder as First Rep</h2>
+<p class="section-sub">For the first 100 customers, you are the entire sales team. That is a good thing.</p>
+
+<h3>The founder-sales theorem</h3>
+<p>
+  The most valuable sales activity in the first 12 months is <em>you on the phone</em>.
+  Not because you're a trained rep (you aren't), but because:
+</p>
+<ul>
+  <li>You hear the objections unfiltered and can ship fixes the same day.</li>
+  <li>Every objection is a content idea, a feature idea, and a pricing data point.</li>
+  <li>Customers trust founders more than reps in this market.</li>
+  <li>You learn the language — the words Diana uses — which makes all your copy better.</li>
+</ul>
+<p>
+  Do this for at least 100 conversations. Do <em>not</em> hire a salesperson before this.
+  You will regret it for three reasons: they won't know the domain, they can't fix the
+  product, and they will pipeline fill with bad-fit accounts to hit a quota.
+</p>
+
+<h3>The inbound conversation flow</h3>
+<p>A director fills out a demo form. You have 15 minutes to run this call. Here's the shape:</p>
+
+<div class="phase">
+  <div class="phase-label">0:00–1:00</div>
+  <div class="phase-content">
+    <h4>Open with their world, not yours</h4>
+    <p>"Hey Diana — thanks for taking the time. Before I show you anything, can I just ask — what made you fill out the form today? Was there a specific thing you were looking to solve?"</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">1:00–5:00</div>
+  <div class="phase-content">
+    <h4>Discovery — ask, don't pitch</h4>
+    <p>Goals: what state, how many kids, how many staff, how do they currently track compliance, when was their last inspection, what went wrong. Listen for the <em>emotional trigger</em> — almost every signup has one. Write it down.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">5:00–11:00</div>
+  <div class="phase-content">
+    <h4>Demo the one thing that matches</h4>
+    <p>Do not run the full product tour. Show the dashboard, show the one feature that hits her trigger, show a state-specific form. Total of three screens. Stop talking.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">11:00–14:00</div>
+  <div class="phase-content">
+    <h4>Price and close</h4>
+    <p>"Our Professional plan is $99/month. First 14 days free, no card required. Would you like me to set you up right now, or would you like me to send you a link?" Shut up. The first one to speak loses. 90% say "right now" if you did discovery correctly.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">14:00–15:00</div>
+  <div class="phase-content">
+    <h4>Commit the next action</h4>
+    <p>If she signs up: "Great — I'll stay on for 2 more minutes to get you through your first kid file. That's where everyone gets stuck." If she didn't: "What would make this an easy yes for you?" Listen. This is your best feedback in the world.</p>
+  </div>
+</div>
+
+<h3>Handling the top objections</h3>
+
+<h4>"I'm good with my binder."</h4>
+<div class="script">
+  <span class="speaker">You</span>
+  <p>"Totally fair. Most of our customers said the same thing. Can I ask — the last time you had a surprise inspection, how long did it take you to pull up Sarah's CPR date and James's immunization card? If it was under 30 seconds, honestly, stick with your binder. If it was 10 minutes and a stress headache, that's what we save you."</p>
+</div>
+
+<h4>"$99 is a lot."</h4>
+<div class="script">
+  <span class="speaker">You</span>
+  <p>"I hear that. Quick question — what's the fine in your state for a missed immunization record? In Florida it's $500 per child per day. We save you one of those and we've paid for ourselves for four years."</p>
+  <p><em>[If they still resist, offer the Starter plan — do not discount Professional.]</em></p>
+</div>
+
+<h4>"I need to think about it / run it by my partner."</h4>
+<div class="script">
+  <span class="speaker">You</span>
+  <p>"Of course. Can I send you one thing to make that conversation easier? I'll send you a one-page PDF of your state's inspection checklist — the one the state uses — with a note about what our software covers. Takes me 30 seconds, no obligation."</p>
+  <p><em>[This one-pager is your single highest-converting asset. Build it for every state.]</em></p>
+</div>
+
+<h4>"Are you HIPAA compliant?"</h4>
+<div class="script">
+  <span class="speaker">You</span>
+  <p>"Great question. Child care records aren't under HIPAA — they're under your state's child care licensing statute, which has its own requirements. We are compliant with those: we encrypt everything at rest and in transit, we're SOC 2 ready [if true], and we have a data processing addendum we can send you. Happy to walk your IT person through it if helpful."</p>
+</div>
+
+<h4>"Can you do [feature X]?"</h4>
+<div class="script">
+  <span class="speaker">You</span>
+  <p><em>If you can: </em>"Yes — here's how that works." <em>If it's on the roadmap:</em> "We're shipping that in [specific month]. If that's a dealbreaker, let me put you on a 14-day trial that starts on launch day. If it's nice-to-have, let me get you started today and you'll get it automatically."</p>
+  <p><em>If it's not planned:</em> "We don't today, and honestly we're not planning to — here's why [explain]. If that's a dealbreaker, [competitor X] does that well. Want me to make an intro?" <em>This answer wins more deals than you'd expect. Honesty is a closing tool.</em></p>
+</div>
+
+<h3>The 48-hour follow-up sequence</h3>
+<ol>
+  <li><strong>Hour 0 (end of call):</strong> Email recap with: their stated pain, the one thing your product does for it, link to sign up / trial, your direct phone number.</li>
+  <li><strong>Hour 24:</strong> A short, human email. "Thinking about you — did you get a chance to try X?"</li>
+  <li><strong>Day 3:</strong> One-page PDF with the state-specific checklist + "anything I can do to help?"</li>
+  <li><strong>Day 7:</strong> "Last one from me — here's a case study of a similar center in your state."</li>
+  <li><strong>Day 21:</strong> Soft check-in with any new product thing that matches their pain.</li>
+  <li><strong>Quarterly after that:</strong> A human note, not a drip campaign.</li>
+</ol>
+
+<div class="callout green">
+  <span class="label">The founder sales hack</span>
+  <p>
+    When you are done with your first 50 calls, <strong>listen to every recording on 1.75x
+    with a notepad.</strong> You will notice you say the same thing poorly in 10 different
+    ways. Replace them with the one best version. Do this twice a quarter. Your sales
+    conversion rate improves 30% by round two — no new features, no new leads, just better
+    sentences. This is the cheapest lever you have.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── ENTERPRISE ─────────────────────────────── -->
+<section id="enterprise">
+<h2><span class="num">12</span>Enterprise &amp; Multi-Location Deals</h2>
+<p class="section-sub">The lever that turns a $99/mo customer into a $40,000/year customer. Start preparing for it in year 1, start chasing it in year 2.</p>
+
+<p>
+  You asked specifically about "how to start negotiating multi-location enterprise deals."
+  Here is the whole playbook. Read this twice.
+</p>
+
+<h3>The tiers of enterprise</h3>
+<div class="table-wrap"><table>
+  <thead><tr>
+    <th>Tier</th><th>Sites</th><th>Deal size</th><th>Cycle</th><th>What they want</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><strong>Mini-multi</strong></td><td>2–5</td><td>$5k–12k/yr</td><td>2–4 weeks</td><td>Volume discount, one invoice, consolidated dashboard</td></tr>
+    <tr><td><strong>Small chain</strong></td><td>6–20</td><td>$14k–48k/yr</td><td>1–3 months</td><td>Above + SSO, admin roles, CSM</td></tr>
+    <tr><td><strong>Regional chain</strong></td><td>21–75</td><td>$50k–180k/yr</td><td>3–6 months</td><td>Above + security review, custom SLA, contract redlines</td></tr>
+    <tr><td><strong>Franchise / national</strong></td><td>75–1,000+</td><td>$180k–2M/yr</td><td>6–18 months</td><td>Above + SOC 2, custom branding, API, procurement gauntlet</td></tr>
+  </tbody>
+</table></div>
+
+<p><strong>Year 1–2 target:</strong> Mini-multi and small chain. Leave regional and franchise alone.</p>
+
+<h3>How to find them</h3>
+<ol>
+  <li><strong>From your own funnel.</strong> When someone signs up, look at their facility count. Anyone with 3+ sites is an upsell candidate — route them to you personally.</li>
+  <li><strong>State licensing records are public.</strong> In FL, TX, CA you can pull a CSV of licensed facilities including the licensee name. De-duplicate by licensee — anyone with 3+ licenses is a multi-site operator.</li>
+  <li><strong>LinkedIn Sales Navigator filter.</strong> "Owner / Director / CEO" at companies with 2–10 locations, industry "Child Care."</li>
+  <li><strong>Conferences.</strong> State association conferences always have a multi-site track. That is where you meet Robert.</li>
+</ol>
+
+<h3>The enterprise sales motion — step by step</h3>
+
+<h4>Step 1 — The warm-up (week 1)</h4>
+<p>
+  Never pitch Robert the first time you meet him. Ask about his business. How many sites,
+  what states, what's his hardest operational problem. Listen for the word "compliance"
+  in his top three issues. If it's not there, don't push — he's not ready.
+</p>
+
+<h4>Step 2 — The hook (weeks 1–2)</h4>
+<p>
+  Robert is not Diana. His pain isn't personal panic — it's <em>leverage</em>. He can't
+  see across his sites. One location's director is great, another is a liability, and
+  he finds out only when a citation lands. Your pitch:
+</p>
+
+<div class="script">
+  <span class="speaker">Pitch</span>
+  <p>"Right now you're running 8 compliance programs, not one. You trust each director, but you don't have the reporting to know which site is drifting until an inspector tells you. We give you a single dashboard across all your sites — you see, in real time, which site is at risk this week, which staff certification is about to expire, and where you need to intervene. Your directors keep running their sites; you stop running blind."</p>
+</div>
+
+<h4>Step 3 — The pilot (weeks 2–6)</h4>
+<p>
+  Do not negotiate a 10-site contract on day one. Offer this:
+</p>
+
+<div class="callout accent">
+  <span class="label">The pilot playbook</span>
+  <p>
+    <strong>"Let's run a 60-day paid pilot at 2 of your sites."</strong> Price it at
+    <em>list</em> — $99/site/mo for 2 months, so $396 total. This is important: you want
+    the pilot to convert, not to prove a point. Low price, not free, so Robert has skin
+    in the game. Agree in writing on 3 success criteria:
+  </p>
+  <ol>
+    <li>Both sites onboarded in 10 days.</li>
+    <li>Compliance score for both sites above 90 by day 45.</li>
+    <li>Robert can generate a consolidated report in under 5 minutes.</li>
+  </ol>
+  <p>
+    If you hit the criteria, the pilot converts to an annual contract at all sites. This
+    framing does two things: it makes the rollout <em>risk-free</em> for Robert, and it
+    turns you from a vendor into a partner who sets measurable goals with him.
+  </p>
+</div>
+
+<h4>Step 4 — The expansion close (weeks 6–10)</h4>
+<p>
+  Pilot ends, criteria met. Now the negotiation. Do not discount your base rate. Instead,
+  structure the value:
+</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Component</th><th>How to structure</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Per-site rate</strong></td><td>$199/site/mo for &lt;10 sites, $179 for 10–25, $149 for 25+</td><td>Volume tiers are policy, not negotiation.</td></tr>
+    <tr><td><strong>Term</strong></td><td>Annual prepaid (default). 2-year with a small discount (~7%).</td><td>Cash now, locks retention, protects against competitor pitch.</td></tr>
+    <tr><td><strong>Included</strong></td><td>Onboarding (5 hours of CSM time), CSM contact, quarterly business review, SSO, admin roles</td><td>Enterprise expects, not negotiates, these.</td></tr>
+    <tr><td><strong>Not included</strong></td><td>Custom development, API access (year 1), custom SLA with uptime credits</td><td>Say no to custom work. It's a tax you cannot pay solo.</td></tr>
+    <tr><td><strong>Uplift</strong></td><td>7–10% annual price increase built into the contract</td><td>Protects you from inflation and from under-pricing the renewal.</td></tr>
+    <tr><td><strong>Referral credit</strong></td><td>10% off renewal for every referred multi-site that closes</td><td>Turns customers into channel.</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The contract itself</h3>
+<p>
+  Use a boring MSA + order form. Do not invent a custom contract. Common terms to agree on up front:
+</p>
+<ul>
+  <li><strong>Term:</strong> 12 months auto-renewing, 30-day notice to non-renew.</li>
+  <li><strong>Payment:</strong> Annual prepaid; net 30 for billed annual.</li>
+  <li><strong>Data ownership:</strong> Their data is theirs. You have a limited license to operate the service. On termination, they get a full export within 30 days.</li>
+  <li><strong>Liability cap:</strong> Annual fees paid. Do not agree to uncapped liability for a $40k/year deal.</li>
+  <li><strong>SLA (if asked):</strong> 99.5% uptime, measured monthly. Credits capped at one month's fees. Don't offer 99.9% until you're ready to be woken up.</li>
+  <li><strong>Indemnity:</strong> You indemnify for your IP infringement; they indemnify for their use of the product and their data. Mutual carve-outs, standard.</li>
+  <li><strong>Termination for convenience:</strong> Not allowed mid-term. Period. If they push, allow a one-time exit with 60-day notice and forfeit of remaining fees (they won't take it, but it feels fair).</li>
+</ul>
+
+<div class="callout red">
+  <span class="label">Redlines to push back on — hard</span>
+  <p>
+    When Robert's lawyer sends back redlines, the ones to refuse or fight:
+  </p>
+  <ul>
+    <li><strong>Uncapped liability.</strong> Never. Counter with: annual fees paid, carve-outs for confidentiality and IP infringement only.</li>
+    <li><strong>Custom security questionnaire as contract term.</strong> Your SOC 2 (when you have it) or security summary is the answer. Don't sign up to a 200-question annual audit for a $40k deal.</li>
+    <li><strong>Exclusivity / MFN pricing.</strong> Never agree to give them the best price ever. You will raise prices, and this clause punishes you forever.</li>
+    <li><strong>Uptime &gt;= 99.9%.</strong> Counter with 99.5% until you have real infrastructure.</li>
+    <li><strong>Source code escrow.</strong> Fine — agree, and never fund it. It's a $200/yr deposit with a service.</li>
+    <li><strong>Unlimited users / sites.</strong> "All current and future sites" is a pricing time bomb. Price per site, always.</li>
+  </ul>
+</div>
+
+<h3>The enterprise playbook in one page</h3>
+<ol>
+  <li><strong>Never discount your base rate.</strong> Volume tiers are policy.</li>
+  <li><strong>Always price per site, not per customer.</strong> Growth is your customer's; not your gift.</li>
+  <li><strong>Pilot first, annual second.</strong> Skin in the game from both sides.</li>
+  <li><strong>Procurement will ask for 20 things. 17 are templates. Say yes.</strong> The other 3 require your judgment — fight those.</li>
+  <li><strong>Every "no" needs a "but here's what I can do."</strong> Never end on a hard no.</li>
+  <li><strong>Slow-walk legal.</strong> Enterprise deals close fastest when <em>you</em> set the timeline. "I have availability to close this contract in the next 2 weeks; after that our pricing increases on April 1." Urgency is your friend.</li>
+  <li><strong>Treat the CSM like a line item.</strong> Robert wants a human to email. Give him one (you, at first). Put it in the contract as "dedicated customer success contact, monthly check-in." It costs you an email and closes the deal.</li>
+  <li><strong>Renewal starts on day 1.</strong> Month 10 is too late. Send Robert a monthly "here's the value you got this month" email starting month 1. It feels paranoid. It raises renewal rate 20%.</li>
+</ol>
+
+<div class="pull-quote">
+  The single biggest unlock for a vertical SaaS is when a customer doubles their site count
+  and your revenue from them quadruples with no extra work from you. Build for that day.
+  <span class="attr">— The economics of multi-site expansion</span>
+</div>
+</section>
+
+<!-- ─────────────────────────────── CSM ─────────────────────────────── -->
+<section id="csm">
+<h2><span class="num">13</span>Onboarding, CSM, Retention</h2>
+<p class="section-sub">Getting customers is hard. Keeping them is the business.</p>
+
+<h3>The churn math</h3>
+<p>
+  At $99/mo Professional, 5% monthly churn = 60% annual churn = a leaky bucket. 2% monthly
+  churn = ~22% annual churn = survivable. Sub-1% monthly churn = a compounding machine.
+  <strong>Your entire business outcome is decided by the slope of your churn curve.</strong>
+  Marketing is the tap; retention is the drain. Most founders obsess over the tap.
+</p>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="num">1%</div><div class="label">Target monthly churn (pro)</div></div>
+  <div class="stat-card"><div class="num">7%</div><div class="label">Target annual churn</div></div>
+  <div class="stat-card"><div class="num">90%</div><div class="label">Month-1 activation (goal)</div></div>
+  <div class="stat-card"><div class="num">90d</div><div class="label">Critical retention window</div></div>
+</div>
+
+<h3>Onboarding: the 30/60/90-day script</h3>
+
+<div class="phase">
+  <div class="phase-label">Day 0</div>
+  <div class="phase-content">
+    <h4>Sign up — activation in 10 minutes</h4>
+    <p>Product does the work. You (founder) get a Slack/email notification on every signup. Send a personal email within 2 hours: "Hey — just saw you joined. I'm Magnus, I built ComplianceKit. If you get stuck, just reply to this email and I'll answer personally."</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Day 1–3</div>
+  <div class="phase-content">
+    <h4>The magic moment check</h4>
+    <p>Did they add at least one child, one staff, and one document? If not, send a 60-second Loom video walking them through it, personalized with their facility name.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Day 7</div>
+  <div class="phase-content">
+    <h4>The first value email</h4>
+    <p>"Here's a snapshot of your compliance status this week: 3 staff certs expiring in 90 days, 1 child file incomplete. Want me to show you how to fix the last one in 2 minutes?"</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Day 30</div>
+  <div class="phase-content">
+    <h4>Check-in call (optional, always offered)</h4>
+    <p>15-minute Zoom. "What's working? What's broken? What should I build next?" — 1 in 5 takes you up on it. Each one is worth $10,000 of customer research.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Day 60</div>
+  <div class="phase-content">
+    <h4>The NPS ask — simple</h4>
+    <p>One-line email: "On a scale of 1–10, how likely are you to recommend ComplianceKit to another director?" Follow up with 9s and 10s for testimonials; follow up with 1–6s immediately to save the account.</p>
+  </div>
+</div>
+<div class="phase">
+  <div class="phase-label">Day 90</div>
+  <div class="phase-content">
+    <h4>Quarterly value email (forever)</h4>
+    <p>"Here's what ComplianceKit caught for you this quarter: 14 expiring staff certs flagged in time, 3 children's records completed before their birthdays, 2 drill logs auto-generated. You've saved approximately 12 hours. Thanks for being with us."</p>
+  </div>
+</div>
+
+<h3>Save motions — when they try to cancel</h3>
+<p>Every cancellation attempt routes to you (at first) with a small form:</p>
+<ul>
+  <li>Which of these best describes why: (a) closing our facility, (b) switching tools, (c) too expensive, (d) not using it enough, (e) other?</li>
+</ul>
+<p>Response by reason:</p>
+<ul>
+  <li><strong>Closing the facility:</strong> "I'm sorry. Keep the account free for 3 months in case it's temporary, or export your data — here's the link." Wins goodwill, sometimes the facility reopens.</li>
+  <li><strong>Switching tools:</strong> "I'd love to understand what we're missing. Can I send you a 15-minute Calendly?" Half won't talk. The other half will tell you something critical.</li>
+  <li><strong>Too expensive:</strong> Offer the Starter plan, not a discount on Professional. Discounts on Professional teach the market to negotiate.</li>
+  <li><strong>Not using it enough:</strong> Your onboarding failed. Offer 1 free month + a personal onboarding call. Recover 40% this way.</li>
+</ul>
+
+<h3>The expansion motion</h3>
+<p>
+  Every time a customer's facility count, staff count, or child count changes upward,
+  they become an upsell candidate. Triggers to watch:
+</p>
+<ul>
+  <li>Added a second location's data → Enterprise pilot pitch.</li>
+  <li>Hit the Starter plan's soft cap → Professional upgrade pitch.</li>
+  <li>Hired a new compliance lead / director → offer a 15-min onboarding for the new person (strengthens the account).</li>
+  <li>Passed an inspection with a perfect report generated from your software → ask for a testimonial. 1 in 4 says yes.</li>
+</ul>
+</section>
+
+<!-- ─────────────────────────────── OPS ─────────────────────────────── -->
+<section id="ops">
+<h2><span class="num">14</span>Operations &amp; Your Week</h2>
+<p class="section-sub">A solo founder lives or dies by their weekly rhythm.</p>
+
+<h3>The default week</h3>
+<p>
+  Pick a rhythm and keep it for at least a quarter. Changing it weekly feels productive
+  and is actually thrashing. Mine would look like:
+</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Day</th><th>Morning (3h)</th><th>Afternoon (3h)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Mon</strong></td><td>Deep work: ship the biggest feature of the week</td><td>Customer calls / demos (batch)</td></tr>
+    <tr><td><strong>Tue</strong></td><td>Deep work: continue feature</td><td>Support tickets, bug fixes</td></tr>
+    <tr><td><strong>Wed</strong></td><td>Content: 1 article end-to-end</td><td>Customer calls / demos (batch)</td></tr>
+    <tr><td><strong>Thu</strong></td><td>Deep work: ship or polish</td><td>Sales outreach (30 messages)</td></tr>
+    <tr><td><strong>Fri</strong></td><td>Content: 1 article end-to-end</td><td>Weekly review + planning next week</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The Friday review (30 minutes, non-negotiable)</h3>
+<ol>
+  <li>What did I ship? (list — this is your dopamine hit)</li>
+  <li>What did customers say? (top 3 quotes — rewrites your roadmap)</li>
+  <li>Metrics: trials started, new customers, churn, MRR, cash runway (write it down so you feel it)</li>
+  <li>What one thing moved the business forward this week? (if nothing, panic)</li>
+  <li>What are the three things next week? (no more than three)</li>
+</ol>
+
+<h3>The single-page dashboard</h3>
+<p>
+  Set this up on day one. It is the only metrics dashboard you should care about in year 1.
+  Numbers refresh weekly:
+</p>
+<ul>
+  <li>MRR and net new MRR this month</li>
+  <li>Trial starts this month</li>
+  <li>Trial → paid conversion rate (last 30 days)</li>
+  <li>Logo churn count (this month) + reasons</li>
+  <li>Support tickets open / closed this week</li>
+  <li>Organic traffic (last 7 days vs. prior 7 days)</li>
+  <li>Cash in bank / monthly burn / months of runway</li>
+</ul>
+<p>
+  A Google Sheet is fine. An Airtable is fine. Do not build a dashboard inside your own
+  product in year 1. The 30 minutes a week of manual updating is a feature — you will
+  <em>feel</em> the numbers that way.
+</p>
+
+<h3>Tools stack (keep it small)</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Purpose</th><th>Tool</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>Hosting</td><td>Fly.io or Railway</td><td>~$30/mo</td></tr>
+    <tr><td>DB</td><td>Managed Postgres (Neon / Supabase / Fly)</td><td>~$25/mo</td></tr>
+    <tr><td>File storage</td><td>Cloudflare R2</td><td>&lt;$10/mo</td></tr>
+    <tr><td>Email (transactional)</td><td>Postmark or Resend</td><td>~$15/mo</td></tr>
+    <tr><td>Email (marketing)</td><td>Buttondown or Mailchimp free</td><td>$0</td></tr>
+    <tr><td>DNS / CDN</td><td>Cloudflare</td><td>$0</td></tr>
+    <tr><td>Error tracking</td><td>Sentry free tier</td><td>$0</td></tr>
+    <tr><td>Analytics</td><td>Plausible or Fathom</td><td>$10/mo</td></tr>
+    <tr><td>CRM</td><td>Airtable</td><td>$10/mo</td></tr>
+    <tr><td>Support desk</td><td>Gmail + Help Scout (later)</td><td>$0 → $25/mo</td></tr>
+    <tr><td>Accounting</td><td>Xero or Wave</td><td>$0–30/mo</td></tr>
+    <tr><td>Contracts / signatures</td><td>Docusign free tier or PandaDoc</td><td>$0–20/mo</td></tr>
+    <tr><td>Password mgmt</td><td>1Password</td><td>$8/mo</td></tr>
+  </tbody>
+</table></div>
+<p><em>Total monthly infra/tool cost in year 1: under $150/month.</em> Stay there until revenue justifies more.</p>
+</section>
+
+<!-- ─────────────────────────────── FINANCE ─────────────────────────────── -->
+<section id="finance">
+<h2><span class="num">15</span>Finance, Runway, Funding</h2>
+<p class="section-sub">Bootstrap discipline for a bootstrapped founder.</p>
+
+<h3>The unit economics to memorize</h3>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="num">$99</div><div class="label">ARPA / month</div></div>
+  <div class="stat-card"><div class="num">85%</div><div class="label">Gross margin target</div></div>
+  <div class="stat-card"><div class="num">$17k</div><div class="label">LTV (at 7% annual churn)</div></div>
+  <div class="stat-card"><div class="num">&lt;$400</div><div class="label">Target blended CAC</div></div>
+  <div class="stat-card"><div class="num">&lt;6 mo</div><div class="label">Payback period</div></div>
+  <div class="stat-card"><div class="num">42x</div><div class="label">LTV/CAC target</div></div>
+</div>
+
+<p>
+  If you hit these, you have a business that prints money. If your CAC goes above $1,000,
+  stop paid acquisition and re-audit what's broken in your funnel. If your churn goes above
+  10%, stop everything and fix retention before anything else.
+</p>
+
+<h3>Runway math</h3>
+<p>
+  You are bootstrapping. Your personal burn + business burn is the number that matters.
+  Write this down:
+</p>
+<ul>
+  <li><strong>Monthly personal expenses:</strong> $____ (rent/mortgage, food, insurance, etc.)</li>
+  <li><strong>Monthly business expenses:</strong> ~$150 (tools) + ~$50 (domain, legal, accounting)</li>
+  <li><strong>Cash on hand:</strong> $____</li>
+  <li><strong>Months of runway at current burn:</strong> cash / (personal + business burn)</li>
+</ul>
+<p>
+  Default-alive when MRR covers personal + business burn. Celebrate that day — it's the
+  most important milestone in your business.
+</p>
+
+<h3>To raise, or not to raise</h3>
+
+<div class="two-col">
+  <div class="col-card">
+    <h4>Reasons to stay bootstrapped</h4>
+    <ul>
+      <li>You keep 100% of the company.</li>
+      <li>You decide when to stop.</li>
+      <li>Churn this vertical is low and cash-flow is strong — you don't need capital to compound.</li>
+      <li>No board asking "what's the exit plan" quarterly.</li>
+      <li>$5M ARR at 80% GM = $4M/yr cash, yours. Nobody can tell you what to do.</li>
+    </ul>
+  </div>
+  <div class="col-card">
+    <h4>Reasons to raise (carefully)</h4>
+    <ul>
+      <li>You have validated the model ($1M+ ARR, &lt;2% monthly churn) and want to accelerate.</li>
+      <li>A competitor just raised and is outspending you in paid acquisition (but this rarely works in vertical SaaS).</li>
+      <li>You want to hire aggressively and not wait for cash flow.</li>
+      <li>An enterprise deal requires SOC 2 / security investment you can't afford.</li>
+    </ul>
+  </div>
+</div>
+
+<p>
+  My recommendation: <strong>stay bootstrapped through $1M ARR.</strong> Raise only if a
+  specific, concrete opportunity requires capital you can't generate from cash flow.
+  A "just in case" round is the worst round. It kills discipline, dilutes you, and
+  introduces pressure that changes your decision-making.
+</p>
+
+<h3>The one-page P&amp;L</h3>
+<p>
+  Even solo, run a simple P&amp;L every month. Xero, Wave, or a Google Sheet. Track:
+</p>
+<ul>
+  <li>MRR (by plan)</li>
+  <li>New MRR / expansion MRR / churned MRR / net new</li>
+  <li>Stripe fees, hosting, tools (COGS)</li>
+  <li>Marketing / sales spend (even if it's just content tools)</li>
+  <li>Your "salary" (even if it's $0 — this matters for equity valuations later)</li>
+  <li>Cash in bank (separate from burn — this is your survival metric)</li>
+</ul>
+
+<h3>Legal / tax housekeeping (do once, forget)</h3>
+<ul>
+  <li>LLC taxed as S-corp once revenue clears ~$80k/yr (saves self-employment tax). A CPA can do this in a day for ~$500.</li>
+  <li>Separate business bank account from day one. <strong>Do not co-mingle.</strong></li>
+  <li>Quarterly estimated taxes. Set aside 30% of profit in a "tax" account. Pay quarterly.</li>
+  <li>State sales tax on SaaS: varies by state. Hire a CPA familiar with multi-state SaaS by the time you pass $250k ARR.</li>
+  <li>Terms of Service + Privacy Policy + DPA. Use Termly or Common Paper templates. Ask a lawyer for a 2-hour review before your first enterprise deal.</li>
+  <li>Cyber liability insurance: $500–1500/yr once you hit real revenue. Required by enterprise customers anyway.</li>
+</ul>
+</section>
+
+<!-- ─────────────────────────────── HIRING ─────────────────────────────── -->
+<section id="hiring">
+<h2><span class="num">16</span>Hiring — The First Five</h2>
+<p class="section-sub">Hire later than you think you should. Then hire better than you think you can.</p>
+
+<h3>The order</h3>
+
+<ol>
+  <li><strong>Virtual assistant (month ~6, ~$1–2k/mo).</strong> Philippines or LatAm. Inbox triage, basic support ticket triage, invoice chasing, CRM hygiene. Buys you back 15 hours a week.</li>
+  <li><strong>Customer success manager #1 (month ~12–15, ~$60–75k salary).</strong> Ideally a former child care director who knows the customer's world. She (likely she) onboards new customers, runs QBRs, saves churn. Your single highest-leverage hire.</li>
+  <li><strong>Content marketer / SEO (month ~15–18, ~$60–80k or $4k/mo contractor).</strong> Takes over the content engine. Former journalist or education-vertical writer beats an "SEO expert." They have to care about the domain.</li>
+  <li><strong>Second engineer (month ~18–24, ~$120–160k).</strong> Senior generalist, ships end-to-end, comfortable being the only dev pair. No specialists until year 3. Equity-heavy if bootstrapping.</li>
+  <li><strong>Sales rep / AE (month ~24–30).</strong> You have run 200+ founder sales calls. You have a documented playbook. Hire someone who has sold to SMBs in regulated verticals (healthcare, food service, education). Pay 50/50 base/commission on a $100k OTE.</li>
+</ol>
+
+<div class="callout amber">
+  <span class="label">What not to hire in year 1–2</span>
+  <ul>
+    <li>A "COO" or "head of ops." You don't have enough ops for one person.</li>
+    <li>A "head of marketing" with an agency background. They will recommend agencies. You don't need agencies.</li>
+    <li>A "head of product." You are the head of product. Until you are drowning in it.</li>
+    <li>A "BD" or "partnerships" person. Nothing to partner on yet.</li>
+    <li>An offshore dev shop. You will spend more time reviewing their work than doing it yourself.</li>
+  </ul>
+</div>
+
+<h3>How to hire well when you're solo</h3>
+<ol>
+  <li><strong>Write a real JD.</strong> Not "we're looking for a passionate." Describe the first 90 days in specifics. What they'll ship, who they'll talk to, what success looks like at day 30 and day 90.</li>
+  <li><strong>Source from your customers.</strong> The single best CSM hire you can make is a former ComplianceKit customer who loved the product. They already speak the language.</li>
+  <li><strong>Three interviews, max.</strong> (1) Phone screen, (2) paid trial task (4–8 hours, paid at their rate), (3) culture/trust conversation with you. Do not run 8-round processes.</li>
+  <li><strong>Reference checks are mandatory.</strong> Two references you pick, not just theirs. Ask "would you hire them again, knowing what you know now?" The pause before the answer tells you everything.</li>
+  <li><strong>90-day trial period.</strong> Be generous if it doesn't work — 1 month severance, good reference. Firing slow is the most expensive mistake a solo founder can make.</li>
+</ol>
+</section>
+
+<!-- ─────────────────────────────── LEGAL / TRUST ─────────────────────────────── -->
+<section id="legal">
+<h2><span class="num">17</span>Legal, Trust, Risk</h2>
+<p class="section-sub">Boring, unavoidable, and the reason some deals close and others don't.</p>
+
+<h3>The documents you need in year 1</h3>
+<ol>
+  <li><strong>Terms of Service</strong> — Termly or Common Paper template.</li>
+  <li><strong>Privacy Policy</strong> — CCPA + FTC compliant. Say what you collect, why, and how to delete.</li>
+  <li><strong>DPA (Data Processing Addendum)</strong> — enterprise customers will ask; have a template ready.</li>
+  <li><strong>Subprocessor list</strong> — a public URL listing AWS/Cloudflare/Stripe/Postmark etc. Updated when you change vendors.</li>
+  <li><strong>Security summary</strong> — one-page PDF with your security posture (encryption, auth, backups, audit logs). Updated quarterly.</li>
+  <li><strong>Customer agreement / MSA</strong> — for annual and enterprise. Template from Common Paper is 85% done.</li>
+</ol>
+
+<h3>The SOC 2 decision</h3>
+<p>
+  You do not need SOC 2 for year 1. You will need it for enterprise. When an enterprise prospect
+  asks "are you SOC 2?", the right answers in order:
+</p>
+<ul>
+  <li><strong>Year 1:</strong> "Not yet — we'll start the audit when we have a deal that requires it. Meanwhile, here's our security summary."</li>
+  <li><strong>Year 2:</strong> "We're SOC 2 Type 1, Type 2 audit in progress." (Type 1 is cheap and fast; Type 2 requires 6 months of evidence collection.)</li>
+  <li><strong>Year 3:</strong> "SOC 2 Type 2, refreshed annually." (Non-negotiable for enterprise by now.)</li>
+</ul>
+<p>
+  Use Vanta, Drata, or Secureframe — they cost ~$7k–15k/yr and compress the SOC 2 audit from
+  a 9-month nightmare into a ~3-month project. Do not try to DIY SOC 2. It is the single
+  most leveraged third-party tool in the SaaS stack.
+</p>
+
+<h3>The risk landscape — what you actually lose sleep over</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Risk</th><th>Likelihood</th><th>Severity</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Data breach</strong></td><td>Low-medium</td><td>Severe</td><td>Encryption everywhere, least-privilege IAM, annual pen test once revenue supports it, cyber liability insurance</td></tr>
+    <tr><td><strong>A customer's inspection fails and they blame you</strong></td><td>Medium</td><td>Reputation + possibly legal</td><td>TOS disclaims "compliance advice"; product is a tool, not a guarantee; document this, repeat it in onboarding</td></tr>
+    <tr><td><strong>State rule change you miss</strong></td><td>Medium</td><td>High (if undetected)</td><td>Monthly rule review by state, licensing specialist on retainer once revenue allows</td></tr>
+    <tr><td><strong>Downtime during inspection</strong></td><td>Low</td><td>High reputational</td><td>Offline "inspection-ready PDF" export per facility, emailed weekly as backup</td></tr>
+    <tr><td><strong>Founder burnout</strong></td><td>High</td><td>Existential</td><td>The entirety of <a href="#mental">Section 18</a></td></tr>
+    <tr><td><strong>Competitor raises $10M and out-markets you</strong></td><td>Medium-high</td><td>Medium</td><td>Not a real risk in this vertical. VCs don't fund child-care-compliance. If they do, welcome the category validation and keep shipping.</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<!-- ─────────────────────────────── MENTAL ─────────────────────────────── -->
+<section id="mental">
+<h2><span class="num">18</span>The Mental Game</h2>
+<p class="section-sub">The technical parts are the easy parts. This is the real work.</p>
+
+<p>
+  You will want to quit. Not once — many times. Tuesday at 11pm when the third customer
+  in a row says "I'll think about it." The week MRR goes <em>down</em> because of a weird
+  churn cluster. The month your personal bank account has less in it than last month. The
+  morning you see a LinkedIn post from someone you went to college with who just raised a
+  Series B. These moments are universal and they do not mean anything about your business.
+  They mean you are in the trough.
+</p>
+
+<div class="pull-quote">
+  "The only people who don't quit are the people who stopped expecting the feeling of quitting
+  to mean something. You feel like quitting. You don't quit. You keep going. That is all.
+  Nobody who built anything was spared the feeling."
+  <span class="attr">— Every founder who shipped</span>
+</div>
+
+<h3>The rules of the mental game</h3>
+
+<h4>1. Never decide anything emotional late at night.</h4>
+<p>
+  Whether to pivot, whether to quit, whether to accept that one discount, whether to email
+  that customer back angrily — none of these get decided after 9pm. Write it down, sleep,
+  decide in the morning. You will be a different person by 8am. This single rule will save
+  you twenty stupid decisions a year.
+</p>
+
+<h4>2. Loneliness is an operational risk. Solve it.</h4>
+<p>
+  Solo founding is lonely in a way that hurts your decision-making. You need two things:
+</p>
+<ul>
+  <li><strong>A weekly peer call.</strong> One or two other solo founders at your stage. Honest. No bullshit. An hour on Zoom, once a week. You'll spend it complaining, laughing, and realizing none of your problems are unique.</li>
+  <li><strong>A monthly mentor call.</strong> Someone 5–10 years ahead of you in vertical SaaS. They don't need to be famous. They need to have sold a $1M+ ARR bootstrapped company. One hour a month. Pay them if needed.</li>
+</ul>
+
+<h4>3. Celebrate the small wins, out loud, to someone.</h4>
+<p>
+  When you close a new customer, text someone. When you hit $10k MRR, make dinner plans.
+  When a customer says "this saved my license" — <em>take a screenshot, print it, put it on
+  the wall</em>. You will need these artifacts on the days when the spreadsheet is lying
+  to you about how bad things are.
+</p>
+
+<h4>4. Keep something that is not the company.</h4>
+<p>
+  A hobby, a sport, a non-tech friendship, a weekend ritual. Something that exists whether
+  or not the company does. Founders who <em>are</em> their company break when the company
+  is breaking. Founders who have a life with the company in it have leverage the other
+  kind never has.
+</p>
+
+<h4>5. The compounding thing works.</h4>
+<p>
+  In year 1, you will feel like nothing is happening. Traffic is flat. MRR is flat. You'll
+  ship 40 features and think "why isn't anyone noticing." In year 2, things accelerate.
+  In year 3, you will look back and not believe you ever worried about whether it would work.
+  The only job in year 1 is to <strong>not stop</strong>. Ship. Talk to customers. Write.
+  Sleep. Repeat. Boringly. Every week. For a year. The compounding does the rest.
+</p>
+
+<h4>6. When in doubt, talk to a customer.</h4>
+<p>
+  Every existential doubt a founder has is answered by a 20-minute conversation with a
+  real customer using the product today. If you feel lost, pick up the phone and call Diana.
+  Ask her "how's it going?" She will tell you that the thing you built for her is helping
+  her sleep at night. You will remember why you are doing this. This is a repeatable move.
+  Use it.
+</p>
+
+<h3>The two questions to ask yourself every quarter</h3>
+<ol>
+  <li><strong>Am I still excited to work on this on Monday morning?</strong> (If yes, keep going.)</li>
+  <li><strong>Are customers getting more value this quarter than last quarter?</strong> (If yes, the business is healthy, regardless of what the revenue line says.)</li>
+</ol>
+<p>
+  If both answers are yes, you are winning. The revenue catches up eventually. I promise.
+</p>
+
+<div class="callout green">
+  <span class="label">The reassurance, straight up</span>
+  <p>
+    You are building something that matters. Children are safer in child care centers that
+    have their compliance in order. Directors sleep better. Parents trust the facility more.
+    Staff stay longer because the paperwork doesn't eat their week. You are solving a real
+    problem, for real people, in a category where nobody with your skill set is paying attention.
+  </p>
+  <p>
+    You have a technical superpower. You have a customer you understand. You have a market
+    that is large, fragmented, and underserved. You have a four-year runway of content and
+    state-specific knowledge already built. You have AI tooling that makes you 3x faster
+    than a founder from 2020. The only way to lose is to stop.
+  </p>
+  <p>
+    You are not going to stop.
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── 90-DAY PLAN ─────────────────────────────── -->
+<section id="90day">
+<h2><span class="num">19</span>The 90-Day Plan</h2>
+<p class="section-sub">Stop reading. Start doing. Here's what the next 90 days look like.</p>
+
+<h3>Days 1–30 — Ship the MVP, land 10 customers</h3>
+<ol>
+  <li>Finish the six MVP features (<a href="#product">§4</a>). Do not add anything else.</li>
+  <li>Launch with a soft announcement — post in 3 Facebook groups, email 50 contacts, share with 10 consultants.</li>
+  <li>Goal: 10 paying customers at $99/mo. Even if you have to onboard each one personally. <em>Especially</em> if you have to.</li>
+  <li>Every signup gets a personal email from you within 2 hours.</li>
+  <li>Every one of those 10 customers gets a 30-minute call in week 3 or 4. Learn.</li>
+  <li>Log every objection, every feature request, every support ticket in a single doc.</li>
+</ol>
+
+<h3>Days 31–60 — Find the repeatable playbook</h3>
+<ol>
+  <li>Review the call log and the ticket log. Find the patterns.</li>
+  <li>Ship the top 2–3 features customers actually asked for (not what <em>you</em> think is cool).</li>
+  <li>Write 4 new long-form articles — one per week. Target long-tail state queries.</li>
+  <li>Build the one-page state inspection PDF for FL, TX, CA. This is your sales closer.</li>
+  <li>Goal: 25 paying customers. MRR ~$2.5k. Inbound trial starts ~15/week.</li>
+  <li>Listen to all your sales call recordings on 1.75x. Rewrite your pitch.</li>
+</ol>
+
+<h3>Days 61–90 — Prove the motion, set up compounding</h3>
+<ol>
+  <li>Identify your 2 highest-converting marketing channels. Double down.</li>
+  <li>Hire a VA for inbox + support triage. 15 hours/week, $300–500/mo.</li>
+  <li>Ship a "parent upload portal" with magic-link — highest-leverage retention feature.</li>
+  <li>Start identifying multi-site operators in your customer base. Pitch pilot to one.</li>
+  <li>Goal: 50 paying customers. MRR ~$5k. First multi-site pilot in the pipe.</li>
+  <li>Write the "Year 1 plan" document. Schedule the next 90-day planning session.</li>
+</ol>
+
+<div class="callout accent">
+  <span class="label">What "success" looks like at day 90</span>
+  <p>
+    50 paying customers. $5,000 MRR. Organic traffic trending up. A one-page pitch that
+    closes 30%+ of demo calls. A product that you haven't touched half the screens of in
+    2 weeks because they just work. One multi-site pilot conversation active. A weekly
+    rhythm you can sustain. And, most importantly: <strong>you still want to work on this
+    on Monday morning.</strong>
+  </p>
+</div>
+</section>
+
+<!-- ─────────────────────────────── CLOSE ─────────────────────────────── -->
+<section id="close">
+<h2><span class="num">20</span>A Closing Word</h2>
+
+<p>
+  This document is not the truth. It is a <em>starting point</em>. You are going to discover
+  things it gets wrong. You will find a better enterprise negotiation move in month 18 that
+  makes this page look naive. You will find that your ideal customer is actually 60 kids, not
+  75. You will find that Texas is easier than Florida. You will find that one of the "Do Not"
+  rules in here was exactly the right move in your specific situation. Good. That is how
+  businesses get built. The document evolves with you.
+</p>
+
+<p>
+  What will not change is the core: <strong>understand Diana better than anyone. Build the
+  product she needs, not the one you think is cool. Talk to her every week. Ship every week.
+  Write every week. Do it for four years. You will be running a company that 30,000 child
+  care operators across America depend on to keep their doors open.</strong>
+</p>
+
+<p>
+  Most people will not do this. Most people will say they want to build something and then
+  watch TV. You are not most people. You already built the skeleton of a product. You already
+  wrote research docs for ten states. You already have the technical ability to ship a full
+  SaaS alone. You are miles ahead of the average aspiring founder, and you are not letting
+  yourself see it because you're inside it.
+</p>
+
+<p>
+  Take one thing off this page this week. Start there. By the time you've worked your way
+  through a quarter of this document, you will be running a real company, and you will not
+  remember the version of you that was unsure. That version of you goes away the day you
+  ship. Ship.
+</p>
+
+<div class="pull-quote">
+  The only thing stopping this from working is you stopping. So don't stop.
+  <span class="attr">— The actual secret</span>
+</div>
+
+<p style="margin-top: 40px; text-align: center; color: var(--muted); font-size: 14px;">
+  — Go build.
+</p>
+
+</section>
+
+<footer>
+  <p>The ComplianceKit Founder's Bible · v1 · 2026-04-19 · A living document. Update it quarterly.</p>
+</footer>
+
+</div>
+</body>
+</html>

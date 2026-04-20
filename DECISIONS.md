@@ -52,7 +52,7 @@ Use React 18 + Vite + TypeScript (strict). Tailwind for styling. Zustand for sta
 ## ADR-003 — PostgreSQL for primary datastore
 
 - **Date:** 2026-04-16
-- **Status:** Accepted
+- **Status:** Superseded by [ADR-017](#adr-017--sqlite-for-primary-datastore-supersedes-adr-003) on 2026-04-17
 
 ### Context
 
@@ -129,7 +129,7 @@ Compliance workflows include staff acknowledgments (handbook, confidentiality) t
 
 ### Decision
 
-Self-build. Browser uses pdf-lib to stamp the signature PNG onto the PDF. Backend hashes the signed PDF (SHA-256), stores the PDF in `ck-signed-pdfs`, and writes an audit JSON (IP, UA, token, timestamp, SHA-256 of signature PNG, SHA-256 of signed PDF) to `ck-audit-trail`.
+Self-build. Browser uses pdf-lib to stamp the signature PNG onto the PDF. Backend hashes the signed PDF (SHA-256), stores the PDF in `ck-files` under `signed/`, and writes an audit JSON (IP, UA, token, timestamp, SHA-256 of signature PNG, SHA-256 of signed PDF) alongside it under `audit/`.
 
 ### Consequences
 
@@ -217,13 +217,13 @@ Single DigitalOcean droplet (2 vCPU, 4 GB, $24/mo). Caddy + systemd. Managed Pos
 ## ADR-010 — S3 bucket partitioning by content type
 
 - **Date:** 2026-04-16
-- **Status:** Accepted
+- **Status:** Superseded on 2026-04-17 — collapsed to a single `ck-files` bucket with `docs/`, `templates/`, `signed/`, `audit/` prefixes. Four sets of keys and a WORM audit bucket were over-engineering for MVP scale; one IAM user, one credential pair, same blast radius in practice. See revision note below.
 
 ### Context
 
 Different document types have different security, retention, and access-pattern needs. Original parent uploads are arbitrary phone photos; we do not want them co-mingled with signed PDFs or audit blobs. A single bucket with prefixes works but complicates IAM scoping.
 
-### Decision
+### Decision (original, superseded)
 
 Four dedicated buckets:
 
@@ -234,12 +234,16 @@ Four dedicated buckets:
 
 Each bucket has its own IAM user with scoped permissions.
 
-### Consequences
+### Consequences (as written)
 
 - Four sets of access keys to manage — mitigated by env-var convention (`CK_S3_DOCS_ACCESS_KEY`, etc.).
 - Clear blast-radius boundaries: compromise of the raw-uploads key cannot read signed PDFs.
 - Audit bucket WORM policy means even a compromised admin cannot tamper with signature history.
 - Slightly higher S3 cost (per-bucket request overhead is negligible at our scale).
+
+### Revision — 2026-04-17
+
+Walked this back before any of it shipped. One `ck-files` bucket with prefix-based layout, one IAM user, versioning on. No approval step, no separate raw-uploads tier, no Object Lock. If a customer or regulator later demands true WORM for signature audit, we revisit and add a dedicated bucket for that tenant.
 
 ---
 
@@ -368,6 +372,44 @@ Zustand.
 - Stores are colocated with features.
 - No time travel / devtools out of the box (Zustand has a devtools middleware; acceptable).
 - Migration path to Redux or TanStack Query possible if scale demands.
+
+---
+
+## ADR-017 — SQLite for primary datastore (supersedes ADR-003)
+
+- **Date:** 2026-04-17
+- **Status:** Accepted
+
+### Context
+
+ADR-003 chose managed PostgreSQL. Re-evaluated with one more week of building behind us. At MVP scale (target 100 paying customers at 90 days, <10k facilities before topology changes per ADR-009), we aren't using any Postgres-only feature that justifies the operational cost of running a second managed service:
+
+- **Extensions we use:** `citext` (case-insensitive email) and `pgcrypto` (unused — IDs generated in Go). Both trivially replaceable — `COLLATE NOCASE` and deletion respectively.
+- **Types we use:** `JSONB`, `TIMESTAMPTZ`, `BYTEA`, `INET`. SQLite has `json_*` functions over TEXT, and the other three map cleanly to TEXT/BLOB.
+- **Concurrency shape:** writes are single-director (one owner per tenant, mostly sequential), reads are heavy on dashboard load. SQLite in WAL mode handles this profile.
+- **No replication need at MVP** (ADR-009 already accepts single-node).
+
+Operational benefits of SQLite for our deployment shape:
+
+- **Deployment stays rsync + systemctl.** No separate DB service to operate, monitor, upgrade, or pay for.
+- **One DB file → one backup.** `VACUUM INTO` + S3 upload replaces `pg_dump`. Restore is `cp`.
+- **Dev loop is faster.** No docker-compose postgres for local dev; backend opens `./ck.db` and goes.
+- **Pure-Go driver.** `modernc.org/sqlite` is a CGO-free translation of the SQLite amalgamation — preserves the "single static binary, `CGO_ENABLED=0`" property we chose in ADR-001.
+
+### Decision
+
+SQLite 3.40+ via `modernc.org/sqlite` (pure Go, no CGO). Single file under `/var/lib/compliancekit/ck.db`. Pragmas set at open: `journal_mode=WAL`, `synchronous=NORMAL`, `foreign_keys=ON`, `busy_timeout=5000`, `temp_store=MEMORY`.
+
+### Consequences
+
+- **Saves $15/mo DB + ops load.** Total infra at 100 customers drops from ~$472/mo to ~$457/mo and one fewer thing to page us.
+- **Lose JSONB-specific operators** (`jsonb_path_ops` GIN, `jsonb_array_length` etc.). Replace with the SQLite `json1` extension functions (`json_type`, `json_extract`, `json_array_length`) — bundled, no install.
+- **Lose deferred FKs.** The one forward-declared FK in the schema (`signatures.consent_version_id` → `policy_versions.id`) can't be added via `ALTER TABLE ADD CONSTRAINT` under SQLite. We keep the column as `TEXT` with no enforced FK; integrity is enforced in app code at insert time. Documented in `backend/migrations/000005_pdfsign.up.sql`.
+- **Lose CITEXT.** `email` columns become `TEXT COLLATE NOCASE`. Unique indexes on email use the same collation.
+- **Lose pg-specific regex CHECKs** (`state ~ '^[A-Z]{2}$'`). We normalize in Go at insert time.
+- **Backup shape changes.** `infra/scripts/backup-db.sh` uses `sqlite3 $DB '.backup /tmp/snap.db'` (hot, consistent, no lock on readers) then gzip + upload.
+- **No streaming logical replication.** Not needed at MVP. When we need it, the exit path is: dual-write to a Postgres replica for two weeks, then cut over — known pattern.
+- **Revisit when ANY of:** 5k paying customers, multi-region requirement, a second backend instance (horizontal scale), or a customer contract that mandates HA replication.
 
 ---
 

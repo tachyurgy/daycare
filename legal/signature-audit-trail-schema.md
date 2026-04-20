@@ -6,27 +6,26 @@
 **Version:** 1.0.0
 **Owner:** ComplianceKit Engineering
 
-This document specifies the schema for signature audit-trail records stored in the `ck-audit-trail` S3 bucket. Every e-signature event captured through the ComplianceKit service generates exactly one immutable audit-trail JSON object. These records are part of the evidence we rely on to prove the validity of an electronic signature under the federal ESIGN Act and state UETA statutes.
+This document specifies the schema for signature audit-trail records stored under the `audit/` prefix of the `ck-files` S3 bucket. Every e-signature event captured through the ComplianceKit service generates exactly one audit-trail JSON object. These records are part of the evidence we rely on to prove the validity of an electronic signature under the federal ESIGN Act and state UETA statutes.
 
-The audit-trail object is written **after** the signed document is hashed, stored, and verified. Once written, the object is set to immutable (S3 Object Lock in compliance mode with a 7-year retention) and is never mutated. Correction of erroneous records is handled by writing a new object that references the original (see Section 5).
+The audit-trail object is written **after** the signed document is hashed, stored, and verified. The application never updates or deletes an audit object after write; correction of erroneous records is handled by writing a new object that references the original (see Section 5).
 
 ---
 
 ## 1. Storage Layout
 
 ```
-s3://ck-audit-trail/
+s3://ck-files/audit/
   └── org={organization_id}/
         └── year={YYYY}/
               └── month={MM}/
                     └── {signature_id}.json
 ```
 
-- Bucket: `ck-audit-trail` (region: us-west-2; replicated to us-east-1 for durability).
-- Object lock: **Compliance mode**, 7-year retention.
-- Server-side encryption: SSE-KMS with a dedicated CMK.
-- Object versioning: enabled. Tampering attempts would create new versions; previous versions remain immutable.
-- Access: read-only from the application service role; write-once from a dedicated `signature-writer` role. Break-glass access logged.
+- Bucket: `ck-files` (region: us-west-2), `audit/` prefix.
+- Server-side encryption: SSE-S3 (AES256) — the bucket's default.
+- Object versioning: enabled on the bucket. Accidental overwrites or deletes can be recovered from prior versions.
+- Access: read/write via the `ck-deploy` IAM user. Application code never performs delete or overwrite on `audit/` keys; any such mutation would indicate a code bug or credential compromise.
 
 ---
 
@@ -274,16 +273,16 @@ Audit-trail records are immutable. If a record must be corrected (for example, a
 
 ## 6. Retention
 
-Records are retained for **7 years** after `signed_at`, subject to S3 Object Lock compliance-mode retention. Litigation holds may extend retention.
+Records are retained for **7 years** after `signed_at`. Retention is enforced by application policy (no delete path in code) and by routine audits; litigation holds may extend retention.
 
 ---
 
 ## 7. Security
 
-- Writes occur only from a dedicated `signature-writer` IAM role scoped to `s3:PutObject` under the `ck-audit-trail` bucket.
-- Reads occur from application roles with `s3:GetObject` and from the audit console with additional logging.
+- Writes are issued by the `ck-deploy` IAM user under the `audit/` prefix of `ck-files`. Application code never invokes delete or overwrite on this prefix.
+- Reads occur from the same application role.
 - All reads and writes emit CloudTrail events; CloudTrail logs are forwarded to a security log sink and retained 24 months.
-- Bucket, KMS key, and IAM policies are reviewed quarterly.
+- Bucket and IAM policy are reviewed quarterly.
 
 ---
 
@@ -297,4 +296,4 @@ This schema is versioned in `schema_version`. Any breaking change requires:
 
 ---
 
-**[LAWYER CHECK: confirm S3 Object Lock compliance-mode 7-year retention is aligned with WORM requirements that a particular state regulator or customer auditor may demand. If any customer's compliance context requires a longer retention, the record's retention lock should be extended at write time rather than relying on bucket default.]**
+**[LAWYER CHECK: confirm that application-enforced 7-year retention (no S3 Object Lock / WORM) is acceptable for ESIGN/UETA audit evidence. If any customer or regulator requires a true WORM control, we would need to re-introduce a WORM-backed bucket for that tenant's audit writes.]**

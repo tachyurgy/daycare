@@ -89,11 +89,11 @@ Then:
 
 ## 3. Create the S3 buckets
 
-All buckets: **block all public access**, versioning **on**, default
-encryption **SSE-S3 (AES256)**, lifecycle rules per bucket policy.
+Two buckets: **block all public access**, versioning **on**, default
+encryption **SSE-S3 (AES256)**.
 
 ```bash
-for b in ck-documents ck-signed-pdfs ck-audit-trail ck-raw-uploads ck-backups; do
+for b in ck-files ck-backups; do
     aws s3api create-bucket --bucket "$b" --region us-east-1
     aws s3api put-public-access-block --bucket "$b" \
         --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
@@ -106,11 +106,11 @@ for b in ck-documents ck-signed-pdfs ck-audit-trail ck-raw-uploads ck-backups; d
 done
 ```
 
-Apply the CORS config to `ck-documents` (for browser presigned-PUT):
+Apply the CORS config to `ck-files` (for browser presigned-PUT):
 
 ```bash
-aws s3api put-bucket-cors --bucket ck-documents \
-    --cors-configuration file://infra/s3-bucket-policies/ck-documents.cors.json
+aws s3api put-bucket-cors --bucket ck-files \
+    --cors-configuration file://infra/s3-bucket-policies/ck-files.cors.json
 ```
 
 Apply lifecycle for `ck-backups` (30-day retention):
@@ -118,17 +118,6 @@ Apply lifecycle for `ck-backups` (30-day retention):
 ```bash
 aws s3api put-bucket-lifecycle-configuration --bucket ck-backups \
     --lifecycle-configuration file://infra/s3-bucket-policies/ck-backups.lifecycle.json
-```
-
-Apply Object Lock + retention for `ck-audit-trail` (WORM compliance for
-ESIGN records — configure **at bucket create time**; the `create-bucket`
-line above must be replaced with the two-step flow below for this bucket):
-
-```bash
-aws s3api create-bucket --bucket ck-audit-trail --region us-east-1 \
-    --object-lock-enabled-for-bucket
-aws s3api put-object-lock-configuration --bucket ck-audit-trail \
-    --object-lock-configuration '{"ObjectLockEnabled":"Enabled","Rule":{"DefaultRetention":{"Mode":"COMPLIANCE","Years":7}}}'
 ```
 
 ---
@@ -256,11 +245,9 @@ Expect up to 24 hours of data loss in that scenario (nightly cadence).
 
 ### S3 bucket compromise
 
-`ck-audit-trail` is Object-Lock-locked in COMPLIANCE mode for 7 years — it
-cannot be tampered with even by the root account. Everything else has
-versioning on; a malicious delete can be un-done by restoring prior
-versions. Rotate the `ck-deploy` IAM access keys and audit CloudTrail
-immediately.
+`ck-files` has versioning on; a malicious delete or overwrite can be un-done
+by restoring the prior version. Rotate the `ck-deploy` IAM access keys and
+audit CloudTrail immediately.
 
 ### Secret leak
 

@@ -18,8 +18,8 @@ Companion to [SPEC.md](SPEC.md). Decisions referenced here are justified in [DEC
                                     | HTTPS (api.compliancekit.app)
                                     v
 +---------------+         +---------+----------+         +----------------+
-|  Stripe       |<------->|  Go API            |<------->|  PostgreSQL    |
-|  (billing)    |  wh     |  DigitalOcean      |  SQL    |  (managed DO)  |
+|  Stripe       |<------->|  Go API            |<-- file>|  SQLite (WAL)  |
+|  (billing)    |  wh     |  DigitalOcean      |         |  ck.db (local) |
 +---------------+         |  Droplet (systemd) |         +----------------+
                           |                    |
 +---------------+         |                    |         +----------------+
@@ -53,7 +53,7 @@ External integrations enumerated in [EXTERNAL_SERVICES.md](EXTERNAL_SERVICES.md)
 
 ### 2.1 Language & Runtime
 
-Go 1.22+. Single statically-linked binary. Deployed as a systemd unit on a single DigitalOcean droplet (see [DECISIONS.md](DECISIONS.md) ADR-001, ADR-009).
+Go 1.22+. Single statically-linked binary (`CGO_ENABLED=0`). Deployed as a systemd unit on a single DigitalOcean droplet (see [DECISIONS.md](DECISIONS.md) ADR-001, ADR-009). Data lives in a local SQLite file (ADR-017) co-resident with the binary.
 
 ### 2.2 Package Layout
 
@@ -67,7 +67,7 @@ backend/
     migrate/             # migration runner
   internal/
     config/              # env var loading, typed config struct
-    db/                  # pgx pool, migration runner, query helpers
+    db/                  # sql.DB (SQLite), pragma setup, migration runner, Tx helper
     httpx/               # router, middleware mounting, error renderer
     auth/                # magic link issuance & validation, session cookies
     middleware/          # authz, rate-limit, request logging, recover
@@ -97,7 +97,7 @@ backend/
 ### 2.3 Package responsibilities
 
 - **config** — Loads `CK_*` environment variables. Fails loud at startup on missing required keys.
-- **db** — Wraps pgx v5 connection pool. Exposes `WithTx` and typed repository accessors. No ORM.
+- **db** — Wraps `database/sql` with the pure-Go `modernc.org/sqlite` driver. Applies WAL, foreign_keys, and busy_timeout pragmas at open. Exposes `Tx` helper and typed repository accessors. No ORM. See ADR-017.
 - **httpx** — chi router + panic recovery + request ID injection + structured JSON error responses.
 - **auth** — Two magic-link flavors: `auth.IssueOwnerLink(email)` (15 min TTL) and `auth.IssuePortalLink(facilityID, subjectID, kind)` (30 day TTL). Validates session cookies.
 - **middleware** — `RequireOwner`, `RequireFacilityScope`, `RateLimit`, `RequestLog`.
@@ -129,7 +129,7 @@ audit_log(id PK, facility_id, actor_id, action, resource_type, resource_id, ip, 
 compliance_snapshot(id PK, facility_id, score, violations jsonb, evaluated_at)
 ```
 
-Primary keys are all base62 strings (TEXT PRIMARY KEY, NOT NULL, default via app layer).
+Primary keys are all base62 strings (TEXT PRIMARY KEY, NOT NULL, default via app layer). Concrete types under SQLite (see ADR-017): TIMESTAMPTZ → TEXT (ISO 8601, default `CURRENT_TIMESTAMP`), JSONB → TEXT validated with `json_valid()`, BYTEA → BLOB, INET → TEXT, CITEXT → `TEXT COLLATE NOCASE`.
 
 ---
 
@@ -192,19 +192,17 @@ Browser uploads file → POST /portal/:token/upload (multipart)
 Go API
     │ 1. validate token, resolve facility_id + subject_id
     │ 2. generate base62 doc ID
-    │ 3. PUT to s3://ck-raw-uploads/{facility_id}/{doc_id}.{ext}
+    │ 3. PUT to s3://ck-files/docs/{facility_id}/{doc_id}.{ext}
     │ 4. INSERT document row (status='raw', ocr_confidence=NULL)
     │ 5. INSERT ocr_job row
     ▼
 Worker process (pulls from ocr_job queue)
-    │ 1. GET from ck-raw-uploads
+    │ 1. GET from ck-files
     │ 2. send bytes to Mistral OCR
     │ 3. on failure: retry Gemini Flash
     │ 4. send extracted text to Gemini Flash with prompt: extract {kind, expires_at, subject_name}
-    │ 5. COPY to s3://ck-documents/{facility_id}/{doc_id}.{ext}
-    │ 6. DELETE from ck-raw-uploads
-    │ 7. UPDATE document SET status='pending_review', expires_at=?, ocr_confidence=?
-    │ 8. INSERT audit_log
+    │ 5. UPDATE document SET status='pending_review', expires_at=?, ocr_confidence=?
+    │ 6. INSERT audit_log
     ▼
 Owner dashboard
     │ polls GET /documents?status=pending_review
@@ -293,22 +291,21 @@ Per-state rules live in Go code, not config files, at MVP. Tests cover each stat
 
 ### 6.3 Database
 
-- DigitalOcean Managed PostgreSQL 16, 1 GB RAM tier, $15/mo
-- Connection over the DO private network (no public ingress)
-- Daily backups, 7-day retention, tested restore quarterly
+- SQLite 3.40+ via `modernc.org/sqlite` (pure-Go, no CGO). See ADR-017.
+- File at `/var/lib/compliancekit/ck.db` on the droplet, mode 0600, owned by the `compliancekit` service user.
+- Opened with pragmas: `journal_mode=WAL`, `synchronous=NORMAL`, `foreign_keys=ON`, `busy_timeout=5000`, `temp_store=MEMORY`.
+- Nightly backup: `sqlite3 $DB '.backup /tmp/snap.db'` (online, consistent), gzip, upload to `ck-backups` in S3, 7-day retention via lifecycle rule.
+- Tested restore quarterly: download latest backup, `sqlite3 new.db '.restore'`, run a smoke query set.
 
 ### 6.4 Storage
 
-Four S3 buckets, all `us-west-2`:
+One S3 bucket, `us-west-2`:
 
-| Bucket | Purpose | Lifecycle |
-|--------|---------|-----------|
-| `ck-raw-uploads` | Initial parent/staff uploads; OCR worker reads from here | Delete after 7 days |
-| `ck-documents` | Originals after OCR + approval | Versioning on, retain forever |
-| `ck-signed-pdfs` | Completed signed PDFs | Versioning on, retain forever |
-| `ck-audit-trail` | Signature audit JSON blobs | Object Lock (WORM), retain 7 years |
+| Bucket | Purpose | Notes |
+|--------|---------|-------|
+| `ck-files` | All uploaded documents, signed PDFs, and signature audit JSON | Versioning on |
 
-Each bucket has a dedicated IAM user with scoped policy. Backend loads four distinct access key pairs. See [DECISIONS.md](DECISIONS.md) ADR-010.
+Key prefixes inside the bucket: `docs/`, `templates/`, `signed/`, `audit/`. One IAM user scoped to this bucket. See [DECISIONS.md](DECISIONS.md) ADR-010.
 
 ---
 
@@ -317,15 +314,11 @@ Each bucket has a dedicated IAM user with scoped policy. Backend loads four dist
 ### 7.1 Encryption
 
 - In transit: TLS 1.3 everywhere. HSTS preload eligible.
-- At rest: Managed Postgres disk encryption. SSE-S3 on `ck-documents`, `ck-raw-uploads`, `ck-signed-pdfs`. SSE-KMS with dedicated CMK on `ck-audit-trail`.
+- At rest: SQLite DB file on the droplet's encrypted root volume (DigitalOcean volumes are encrypted at rest by default). File perms 0600, owned by the service user. SSE-S3 (AES256) on `ck-files`.
 
 ### 7.2 IAM
 
-Per-bucket IAM user with least privilege:
-- `ck-raw-uploads`: `s3:PutObject`, `s3:GetObject`, `s3:DeleteObject` on that bucket only
-- `ck-documents`: `s3:PutObject`, `s3:GetObject`, `s3:GetObjectVersion` on that bucket only
-- `ck-signed-pdfs`: `s3:PutObject`, `s3:GetObject` on that bucket only
-- `ck-audit-trail`: `s3:PutObject` only (write-once)
+One IAM user (`ck-deploy`) scoped to `ck-files`: `s3:PutObject`, `s3:GetObject`, `s3:GetObjectVersion`, `s3:DeleteObject`, `s3:ListBucket`, `s3:GetBucketLocation`.
 
 ### 7.3 Magic Links
 
@@ -367,7 +360,7 @@ Every mutation writes to `audit_log`. IP and UA captured on every authenticated 
 | Line item | Cost |
 |-----------|------|
 | DigitalOcean droplet (2 vCPU, 4GB) | $24 |
-| DO Managed Postgres (1GB) | $15 |
+| SQLite (local file on droplet) | $0 |
 | AWS S3 storage (est. 200GB documents + versioning) | $6 |
 | AWS S3 requests | $3 |
 | AWS SES (est. 30k emails/mo) | $3 |
@@ -377,7 +370,7 @@ Every mutation writes to `audit_log`. IP and UA captured on every authenticated 
 | Domain + DNS (Cloudflare free) | $1 |
 | Grafana Cloud + UptimeRobot | $0 |
 | Stripe fees (2.9% + 30¢ on $9,900 MRR) | $317 |
-| **Total infra/COGS** | **~$472/mo** |
+| **Total infra/COGS** | **~$457/mo** |
 | **Revenue @ 100 × $99** | **$9,900/mo** |
 | **Gross margin** | **~95%** |
 

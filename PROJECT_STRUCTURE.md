@@ -10,7 +10,7 @@ daycare/
 ├── SPEC.md                           Master product + technical spec (3k+ words)
 ├── ARCHITECTURE.md                   System context, packages, data flow, security
 ├── ROADMAP.md                        Day-by-day Week 1 plan, Week 2-8 post-MVP
-├── DECISIONS.md                      16 ADRs (Go, React, Postgres, base62, etc.)
+├── DECISIONS.md                      17 ADRs (Go, React, SQLite, base62, etc.)
 ├── EXTERNAL_SERVICES.md              Every third-party dependency, cost, env var
 ├── QUESTIONS.md                      Open questions for Magnus (20 items)
 ├── PROJECT_STRUCTURE.md              This file
@@ -22,7 +22,7 @@ daycare/
 │   ├── go.mod                        Module: github.com/markdonahue100/compliancekit/backend
 │   ├── Makefile                      build, run, test, migrate-up, fmt, lint, docker-build
 │   ├── Dockerfile                    Multi-stage, distroless final
-│   ├── docker-compose.yml            Local dev: api + postgres:16 + minio
+│   ├── docker-compose.yml            Local dev: api + SQLite (volume) + minio
 │   ├── .env.example                  Every env var the server expects
 │   ├── db-schema.md                  Narrative + ERD + retention policy
 │   │
@@ -31,7 +31,7 @@ daycare/
 │   ├── internal/
 │   │   ├── api/                      Chi router wiring (was in httpx, split to avoid cycle)
 │   │   ├── config/                   Env var config loader
-│   │   ├── db/                       pgxpool + Tx helper
+│   │   ├── db/                       database/sql (modernc.org/sqlite) + Tx helper (ADR-017)
 │   │   ├── httpx/                    Error types + JSON error envelope
 │   │   ├── base62/                   26-char IDs from 32 random bytes
 │   │   ├── magiclink/                HMAC-hashed tokens, 5 kinds, sliding TTL
@@ -125,7 +125,7 @@ daycare/
 │   ├── cookie-policy.md
 │   ├── acceptable-use-policy.md
 │   ├── esignature-disclosure.md      ESIGN Act / UETA consent disclosure
-│   └── signature-audit-trail-schema.md  JSON shape for ck-audit-trail bucket
+│   └── signature-audit-trail-schema.md  JSON shape for audit/ prefix in ck-files
 │
 ├── infra/                            Ops and deployment
 │   ├── README.md                     End-to-end runbook
@@ -134,10 +134,7 @@ daycare/
 │   │   ├── deploy.sh                 Build → rsync → migrate → restart → health-check
 │   │   └── backup-db.sh              Daily pg_dump → ck-backups bucket
 │   └── s3-bucket-policies/           JSON policies + CORS + lifecycle
-│       ├── ck-documents.json (+ .cors.json)
-│       ├── ck-signed-pdfs.json
-│       ├── ck-audit-trail.json       Object Lock compliance mode, 7-year retention
-│       ├── ck-raw-uploads.json
+│       ├── ck-files.json (+ .cors.json)
 │       └── ck-backups.json (+ .lifecycle.json)
 │
 ├── .github/workflows/
