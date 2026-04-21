@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/markdonahue100/compliancekit/backend/internal/auditlog"
 	"github.com/markdonahue100/compliancekit/backend/internal/compliance"
 	"github.com/markdonahue100/compliancekit/backend/internal/httpx"
 	mw "github.com/markdonahue100/compliancekit/backend/internal/middleware"
@@ -124,6 +125,12 @@ func (h *RatioHandler) Check(w http.ResponseWriter, r *http.Request) {
 		httpx.RenderError(w, r, httpx.Wrap(httpx.ErrInternal, err))
 		return
 	}
+
+	auditlog.EmitRatioCheck(r.Context(), h.Pool, pid, mw.UserIDFrom(r.Context()), map[string]any{
+		"ok":             allOK,
+		"rooms_checked":  len(rooms),
+		"violated_rooms": violated,
+	}, r)
 
 	httpx.RenderJSON(w, http.StatusOK, ratioCheckResponse{
 		OK:            allOK,
