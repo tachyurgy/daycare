@@ -49,54 +49,61 @@ Multiple legal docs (`legal/master-subscription-agreement.md`, `legal/data-proce
 
 ## 🔴 Phase 1 — Provision infrastructure (half a day of work)
 
-**⚠ Hosting decision: Hetzner (EU) + Backblaze B2 (object storage).** ~€7–15/mo total vs. $30+/mo on AWS/DO. Full step-by-step runbook in [`DEPLOY-HETZNER.md`](./DEPLOY-HETZNER.md). Phase 1 below is the summary — read the full runbook once end-to-end before you start.
+**⚠ Hosting decision: DigitalOcean droplet (backend) + AWS S3 (object storage) + AWS SES (email).** ~$40/mo all-in. Matches ADR-009 + ADR-011 in `DECISIONS.md` and the canonical subprocessor list in `EXTERNAL_SERVICES.md`. (A prior detour toward Hetzner + Backblaze B2 — see `DEPLOY-HETZNER.md` — has been reverted; keep that doc around as reference only, do not follow it.)
 
-### 4. Hetzner VM 🔴
+### 4. DigitalOcean droplet 🔴
 
-- Sign up at [console.hetzner.cloud](https://console.hetzner.cloud). Verify with ID (15-min delay).
-- Create project `compliancekit-prod`. Generate a Read+Write API token. Add your SSH key.
-- Create a VM:
-  - **Plan:** CX22 (€4.59/mo, 2 vCPU ARM, 4 GB RAM, 40 GB NVMe). Or CPX21 (€8.46/mo) if you insist on x86.
-  - **Image:** Ubuntu 24.04.
-  - **Location:** Ashburn VA (`ash`) for US customers, or Helsinki/Nuremberg for EU.
-  - **Backups:** enable (+20% surcharge; cheap DR).
-- Reserve a **Floating IPv4** (€1/mo) and assign it to the VM. Always use the floating IP in DNS — lets you swap VMs without a DNS change.
+- Sign up at [cloud.digitalocean.com](https://cloud.digitalocean.com). Add payment info + SSH key.
+- Create a project `compliancekit-prod`.
+- Create a droplet:
+  - **Plan:** Basic → Regular SSD → **2 vCPU / 4 GB RAM / 80 GB** ($24/mo). CPU-Optimized is overkill at MVP scale.
+  - **Image:** Ubuntu 24.04 LTS.
+  - **Datacenter:** NYC3 or SFO3 (closest to target customers in CA/TX/FL).
+  - **Backups:** enable ($4.80/mo — cheap DR, takes weekly snapshots).
+- Reserve a **Floating IP** (free while attached) and assign it to the droplet. Always use the floating IP in DNS — lets you swap droplets without a DNS change.
 - Save the floating IP.
 
 ### 5. Harden + install runtime 🔴
 
-Full commands in `DEPLOY-HETZNER.md` §4–§5. Short version:
-- SSH in as `root`, `apt-get update`, install ufw, create non-root `ck` user, disable root SSH.
-- Install Go 1.24+ (arm64 or amd64 to match your VM), nginx, certbot, golang-migrate CLI.
+Short version (standard droplet hardening):
+- SSH in as `root`, `apt-get update && apt-get upgrade -y`.
+- `apt-get install -y ufw fail2ban nginx certbot python3-certbot-nginx`.
+- `ufw default deny incoming && ufw allow ssh && ufw allow http && ufw allow https && ufw enable`.
+- Create non-root `ck` user: `adduser ck && usermod -aG sudo ck`. Copy your SSH key to `/home/ck/.ssh/authorized_keys`. Disable root SSH in `/etc/ssh/sshd_config` (`PermitRootLogin no`) and restart sshd.
+- Install Go 1.24+ (`curl -OL https://go.dev/dl/go1.24.0.linux-amd64.tar.gz && tar -C /usr/local -xzf go*.tar.gz` — add `/usr/local/go/bin` to `/etc/profile`).
+- Install golang-migrate CLI: `curl -L https://github.com/golang-migrate/migrate/releases/latest/download/migrate.linux-amd64.tar.gz | tar xz -C /usr/local/bin`.
 
-### 6. Object storage — Backblaze B2 🔴
-
-Hetzner Storage Box is SFTP (no S3 API); Hetzner Object Storage is beta-only in 2026. Use Backblaze B2 — fully S3-compatible, ~$5/TB stored, $10/TB egress. Cheaper than AWS by 3–4× at our scale.
+### 6. Object storage — AWS S3 🔴
 
 **Do:**
-- Sign up at [backblaze.com/b2](https://www.backblaze.com/b2/cloud-storage.html).
-- Create two buckets: `ck-files` (private, versioning enabled) and `ck-backups` (private, 30-day lifecycle rule to auto-delete old dumps).
-- Create an **Application Key** restricted to both buckets with read+write+delete permissions. Save `keyID` + `applicationKey`.
+- AWS Console → S3 → create **one bucket** `ck-files` (unique name — add a suffix if taken). Region `us-east-1` or `us-west-2`. Enable versioning. Block all public access.
+- Inside the bucket, the code writes to prefixes `docs/`, `templates/`, `signed/`, `audit/`, `raw-uploads/` (see ADR-010 revision).
+- Also create `ck-backups` (same region) with a lifecycle rule deleting objects older than 30 days.
+- IAM Console → Users → create user `ck-backend-s3` with programmatic access. Attach an inline policy scoped to `s3:PutObject`, `s3:GetObject`, `s3:DeleteObject`, `s3:ListBucket` on `arn:aws:s3:::ck-files/*` and `arn:aws:s3:::ck-backups/*`. Save the access key pair.
+- **Do not use your AWS root credentials.** Create the scoped IAM user above; that's what goes in prod env.
 - Backend env vars (set in step 15):
-  - `AWS_REGION=us-west-004` (or the region you picked)
-  - `AWS_ACCESS_KEY_ID=<keyID>`
-  - `AWS_SECRET_ACCESS_KEY=<applicationKey>`
-  - `AWS_ENDPOINT_URL=https://s3.us-west-004.backblazeb2.com`
-  - `S3_BUCKET_DOCUMENTS=ck-files` (and the other three S3_BUCKET_* vars)
+  - `AWS_REGION=us-east-1` (or the region you picked)
+  - `AWS_ACCESS_KEY_ID=<from the scoped IAM user>`
+  - `AWS_SECRET_ACCESS_KEY=<from the scoped IAM user>`
+  - `S3_BUCKET_DOCUMENTS=ck-files`
+  - `S3_BUCKET_SIGNED_PDFS=ck-files`
+  - `S3_BUCKET_AUDIT_TRAIL=ck-files`
+  - `S3_BUCKET_RAW_UPLOADS=ck-files`
+  - (Leave `AWS_ENDPOINT_URL_S3` unset — it's a MinIO/LocalStack escape hatch, not needed for real AWS.)
 
 ### 7. DNS 🔴
 
 **Do:**
 - Own `compliancekit.com` (or whatever name) via Namecheap / Cloudflare / Porkbun.
 - Point `compliancekit.com` at GitHub Pages: `A` records to `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`.
-- Point `api.compliancekit.com` at your **Hetzner floating IP** (A record) + IPv6 AAAA record.
+- Point `api.compliancekit.com` at your **DigitalOcean floating IP** (A record). Optional IPv6 AAAA if DO assigned one.
 - `CNAME` `www.compliancekit.com` → `compliancekit.com.`
 - SES DKIM + SPF: AWS gives you CNAME records to add when you verify the sender in §10.
 
 ### 8. TLS certificates 🔴
 
 **Do:**
-- On the Hetzner VM (after DNS propagates): `sudo certbot --nginx -d api.compliancekit.com --email you@compliancekit.com --agree-tos --redirect --no-eff-email`.
+- On the droplet (after DNS propagates): `sudo certbot --nginx -d api.compliancekit.com --email you@compliancekit.com --agree-tos --redirect --no-eff-email`.
 - GitHub Pages auto-provisions TLS for `compliancekit.com` — tick "Enforce HTTPS" in repo settings 5 min after DNS resolves.
 
 ---

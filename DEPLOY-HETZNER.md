@@ -1,8 +1,12 @@
 # Deploying ComplianceKit on Hetzner
 
-**Target stack:** single Hetzner Cloud VM (CX22 or CPX21) running the Go backend + nginx, SQLite on local disk, S3-compatible object storage from Hetzner Storage Box or a separate bucket provider, GitHub Pages for the frontend. Monthly cost floor ≈ **€7–15/mo** all-in.
+> **⚠ DEPRECATED (2026-04-21) — do not follow this doc for production.**
+>
+> The canonical stack per ADR-009 + ADR-011 in `DECISIONS.md` is **DigitalOcean droplet + AWS S3 + AWS SES**. See `HUMAN-TO-DO.md` for the active runbook. This Hetzner + Backblaze B2 detour was walked back — kept here for reference only in case cost pressure ever makes it worth revisiting.
 
-**Why Hetzner.** ~⅓ the price of AWS/DO for comparable VMs, EU-based (good for eventual GDPR story), the fastest disks in the mass-market VPS tier, and they keep egress pricing sane (20 TB/mo included on every plan).
+**Target stack (DEPRECATED):** single Hetzner Cloud VM (CX22 or CPX21) running the Go backend + nginx, SQLite on local disk, S3-compatible object storage from Hetzner Storage Box or a separate bucket provider, GitHub Pages for the frontend. Monthly cost floor ≈ **€7–15/mo** all-in.
+
+**Why Hetzner (historical).** ~⅓ the price of AWS/DO for comparable VMs, EU-based (good for eventual GDPR story), the fastest disks in the mass-market VPS tier, and they keep egress pricing sane (20 TB/mo included on every plan).
 
 Walk through this doc once end-to-end on a scratch server before you do it on production. The first deploy is the hard one.
 
